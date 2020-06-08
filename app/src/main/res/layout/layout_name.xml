@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="wrap_content"
+    android:layout_width="100dp">
+
+    <LinearLayout
+        android:id="@+id/wrapperItemName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/bg_item_name"
+        android:layout_marginTop="@dimen/activity_half_margin"
+        android:layout_marginEnd="@dimen/activity_half_margin">
+
+        <ImageButton
+            android:id="@+id/ibItemHear"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@drawable/ic_hearing_black"
+            android:scaleType="fitCenter"
+            android:layout_gravity="center_horizontal"
+            android:tint="@color/colorPrimary"
+            android:background="@android:color/white"
+            android:layout_marginTop="3dp"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/tvItemName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:textSize="10sp"
+            android:gravity="center_horizontal"
+            tools:text="@string/hippopotamus"
+            android:textStyle="bold"
+            android:paddingHorizontal="@dimen/activity_half_margin"
+            tools:ignore="RelativeOverlap,SmallSp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/wrapperProgressBarItemName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:background="@drawable/bg_item_name"
+        android:layout_marginTop="@dimen/activity_half_margin"
+        android:layout_marginEnd="@dimen/activity_half_margin"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:id="@+id/nameProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:layout_marginTop="-18dp"
+            style="?android:progressBarStyleHorizontal" />
+
+        <TextView
+            android:id="@+id/nameProgressBarText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:text="@string/loading_message"
+            android:textSize="8sp"
+            android:paddingHorizontal="@dimen/activity_half_margin"
+            tools:ignore="SmallSp" />
+
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/buttonCancelItemName"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/ic_cancel_black"
+        android:scaleType="centerCrop"
+        android:tint="@color/colorFailed"
+        android:background="@android:color/transparent"
+        android:layout_alignParentEnd="true"
+        tools:ignore="ContentDescription" />
+
+</RelativeLayout>

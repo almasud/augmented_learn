@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.LearnArActivity">
+
+    <include
+        android:id="@+id/toolbarRealView"
+        layout="@layout/toolbar"/>
+
+    <FrameLayout
+        android:id="@+id/frameRealView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbarRealView">
+
+        <fragment
+            android:name="com.google.ar.sceneform.ux.ArFragment"
+            android:id="@+id/arFragmentAnimal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </FrameLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvRealView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbarRealView"
+        android:layout_alignParentEnd="true"
+        android:background="@color/colorPrimaryTransparent_44"/>
+
+</RelativeLayout>

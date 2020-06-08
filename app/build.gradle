@@ -1,0 +1,74 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.google.ar.sceneform.plugin'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+
+    defaultConfig {
+        applicationId "com.almasud.intro"
+        // "AR Optional" apps must declare minSdkVersion >= 14.
+        minSdkVersion 17
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    viewBinding {
+        enabled true
+    }
+    // Sceneform libraries use language constructs from Java 8.
+    // Add these compile options if targeting minSdkVersion < 26 or want use java 8 feature (ex. lambda).
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    def lifecycle_version = "2.2.0";
+
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'com.google.android.material:material:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.fragment:fragment:1.2.2'
+    // Architecture Component (ViewModel, LiveData & ProcessLifecycleOwner)
+    implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-livedata:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-process:$lifecycle_version"
+    // Provides ARCore Session and related resources.
+    implementation 'com.google.ar:core:1.16.0'
+    // Provides ArFragment, and other UX resources.
+    implementation 'com.google.ar.sceneform.ux:sceneform-ux:1.15.0'
+    // RxAndroid and RxJava
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.10'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}
+
+// "Import Sceneform Assets" option of Sceneform plugin cause failed in android 3.6. So have done this
+// manually instead using "Import Sceneform Assets" option of Sceneform plugin only once & then Rebuild.
+
+//apply plugin: 'com.google.ar.sceneform.plugin'
+//
+//sceneform.asset('sampledata/models/alphabets/capital_a.fbx', // 'Source Asset Path' specified during import.
+//        'default',                    // 'Material Path' specified during import.
+//        'sampledata/models/alphabets/capital_a.sfa', // '.sfa Output Path' specified during import.
+//        'src/main/assets/models/alphabets/capital_a')      // '.sfb Output Path' specified during import.
+//sceneform.asset('sampledata/models/alphabets/capital_z.fbx',
+//        'default',
+//        'sampledata/models/alphabets/capital_z.sfa',
+//        'src/main/assets/models/alphabets/capital_z')

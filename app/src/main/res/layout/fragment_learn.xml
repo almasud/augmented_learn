@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_gravity="center"
+    android:gravity="center"
+    tools:context=".ui.fragment.LearnFragment">
+
+    <ImageView
+        android:id="@+id/ivLearn"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        tools:src="@drawable/capital_a"
+        android:scaleType="fitCenter"
+        android:layout_marginEnd="@dimen/activity_half_margin"
+        tools:ignore="ContentDescription" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/ivLearnRealView"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/ar"
+            android:scaleType="centerCrop"
+            android:clickable="true"
+            android:focusable="true"
+            android:tint="@color/colorPrimary"
+            android:layout_marginBottom="@dimen/activity_half_margin"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/ivLearnLabel"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            tools:src="@drawable/alphabet_apple"
+            android:scaleType="fitCenter"
+            android:layout_marginBottom="@dimen/activity_half_margin"
+            tools:ignore="ContentDescription"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/tvLearnName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="@string/lion"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:padding="@dimen/activity_half_margin"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"
+            android:background="@color/colorPrimary"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+
+</LinearLayout>

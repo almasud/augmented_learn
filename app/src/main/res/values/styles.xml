@@ -1,0 +1,39 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="ParentTheme">
+        <!-- Customize your theme here. -->
+    </style>
+
+    <!-- Parent application theme for all devices (bellow to API 21 (Lollipop) and above). -->
+    <style name="ParentTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="ParentTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="ParentTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="ParentTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <!-- Customize toolbar theme -->
+    <style name="ParentTheme.ToolbarTheme" parent="ThemeOverlay.AppCompat.ActionBar">
+        <!-- Customize color of toolbar title -->
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <!-- Customize color of navigation drawer and back arrow icons -->
+        <item name="colorControlNormal">@android:color/white</item>
+    </style>
+
+    <!-- Customize text appearance for toolbar subtitle -->
+    <style name="ParentTheme.TextAppearanceToolbarSubtitle" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:fontFamily">cursive</item>
+    </style>
+
+</resources>

@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.TestActivity">
+
+    <include
+        android:id="@+id/toolbarTest"
+        layout="@layout/toolbar"/>
+
+    <LinearLayout
+        android:id="@+id/wrapperTest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/toolbarTest"
+        android:layout_margin="@dimen/activity_vertical_margin"
+        android:baselineAligned="false">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_weight="3">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:baselineAligned="false"
+                tools:ignore="NestedWeights">
+
+                <RelativeLayout
+                    android:id="@+id/wrapperTestOneOne"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="@drawable/bg_round"
+                    android:onClick="onClickItem"
+                    android:layout_marginEnd="@dimen/activity_horizontal_margin">
+
+                    <ImageView
+                        android:id="@+id/ivTestOneOne"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="@dimen/activity_half_margin"
+                        tools:src="@drawable/lion"
+                        android:scaleType="fitCenter"
+                        tools:ignore="ContentDescription"/>
+
+                    <TextView
+                        android:id="@+id/tvTestResultOneOne"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="@string/learn"
+                        android:textColor="@android:color/white"
+                        android:background="@color/colorPrimary"
+                        android:padding="@dimen/activity_half_margin"
+                        android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                        android:layout_marginVertical="@dimen/activity_3x_margin"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:visibility="gone"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/wrapperTestOneTwo"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="@drawable/bg_round"
+                    android:onClick="onClickItem">
+
+                    <ImageView
+                        android:id="@+id/ivTestOneTwo"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="@dimen/activity_half_margin"
+                        tools:src="@drawable/cow"
+                        android:scaleType="fitCenter"
+                        tools:ignore="ContentDescription"/>
+
+                    <TextView
+                        android:id="@+id/tvTestResultOneTwo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="@string/learn"
+                        android:textColor="@android:color/white"
+                        android:background="@color/colorPrimary"
+                        android:padding="@dimen/activity_half_margin"
+                        android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                        android:layout_marginVertical="@dimen/activity_3x_margin"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:visibility="gone"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:id="@+id/wrapperTestTwoOne"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="@drawable/bg_round"
+                    android:onClick="onClickItem"
+                    android:layout_marginEnd="@dimen/activity_horizontal_margin">
+
+                    <ImageView
+                        android:id="@+id/ivTestTwoOne"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="@dimen/activity_half_margin"
+                        tools:src="@drawable/hippopotamus"
+                        android:scaleType="fitCenter"
+                        tools:ignore="ContentDescription"/>
+
+                    <TextView
+                        android:id="@+id/tvTestResultTwoOne"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="@string/learn"
+                        android:textColor="@android:color/white"
+                        android:background="@color/colorPrimary"
+                        android:padding="@dimen/activity_half_margin"
+                        android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                        android:layout_marginVertical="@dimen/activity_3x_margin"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:visibility="gone"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/wrapperTestTwoTwo"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="@drawable/bg_round"
+                    android:onClick="onClickItem">
+
+                    <ImageView
+                        android:id="@+id/ivTestTwoTwo"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="@dimen/activity_half_margin"
+                        tools:src="@drawable/horse"
+                        android:scaleType="fitCenter"
+                        tools:ignore="ContentDescription"/>
+
+                    <TextView
+                        android:id="@+id/tvTestResultTwoTwo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="@string/learn"
+                        android:textColor="@android:color/white"
+                        android:background="@color/colorPrimary"
+                        android:padding="@dimen/activity_half_margin"
+                        android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                        android:layout_marginVertical="@dimen/activity_3x_margin"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:visibility="gone"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/activity_half_margin"
+                    android:text="@string/test_set"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tvTestNumberNOutOf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/test_number_n_out_of"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/activity_half_margin"
+                android:text="@string/find_the_correct"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/ibTestHear"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_hearing_black"
+                android:background="@color/colorPrimary"
+                android:tint="@android:color/white"
+                android:layout_gravity="center_horizontal"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/tvTestModelType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:padding="@dimen/activity_half_margin"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="22sp"
+                tools:text="@string/animal" />
+
+            <TextView
+                android:id="@+id/tvTestItemName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:padding="@dimen/activity_half_margin"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                tools:text="@string/hippopotamus" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
