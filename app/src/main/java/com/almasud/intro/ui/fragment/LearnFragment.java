@@ -49,16 +49,22 @@ public class LearnFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        // Set the photo of ArModel
         mViewBinding.ivLearn.setImageResource(mArModel.getPhoto());
-        // Set the label photo or name of the ARModel
+
+        // Set the label photo or name of ArModel
         if (mArModel.getModelType().equals(BaseApplication.MODEL_ALPHABET)) {
             mViewBinding.ivLearnLabel.setVisibility(View.VISIBLE);
             mViewBinding.ivLearnLabel.setImageResource(mArModel.getLabelPhoto());
+        } else if (mArModel.getModelType().equals(BaseApplication.MODEL_NUMBER)) {
+            mViewBinding.tvLearnName.setVisibility(View.VISIBLE);
+            mViewBinding.tvLearnName.setText(mArModel.getName());
         } else if (mArModel.getModelType().equals(BaseApplication.MODEL_ANIMAL)) {
             mViewBinding.tvLearnName.setVisibility(View.VISIBLE);
             mViewBinding.tvLearnName.setText(mArModel.getName());
         }
-        // Set a click lister for the real view button.
+
+        // Set a click lister for the real view button
         mViewBinding.ivLearnRealView.setOnClickListener(view -> {
             LearnActivity activity = (LearnActivity) getActivity();
             // Set the id of ARModel as an argument to the callback method of the activity.
@@ -72,6 +78,7 @@ public class LearnFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
+
         // Dispose the mRealViewDisposable
         if (mArViewDisposable != null && !mArViewDisposable.isDisposed()) {
             mArViewDisposable.dispose();

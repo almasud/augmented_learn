@@ -51,6 +51,8 @@ public class TestActivity extends AppCompatActivity {
         if (bundle != null) {
             if (bundle.getString(BaseApplication.MODEL_TYPE).equals(BaseApplication.MODEL_ALPHABET))
                 MODEL_TYPE = BaseApplication.ALPHABET;
+            else if (bundle.getString(BaseApplication.MODEL_TYPE).equals(BaseApplication.MODEL_NUMBER))
+                MODEL_TYPE = BaseApplication.NUMBER;
             else if (bundle.getString(BaseApplication.MODEL_TYPE).equals(BaseApplication.MODEL_ANIMAL))
                 MODEL_TYPE = BaseApplication.ANIMAL;
         }
@@ -63,6 +65,11 @@ public class TestActivity extends AppCompatActivity {
             getSupportActionBar().setSubtitle(new StringBuilder(
                     getResources().getString(R.string.test)).append(" | ")
                     .append(getResources().getString(R.string.alphabet))
+            );
+        else if (MODEL_TYPE == BaseApplication.NUMBER)
+            getSupportActionBar().setSubtitle(new StringBuilder(
+                    getResources().getString(R.string.test)).append(" | ")
+                    .append(getResources().getString(R.string.number))
             );
         else if (MODEL_TYPE == BaseApplication.ANIMAL)
             getSupportActionBar().setSubtitle(new StringBuilder(
@@ -80,9 +87,9 @@ public class TestActivity extends AppCompatActivity {
         // Get the Animals live data from AnimalVM and Set the Test items
         ArViewModel arViewModel = new ViewModelProvider(this).get(ArViewModel.class);
         // Get the list of live data of ARModel from ARViewModel
-        LiveData<List<ArModel>> arModelListLiveData =
-                (MODEL_TYPE == BaseApplication.ALPHABET)? arViewModel.getAlphabetsLivedData()
-                        : arViewModel.getAnimalsLivedData();
+        LiveData<List<ArModel>> arModelListLiveData = (MODEL_TYPE == BaseApplication.ALPHABET)?
+                arViewModel.getAlphabetsLivedData(): (MODEL_TYPE == BaseApplication.NUMBER)?
+                arViewModel.getNumbersLivedData(): arViewModel.getAnimalsLivedData();
 
         // Observe the list of ArModel from ArViewModel
         arModelListLiveData.observe(this, arModels -> {
@@ -93,6 +100,8 @@ public class TestActivity extends AppCompatActivity {
                 // Set the name of model type
                 if (MODEL_TYPE == BaseApplication.ALPHABET)
                     mViewBinding.tvTestModelType.setText(R.string.alphabet);
+                else if (MODEL_TYPE == BaseApplication.NUMBER)
+                    mViewBinding.tvTestModelType.setText(R.string.number);
                 else if (MODEL_TYPE == BaseApplication.ANIMAL)
                     mViewBinding.tvTestModelType.setText(R.string.animal);
 
@@ -184,7 +193,7 @@ public class TestActivity extends AppCompatActivity {
 
                         // Set the name of the item to be found
                         mViewBinding.tvTestItemName.setText(name);
-                        // Hide the name of the item to be found for Alphabet type of ARModel.
+                        // Hide the name of the item to be found for Alphabet type of ArModel.
                         if (MODEL_TYPE == BaseApplication.ALPHABET)
                             mViewBinding.tvTestItemName.setVisibility(View.GONE);
                     } else {

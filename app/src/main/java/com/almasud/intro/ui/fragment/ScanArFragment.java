@@ -124,6 +124,10 @@ public class ScanArFragment extends ArFragment {
       sSingleImageName = "capital_a_with_apple.png";
       sImageDbPath = "alphabets.imgdb";
     }
+    else if (modelType == BaseApplication.NUMBER) {
+      sSingleImageName = "1.png";
+      sImageDbPath = "numbers.imgdb";
+    }
     else if (modelType == BaseApplication.ANIMAL) {
       sSingleImageName = "bear.png";
       sImageDbPath = "animals.imgdb";

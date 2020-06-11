@@ -64,11 +64,12 @@ dependencies {
 
 //apply plugin: 'com.google.ar.sceneform.plugin'
 //
-//sceneform.asset('sampledata/models/alphabets/capital_a.fbx', // 'Source Asset Path' specified during import.
+//sceneform.asset('sampledata/models/numbers/number_1.fbx', // 'Source Asset Path' specified during import.
 //        'default',                    // 'Material Path' specified during import.
-//        'sampledata/models/alphabets/capital_a.sfa', // '.sfa Output Path' specified during import.
-//        'src/main/assets/models/alphabets/capital_a')      // '.sfb Output Path' specified during import.
-//sceneform.asset('sampledata/models/alphabets/capital_z.fbx',
+//        'sampledata/models/numbers/number_1.sfa', // '.sfa Output Path' specified during import.
+//        'src/main/assets/models/numbers/number_1')      // '.sfb Output Path' specified during import.
+//sceneform.asset('sampledata/models/numbers/number_2.fbx',
 //        'default',
-//        'sampledata/models/alphabets/capital_z.sfa',
-//        'src/main/assets/models/alphabets/capital_z')
+//        'sampledata/models/numbers/number_2.sfa',
+//        'src/main/assets/models/numbers/number_2')
+

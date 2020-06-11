@@ -23,7 +23,7 @@ import io.reactivex.schedulers.Schedulers;
  *
  * @author Abdullah Almasud
  */
-public class LearnRVAdapter extends RecyclerView.Adapter<LearnRVAdapter.ARModelViewHolder> {
+public class LearnRVAdapter extends RecyclerView.Adapter<LearnRVAdapter.ArModelViewHolder> {
     private ItemRealViewBinding mViewBinding;
     private List<ArModel> mArModels;
     private LearnArActivity mActivity;
@@ -38,15 +38,15 @@ public class LearnRVAdapter extends RecyclerView.Adapter<LearnRVAdapter.ARModelV
 
     @NonNull
     @Override
-    public ARModelViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ArModelViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         mViewBinding = ItemRealViewBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
-        return new ARModelViewHolder(mViewBinding);
+        return new ArModelViewHolder(mViewBinding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ARModelViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ArModelViewHolder holder, int position) {
         ArModel ARModel = mArModels.get(position);
-        holder.setARModel(ARModel);
+        holder.setArModel(ARModel);
         holder.itemView.setOnClickListener(view -> {
             // Subscribe to selectModelCallback() observable of the activity
             // to get the selected item.
@@ -68,15 +68,15 @@ public class LearnRVAdapter extends RecyclerView.Adapter<LearnRVAdapter.ARModelV
         return mArModels.size();
     }
 
-    public class ARModelViewHolder extends RecyclerView.ViewHolder {
+    public class ArModelViewHolder extends RecyclerView.ViewHolder {
         private ItemRealViewBinding viewBinding;
 
-        public ARModelViewHolder(@NonNull ItemRealViewBinding viewBinding) {
+        public ArModelViewHolder(@NonNull ItemRealViewBinding viewBinding) {
             super(viewBinding.getRoot());
             this.viewBinding = viewBinding;
         }
 
-        public void setARModel(ArModel ARModel) {
+        public void setArModel(ArModel ARModel) {
             viewBinding.ivItemRealView.setImageResource(ARModel.getPhoto());
         }
     }
@@ -84,6 +84,7 @@ public class LearnRVAdapter extends RecyclerView.Adapter<LearnRVAdapter.ARModelV
     @Override
     public void onDetachedFromRecyclerView(@NonNull RecyclerView recyclerView) {
         super.onDetachedFromRecyclerView(recyclerView);
+
         // Dispose the mModelDisposable
         if (mModelDisposable != null && !mModelDisposable.isDisposed()) {
             mModelDisposable.dispose();

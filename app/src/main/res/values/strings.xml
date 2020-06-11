@@ -11,23 +11,13 @@
     <string name="test">Test</string>
     <string name="scan">Scan</string>
     <string name="alphabet">Alphabet</string>
+    <string name="number">Number</string>
     <string name="animal">Animal</string>
     <string name="scan_intro_book">Scan Intro Book</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
-    <!-- Strings used for name of the animals -->
-    <string name="bear">Bear</string>
-    <string name="cat">Cat</string>
-    <string name="cow">Cow</string>
-    <string name="dog">Dog</string>
-    <string name="elephant">Elephant</string>
-    <string name="hippopotamus">Hippopotamus</string>
-    <string name="horse">Horse</string>
-    <string name="lion">Lion</string>
-    <string name="deer">Deer</string>
-
-    <!-- Strings used for name of the ArModels -->
+    <!-- Strings used for name of the alphabet -->
     <string name="capital_a">A</string>
     <string name="capital_b">B</string>
     <string name="capital_c">C</string>
@@ -55,7 +45,7 @@
     <string name="capital_y">Y</string>
     <string name="capital_z">Jet</string>
 
-    <!-- Strings used for name of the ArModels labels -->
+    <!-- Strings used for name of alphabet labels of ArModel -->
     <string name="alphabet_apple">Apple</string>
     <string name="alphabet_ball">Ball</string>
     <string name="alphabet_fish">Fish</string>
@@ -77,6 +67,28 @@
     <string name="alphabet_x_ray">X-ray</string>
     <string name="alphabet_yak">Yak</string>
     <string name="alphabet_zebra">Zebra</string>
+
+    <!-- Strings used for name of the animals -->
+    <string name="number_one">One</string>
+    <string name="number_two">Two</string>
+    <string name="number_three">Three</string>
+    <string name="number_four">Four</string>
+    <string name="number_five">Five</string>
+    <string name="number_six">Six</string>
+    <string name="number_seven">Seven</string>
+    <string name="number_eight">Eight</string>
+    <string name="number_nine">Nine</string>
+
+    <!-- Strings used for name of the animals -->
+    <string name="bear">Bear</string>
+    <string name="cat">Cat</string>
+    <string name="cow">Cow</string>
+    <string name="dog">Dog</string>
+    <string name="elephant">Elephant</string>
+    <string name="hippopotamus">Hippopotamus</string>
+    <string name="horse">Horse</string>
+    <string name="lion">Lion</string>
+    <string name="deer">Deer</string>
 
     <!-- Loading strings -->
     <string name="loading_message">Please wait&#8230;</string>

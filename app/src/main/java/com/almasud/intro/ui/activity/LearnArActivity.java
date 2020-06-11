@@ -45,14 +45,18 @@ public class LearnArActivity extends AppCompatActivity {
         // Get the bundle from intent if exists
         Bundle bundle = getIntent().getBundleExtra(BaseApplication.BUNDLE);
         if (bundle != null) {
-            // Get the list of ARModel.
+            // Get the list of ArModel.
             mArModels = (List<ArModel>) bundle.getSerializable(BaseApplication.ITEM_LIST);
-            // Get the type of ARModel
+
+            // Get the type of ArModel
             if (bundle.getString(BaseApplication.MODEL_TYPE).equals(BaseApplication.MODEL_ALPHABET))
                 MODEL_TYPE = BaseApplication.ALPHABET;
+            else if (bundle.getString(BaseApplication.MODEL_TYPE).equals(BaseApplication.MODEL_NUMBER))
+                MODEL_TYPE = BaseApplication.NUMBER;
             else if (bundle.getString(BaseApplication.MODEL_TYPE).equals(BaseApplication.MODEL_ANIMAL))
                 MODEL_TYPE = BaseApplication.ANIMAL;
-            // Get the selected item of ARModel.
+
+            // Get the selected item of ArModel.
             mSelectedItem = bundle.getInt(BaseApplication.SELECTED_ITEM, 0);
         }
 
@@ -64,6 +68,11 @@ public class LearnArActivity extends AppCompatActivity {
             getSupportActionBar().setSubtitle(new StringBuilder(
                     getResources().getString(R.string.real_view)).append(" | ")
                     .append(getResources().getString(R.string.alphabet))
+            );
+        else if (MODEL_TYPE == BaseApplication.NUMBER)
+            getSupportActionBar().setSubtitle(new StringBuilder(
+                    getResources().getString(R.string.real_view)).append(" | ")
+                    .append(getResources().getString(R.string.number))
             );
         else if (MODEL_TYPE == BaseApplication.ANIMAL)
             getSupportActionBar().setSubtitle(new StringBuilder(
@@ -97,7 +106,8 @@ public class LearnArActivity extends AppCompatActivity {
             // Set the selected ModelRenderable into TransformableModel
             try {
                 // Set the initial scale of model.
-                float modelLocalScale = (MODEL_TYPE == BaseApplication.ALPHABET)? 0.3f: 15.0f;
+                float modelLocalScale = (MODEL_TYPE == BaseApplication.ALPHABET)? 0.3f
+                        : (MODEL_TYPE == BaseApplication.NUMBER)? 0.25f: 15.0f;
 
                 // Set the transformable model.
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {

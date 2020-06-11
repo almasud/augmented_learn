@@ -38,7 +38,7 @@ public class LearnFSAdapter extends FragmentStateAdapter {
      * Create a {@link Fragment} for each {@link ArModel}.
      * @param ArModels The list of {@link ArModel}s.
      */
-    public void addARModels(List<ArModel> ArModels) {
+    public void addArModels(List<ArModel> ArModels) {
         for (ArModel ARModel : ArModels) {
             mFragments.add(new LearnFragment(ARModel));
         }

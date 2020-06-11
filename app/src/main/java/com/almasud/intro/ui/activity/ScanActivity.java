@@ -57,6 +57,8 @@ public class ScanActivity extends AppCompatActivity {
         if (bundle != null) {
             if (bundle.getString(BaseApplication.MODEL_TYPE).equals(BaseApplication.MODEL_ALPHABET))
                 MODEL_TYPE = BaseApplication.ALPHABET;
+            else if (bundle.getString(BaseApplication.MODEL_TYPE).equals(BaseApplication.MODEL_NUMBER))
+                MODEL_TYPE = BaseApplication.NUMBER;
             else if (bundle.getString(BaseApplication.MODEL_TYPE).equals(BaseApplication.MODEL_ANIMAL))
                 MODEL_TYPE = BaseApplication.ANIMAL;
         }
@@ -70,6 +72,13 @@ public class ScanActivity extends AppCompatActivity {
                     new StringBuilder(getResources().getString(R.string.real_view))
                             .append(" | ")
                             .append(getResources().getString(R.string.alphabet))
+            );
+        }
+        else if (MODEL_TYPE == BaseApplication.NUMBER) {
+            getSupportActionBar().setSubtitle(
+                    new StringBuilder(getResources().getString(R.string.real_view))
+                            .append(" | ")
+                            .append(getResources().getString(R.string.number))
             );
         }
         else if (MODEL_TYPE == BaseApplication.ANIMAL) {
@@ -89,9 +98,9 @@ public class ScanActivity extends AppCompatActivity {
         // Get an instance of ARViewModel
         ArViewModel arViewModel = new ViewModelProvider(this).get(ArViewModel.class);
         // Get a list of ARModel live data from ARViewModel
-        LiveData<List<ArModel>> arModelListLiveData =
-                (MODEL_TYPE == BaseApplication.ALPHABET)? arViewModel.getAlphabetsLivedData()
-                        : arViewModel.getAnimalsLivedData();
+        LiveData<List<ArModel>> arModelListLiveData = (MODEL_TYPE == BaseApplication.ALPHABET)?
+                arViewModel.getAlphabetsLivedData(): (MODEL_TYPE == BaseApplication.NUMBER)?
+                arViewModel.getNumbersLivedData(): arViewModel.getAnimalsLivedData();
 
         // Observe the list of ARModel from ARViewModel
         arModelListLiveData.observe(this, arModels -> {
@@ -159,7 +168,8 @@ public class ScanActivity extends AppCompatActivity {
                         // Set the detected ModelRenderable into TransformableModel
                         try {
                             // Set the initial scale of model
-                            float modelLocalScale = (MODEL_TYPE == BaseApplication.ALPHABET)? 0.3f: 15.0f;
+                            float modelLocalScale = (MODEL_TYPE == BaseApplication.ALPHABET)? 0.3f
+                                    : (MODEL_TYPE == BaseApplication.NUMBER)? 0.25f: 15.0f;
 
                             // Set the transformable model
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {

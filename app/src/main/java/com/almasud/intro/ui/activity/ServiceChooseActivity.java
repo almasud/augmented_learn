@@ -65,8 +65,11 @@ public class ServiceChooseActivity extends AppCompatActivity {
             case R.id.wrapperAlphabet:
                 mViewBinding.wrapperAlphabet.startAnimation(mAnimation);
                 break;
-            case R.id.wrapperAnimals:
-                mViewBinding.wrapperAnimals.startAnimation(mAnimation);
+            case R.id.wrapperNumber:
+                mViewBinding.wrapperNumber.startAnimation(mAnimation);
+                break;
+            case R.id.wrapperAnimal:
+                mViewBinding.wrapperAnimal.startAnimation(mAnimation);
                 break;
         }
         // Set an animation listener for each item
@@ -81,56 +84,37 @@ public class ServiceChooseActivity extends AppCompatActivity {
                 // To avoid the block of UI (main) thread execute the tasks within a new thread.
                 new Handler().post(() -> {
                     Bundle bundle = new Bundle();
-                    // Set an Activity for each item
+                    // Set the type of ArModel
                     switch (view.getId()) {
                         case R.id.wrapperAlphabet:
-                            // Set the type of ARModel.
                             bundle.putString(BaseApplication.MODEL_TYPE, BaseApplication.MODEL_ALPHABET);
-
-                            if (ACTIVITY == BaseApplication.LEARN) {
-                                BaseApplication.getInstance()
-                                        .startNewActivity(ServiceChooseActivity.this,
-                                                LearnActivity.class, bundle);
-                            } else if (ACTIVITY == BaseApplication.TEST) {
-                                BaseApplication.getInstance()
-                                        .startNewActivity(ServiceChooseActivity.this,
-                                                TestActivity.class, bundle);
-                            } else if (ACTIVITY == BaseApplication.SCAN) {
-                                // Check whether the sceneform is supported for this device or not
-                                // to avoid crashing the application.
-                                if (BaseApplication.isSupportedSceneformOrShowDialog(
-                                        ServiceChooseActivity.this)) {
-                                    BaseApplication.getInstance()
-                                            .startNewActivity(ServiceChooseActivity.this,
-                                                    ScanActivity.class, bundle);
-                                }
-
-                            }
                             break;
-                        case R.id.wrapperAnimals:
-                            // Set the type of ARModel.
+                        case R.id.wrapperNumber:
+                            bundle.putString(BaseApplication.MODEL_TYPE, BaseApplication.MODEL_NUMBER);
+                            break;
+                        case R.id.wrapperAnimal:
                             bundle.putString(BaseApplication.MODEL_TYPE, BaseApplication.MODEL_ANIMAL);
-
-                            if (ACTIVITY == BaseApplication.LEARN) {
-                                BaseApplication.getInstance()
-                                        .startNewActivity(ServiceChooseActivity.this,
-                                                LearnActivity.class, bundle);
-                            } else if (ACTIVITY == BaseApplication.TEST) {
-                                BaseApplication.getInstance()
-                                        .startNewActivity(ServiceChooseActivity.this,
-                                                TestActivity.class, bundle);
-                            } else if (ACTIVITY == BaseApplication.SCAN) {
-                                // Check whether the sceneform is supported for this device or not
-                                // to avoid crashing the application.
-                                if (BaseApplication.isSupportedSceneformOrShowDialog(
-                                        ServiceChooseActivity.this)) {
-                                    BaseApplication.getInstance()
-                                            .startNewActivity(ServiceChooseActivity.this,
-                                                    ScanActivity.class, bundle);
-                                }
-
-                            }
                             break;
+                    }
+
+                    // Set an activity for each service
+                    if (ACTIVITY == BaseApplication.LEARN) {
+                        BaseApplication.getInstance()
+                                .startNewActivity(ServiceChooseActivity.this,
+                                        LearnActivity.class, bundle);
+                    } else if (ACTIVITY == BaseApplication.TEST) {
+                        BaseApplication.getInstance()
+                                .startNewActivity(ServiceChooseActivity.this,
+                                        TestActivity.class, bundle);
+                    } else if (ACTIVITY == BaseApplication.SCAN) {
+                        // Check whether the sceneform is supported for this device or not
+                        // to avoid crashing the application.
+                        if (BaseApplication.isSupportedSceneformOrShowDialog(
+                                ServiceChooseActivity.this)) {
+                            BaseApplication.getInstance()
+                                    .startNewActivity(ServiceChooseActivity.this,
+                                            ScanActivity.class, bundle);
+                        }
                     }
                 });
             }

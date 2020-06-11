@@ -21,7 +21,7 @@ import java.util.List;
  * @author Abdullah Almasud
  */
 public class ArViewModel extends AndroidViewModel {
-    private MutableLiveData<List<ArModel>> mMutableAlphabetLiveData, mMutableAnimalLiveData;
+    private MutableLiveData<List<ArModel>> mMutableAlphabetLiveData, mMutableNumberLiveData, mMutableAnimalLiveData;
     private Context mContext;
 
     public ArViewModel(@NonNull Application application) {
@@ -30,14 +30,13 @@ public class ArViewModel extends AndroidViewModel {
     }
 
     /**
-     * The observable method ({@link LiveData}) of {@link List} of {@link ArModel}.
-     * @return The {@link List} of {@link ArModel} {@link LiveData} to be observed.
+     * @return The {@link List} of alphabet type {@link ArModel}'s {@link LiveData} to be observed.
      */
     public LiveData<List<ArModel>> getAlphabetsLivedData() {
         if (mMutableAlphabetLiveData == null) {
             mMutableAlphabetLiveData = new MutableLiveData<>();
 
-            // The list of items (Animal) to be set in mMutableLiveData
+            // The list of items (Alphabet) to be set in mMutableAlphabetLiveData
             List<ArModel> arModels = new ArrayList<>();
             arModels.add(new ArModel(0, BaseApplication.MODEL_ALPHABET,
                     mContext.getResources().getString(R.string.capital_a),
@@ -199,18 +198,71 @@ public class ArViewModel extends AndroidViewModel {
             // Set the value of mMutableLiveData
             mMutableAlphabetLiveData.setValue(arModels);
         }
+
         return mMutableAlphabetLiveData;
     }
 
     /**
-     * The observable method ({@link LiveData}) of {@link List} of {@link ArModel}.
-     * @return The {@link List} of {@link ArModel} {@link LiveData} to be observed.
+     * @return The {@link List} of number type {@link ArModel}'s {@link LiveData} to be observed.
+     */
+    public LiveData<List<ArModel>> getNumbersLivedData() {
+        if (mMutableNumberLiveData == null) {
+            mMutableNumberLiveData = new MutableLiveData<>();
+
+            // The list of items (Number) to be set in mMutableNumberLiveData
+            List<ArModel> arModels = new ArrayList<>();
+            arModels.add(new ArModel(0, BaseApplication.MODEL_NUMBER,
+                    mContext.getResources().getString(R.string.number_one), R.drawable.number_1,
+                    "models/numbers/number_1.sfb")
+            );
+            arModels.add(new ArModel(1, BaseApplication.MODEL_NUMBER,
+                    mContext.getResources().getString(R.string.number_two), R.drawable.number_2,
+                    "models/numbers/number_2.sfb")
+            );
+            arModels.add(new ArModel(2, BaseApplication.MODEL_NUMBER,
+                    mContext.getResources().getString(R.string.number_three), R.drawable.number_3,
+                    "models/numbers/number_3.sfb")
+            );
+            arModels.add(new ArModel(3, BaseApplication.MODEL_NUMBER,
+                    mContext.getResources().getString(R.string.number_four), R.drawable.number_4,
+                    "models/numbers/number_4.sfb")
+            );
+            arModels.add(new ArModel(4, BaseApplication.MODEL_NUMBER,
+                    mContext.getResources().getString(R.string.number_five), R.drawable.number_5,
+                    "models/numbers/number_5.sfb")
+            );
+            arModels.add(new ArModel(5, BaseApplication.MODEL_NUMBER,
+                    mContext.getResources().getString(R.string.number_six), R.drawable.number_6,
+                    "models/numbers/number_6.sfb")
+            );
+            arModels.add(new ArModel(6, BaseApplication.MODEL_NUMBER,
+                    mContext.getResources().getString(R.string.number_seven), R.drawable.number_7,
+                    "models/numbers/number_7.sfb")
+            );
+            arModels.add(new ArModel(7, BaseApplication.MODEL_NUMBER,
+                    mContext.getResources().getString(R.string.number_eight), R.drawable.number_8,
+                    "models/numbers/number_8.sfb")
+            );
+            arModels.add(new ArModel(8, BaseApplication.MODEL_NUMBER,
+                    mContext.getResources().getString(R.string.number_nine), R.drawable.number_9,
+                    "models/numbers/number_9.sfb")
+            );
+
+            // Set the value of mMutableLiveData
+            mMutableNumberLiveData.setValue(arModels);
+        }
+
+        return mMutableNumberLiveData;
+    }
+
+    /**
+     * @return The {@link List} of animal type {@link ArModel}'s {@link LiveData} to be observed.
      */
     public LiveData<List<ArModel>> getAnimalsLivedData() {
         if (mMutableAnimalLiveData == null) {
             mMutableAnimalLiveData = new MutableLiveData<>();
 
-            // The list of items (Animal) to be set in mMutableLiveData
+            // The list of items (Animal) to be set in mMutableAnimalLiveData
             List<ArModel> arModels = new ArrayList<>();
             arModels.add(new ArModel(0, BaseApplication.MODEL_ANIMAL,
                     mContext.getResources().getString(R.string.bear), R.drawable.bear,
@@ -252,6 +304,7 @@ public class ArViewModel extends AndroidViewModel {
             // Set the value of mMutableLiveData
             mMutableAnimalLiveData.setValue(arModels);
         }
+
         return mMutableAnimalLiveData;
     }
 }

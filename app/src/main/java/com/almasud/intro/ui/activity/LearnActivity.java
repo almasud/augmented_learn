@@ -39,6 +39,8 @@ public class LearnActivity extends AppCompatActivity {
         if (bundle != null) {
             if (bundle.getString(BaseApplication.MODEL_TYPE).equals(BaseApplication.MODEL_ALPHABET))
                 MODEL_TYPE = BaseApplication.ALPHABET;
+            else if (bundle.getString(BaseApplication.MODEL_TYPE).equals(BaseApplication.MODEL_NUMBER))
+                MODEL_TYPE = BaseApplication.NUMBER;
             else if (bundle.getString(BaseApplication.MODEL_TYPE).equals(BaseApplication.MODEL_ANIMAL))
                 MODEL_TYPE = BaseApplication.ANIMAL;
         }
@@ -51,6 +53,11 @@ public class LearnActivity extends AppCompatActivity {
             getSupportActionBar().setSubtitle(new StringBuilder(
                     getResources().getString(R.string.learn)).append(" | ")
                     .append(getResources().getString(R.string.alphabet))
+            );
+        else if (MODEL_TYPE == BaseApplication.NUMBER)
+            getSupportActionBar().setSubtitle(new StringBuilder(
+                            getResources().getString(R.string.learn)).append(" | ")
+                            .append(getResources().getString(R.string.number))
             );
         else if (MODEL_TYPE == BaseApplication.ANIMAL)
             getSupportActionBar().setSubtitle(new StringBuilder(
@@ -66,9 +73,9 @@ public class LearnActivity extends AppCompatActivity {
         // Get an instance of ARViewModel
         ArViewModel arViewModel = new ViewModelProvider(this).get(ArViewModel.class);
         // Get the list of live data of ARModel from ARViewModel
-        LiveData<List<ArModel>> arModelListLiveData =
-                (MODEL_TYPE == BaseApplication.ALPHABET)? arViewModel.getAlphabetsLivedData()
-                        : arViewModel.getAnimalsLivedData();
+        LiveData<List<ArModel>> arModelListLiveData = (MODEL_TYPE == BaseApplication.ALPHABET)?
+                arViewModel.getAlphabetsLivedData(): (MODEL_TYPE == BaseApplication.NUMBER)?
+                arViewModel.getNumbersLivedData(): arViewModel.getAnimalsLivedData();
 
         // Observe the list of ARModel from ARViewModel
         arModelListLiveData.observe(this, arModels -> {
@@ -76,8 +83,8 @@ public class LearnActivity extends AppCompatActivity {
             mArModels = arModels;
 
             if (mArModels.size() > 0) {
-                // Add the items (ArModels) to the view pager2 adapter
-                mPagerAdapter.addARModels(mArModels);
+                // Add the items (ArModel(s)) to the view pager2 adapter
+                mPagerAdapter.addArModels(mArModels);
 
                 // The previous button should be hidden for the first time
                 mViewBinding.buttonPrevLearn.setVisibility(View.GONE);
@@ -108,9 +115,8 @@ public class LearnActivity extends AppCompatActivity {
                 super.onPageSelected(position);
 
                 // Get the speak of different type of ArModel
-                String speak =
-                        (MODEL_TYPE == BaseApplication.ALPHABET)? mArModels.get(position).getName()
-                                + ", for, " + mArModels.get(position).getLabelName()
+                String speak = (MODEL_TYPE == BaseApplication.ALPHABET)?
+                        mArModels.get(position).getName() + ", for, " + mArModels.get(position).getLabelName()
                                 : mArModels.get(position).getName();
                 // Speak the name of each item
                 BaseApplication.speak(speak);
@@ -150,7 +156,8 @@ public class LearnActivity extends AppCompatActivity {
     public Completable getArViewCallback(int selectedItem) {
         // Get the type of ARModel to determine what type should be rendered in the real view.
         String modelType = (MODEL_TYPE == BaseApplication.ALPHABET)?
-                BaseApplication.MODEL_ALPHABET : BaseApplication.MODEL_ANIMAL;
+                BaseApplication.MODEL_ALPHABET: (MODEL_TYPE == BaseApplication.NUMBER)?
+                BaseApplication.MODEL_NUMBER: BaseApplication.MODEL_ANIMAL;
 
         return Completable.create(emitter -> {
             try {

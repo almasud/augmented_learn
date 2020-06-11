@@ -40,9 +40,11 @@ public class BaseApplication extends Application implements LifecycleObserver {
     public static final String SELECTED_ITEM = "Selected_Item";
     public static final String MODEL_TYPE = "Model_Type";
     public static final String MODEL_ALPHABET = "Model_Alphabet";
+    public static final String MODEL_NUMBER = "Model_Number";
     public static final String MODEL_ANIMAL = "Model_Animal";
     public static final int ALPHABET = 0;
-    public static final int ANIMAL = 1;
+    public static final int NUMBER = 1;
+    public static final int ANIMAL = 2;
     private static final double MIN_OPEN_GL_VERSION = 3.0;
 
     private static final String TAG = BaseApplication.class.getSimpleName();

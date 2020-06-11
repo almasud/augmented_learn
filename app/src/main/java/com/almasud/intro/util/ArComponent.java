@@ -115,7 +115,7 @@ public class ArComponent {
 
     /**
      * Set a {@link ModelRenderable} to a {@link TransformableNode} on the top of an {@link AnchorNode}.
-     * @param modelRenderable A {@link ModelRenderable} to be set to {@link TransformableNode}.
+     * @param modelRenderable A {@link ModelRenderable} to be set on {@link TransformableNode}.
      * @param arModel An {@link ArModel} class to get the {@link ModelRenderable}'s data.
      * @param localScale An initial scale of the {@link TransformableNode}.
      */
@@ -151,11 +151,10 @@ public class ArComponent {
      * @param arModel An {@link ArModel} class to get the {@link ModelRenderable}'s data.
      * @param localScale An initial scale of the {@link TransformableNode}.
      */
-    public void setTransformableModel(
-            @NonNull ArModel arModel, @NonNull float localScale) {
-
+    public void setTransformableModel(@NonNull ArModel arModel, final float localScale) {
         // Get a transformable node from arFragment
         TransformableNode transformableNode = new TransformableNode(mArFragment.getTransformationSystem());
+
         // Start loading the models asynchronously
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             CompletableFuture<ModelRenderable> completableFuture = getCompletableFutureModel(arModel);
