@@ -207,7 +207,7 @@ public class ArComponent {
         // AR Scenform required minimumSDK <= 24
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             // Get the layout to be display a name and hold a speak and cancel button or a progress bar
-            ViewRenderable.builder().setView(mContext, R.layout.layout_name)
+            ViewRenderable.builder().setView(mContext, R.layout.item_ar_name)
                     .build().thenAccept(viewRenderable -> {
                         // Get a transformable node from arFragment
                         TransformableNode nameTransformableNode = new TransformableNode(mArFragment.getTransformationSystem());

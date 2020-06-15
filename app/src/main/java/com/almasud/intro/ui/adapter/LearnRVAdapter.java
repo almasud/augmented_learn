@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.almasud.intro.R;
-import com.almasud.intro.databinding.ItemRealViewBinding;
+import com.almasud.intro.databinding.ItemArBinding;
 import com.almasud.intro.model.ArModel;
 import com.almasud.intro.ui.activity.LearnArActivity;
 
@@ -24,7 +24,7 @@ import io.reactivex.schedulers.Schedulers;
  * @author Abdullah Almasud
  */
 public class LearnRVAdapter extends RecyclerView.Adapter<LearnRVAdapter.ArModelViewHolder> {
-    private ItemRealViewBinding mViewBinding;
+    private ItemArBinding mViewBinding;
     private List<ArModel> mArModels;
     private LearnArActivity mActivity;
     private int mRowIndex;
@@ -39,14 +39,14 @@ public class LearnRVAdapter extends RecyclerView.Adapter<LearnRVAdapter.ArModelV
     @NonNull
     @Override
     public ArModelViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        mViewBinding = ItemRealViewBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        mViewBinding = ItemArBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new ArModelViewHolder(mViewBinding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ArModelViewHolder holder, int position) {
-        ArModel ARModel = mArModels.get(position);
-        holder.setArModel(ARModel);
+        ArModel arModel = mArModels.get(position);
+        holder.setArModel(arModel);
         holder.itemView.setOnClickListener(view -> {
             // Subscribe to selectModelCallback() observable of the activity
             // to get the selected item.
@@ -69,15 +69,15 @@ public class LearnRVAdapter extends RecyclerView.Adapter<LearnRVAdapter.ArModelV
     }
 
     public class ArModelViewHolder extends RecyclerView.ViewHolder {
-        private ItemRealViewBinding viewBinding;
+        private ItemArBinding viewBinding;
 
-        public ArModelViewHolder(@NonNull ItemRealViewBinding viewBinding) {
+        public ArModelViewHolder(@NonNull ItemArBinding viewBinding) {
             super(viewBinding.getRoot());
             this.viewBinding = viewBinding;
         }
 
-        public void setArModel(ArModel ARModel) {
-            viewBinding.ivItemRealView.setImageResource(ARModel.getPhoto());
+        public void setArModel(ArModel arModel) {
+            viewBinding.ivItemRealView.setImageResource(arModel.getPhoto());
         }
     }
 
