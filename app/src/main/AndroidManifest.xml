@@ -2,8 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.almasud.intro">
+
     <!-- Both "AR Optional" and "AR Required" apps require CAMERA permission. -->
-    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.CAMERA" /> <!-- INTERNET permission is required to download files from server. -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- FOREGROUND_SERVICE permission is required from Android Oreo or API level 26 or higher. -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".BaseApplication"
@@ -21,13 +26,30 @@
             android:name="com.google.ar.core"
             android:value="optional" />
 
-        <activity android:name=".ui.activity.LearnArActivity"
+        <service
+            android:name=".service.UnzipService"
+            android:enabled="true"
+            android:exported="false"
+            android:icon="@drawable/ic_file_download_black"
+            android:label="@string/intro_model_unziper" />
+
+        <service
+            android:name=".service.DownloadService"
+            android:enabled="true"
+            android:exported="false"
+            android:icon="@drawable/ic_file_download_black"
+            android:label="@string/intro_model_downloader" />
+
+        <activity
+            android:name=".ui.activity.LearnArActivity"
             android:screenOrientation="landscape"
             tools:ignore="LockedOrientationActivity" />
-        <activity android:name=".ui.activity.LearnActivity"
+        <activity
+            android:name=".ui.activity.LearnActivity"
             android:screenOrientation="landscape"
             tools:ignore="LockedOrientationActivity" />
-        <activity android:name=".ui.activity.ScanActivity"
+        <activity
+            android:name=".ui.activity.ScanActivity"
             android:screenOrientation="landscape"
             tools:ignore="LockedOrientationActivity" />
         <activity

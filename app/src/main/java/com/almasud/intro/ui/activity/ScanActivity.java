@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.almasud.intro.BaseApplication;
 import com.almasud.intro.R;
 import com.almasud.intro.databinding.ActivityScanBinding;
-import com.almasud.intro.model.ArModel;
+import com.almasud.intro.model.entity.ArModel;
 import com.almasud.intro.ui.fragment.ScanArFragment;
 import com.almasud.intro.ui.util.SnackbarHelper;
 import com.almasud.intro.util.ArComponent;
@@ -186,6 +186,9 @@ public class ScanActivity extends AppCompatActivity {
                             }
                         } catch (Exception e) {
                             Log.e(TAG, "onUpdateFrame: Couldn't render the model: " + e.getMessage());
+                            SnackbarHelper.getInstance().showMessage(
+                                    this, "Error: Couldn't render the model!"
+                            );
                         }
 
                         // Put the augmentedImage with anchorNode to keep the tracked

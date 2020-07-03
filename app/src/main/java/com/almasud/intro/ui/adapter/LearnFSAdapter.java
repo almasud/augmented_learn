@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.almasud.intro.model.ArModel;
+import com.almasud.intro.model.entity.ArModel;
 import com.almasud.intro.ui.fragment.LearnFragment;
 
 import java.util.ArrayList;

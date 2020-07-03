@@ -13,11 +13,10 @@ import androidx.fragment.app.Fragment;
 import com.almasud.intro.BaseApplication;
 import com.almasud.intro.R;
 import com.almasud.intro.databinding.FragmentLearnBinding;
-import com.almasud.intro.model.ArModel;
+import com.almasud.intro.model.entity.ArModel;
 import com.almasud.intro.ui.activity.LearnActivity;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -28,7 +27,6 @@ import io.reactivex.schedulers.Schedulers;
 public class LearnFragment extends Fragment {
     private FragmentLearnBinding mViewBinding;
     private ArModel mArModel;
-    private Disposable mArViewDisposable;
 
     public LearnFragment(ArModel ARModel) {
         mArModel = ARModel;
@@ -68,20 +66,10 @@ public class LearnFragment extends Fragment {
         mViewBinding.ivLearnRealView.setOnClickListener(view -> {
             LearnActivity activity = (LearnActivity) getActivity();
             // Set the id of ARModel as an argument to the callback method of the activity.
-            mArViewDisposable = activity.getArViewCallback(mArModel.getId())
+            activity.getArViewCallback(mArModel.getId())
                     .observeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe();
         });
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-
-        // Dispose the mRealViewDisposable
-        if (mArViewDisposable != null && !mArViewDisposable.isDisposed()) {
-            mArViewDisposable.dispose();
-        }
     }
 }

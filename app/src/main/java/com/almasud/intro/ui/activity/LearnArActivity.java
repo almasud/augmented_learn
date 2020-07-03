@@ -12,8 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.almasud.intro.BaseApplication;
 import com.almasud.intro.R;
 import com.almasud.intro.databinding.ActivityLearnArBinding;
-import com.almasud.intro.model.ArModel;
+import com.almasud.intro.model.entity.ArModel;
 import com.almasud.intro.ui.adapter.LearnRVAdapter;
+import com.almasud.intro.ui.util.SnackbarHelper;
 import com.almasud.intro.util.ArComponent;
 import com.google.ar.core.Anchor;
 import com.google.ar.sceneform.AnchorNode;
@@ -122,6 +123,9 @@ public class LearnArActivity extends AppCompatActivity {
                 }
             } catch (Exception e) {
                 Log.e(TAG, "onCreate: Couldn't render the model: " + e.getMessage());
+                SnackbarHelper.getInstance().showMessage(
+                        this, "Error: Couldn't render the model!"
+                );
             }
         });
     }

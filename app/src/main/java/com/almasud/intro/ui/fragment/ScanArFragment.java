@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import androidx.annotation.Nullable;
 
 import com.almasud.intro.BaseApplication;
-import com.almasud.intro.model.ArModel;
+import com.almasud.intro.model.entity.ArModel;
 import com.almasud.intro.ui.util.SnackbarHelper;
 import com.google.ar.core.AugmentedImageDatabase;
 import com.google.ar.core.Config;

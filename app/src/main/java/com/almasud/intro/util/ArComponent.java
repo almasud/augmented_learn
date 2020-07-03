@@ -15,7 +15,7 @@ import androidx.annotation.RequiresApi;
 
 import com.almasud.intro.BaseApplication;
 import com.almasud.intro.R;
-import com.almasud.intro.model.ArModel;
+import com.almasud.intro.model.entity.ArModel;
 import com.google.ar.sceneform.AnchorNode;
 import com.google.ar.sceneform.math.Quaternion;
 import com.google.ar.sceneform.math.Vector3;

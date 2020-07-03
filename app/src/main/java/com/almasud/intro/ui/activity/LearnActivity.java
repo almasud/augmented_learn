@@ -12,10 +12,17 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.almasud.intro.BaseApplication;
 import com.almasud.intro.R;
 import com.almasud.intro.databinding.ActivityLearnBinding;
-import com.almasud.intro.model.ArModel;
+import com.almasud.intro.model.entity.ArModel;
+import com.almasud.intro.model.util.EventMessage;
 import com.almasud.intro.ui.adapter.LearnFSAdapter;
+import com.almasud.intro.ui.util.SnackbarHelper;
 import com.almasud.intro.viewmodel.ArViewModel;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
+import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +30,7 @@ import java.util.List;
 import io.reactivex.Completable;
 
 public class LearnActivity extends AppCompatActivity {
+    private static final String TAG = LearnActivity.class.getSimpleName();
     private ActivityLearnBinding mViewBinding;
     private LearnFSAdapter mPagerAdapter;
     private List<ArModel> mArModels = new ArrayList<>();
@@ -139,12 +147,30 @@ public class LearnActivity extends AppCompatActivity {
                 super.onPageScrollStateChanged(state);
             }
         });
+
+        // Download test Emulator - /storage/14EE-270F Real Device - /storage/6405-3F21
+//        BaseApplication.download(
+//                this, BaseApplication.DOWNLOAD_URL_ALPHABETS,
+//                new File(
+//                        "/storage/6405-3F21/Android/data/com.almasud.intro/files/models"
+//                ));
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
     }
 
     @Override
     public boolean onSupportNavigateUp() {
         finish();
         return true;
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventMessage(EventMessage eventMessage) {
+        SnackbarHelper.getInstance().showMessage(this, eventMessage.getMessage());
     }
 
     /**
@@ -178,5 +204,11 @@ public class LearnActivity extends AppCompatActivity {
                 emitter.onError(e);
             }
         });
+    }
+
+    @Override
+    protected void onStop() {
+        EventBus.getDefault().unregister(this);
+        super.onStop();
     }
 }

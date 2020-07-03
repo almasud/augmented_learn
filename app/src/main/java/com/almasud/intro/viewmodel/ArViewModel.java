@@ -10,7 +10,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.almasud.intro.BaseApplication;
 import com.almasud.intro.R;
-import com.almasud.intro.model.ArModel;
+import com.almasud.intro.model.entity.ArModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -266,11 +266,12 @@ public class ArViewModel extends AndroidViewModel {
             List<ArModel> arModels = new ArrayList<>();
             arModels.add(new ArModel(0, BaseApplication.MODEL_ANIMAL,
                     mContext.getResources().getString(R.string.bear), R.drawable.bear,
-                    "models/animals/bear.sfb")
+                    "/storage/14EE-270F/Android/data/com.almasud.intro/files/models/animals/bear.sfb")
             );
             arModels.add(new ArModel(1, BaseApplication.MODEL_ANIMAL,
                     mContext.getResources().getString(R.string.cat), R.drawable.cat,
-                    "models/animals/cat.sfb")
+                    BaseApplication.getExternalFileModelsDir(
+                            mContext, BaseApplication.DIRECTORY_ANIMALS) + "/cat.sfb")
             );
             arModels.add(new ArModel(2, BaseApplication.MODEL_ANIMAL,
                     mContext.getResources().getString(R.string.cow), R.drawable.cow,

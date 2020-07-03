@@ -1,4 +1,4 @@
-package com.almasud.intro.model;
+package com.almasud.intro.model.entity;
 
 import androidx.annotation.DrawableRes;
 

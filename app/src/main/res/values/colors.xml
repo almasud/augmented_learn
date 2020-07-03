@@ -8,5 +8,6 @@
     <color name="colorGray">#88eeeeee</color>
     <color name="colorBlackTransparent">#80333609</color>
     <color name="colorFailed">#C61212</color>
+    <color name="colorFailedTransparent">#66C61212</color>
     <color name="colorSuccess">#0C9F0C</color>
 </resources>

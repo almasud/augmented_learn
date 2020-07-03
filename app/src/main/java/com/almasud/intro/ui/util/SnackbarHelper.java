@@ -1,7 +1,6 @@
 package com.almasud.intro.ui.util;
 
 import android.app.Activity;
-import android.view.View;
 
 import com.almasud.intro.R;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
@@ -52,52 +51,39 @@ public final class SnackbarHelper {
    * call even if snackbar is not shown.
    */
   public void hide(Activity activity) {
-    activity.runOnUiThread(
-        new Runnable() {
-          @Override
-          public void run() {
-            if (messageSnackbar != null) {
-              messageSnackbar.dismiss();
-            }
-            messageSnackbar = null;
-          }
-        });
+    activity.runOnUiThread(() -> {
+        if (messageSnackbar != null) {
+            messageSnackbar.dismiss();
+        }
+        messageSnackbar = null;
+    });
   }
 
   private void show(
           final Activity activity, final String message, final DismissBehavior dismissBehavior) {
-    activity.runOnUiThread(
-        new Runnable() {
-          @Override
-          public void run() {
-            messageSnackbar =
+    activity.runOnUiThread(() -> {
+        messageSnackbar =
                 Snackbar.make(
-                    activity.findViewById(android.R.id.content),
-                    message,
-                    Snackbar.LENGTH_SHORT);
-            messageSnackbar.getView().setBackgroundColor(activity.getResources().getColor(R.color.colorPrimaryTransparent_66));
-            if (dismissBehavior != DismissBehavior.HIDE) {
-              messageSnackbar.setAction(
-                  "Dismiss",
-                  new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                      messageSnackbar.dismiss();
-                    }
-                  });
-              if (dismissBehavior == DismissBehavior.FINISH) {
+                        activity.findViewById(android.R.id.content),
+                        message,
+                        Snackbar.LENGTH_SHORT);
+        messageSnackbar.getView().setBackgroundColor(activity.getResources().getColor(R.color.colorPrimaryTransparent_66));
+        if (dismissBehavior != DismissBehavior.HIDE) {
+            messageSnackbar.setAction(
+                    "Dismiss",
+                    v -> messageSnackbar.dismiss());
+            if (dismissBehavior == DismissBehavior.FINISH) {
                 messageSnackbar.addCallback(
-                    new BaseTransientBottomBar.BaseCallback<Snackbar>() {
-                      @Override
-                      public void onDismissed(Snackbar transientBottomBar, int event) {
-                        super.onDismissed(transientBottomBar, event);
-                        activity.finish();
-                      }
-                    });
-              }
+                        new BaseTransientBottomBar.BaseCallback<Snackbar>() {
+                            @Override
+                            public void onDismissed(Snackbar transientBottomBar, int event) {
+                                super.onDismissed(transientBottomBar, event);
+                                activity.finish();
+                            }
+                        });
             }
-            messageSnackbar.show();
-          }
-        });
+        }
+        messageSnackbar.show();
+    });
   }
 }

@@ -20,14 +20,12 @@ import androidx.lifecycle.ViewModelProvider;
 import com.almasud.intro.BaseApplication;
 import com.almasud.intro.R;
 import com.almasud.intro.databinding.ActivityTestBinding;
-import com.almasud.intro.model.ArModel;
+import com.almasud.intro.model.entity.ArModel;
 import com.almasud.intro.viewmodel.ArViewModel;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
-import java.util.Set;
 
 public class TestActivity extends AppCompatActivity {
     private static final String TAG = TestActivity.class.getSimpleName();
@@ -170,7 +168,7 @@ public class TestActivity extends AppCompatActivity {
                             mArModels.remove(mTestRandNumbers[3]);
 
                         // Reset the mTestRandItems value and start a new test
-                        mTestRandNumbers = getTestRandNumbers(mArModels.size());
+                        mTestRandNumbers = BaseApplication.getUniqueRandNumbers(mArModels.size(), ITEMS_IN_SINGLE_TEST);
                         // Increment the value of mNumberOfTest and set it to the UI
                         mViewBinding.tvTestNumberNOutOf.setText(String.format(new Locale("en-US"), "%d/%d", ++mNumberOfTest, mNumberOfTotalTest));
 
@@ -267,7 +265,7 @@ public class TestActivity extends AppCompatActivity {
         } else {
             // Code for the test initialization
             // Assign the mTestRandItems value
-            mTestRandNumbers = getTestRandNumbers(mArModels.size());
+            mTestRandNumbers = BaseApplication.getUniqueRandNumbers(mArModels.size(), ITEMS_IN_SINGLE_TEST);
             // Set the value of mNumberOfTotalTest
             mNumberOfTotalTest = (mArModels.size() - ITEMS_IN_SINGLE_TEST) + 1;
             // Increment (initialize) the value of mNumberOfTest and set it to the UI
@@ -294,27 +292,6 @@ public class TestActivity extends AppCompatActivity {
             if (MODEL_TYPE == BaseApplication.ALPHABET)
                 mViewBinding.tvTestItemName.setVisibility(View.GONE);
         }
-    }
-
-    /**
-     * Generate the number of TOTAL_TEST_ITEM int[] array of unique {@link Random}
-     * number from the given boundNumber.
-     *
-     * @param boundNumber The bound number to be {@link Random}.
-     * @return The number of TOTAL_TEST_ITEM int[] array of unique {@link Random} number.
-     */
-    public int[] getTestRandNumbers(int boundNumber) {
-        // Random set to hold unique random number.
-        Set<Integer> randSet = new HashSet<>(ITEMS_IN_SINGLE_TEST);
-        // Add resultSize of random numbers to set
-        while (randSet.size() < ITEMS_IN_SINGLE_TEST)
-            while (!randSet.add(new Random().nextInt(boundNumber)));
-        // Convert the randSet into an integer array to return
-        int[] randArray = new int[ITEMS_IN_SINGLE_TEST];
-        int i = 0;
-        for (Integer integer : randSet)
-            randArray[i++] = integer;
-        return randArray;
     }
 
     /**
