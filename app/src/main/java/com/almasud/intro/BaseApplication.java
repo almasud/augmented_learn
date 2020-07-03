@@ -3,10 +3,8 @@ package com.almasud.intro;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Application;
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -16,14 +14,11 @@ import android.os.Environment;
 import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
-import android.webkit.URLUtil;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
@@ -34,25 +29,12 @@ import com.almasud.intro.model.entity.ArModel;
 import com.almasud.intro.service.DownloadService;
 import com.almasud.intro.service.UnzipService;
 
-import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Random;
 import java.util.Set;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
-
-import io.reactivex.Completable;
 
 /**
  * A base {@link Application} class of the app.
@@ -84,9 +66,9 @@ public class BaseApplication extends Application implements LifecycleObserver {
     public static final String DIRECTORY_ANIMALS = "animals";
     public static final String NOTIFICATION_CHANNEL_DOWNLOADER = "Downloader_Channel";
     public static final String NOTIFICATION_CHANNEL_UNZIP = "Downloader_Unzip";
-    public static final String DOWNLOAD_URL_ALPHABETS = "http://almasud.000webhost.com/alphabets.zip";
-    public static final String DOWNLOAD_URL_NUMBERS = "http://almasud.000webhost.com/numbers.zip";
-    public static final String DOWNLOAD_URL_ANIMALS = "http://almasud.000webhost.com/animals.zip";
+    public static final String DOWNLOAD_URL_ALPHABETS = "http://almasud.000webhostapp.com/alphabets.zip";
+    public static final String DOWNLOAD_URL_NUMBERS = "http://almasud.000webhostapp.com/numbers.zip";
+    public static final String DOWNLOAD_URL_ANIMALS = "http://almasud.000webhostapp.com/animals.zip";
 
     private static final String TAG = BaseApplication.class.getSimpleName();
     private static final BaseApplication INSTANCE = new BaseApplication();
