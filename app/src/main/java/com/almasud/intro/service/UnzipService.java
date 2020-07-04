@@ -9,6 +9,7 @@ import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
 
+import com.almasud.intro.BaseApplication;
 import com.almasud.intro.R;
 import com.almasud.intro.model.util.EventMessage;
 import com.almasud.intro.ui.activity.HomeActivity;
@@ -23,8 +24,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
-
-import static com.almasud.intro.BaseApplication.NOTIFICATION_CHANNEL_UNZIP;
 
 /**
  * A {@link Service} class for file unzip.
@@ -48,14 +47,14 @@ public class UnzipService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         // Get download information from intent
-        final File zipFile = (File) intent.getSerializableExtra(ZIP_FILE);
+        final File sourceFile = (File) intent.getSerializableExtra(ZIP_FILE);
         final File targetDirectory = (File) intent.getSerializableExtra(TARGET_DIRECTORY);
         // Notification ID is a unique int for each notification that must be define
         final int notificationId = (int) (System.currentTimeMillis() / 1000);
 
         // Create a thread to unzip the file
         Thread thread = new Thread(() -> {
-            boolean successStatus = false;
+            boolean successStatus = true;
             // Dispatch an EventMessage to it's subscribers
             EventBus.getDefault().post(
                     new EventMessage("Unzip starting", EventMessage.TYPE_NORMAL)
@@ -66,18 +65,18 @@ public class UnzipService extends Service {
             PendingIntent notifyPendingIntent = PendingIntent.getActivity(
                     this, 0, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT
             );
-            String notificationContent = "Unzipping";
 
             // Create a notification builder before starting the download
             NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(
-                    this, NOTIFICATION_CHANNEL_UNZIP
+                    this, BaseApplication.NOTIFICATION_CHANNEL_UNZIP
             );
             notificationBuilder.setContentIntent(notifyPendingIntent);
             notificationBuilder.setTicker("Start unzipping");
             notificationBuilder.setOngoing(true);
             notificationBuilder.setAutoCancel(false);
+            notificationBuilder.setOnlyAlertOnce(true);
             notificationBuilder.setSmallIcon(R.drawable.ic_file_download_black);
-            notificationBuilder.setContentTitle(notificationContent);
+            notificationBuilder.setContentTitle("Unzipping");
             notificationBuilder.setContentText("0%");
             notificationBuilder.setProgress(100, 0, false);
 
@@ -86,20 +85,20 @@ public class UnzipService extends Service {
             // of start request of the service until the service is stopped.
             startForeground(notificationId, notificationBuilder.build());
 
-            // Try to unzip the zip file
-            try (ZipInputStream zis = new ZipInputStream(
-                    new BufferedInputStream(new FileInputStream(zipFile)))) {
-                ZipEntry ze;
-                byte[] buffer = new byte[1024];
-                long total = 0, fileLength = zipFile.length();
-                int count, tempPercent = 0;
+            // Try to unzip the file
+            try (ZipInputStream zipInputStream = new ZipInputStream(
+                    new BufferedInputStream(new FileInputStream(sourceFile)))) {
+                ZipEntry zipEntry;
+                long total = 0, fileLength = (int) sourceFile.length();
+                int tempPercent = 0;
 
-                while ((ze = zis.getNextEntry()) != null) {
-                    File file = new File(targetDirectory, ze.getName());
-                    File dir = ze.isDirectory() ? file : file.getParentFile();
+                while ((zipEntry = zipInputStream.getNextEntry()) != null) {
+                    File file = new File(targetDirectory, zipEntry.getName());
+                    File dir = zipEntry.isDirectory() ? file : file.getParentFile();
 
                     if (!dir.isDirectory() && !dir.mkdirs()) {
-                        Log.e(TAG, "download: Couldn't crete the child directory!");
+                        successStatus = false;
+                        Log.e(TAG, "onStartCommand: Couldn't crete the child directory!");
 
                         // Dispatch an EventMessage to it's subscribers
                         EventBus.getDefault().post(
@@ -107,44 +106,51 @@ public class UnzipService extends Service {
                         );
                     }
 
-                    if (ze.isDirectory())
+                    if (zipEntry.isDirectory())
                         continue;
 
+                    // Try to write the uncompressed file
                     try (FileOutputStream fileOutputStream = new FileOutputStream(file)) {
-                        while ((count = zis.read(buffer)) != -1) {
-                            total += count;
+                        byte[] buffer = new byte[1024];
+                        int count;
+
+                        while ((count = zipInputStream.read(buffer)) != -1)
                             fileOutputStream.write(buffer, 0, count);
-                            int percent = (int) ((total * 100) / fileLength);
+                    }
 
-                            if (percent > tempPercent) {
-                                tempPercent = percent;
-                                notificationBuilder.setContentText(percent + "%");
-                                notificationBuilder.setProgress(100, percent, false);
+                    // Show the progress in notification bar
+                    total += zipEntry.getCompressedSize();
+                    int percent = (int) ((total * 100) / fileLength);
 
-                                // Notify by starting the foreground service.
-                                startForeground(notificationId, notificationBuilder.build());
-                            }
-                        }
+                    if (percent > tempPercent) {
+                        tempPercent = percent;
+                        notificationBuilder.setContentText(percent + "%");
+                        notificationBuilder.setProgress(100, percent, false);
+
+                        // Notify by starting the foreground service.
+                        startForeground(notificationId, notificationBuilder.build());
                     }
 
                     // Time should be restored as well
-                    long time = ze.getTime();
+                    long time = zipEntry.getTime();
                     if (time > 0)
                         successStatus = file.setLastModified(time);
                 }
 
                 // File should be deleted as well
-                if (zipFile.exists())
-                    successStatus = zipFile.delete();
+                if (sourceFile.exists())
+                    successStatus = sourceFile.delete();
             } catch (FileNotFoundException e) {
-                Log.e(TAG, "download: FileNotFoundException: " + e.getMessage());
+                successStatus = false;
+                Log.e(TAG, "onStartCommand: FileNotFoundException: " + e.getMessage());
 
                 // Dispatch an EventMessage to it's subscribers
                 EventBus.getDefault().post(
                         new EventMessage("File is not found!", EventMessage.TYPE_ERROR)
                 );
             } catch (IOException e) {
-                Log.e(TAG, "download: IOException: " + e.getMessage());
+                successStatus = false;
+                Log.e(TAG, "onStartCommand: IOException: " + e.getMessage());
 
                 // Dispatch an EventMessage to it's subscribers
                 EventBus.getDefault().post(

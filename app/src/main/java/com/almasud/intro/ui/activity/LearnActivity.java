@@ -22,6 +22,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -146,23 +147,26 @@ public class LearnActivity extends AppCompatActivity {
                 super.onPageScrollStateChanged(state);
             }
         });
-    }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        EventBus.getDefault().register(this);
+        // Download test Emulator - /storage/14EE-270F Real Device - /storage/6405-3F21
+//        BaseApplication.download(
+//                this,
+//                BaseApplication.DOWNLOAD_URL_NUMBERS,
+//                new File("/storage/6405-3F21/Android/data/com.almasud.intro/files/models")
+//        );
+
+        // Unzip test Emulator - /storage/14EE-270F Real Device - /storage/6405-3F21
+//        BaseApplication.unzip(
+//                this,
+//                new File("/storage/14EE-270F/Android/data/com.almasud.intro/files/models/numbers.zip"),
+//                new File("/storage/14EE-270F/Android/data/com.almasud.intro/files/models")
+//        );
     }
 
     @Override
     public boolean onSupportNavigateUp() {
         finish();
         return true;
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMessage(EventMessage eventMessage) {
-        SnackbarHelper.getInstance().showMessage(this, eventMessage.getMessage());
     }
 
     /**
@@ -196,6 +200,17 @@ public class LearnActivity extends AppCompatActivity {
                 emitter.onError(e);
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventMessage(EventMessage eventMessage) {
+        SnackbarHelper.getInstance().showMessage(this, eventMessage.getMessage());
     }
 
     @Override

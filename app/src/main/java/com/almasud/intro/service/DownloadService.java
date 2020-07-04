@@ -11,6 +11,7 @@ import android.webkit.URLUtil;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
+import com.almasud.intro.BaseApplication;
 import com.almasud.intro.R;
 import com.almasud.intro.model.util.EventMessage;
 import com.almasud.intro.ui.activity.HomeActivity;
@@ -27,8 +28,6 @@ import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-
-import static com.almasud.intro.BaseApplication.NOTIFICATION_CHANNEL_DOWNLOADER;
 
 /**
  * A {@link Service} class for file download.
@@ -55,13 +54,12 @@ public class DownloadService extends Service {
         // Get download information from intent
         final String downloadURL = intent.getStringExtra(DOWNLOAD_URL);
         final File targetDirectory = (File) intent.getSerializableExtra(TARGET_DIRECTORY);
-        final boolean unzipService = intent.getBooleanExtra(UNZIP_SERVICE, false);
         // Notification ID is a unique int for each notification that must be define
         final int notificationId = (int) (System.currentTimeMillis() / 1000);
 
         // Create a thread to download the file
         Thread thread = new Thread(() -> {
-            boolean successStatus = false;
+            boolean successStatus = true;
             // Dispatch an EventMessage to it's subscribers
             EventBus.getDefault().post(
                     new EventMessage("Download starting", EventMessage.TYPE_NORMAL)
@@ -72,18 +70,18 @@ public class DownloadService extends Service {
             PendingIntent notifyPendingIntent = PendingIntent.getActivity(
                     this, 0, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT
             );
-            String notificationContent = "Downloading";
 
             // Create a notification builder before starting the download
             NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(
-                    this, NOTIFICATION_CHANNEL_DOWNLOADER
+                    this, BaseApplication.NOTIFICATION_CHANNEL_DOWNLOADER
             );
             notificationBuilder.setContentIntent(notifyPendingIntent);
             notificationBuilder.setTicker("Start downloading from server");
             notificationBuilder.setOngoing(true);
             notificationBuilder.setAutoCancel(false);
+            notificationBuilder.setOnlyAlertOnce(true);
             notificationBuilder.setSmallIcon(R.drawable.ic_file_download_black);
-            notificationBuilder.setContentTitle(notificationContent);
+            notificationBuilder.setContentTitle("Downloading");
             notificationBuilder.setContentText("0%");
             notificationBuilder.setProgress(100, 0, false);
 
@@ -104,7 +102,7 @@ public class DownloadService extends Service {
                 // Create the directory if not exists
                 if (!dir.exists())
                     if (!(successStatus = dir.mkdirs())) {
-                        Log.e(TAG, "download: Couldn't crete the download directory!");
+                        Log.e(TAG, "onStartCommand: Couldn't crete the download directory!");
 
                         // Dispatch an EventMessage to it's subscribers
                         EventBus.getDefault().post(
@@ -116,7 +114,7 @@ public class DownloadService extends Service {
                 try {
                     successStatus = tempFile.createNewFile();
                 } catch (IOException e) {
-                    Log.e(TAG, "download: Couldn't crete the download file.");
+                    Log.e(TAG, "onStartCommand: Couldn't crete the download file.");
 
                     // Dispatch an EventMessage to it's subscribers
                     EventBus.getDefault().post(
@@ -131,7 +129,7 @@ public class DownloadService extends Service {
                     URL url = new URL(downloadURL);
                     URLConnection connection = url.openConnection();
                     int fileLength = connection.getContentLength();
-                    // Input stream to read file with 8k buffer
+                    // Read file with 8k buffer
                     InputStream inputStream = new BufferedInputStream(url.openStream(), 8192);
                     // Output stream to write file
                     OutputStream outputStream = new FileOutputStream(tempFile);
@@ -147,6 +145,7 @@ public class DownloadService extends Service {
 
                         if (percent > tempPercent) {
                             tempPercent = percent;
+                            notificationBuilder.setContentTitle(fileName);
                             notificationBuilder.setContentText(percent + "%");
                             notificationBuilder.setProgress(100, percent, false);
 
@@ -164,7 +163,7 @@ public class DownloadService extends Service {
                     successStatus = tempFile.renameTo(file);
                 } catch (FileNotFoundException e) {
                     successStatus = false;
-                    Log.e(TAG, "download: FileNotFoundException: " + e.getMessage());
+                    Log.e(TAG, "onStartCommand: FileNotFoundException: " + e.getMessage());
 
                     // Dispatch an EventMessage to it's subscribers
                     EventBus.getDefault().post(
@@ -172,7 +171,7 @@ public class DownloadService extends Service {
                     );
                 } catch (MalformedURLException e) {
                     successStatus = false;
-                    Log.e(TAG, "download: MalformedURLException: " + e.getMessage());
+                    Log.e(TAG, "onStartCommand: MalformedURLException: " + e.getMessage());
 
                     // Dispatch an EventMessage to it's subscribers
                     EventBus.getDefault().post(
@@ -180,7 +179,7 @@ public class DownloadService extends Service {
                     );
                 } catch (IOException e) {
                     successStatus = false;
-                    Log.e(TAG, "download: IOException: " + e.getMessage());
+                    Log.e(TAG, "onStartCommand: IOException: " + e.getMessage());
 
                     // Dispatch an EventMessage to it's subscribers
                     EventBus.getDefault().post(

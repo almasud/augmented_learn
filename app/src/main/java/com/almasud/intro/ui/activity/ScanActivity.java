@@ -14,6 +14,7 @@ import com.almasud.intro.BaseApplication;
 import com.almasud.intro.R;
 import com.almasud.intro.databinding.ActivityScanBinding;
 import com.almasud.intro.model.entity.ArModel;
+import com.almasud.intro.model.util.EventMessage;
 import com.almasud.intro.ui.fragment.ScanArFragment;
 import com.almasud.intro.ui.util.SnackbarHelper;
 import com.almasud.intro.util.ArComponent;
@@ -23,6 +24,10 @@ import com.google.ar.core.Frame;
 import com.google.ar.sceneform.AnchorNode;
 import com.google.ar.sceneform.FrameTime;
 import com.google.ar.sceneform.rendering.ModelRenderable;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -203,5 +208,22 @@ public class ScanActivity extends AppCompatActivity {
                     break;
             }
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventMessage(EventMessage eventMessage) {
+        SnackbarHelper.getInstance().showMessage(this, eventMessage.getMessage());
+    }
+
+    @Override
+    protected void onStop() {
+        EventBus.getDefault().unregister(this);
+        super.onStop();
     }
 }

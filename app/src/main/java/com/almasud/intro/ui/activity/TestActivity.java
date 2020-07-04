@@ -21,7 +21,13 @@ import com.almasud.intro.BaseApplication;
 import com.almasud.intro.R;
 import com.almasud.intro.databinding.ActivityTestBinding;
 import com.almasud.intro.model.entity.ArModel;
+import com.almasud.intro.model.util.EventMessage;
+import com.almasud.intro.ui.util.SnackbarHelper;
 import com.almasud.intro.viewmodel.ArViewModel;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 import java.util.Locale;
@@ -379,5 +385,22 @@ public class TestActivity extends AppCompatActivity {
         // Release the medial players
         mCorrectResultMP.release();
         mWrongResultMP.release();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventMessage(EventMessage eventMessage) {
+        SnackbarHelper.getInstance().showMessage(this, eventMessage.getMessage());
+    }
+
+    @Override
+    protected void onStop() {
+        EventBus.getDefault().unregister(this);
+        super.onStop();
     }
 }

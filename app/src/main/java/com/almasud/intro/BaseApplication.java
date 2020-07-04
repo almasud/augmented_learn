@@ -65,7 +65,7 @@ public class BaseApplication extends Application implements LifecycleObserver {
     public static final String DIRECTORY_NUMBERS = "numbers";
     public static final String DIRECTORY_ANIMALS = "animals";
     public static final String NOTIFICATION_CHANNEL_DOWNLOADER = "Downloader_Channel";
-    public static final String NOTIFICATION_CHANNEL_UNZIP = "Downloader_Unzip";
+    public static final String NOTIFICATION_CHANNEL_UNZIP = "Unzip_Channel";
     public static final String DOWNLOAD_URL_ALPHABETS = "http://almasud.000webhostapp.com/alphabets.zip";
     public static final String DOWNLOAD_URL_NUMBERS = "http://almasud.000webhostapp.com/numbers.zip";
     public static final String DOWNLOAD_URL_ANIMALS = "http://almasud.000webhostapp.com/animals.zip";
@@ -82,7 +82,7 @@ public class BaseApplication extends Application implements LifecycleObserver {
         // Add observer
         ProcessLifecycleOwner.get().getLifecycle().addObserver(this);
         // Create downloader and unzip notification channel
-        createDownloaderNotificationChannel();
+        createDownloadNotificationChannel();
         createUnzipNotificationChannel();
     }
 
@@ -202,7 +202,7 @@ public class BaseApplication extends Application implements LifecycleObserver {
     }
 
     /**
-     * Load a TTS ({@link TextToSpeech}) engine (TTS engine initialization takes some times).
+     * Load a TTS ({@link TextToSpeech}) engine (TTS engine initialization takes some times) with thread safe.
      * @param context The {@link Context} of the application.
      */
     private static void loadTTSEngine(@NonNull Context context) {
@@ -296,16 +296,18 @@ public class BaseApplication extends Application implements LifecycleObserver {
         );
     }
 
-    private void createDownloaderNotificationChannel() {
+    private void createDownloadNotificationChannel() {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             NotificationChannel notificationChannel = new NotificationChannel(
                     NOTIFICATION_CHANNEL_DOWNLOADER, getString(R.string.app_name),
-                    NotificationManager.IMPORTANCE_LOW
+                    NotificationManager.IMPORTANCE_DEFAULT
             );
             notificationChannel.setLightColor(Color.GREEN);
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            if (notificationManager != null)
+            if (notificationManager != null) {
                 notificationManager.createNotificationChannel(notificationChannel);
+                Log.d(TAG, "createDownloaderNotificationChannel: Notification channel created.");
+            }
         }
     }
 
@@ -313,12 +315,14 @@ public class BaseApplication extends Application implements LifecycleObserver {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             NotificationChannel notificationChannel = new NotificationChannel(
                     NOTIFICATION_CHANNEL_UNZIP, getString(R.string.app_name),
-                    NotificationManager.IMPORTANCE_LOW
+                    NotificationManager.IMPORTANCE_DEFAULT
             );
             notificationChannel.setLightColor(Color.GREEN);
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            if (notificationManager != null)
+            if (notificationManager != null) {
                 notificationManager.createNotificationChannel(notificationChannel);
+                Log.d(TAG, "createUnzipNotificationChannel: Notification channel created.");
+            }
         }
     }
 
