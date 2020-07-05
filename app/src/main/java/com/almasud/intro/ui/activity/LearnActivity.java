@@ -22,7 +22,6 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -147,20 +146,6 @@ public class LearnActivity extends AppCompatActivity {
                 super.onPageScrollStateChanged(state);
             }
         });
-
-        // Download test Emulator - /storage/14EE-270F Real Device - /storage/6405-3F21
-//        BaseApplication.download(
-//                this,
-//                BaseApplication.DOWNLOAD_URL_NUMBERS,
-//                new File("/storage/6405-3F21/Android/data/com.almasud.intro/files/models")
-//        );
-
-        // Unzip test Emulator - /storage/14EE-270F Real Device - /storage/6405-3F21
-//        BaseApplication.unzip(
-//                this,
-//                new File("/storage/14EE-270F/Android/data/com.almasud.intro/files/models/numbers.zip"),
-//                new File("/storage/14EE-270F/Android/data/com.almasud.intro/files/models")
-//        );
     }
 
     @Override

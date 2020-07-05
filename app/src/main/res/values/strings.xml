@@ -4,8 +4,8 @@
     <string name="learn_with_reality">Learn with Reality</string>
     <string name="app_greeting">"Hello, Welcome to Intro"</string>
     <string name="real_view">"Real View"</string>
-    <string name="intro_model_downloader">"Intro model downloader"</string>
-    <string name="intro_model_unziper">"Intro model unziper"</string>
+    <string name="intro_download">"Intro download"</string>
+    <string name="intro_unzip">"Intro unzip"</string>
 
     <!-- Strings used for navigation -->
     <string name="action_settings">Settings</string>

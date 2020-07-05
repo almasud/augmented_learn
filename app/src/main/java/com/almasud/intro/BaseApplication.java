@@ -340,6 +340,13 @@ public class BaseApplication extends Application implements LifecycleObserver {
 
         // Start the service as foreground
         ContextCompat.startForegroundService(context, unzipServiceIntent);
+
+        // Use the code for unzip where needed
+//        BaseApplication.unzip(
+//                this,
+//                new File("/storage/14EE-270F/Android/data/com.almasud.intro/files/models/numbers.zip"),
+//                new File("/storage/14EE-270F/Android/data/com.almasud.intro/files/models")
+//        );
     }
 
     /**
@@ -358,5 +365,12 @@ public class BaseApplication extends Application implements LifecycleObserver {
 
         // Start the service as foreground
         ContextCompat.startForegroundService(context, downloadServiceIntent);
+
+        // Use the code for download where needed
+//        BaseApplication.download(
+//                this,
+//                BaseApplication.DOWNLOAD_URL_NUMBERS,
+//                new File("/storage/6405-3F21/Android/data/com.almasud.intro/files/models")
+//        );
     }
 }

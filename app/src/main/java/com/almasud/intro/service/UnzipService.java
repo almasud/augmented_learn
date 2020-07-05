@@ -75,7 +75,7 @@ public class UnzipService extends Service {
             notificationBuilder.setOngoing(true);
             notificationBuilder.setAutoCancel(false);
             notificationBuilder.setOnlyAlertOnce(true);
-            notificationBuilder.setSmallIcon(R.drawable.ic_file_download_black);
+            notificationBuilder.setSmallIcon(R.drawable.ic_file_download);
             notificationBuilder.setContentTitle("Unzipping");
             notificationBuilder.setContentText("0%");
             notificationBuilder.setProgress(100, 0, false);
@@ -158,7 +158,7 @@ public class UnzipService extends Service {
                 );
             }
 
-            notificationBuilder.setSmallIcon(successStatus? R.drawable.ic_done_black: R.drawable.ic_error_black);
+            notificationBuilder.setSmallIcon(successStatus? R.drawable.ic_done_black: R.drawable.ic_error);
             notificationBuilder.setContentTitle(successStatus? "Done": "Failed");
             notificationBuilder.setContentText(successStatus? "Unzip completed": "Unzip is not completed");
             notificationBuilder.setOngoing(false);
