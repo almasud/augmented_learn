@@ -3,7 +3,6 @@ package com.almasud.intro.util;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Build;
-import android.speech.tts.TextToSpeech;
 import android.text.Layout;
 import android.util.Log;
 import android.view.View;
@@ -43,13 +42,11 @@ public class ArComponent {
     private Context mContext;
     private ArFragment mArFragment;
     private AnchorNode mAnchorNode;
-    private TextToSpeech mTextToSpeech;
 
     private ArComponent(ArComponentBuilder arComponentBuilder) {
         mContext = arComponentBuilder.context;
         mArFragment = arComponentBuilder.arFragment;
         mAnchorNode = arComponentBuilder.anchorNode;
-        mTextToSpeech = arComponentBuilder.textToSpeech;
     }
 
     public Context getContext() {
@@ -64,10 +61,6 @@ public class ArComponent {
         return mAnchorNode;
     }
 
-    public TextToSpeech getTextToSpeech() {
-        return mTextToSpeech;
-    }
-
     /**
      * Builder class of {@link ArComponent}.
      */
@@ -75,7 +68,6 @@ public class ArComponent {
         private Context context;
         private ArFragment arFragment;
         private AnchorNode anchorNode;
-        private TextToSpeech textToSpeech;
 
         public ArComponentBuilder(Context context) {
             this.context = context;
@@ -96,15 +88,6 @@ public class ArComponent {
          */
         public ArComponentBuilder setAnchorNode(AnchorNode anchorNode) {
             this.anchorNode = anchorNode;
-            return this;
-        }
-
-        /**
-         * @param textToSpeech An instance of {@link TextToSpeech}.
-         * @return An instance of {@link ArComponentBuilder}.
-         */
-        public ArComponentBuilder setTextToSpeech(TextToSpeech textToSpeech) {
-            this.textToSpeech = textToSpeech;
             return this;
         }
 
@@ -217,7 +200,7 @@ public class ArComponent {
                         nameTransformableNode.setLocalPosition(
                                 new Vector3(
                                         transformableNode.getLocalPosition().x,
-                                        transformableNode.getLocalPosition().y + 0.75f,
+                                        transformableNode.getLocalPosition().y + 0.85f,
                                         transformableNode.getLocalPosition().z
                                 ));
                         // Set the parent after setting all local custom value
@@ -251,14 +234,16 @@ public class ArComponent {
                             ImageButton hearButton = parentView.findViewById(R.id.ibItemHear);
                             TextView nameTV = parentView.findViewById(R.id.tvItemName);
 
-                            // Set the name of item except alphabet type of ArModel
-                            if (!arModel.getModelType().equals(BaseApplication.MODEL_ALPHABET))
+                            // Set the name of item except vowel & alphabet category of ArModel
+                            if (arModel.getExtraName() == null)
                                 nameTV.setText(arModel.getName());
                             else
                                 nameTV.setVisibility(View.GONE);
 
-                            // Speak the name of item after click on the hear button
-                            hearButton.setOnClickListener(view -> BaseApplication.speak(arModel.getName()));
+                            // Play the voice of the item after click on the hear button
+                            hearButton.setOnClickListener(view ->
+                                    BaseApplication.playVoice(arModel, false)
+                            );
                         }
                     });
         }

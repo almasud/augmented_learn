@@ -69,22 +69,25 @@ public class HomeActivity extends AppCompatActivity {
                     // Set an Activity for each item
                     switch (view.getId()) {
                         case R.id.wrapperLearn:
-                            bundle.putString(BaseApplication.ACTIVITY_NAME, BaseApplication.ACTIVITY_LEARN);
+                            bundle.putString(BaseApplication.SERVICE_NAME, BaseApplication.SERVICE_LEARN);
                             BaseApplication.getInstance()
                                     .startNewActivity(HomeActivity.this,
-                                            ServiceChooseActivity.class, bundle);
+                                            ServiceChooseActivity.class, bundle
+                                    );
                             break;
                         case R.id.wrapperTest:
-                            bundle.putString(BaseApplication.ACTIVITY_NAME, BaseApplication.ACTIVITY_TEST);
+                            bundle.putString(BaseApplication.SERVICE_NAME, BaseApplication.SERVICE_TEST);
                             BaseApplication.getInstance()
                                     .startNewActivity(HomeActivity.this,
-                                            ServiceChooseActivity.class, bundle);
+                                            ServiceChooseActivity.class, bundle
+                                    );
                             break;
                         case R.id.wrapperScan:
-                            bundle.putString(BaseApplication.ACTIVITY_NAME, BaseApplication.ACTIVITY_SCAN);
+                            bundle.putString(BaseApplication.SERVICE_NAME, BaseApplication.SERVICE_SCAN);
                             BaseApplication.getInstance()
                                     .startNewActivity(HomeActivity.this,
-                                            ServiceChooseActivity.class, bundle);
+                                            ServiceChooseActivity.class, bundle
+                                    );
                             break;
                     }
                 });

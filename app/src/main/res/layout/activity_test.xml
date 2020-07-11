@@ -51,7 +51,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:padding="@dimen/activity_half_margin"
-                        tools:src="@drawable/lion"
+                        tools:src="@drawable/animal_lion"
                         android:scaleType="fitCenter"
                         tools:ignore="ContentDescription"/>
 
@@ -86,7 +86,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:padding="@dimen/activity_half_margin"
-                        tools:src="@drawable/cow"
+                        tools:src="@drawable/animal_cow"
                         android:scaleType="fitCenter"
                         tools:ignore="ContentDescription"/>
 
@@ -130,7 +130,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:padding="@dimen/activity_half_margin"
-                        tools:src="@drawable/hippopotamus"
+                        tools:src="@drawable/animal_hippopotamus"
                         android:scaleType="fitCenter"
                         tools:ignore="ContentDescription"/>
 
@@ -165,7 +165,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:padding="@dimen/activity_half_margin"
-                        tools:src="@drawable/horse"
+                        tools:src="@drawable/animal_horse"
                         android:scaleType="fitCenter"
                         tools:ignore="ContentDescription"/>
 

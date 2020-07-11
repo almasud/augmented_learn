@@ -13,7 +13,9 @@ import com.almasud.intro.BaseApplication;
 import com.almasud.intro.R;
 import com.almasud.intro.databinding.ActivityLearnArBinding;
 import com.almasud.intro.model.entity.ArModel;
+import com.almasud.intro.model.entity.Category;
 import com.almasud.intro.model.util.EventMessage;
+import com.almasud.intro.model.util.ModelUtils;
 import com.almasud.intro.ui.adapter.LearnRVAdapter;
 import com.almasud.intro.ui.util.SnackbarHelper;
 import com.almasud.intro.util.ArComponent;
@@ -38,8 +40,8 @@ public class LearnArActivity extends AppCompatActivity {
     private ArFragment mArFragment;
     private LearnRVAdapter mRVAdapter;
     private List<ArModel> mArModels;
-    private static int MODEL_TYPE = -1;
-    private int mSelectedItem = -1;
+    private int mModelCategory;
+    private int mSelectedItem;
     private List<CompletableFuture<ModelRenderable>> mCompletableFutureModels = new ArrayList<>();
 
     @Override
@@ -52,39 +54,21 @@ public class LearnArActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getBundleExtra(BaseApplication.BUNDLE);
         if (bundle != null) {
             // Get the list of ArModel.
-            mArModels = (List<ArModel>) bundle.getSerializable(BaseApplication.ITEM_LIST);
-
-            // Get the type of ArModel
-            if (bundle.getString(BaseApplication.MODEL_TYPE).equals(BaseApplication.MODEL_ALPHABET))
-                MODEL_TYPE = BaseApplication.ALPHABET;
-            else if (bundle.getString(BaseApplication.MODEL_TYPE).equals(BaseApplication.MODEL_NUMBER))
-                MODEL_TYPE = BaseApplication.NUMBER;
-            else if (bundle.getString(BaseApplication.MODEL_TYPE).equals(BaseApplication.MODEL_ANIMAL))
-                MODEL_TYPE = BaseApplication.ANIMAL;
-
+            mArModels = (List<ArModel>) bundle.getSerializable(ArModel.LIST_ITEM);
+            // Get the category of ArModel
+            mModelCategory = bundle.getInt(BaseApplication.MODEL_CATEGORY);
             // Get the selected item of ArModel.
-            mSelectedItem = bundle.getInt(BaseApplication.SELECTED_ITEM, 0);
+            mSelectedItem = bundle.getInt(ArModel.SELECTED_ITEM);
         }
 
         // Set toolbar as an actionbar
         setSupportActionBar((Toolbar) mViewBinding.toolbarRealView.getRoot());
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         // Set a subtitle of the actionbar
-        if (MODEL_TYPE == BaseApplication.ALPHABET)
-            getSupportActionBar().setSubtitle(new StringBuilder(
-                    getResources().getString(R.string.real_view)).append(" | ")
-                    .append(getResources().getString(R.string.alphabet))
-            );
-        else if (MODEL_TYPE == BaseApplication.NUMBER)
-            getSupportActionBar().setSubtitle(new StringBuilder(
-                    getResources().getString(R.string.real_view)).append(" | ")
-                    .append(getResources().getString(R.string.number))
-            );
-        else if (MODEL_TYPE == BaseApplication.ANIMAL)
-            getSupportActionBar().setSubtitle(new StringBuilder(
-                    getResources().getString(R.string.real_view)).append(" | ")
-                    .append(getResources().getString(R.string.animal))
-            );
+        getSupportActionBar().setSubtitle(new StringBuilder(
+                getResources().getString(R.string.real_view)).append(" | ")
+                .append(ModelUtils.getArModelCategoryName(this, mModelCategory))
+        );
 
         // Initialize the RV adapter
         mRVAdapter = new LearnRVAdapter(mArModels, this, mSelectedItem);
@@ -112,8 +96,12 @@ public class LearnArActivity extends AppCompatActivity {
             // Set the selected ModelRenderable into TransformableModel
             try {
                 // Set the initial scale of model.
-                float modelLocalScale = (MODEL_TYPE == BaseApplication.ALPHABET)? 0.3f
-                        : (MODEL_TYPE == BaseApplication.NUMBER)? 0.25f: 15.0f;
+                float modelLocalScale = (mModelCategory == Category.CATEGORY_ALPHABET_BENGALI
+                        || mModelCategory == Category.CATEGORY_ALPHABET_ENGLISH)? 0.3f
+                        : (mModelCategory == Category.CATEGORY_VOWEL_BENGALI
+                        || mModelCategory == Category.CATEGORY_NUMBER_BENGALI
+                        || mModelCategory == Category.CATEGORY_NUMBER_ENGLISH)? 0.25f
+                        : (mModelCategory == Category.CATEGORY_ANIMAL_ENGLISH)? 15.0f: 1.0f;
 
                 // Set the transformable model.
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {

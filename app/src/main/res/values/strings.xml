@@ -7,17 +7,142 @@
     <string name="intro_download">"Intro download"</string>
     <string name="intro_unzip">"Intro unzip"</string>
 
+    <!-- Strings used for model type -->
+    <string name="bengali">বাংলা</string>
+    <string name="english">English</string>
+
     <!-- Strings used for navigation -->
     <string name="action_settings">Settings</string>
     <string name="learn">Learn</string>
     <string name="test">Test</string>
     <string name="scan">Scan</string>
-    <string name="alphabet">Alphabet</string>
-    <string name="number">Number</string>
-    <string name="animal">Animal</string>
-    <string name="scan_intro_book">Scan Intro Book</string>
+    <string name="vowel_bengali">স্বরবর্ণ</string>
+    <string name="alphabet_bengali">ব্যঞ্জণবর্ণ</string>
+    <string name="number_bengali">সংখ্যা</string>
+    <string name="alphabet_english">Alphabet</string>
+    <string name="number_english">Number</string>
+    <string name="animal_english">Animal</string>
+    <string name="scan_book">Scan Intro Book</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+
+    <!-- Strings used for name of bengali vowels -->
+    <string name="bn_vowel_01">অ</string>
+    <string name="bn_vowel_02">আ</string>
+    <string name="bn_vowel_03">ই</string>
+    <string name="bn_vowel_04">ঈ</string>
+    <string name="bn_vowel_05">উ</string>
+    <string name="bn_vowel_06">ঊ</string>
+    <string name="bn_vowel_07">ঋ</string>
+    <string name="bn_vowel_08">এ</string>
+    <string name="bn_vowel_09">ঐ</string>
+    <string name="bn_vowel_10">ও</string>
+    <string name="bn_vowel_11">ঔ</string>
+
+    <!-- Strings used for name of bengali vowel's extras -->
+    <string name="bn_vowel_01_extra">অলি</string>
+    <string name="bn_vowel_02_extra">আম</string>
+    <string name="bn_vowel_03_extra">ইলিশ</string>
+    <string name="bn_vowel_04_extra">ঈগল</string>
+    <string name="bn_vowel_05_extra">উট</string>
+    <string name="bn_vowel_06_extra">ঊষা</string>
+    <string name="bn_vowel_07_extra">ঋতু</string>
+    <string name="bn_vowel_08_extra">একতারা</string>
+    <string name="bn_vowel_09_extra">ঐরাবত</string>
+    <string name="bn_vowel_10_extra">ওল</string>
+    <string name="bn_vowel_11_extra">ঔষধ</string>
+
+    <!-- Strings used for name of bengali alphabets -->
+    <string name="bn_alphabet_01">ক</string>
+    <string name="bn_alphabet_02">খ</string>
+    <string name="bn_alphabet_03">গ</string>
+    <string name="bn_alphabet_04">ঘ</string>
+    <string name="bn_alphabet_05">ঙ</string>
+    <string name="bn_alphabet_06">চ</string>
+    <string name="bn_alphabet_07">ছ</string>
+    <string name="bn_alphabet_08">জ</string>
+    <string name="bn_alphabet_09">ঝ</string>
+    <string name="bn_alphabet_10">ঞ</string>
+    <string name="bn_alphabet_11">ট</string>
+    <string name="bn_alphabet_12">ঠ</string>
+    <string name="bn_alphabet_13">ড</string>
+    <string name="bn_alphabet_14">ঢ</string>
+    <string name="bn_alphabet_15">ণ</string>
+    <string name="bn_alphabet_16">ত</string>
+    <string name="bn_alphabet_17">থ</string>
+    <string name="bn_alphabet_18">দ</string>
+    <string name="bn_alphabet_19">ধ</string>
+    <string name="bn_alphabet_20">ন</string>
+    <string name="bn_alphabet_21">প</string>
+    <string name="bn_alphabet_22">ফ</string>
+    <string name="bn_alphabet_23">ব</string>
+    <string name="bn_alphabet_24">ভ</string>
+    <string name="bn_alphabet_25">ম</string>
+    <string name="bn_alphabet_26">য</string>
+    <string name="bn_alphabet_27">র</string>
+    <string name="bn_alphabet_28">ল</string>
+    <string name="bn_alphabet_29">শ</string>
+    <string name="bn_alphabet_30">ষ</string>
+    <string name="bn_alphabet_31">স</string>
+    <string name="bn_alphabet_32">হ</string>
+    <string name="bn_alphabet_33">ড়</string>
+    <string name="bn_alphabet_34">ঢ়</string>
+    <string name="bn_alphabet_35">য়</string>
+    <string name="bn_alphabet_36">ৎ</string>
+    <string name="bn_alphabet_37">ং</string>
+    <string name="bn_alphabet_38">ঃ</string>
+    <string name="bn_alphabet_39">ঁ</string>
+
+    <!-- Strings used for name of bengali alphabet's extras -->
+    <string name="bn_alphabet_01_extra">কলম</string>
+    <string name="bn_alphabet_02_extra">খরগোশ</string>
+    <string name="bn_alphabet_03_extra">গরু</string>
+    <string name="bn_alphabet_04_extra">ঘোড়া</string>
+    <string name="bn_alphabet_05_extra">ব্যাঙ</string>
+    <string name="bn_alphabet_06_extra">চশমা</string>
+    <string name="bn_alphabet_07_extra">ছাতা</string>
+    <string name="bn_alphabet_08_extra">জাহাজ</string>
+    <string name="bn_alphabet_09_extra">ঝাড়ু</string>
+    <string name="bn_alphabet_10_extra">মিঞা</string>
+    <string name="bn_alphabet_11_extra">টিয়া</string>
+    <string name="bn_alphabet_12_extra">ঠেলাগাড়ি</string>
+    <string name="bn_alphabet_13_extra">ডাব</string>
+    <string name="bn_alphabet_14_extra">ঢোল</string>
+    <string name="bn_alphabet_15_extra">হরিণ</string>
+    <string name="bn_alphabet_16_extra">তবলা</string>
+    <string name="bn_alphabet_17_extra">থালা</string>
+    <string name="bn_alphabet_18_extra">দই</string>
+    <string name="bn_alphabet_19_extra">ধান</string>
+    <string name="bn_alphabet_20_extra">নৌকা</string>
+    <string name="bn_alphabet_21_extra">পাতা</string>
+    <string name="bn_alphabet_22_extra">ফল</string>
+    <string name="bn_alphabet_23_extra">বিড়াল</string>
+    <string name="bn_alphabet_24_extra">ভালুক</string>
+    <string name="bn_alphabet_25_extra">মিষ্টি</string>
+    <string name="bn_alphabet_26_extra">যব</string>
+    <string name="bn_alphabet_27_extra">রাণী</string>
+    <string name="bn_alphabet_28_extra">লাল</string>
+    <string name="bn_alphabet_29_extra">শসা</string>
+    <string name="bn_alphabet_30_extra">ষাড়</string>
+    <string name="bn_alphabet_31_extra">সিংহ</string>
+    <string name="bn_alphabet_32_extra">হাতি</string>
+    <string name="bn_alphabet_34_extra">ঢ়</string>
+    <string name="bn_alphabet_35_extra">পায়রা</string>
+    <string name="bn_alphabet_36_extra">শরৎ</string>
+    <string name="bn_alphabet_37_extra">চিংড়ি</string>
+    <string name="bn_alphabet_38_extra">দুঃখ</string>
+    <string name="bn_alphabet_39_extra">চাঁদ</string>
+
+    <!-- Strings used for name of bengali numbers -->
+    <string name="bn_number_1">এক</string>
+    <string name="bn_number_2">দুই</string>
+    <string name="bn_number_3">তিন</string>
+    <string name="bn_number_4">চার</string>
+    <string name="bn_number_5">পাঁচ</string>
+    <string name="bn_number_6">ছয়</string>
+    <string name="bn_number_7">সাত</string>
+    <string name="bn_number_8">আট</string>
+    <string name="bn_number_9">নয়</string>
 
     <!-- Strings used for name of the alphabet -->
     <string name="capital_a">A</string>
@@ -47,7 +172,7 @@
     <string name="capital_y">Y</string>
     <string name="capital_z">Jet</string>
 
-    <!-- Strings used for name of alphabet labels of ArModel -->
+    <!-- Strings used for name of alphabet's extras -->
     <string name="alphabet_apple">Apple</string>
     <string name="alphabet_ball">Ball</string>
     <string name="alphabet_fish">Fish</string>
@@ -70,7 +195,7 @@
     <string name="alphabet_yak">Yak</string>
     <string name="alphabet_zebra">Zebra</string>
 
-    <!-- Strings used for name of the animals -->
+    <!-- Strings used for name of numbers -->
     <string name="number_one">One</string>
     <string name="number_two">Two</string>
     <string name="number_three">Three</string>
@@ -81,7 +206,7 @@
     <string name="number_eight">Eight</string>
     <string name="number_nine">Nine</string>
 
-    <!-- Strings used for name of the animals -->
+    <!-- Strings used for name of animals -->
     <string name="bear">Bear</string>
     <string name="cat">Cat</string>
     <string name="cow">Cow</string>

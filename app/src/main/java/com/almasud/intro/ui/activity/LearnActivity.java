@@ -14,6 +14,7 @@ import com.almasud.intro.R;
 import com.almasud.intro.databinding.ActivityLearnBinding;
 import com.almasud.intro.model.entity.ArModel;
 import com.almasud.intro.model.util.EventMessage;
+import com.almasud.intro.model.util.ModelUtils;
 import com.almasud.intro.ui.adapter.LearnFSAdapter;
 import com.almasud.intro.ui.util.SnackbarHelper;
 import com.almasud.intro.viewmodel.ArViewModel;
@@ -33,7 +34,7 @@ public class LearnActivity extends AppCompatActivity {
     private ActivityLearnBinding mViewBinding;
     private LearnFSAdapter mPagerAdapter;
     private List<ArModel> mArModels = new ArrayList<>();
-    private static int MODEL_TYPE = -1;
+    private static int sModelCategory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,33 +45,18 @@ public class LearnActivity extends AppCompatActivity {
         // Get the bundle from intent if exists
         Bundle bundle = getIntent().getBundleExtra(BaseApplication.BUNDLE);
         if (bundle != null) {
-            if (bundle.getString(BaseApplication.MODEL_TYPE).equals(BaseApplication.MODEL_ALPHABET))
-                MODEL_TYPE = BaseApplication.ALPHABET;
-            else if (bundle.getString(BaseApplication.MODEL_TYPE).equals(BaseApplication.MODEL_NUMBER))
-                MODEL_TYPE = BaseApplication.NUMBER;
-            else if (bundle.getString(BaseApplication.MODEL_TYPE).equals(BaseApplication.MODEL_ANIMAL))
-                MODEL_TYPE = BaseApplication.ANIMAL;
+            // Get the category of ArModel
+            sModelCategory = bundle.getInt(BaseApplication.MODEL_CATEGORY);
         }
 
         // Set toolbar as an actionbar
         setSupportActionBar((Toolbar) mViewBinding.toolbarLearnAlphabet.getRoot());
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         // Set a subtitle of the actionbar
-        if (MODEL_TYPE == BaseApplication.ALPHABET)
-            getSupportActionBar().setSubtitle(new StringBuilder(
-                    getResources().getString(R.string.learn)).append(" | ")
-                    .append(getResources().getString(R.string.alphabet))
-            );
-        else if (MODEL_TYPE == BaseApplication.NUMBER)
-            getSupportActionBar().setSubtitle(new StringBuilder(
-                            getResources().getString(R.string.learn)).append(" | ")
-                            .append(getResources().getString(R.string.number))
-            );
-        else if (MODEL_TYPE == BaseApplication.ANIMAL)
-            getSupportActionBar().setSubtitle(new StringBuilder(
-                            getResources().getString(R.string.learn)).append(" | ")
-                            .append(getResources().getString(R.string.animal))
-            );
+        getSupportActionBar().setSubtitle(new StringBuilder(
+                getResources().getString(R.string.learn)).append(" | ")
+                .append(ModelUtils.getArModelCategoryName(this, sModelCategory))
+        );
 
         // Initialize the adapter
         mPagerAdapter = new LearnFSAdapter(this);
@@ -79,11 +65,8 @@ public class LearnActivity extends AppCompatActivity {
 
         // Get an instance of ARViewModel
         ArViewModel arViewModel = new ViewModelProvider(this).get(ArViewModel.class);
-        // Get the list of live data of ARModel from ARViewModel
-        LiveData<List<ArModel>> arModelListLiveData = (MODEL_TYPE == BaseApplication.ALPHABET)?
-                arViewModel.getAlphabetsLivedData(): (MODEL_TYPE == BaseApplication.NUMBER)?
-                arViewModel.getNumbersLivedData(): arViewModel.getAnimalsLivedData();
-
+        // Get the list of live data of ArModel from ArViewModel
+        LiveData<List<ArModel>> arModelListLiveData = arViewModel.getArModelLivedData(sModelCategory);
         // Observe the list of ARModel from ARViewModel
         arModelListLiveData.observe(this, arModels -> {
             // Set the value of mARModels (list of ARModel)
@@ -121,12 +104,10 @@ public class LearnActivity extends AppCompatActivity {
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
 
-                // Get the speak of different type of ArModel
-                String speak = (MODEL_TYPE == BaseApplication.ALPHABET)?
-                        mArModels.get(position).getName() + ", for, " + mArModels.get(position).getLabelName()
-                                : mArModels.get(position).getName();
-                // Speak the name of each item
-                BaseApplication.speak(speak);
+                // Set whether the voice play form extra of the item or not
+                boolean isExtraPlay = (mArModels.get(position).getExtraName() != null);
+                // Play the voice of each item
+                BaseApplication.playVoice(mArModels.get(position), isExtraPlay);
 
                 // Set the visibility of the next and previous button.
                 // For previous button
@@ -161,23 +142,21 @@ public class LearnActivity extends AppCompatActivity {
      * @return A {@link Completable} observable to it's subscribers.
      */
     public Completable getArViewCallback(int selectedItem) {
-        // Get the type of ARModel to determine what type should be rendered in the real view.
-        String modelType = (MODEL_TYPE == BaseApplication.ALPHABET)?
-                BaseApplication.MODEL_ALPHABET: (MODEL_TYPE == BaseApplication.NUMBER)?
-                BaseApplication.MODEL_NUMBER: BaseApplication.MODEL_ANIMAL;
-
         return Completable.create(emitter -> {
             try {
                 // Check whether the sceneform is supported for this device or not
                 // to avoid crashing the application.
                 if (BaseApplication.isSupportedSceneformOrShowDialog(this)) {
                     Bundle bundle = new Bundle();
-                    bundle.putSerializable(BaseApplication.ITEM_LIST, (Serializable) mArModels);
-                    bundle.putString(BaseApplication.MODEL_TYPE, modelType);
-                    bundle.putInt(BaseApplication.SELECTED_ITEM, selectedItem);
+                    bundle.putSerializable(ArModel.LIST_ITEM, (Serializable) mArModels);
+                    // Specify the model category to determine what category should be
+                    // rendered in the real view.
+                    bundle.putInt(BaseApplication.MODEL_CATEGORY, sModelCategory);
+                    bundle.putInt(ArModel.SELECTED_ITEM, selectedItem);
                     BaseApplication.getInstance()
-                            .startNewActivity(LearnActivity.this,
-                                    LearnArActivity.class, bundle);
+                            .startNewActivity(
+                                    LearnActivity.this, LearnArActivity.class, bundle
+                            );
                 }
                 // Signal the subscribers for completing the task
                 emitter.onComplete();

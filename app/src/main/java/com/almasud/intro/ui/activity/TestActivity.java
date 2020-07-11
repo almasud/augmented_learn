@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -22,6 +21,7 @@ import com.almasud.intro.R;
 import com.almasud.intro.databinding.ActivityTestBinding;
 import com.almasud.intro.model.entity.ArModel;
 import com.almasud.intro.model.util.EventMessage;
+import com.almasud.intro.model.util.ModelUtils;
 import com.almasud.intro.ui.util.SnackbarHelper;
 import com.almasud.intro.viewmodel.ArViewModel;
 
@@ -38,11 +38,11 @@ public class TestActivity extends AppCompatActivity {
     private ActivityTestBinding mViewBinding;
     private Animation mAnimation;
     private List<ArModel> mArModels;
-    private int[] mTestRandNumbers;
+    private static int sModelCategory;
     private final int ITEMS_IN_SINGLE_TEST = 4;
-    private MediaPlayer mCorrectResultMP, mWrongResultMP;
+    private int[] mTestRandNumbers;
     private int mNumberOfTest, mNumberOfTotalTest, mNumberOfTry;
-    private static int MODEL_TYPE = -1;
+    private MediaPlayer mMediaPlayerCorrect, mMediaPlayerWrong;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,48 +53,30 @@ public class TestActivity extends AppCompatActivity {
         // Get the bundle from intent if exists
         Bundle bundle = getIntent().getBundleExtra(BaseApplication.BUNDLE);
         if (bundle != null) {
-            if (bundle.getString(BaseApplication.MODEL_TYPE).equals(BaseApplication.MODEL_ALPHABET))
-                MODEL_TYPE = BaseApplication.ALPHABET;
-            else if (bundle.getString(BaseApplication.MODEL_TYPE).equals(BaseApplication.MODEL_NUMBER))
-                MODEL_TYPE = BaseApplication.NUMBER;
-            else if (bundle.getString(BaseApplication.MODEL_TYPE).equals(BaseApplication.MODEL_ANIMAL))
-                MODEL_TYPE = BaseApplication.ANIMAL;
+            // Get the category of ArModel
+            sModelCategory = bundle.getInt(BaseApplication.MODEL_CATEGORY);
         }
 
         // Set toolbar as an actionbar
         setSupportActionBar((Toolbar) mViewBinding.toolbarTest.getRoot());
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         // Set a subtitle of the actionbar
-        if (MODEL_TYPE == BaseApplication.ALPHABET)
-            getSupportActionBar().setSubtitle(new StringBuilder(
-                    getResources().getString(R.string.test)).append(" | ")
-                    .append(getResources().getString(R.string.alphabet))
-            );
-        else if (MODEL_TYPE == BaseApplication.NUMBER)
-            getSupportActionBar().setSubtitle(new StringBuilder(
-                    getResources().getString(R.string.test)).append(" | ")
-                    .append(getResources().getString(R.string.number))
-            );
-        else if (MODEL_TYPE == BaseApplication.ANIMAL)
-            getSupportActionBar().setSubtitle(new StringBuilder(
-                    getResources().getString(R.string.test)).append(" | ")
-                    .append(getResources().getString(R.string.animal))
-            );
+        getSupportActionBar().setSubtitle(new StringBuilder(
+                getResources().getString(R.string.test)).append(" | ")
+                .append(ModelUtils.getArModelCategoryName(this, sModelCategory))
+        );
 
         // Load an animation for navigation items
         mAnimation = AnimationUtils.loadAnimation(this, R.anim.click_item);
 
-        // Create sound effects for correct and wrong result
-        mCorrectResultMP = MediaPlayer.create(TestActivity.this, R.raw.correct_answer);
-        mWrongResultMP = MediaPlayer.create(TestActivity.this, R.raw.wrong_answer);
+        // Create media players for sound effects of correct and wrong result
+        mMediaPlayerCorrect = MediaPlayer.create(TestActivity.this, R.raw.correct_answer);
+        mMediaPlayerWrong = MediaPlayer.create(TestActivity.this, R.raw.wrong_answer);
 
-        // Get the Animals live data from AnimalVM and Set the Test items
+        // Get an instance of ARViewModel
         ArViewModel arViewModel = new ViewModelProvider(this).get(ArViewModel.class);
-        // Get the list of live data of ARModel from ARViewModel
-        LiveData<List<ArModel>> arModelListLiveData = (MODEL_TYPE == BaseApplication.ALPHABET)?
-                arViewModel.getAlphabetsLivedData(): (MODEL_TYPE == BaseApplication.NUMBER)?
-                arViewModel.getNumbersLivedData(): arViewModel.getAnimalsLivedData();
-
+        // Get the list of live data of ArModel from ArViewModel
+        LiveData<List<ArModel>> arModelListLiveData = arViewModel.getArModelLivedData(sModelCategory);
         // Observe the list of ArModel from ArViewModel
         arModelListLiveData.observe(this, arModels -> {
             // Set the value of mArModels (list of ArModel).
@@ -102,19 +84,16 @@ public class TestActivity extends AppCompatActivity {
 
             if (mArModels.size() > 0) {
                 // Set the name of model type
-                if (MODEL_TYPE == BaseApplication.ALPHABET)
-                    mViewBinding.tvTestModelType.setText(R.string.alphabet);
-                else if (MODEL_TYPE == BaseApplication.NUMBER)
-                    mViewBinding.tvTestModelType.setText(R.string.number);
-                else if (MODEL_TYPE == BaseApplication.ANIMAL)
-                    mViewBinding.tvTestModelType.setText(R.string.animal);
+                mViewBinding.tvTestModelType.setText(
+                        ModelUtils.getArModelCategoryName(this, sModelCategory)
+                );
 
                 // Initialize the test
                 startTest(null, null, true);
 
                 // Create sound effects of correct and wrong result.
-                mCorrectResultMP = MediaPlayer.create(TestActivity.this, R.raw.correct_answer);
-                mWrongResultMP = MediaPlayer.create(TestActivity.this, R.raw.wrong_answer);
+                mMediaPlayerCorrect = MediaPlayer.create(TestActivity.this, R.raw.correct_answer);
+                mMediaPlayerWrong = MediaPlayer.create(TestActivity.this, R.raw.wrong_answer);
             }
         });
     }
@@ -143,9 +122,9 @@ public class TestActivity extends AppCompatActivity {
             ++mNumberOfTry;
 
             if (result) {
-                // Set the sound effects of correct result
-                if (!mCorrectResultMP.isPlaying())
-                    mCorrectResultMP.start();
+                // Play the sound effect of correct result
+                if (!mMediaPlayerCorrect.isPlaying())
+                    mMediaPlayerCorrect.start();
 
                 // Visible and set the result text view to correct
                 resultTextView.setVisibility(View.VISIBLE);
@@ -184,21 +163,21 @@ public class TestActivity extends AppCompatActivity {
                         mViewBinding.ivTestTwoOne.setImageResource(mArModels.get(mTestRandNumbers[2]).getPhoto());
                         mViewBinding.ivTestTwoTwo.setImageResource(mArModels.get(mTestRandNumbers[3]).getPhoto());
 
-                        // Get the name of the item to be found
-                        String name = mArModels.get(
+                        // Get the item to be found
+                        ArModel arModel = mArModels.get(
                                 mTestRandNumbers[new Random().nextInt(ITEMS_IN_SINGLE_TEST)]
-                        ).getName();
-                        // Speak the name of the item to be found
-                        BaseApplication.speak(name);
-                        // After click on the hear button speak the name of the item to be found
+                        );
+                        // Play the voice of the item to be found
+                        BaseApplication.playVoice(arModel, false);
+                        // Also play the voice of the item to be found after click on the hear button
                         mViewBinding.ibTestHear.setOnClickListener(view ->
-                                BaseApplication.speak(name)
+                                BaseApplication.playVoice(arModel, false)
                         );
 
                         // Set the name of the item to be found
-                        mViewBinding.tvTestItemName.setText(name);
-                        // Hide the name of the item to be found for Alphabet type of ArModel.
-                        if (MODEL_TYPE == BaseApplication.ALPHABET)
+                        mViewBinding.tvTestItemName.setText(arModel.getName());
+                        // Hide the name of the item to be found for vowel & alphabet category
+                        if (arModel.getExtraName() != null && arModel.getExtraPhoto() != 0)
                             mViewBinding.tvTestItemName.setVisibility(View.GONE);
                     } else {
                         // After finish the test the result should be display. Since all the
@@ -234,6 +213,7 @@ public class TestActivity extends AppCompatActivity {
                                 // Start the test again
                                 Intent intent = new Intent(this, TestActivity.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                new Bundle().putInt(BaseApplication.MODEL_CATEGORY, sModelCategory);
                                 startActivity(intent);
                             });
                             dialogBuilder.setNegativeButton(getResources().getString(R.string.test_finish), (dialogInterface, i) -> {
@@ -247,11 +227,11 @@ public class TestActivity extends AppCompatActivity {
                             dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setAllCaps(false);
                         }
                     }
-                }, mCorrectResultMP.getDuration());
+                }, mMediaPlayerCorrect.getDuration());
             } else {
-                // Set the sound effects of wrong result
-                if (!mWrongResultMP.isPlaying())
-                    mWrongResultMP.start();
+                // Play the sound effect of wrong result
+                if (!mMediaPlayerWrong.isPlaying())
+                    mMediaPlayerWrong.start();
 
                 // Visible and set the result text view to wrong
                 resultTextView.setVisibility(View.VISIBLE);
@@ -266,7 +246,7 @@ public class TestActivity extends AppCompatActivity {
                     // Hide the result text and reset the wrong background
                     resultTextView.setVisibility(View.GONE);
                     wrapperView.setBackground(getResources().getDrawable(R.drawable.bg_round));
-                }, mWrongResultMP.getDuration());
+                }, mMediaPlayerWrong.getDuration());
             }
         } else {
             // Code for the test initialization
@@ -283,19 +263,21 @@ public class TestActivity extends AppCompatActivity {
             mViewBinding.ivTestTwoOne.setImageResource(mArModels.get(mTestRandNumbers[2]).getPhoto());
             mViewBinding.ivTestTwoTwo.setImageResource(mArModels.get(mTestRandNumbers[3]).getPhoto());
 
-            // Get the name of the item to be found
-            String name = mArModels.get(
+            // Get the item to be found
+            ArModel arModel = mArModels.get(
                     mTestRandNumbers[new Random().nextInt(ITEMS_IN_SINGLE_TEST)]
-            ).getName();
-            // Speak the name of the item to be found
-            BaseApplication.speak(name);
-            // After click on the hear button speak the name of the item to be found
-            mViewBinding.ibTestHear.setOnClickListener(view -> BaseApplication.speak(name));
+            );
+            // Play the voice of the item to be found
+            BaseApplication.playVoice(arModel, false);
+            // Also play the voice of the item to be found after click on the hear button
+            mViewBinding.ibTestHear.setOnClickListener(view ->
+                    BaseApplication.playVoice(arModel, false)
+            );
 
             // Set the name of the item to be found
-            mViewBinding.tvTestItemName.setText(name);
-            // Hide the name of the item to be found for Alphabet type of ArModel
-            if (MODEL_TYPE == BaseApplication.ALPHABET)
+            mViewBinding.tvTestItemName.setText(arModel.getName());
+            // Hide the name of the item to be found for vowel & alphabet category
+            if (arModel.getExtraName() != null && arModel.getExtraPhoto() != 0)
                 mViewBinding.tvTestItemName.setVisibility(View.GONE);
         }
     }
@@ -374,17 +356,15 @@ public class TestActivity extends AppCompatActivity {
         super.onDestroy();
 
         // Stop the media players if playing
-        if (mCorrectResultMP.isPlaying()) {
-            mCorrectResultMP.stop();
-            Log.i(TAG, "The audio file for correct result is successfully stopped.");
+        if (mMediaPlayerCorrect.isPlaying()) {
+            mMediaPlayerCorrect.stop();
         }
-        if (mWrongResultMP.isPlaying()) {
-            mWrongResultMP.stop();
-            Log.i(TAG, "The audio file for wrong result is successfully stopped.");
+        if (mMediaPlayerWrong.isPlaying()) {
+            mMediaPlayerWrong.stop();
         }
         // Release the medial players
-        mCorrectResultMP.release();
-        mWrongResultMP.release();
+        mMediaPlayerCorrect.release();
+        mMediaPlayerWrong.release();
     }
 
     @Override

@@ -1,8 +1,6 @@
 package com.almasud.intro.ui.fragment;
 
 import android.content.res.AssetManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,8 +9,8 @@ import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 
-import com.almasud.intro.BaseApplication;
 import com.almasud.intro.model.entity.ArModel;
+import com.almasud.intro.model.entity.Category;
 import com.almasud.intro.ui.util.SnackbarHelper;
 import com.google.ar.core.AugmentedImageDatabase;
 import com.google.ar.core.Config;
@@ -28,10 +26,6 @@ import java.io.InputStream;
  */
 public class ScanArFragment extends ArFragment {
   private static final String TAG = ScanArFragment.class.getSimpleName();
-  // This is the name of the image in the image database. The copy of the image is
-  // in the assets directory. Opening this image on your computer is a good quick
-  // way to test the augmented image matching.
-  private static String sSingleImageName;
 
   // This is a pre-created image database containing the images. The index of the db
   // must be same as it's model class index to get the expected result.
@@ -78,41 +72,17 @@ public class ScanArFragment extends ArFragment {
     // Option 2) has
     // * shorter setup time
     // * doesn't require images to be packaged in apk.
-    if (USE_SINGLE_IMAGE) {
-      Bitmap augmentedImageBitmap = loadAugmentedImageBitmap(assetManager);
-      if (augmentedImageBitmap == null) {
-        return false;
-      }
 
-      augmentedImageDatabase = new AugmentedImageDatabase(session);
-      augmentedImageDatabase.addImage(sSingleImageName, augmentedImageBitmap);
-      // If the physical size of the image is known, you can instead use:
-      // augmentedImageDatabase.addImage("image_name", augmentedImageBitmap, widthInMeters);
-      // This will improve the initial detection speed. ARCore will still actively
-      // estimate the physical size of the image as it is viewed from multiple
-      // viewpoints.
-    } else {
-      // This is an alternative way to initialize an AugmentedImageDatabase instance,
-      // load a pre-existing augmented image database.
-      try (InputStream is = getContext().getAssets().open(sImageDbPath)) {
-        augmentedImageDatabase = AugmentedImageDatabase.deserialize(session, is);
-      } catch (IOException e) {
-        Log.e(TAG, "IO exception loading augmented image database.", e);
-        return false;
-      }
+    // load a pre-existing augmented image database.
+    try (InputStream is = getContext().getAssets().open(sImageDbPath)) {
+      augmentedImageDatabase = AugmentedImageDatabase.deserialize(session, is);
+    } catch (IOException e) {
+      Log.e(TAG, "IO exception loading augmented image database.", e);
+      return false;
     }
 
     config.setAugmentedImageDatabase(augmentedImageDatabase);
     return true;
-  }
-
-  private Bitmap loadAugmentedImageBitmap(AssetManager assetManager) {
-    try (InputStream is = assetManager.open(sSingleImageName)) {
-      return BitmapFactory.decodeStream(is);
-    } catch (IOException e) {
-      Log.e(TAG, "IO exception loading augmented image bitmap.", e);
-    }
-    return null;
   }
 
   /**
@@ -120,17 +90,25 @@ public class ScanArFragment extends ArFragment {
    * @param modelType The type of {@link ArModel}.
    */
   public static void setImageDatabase(int modelType) {
-    if (modelType == BaseApplication.ALPHABET) {
-      sSingleImageName = "capital_a_with_apple.png";
-      sImageDbPath = "alphabets.imgdb";
-    }
-    else if (modelType == BaseApplication.NUMBER) {
-      sSingleImageName = "1.png";
-      sImageDbPath = "numbers.imgdb";
-    }
-    else if (modelType == BaseApplication.ANIMAL) {
-      sSingleImageName = "bear.png";
-      sImageDbPath = "animals.imgdb";
+    switch (modelType) {
+      case Category.CATEGORY_VOWEL_BENGALI:
+        sImageDbPath = "vowels_bengali.imgdb";
+        break;
+      case Category.CATEGORY_ALPHABET_BENGALI:
+        sImageDbPath = "alphabets_bengali.imgdb";
+        break;
+      case Category.CATEGORY_NUMBER_BENGALI:
+        sImageDbPath = "numbers_bengali.imgdb";
+        break;
+      case Category.CATEGORY_ALPHABET_ENGLISH:
+        sImageDbPath = "alphabets.imgdb";
+        break;
+      case Category.CATEGORY_NUMBER_ENGLISH:
+        sImageDbPath = "numbers.imgdb";
+        break;
+      case Category.CATEGORY_ANIMAL_ENGLISH:
+        sImageDbPath = "animals.imgdb";
+        break;
     }
   }
 }

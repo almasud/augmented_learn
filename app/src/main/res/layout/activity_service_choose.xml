@@ -8,116 +8,266 @@
     tools:context=".ui.activity.ServiceChooseActivity">
 
     <include
-        android:id="@+id/toolbarLearnNTest"
+        android:id="@+id/toolServiceChoose"
         layout="@layout/toolbar"/>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/toolbarLearnNTest"
-        android:scrollbars="none">
+        android:layout_below="@id/toolServiceChoose">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="@dimen/activity_vertical_margin"
-            android:baselineAligned="false">
+            android:orientation="vertical"
+            android:padding="@dimen/activity_vertical_margin">
 
-            <RelativeLayout
-                android:id="@+id/wrapperAlphabet"
-                android:layout_width="0dp"
-                android:layout_height="200dp"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="@drawable/bg_round"
-                android:onClick="onClickItem"
-                android:layout_marginEnd="@dimen/activity_horizontal_margin">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="@dimen/activity_half_margin"
-                    android:src="@drawable/alphabet"
-                    android:scaleType="fitXY"
-                    tools:ignore="ContentDescription"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="@dimen/activity_vertical_margin">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/alphabet"
+                    android:text="@string/bengali"
                     android:textColor="@android:color/white"
-                    android:background="@color/colorPrimary"
-                    android:padding="@dimen/activity_half_margin"
-                    android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
-                    android:layout_marginVertical="@dimen/activity_3x_margin"
-                    android:textSize="25sp"/>
+                    android:background="@drawable/bg_item_name"
+                    android:textAlignment="center"
+                    android:textSize="20sp"
+                    android:layout_marginBottom="@dimen/activity_half_margin"/>
 
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/wrapperNumber"
-                android:layout_width="0dp"
-                android:layout_height="200dp"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="@drawable/bg_round"
-                android:onClick="onClickItem"
-                android:layout_marginEnd="@dimen/activity_horizontal_margin">
-
-                <ImageView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:padding="@dimen/activity_half_margin"
-                    android:src="@drawable/number"
-                    android:scaleType="fitXY"
-                    tools:ignore="ContentDescription"/>
+                    android:orientation="horizontal"
+                    android:baselineAligned="false">
+
+                    <RelativeLayout
+                        android:id="@+id/wrapperVowelBengali"
+                        android:layout_width="0dp"
+                        android:layout_height="200dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="@drawable/bg_round"
+                        android:onClick="onClickItem"
+                        android:layout_marginEnd="@dimen/activity_horizontal_margin">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="@dimen/activity_half_margin"
+                            android:src="@drawable/vowel_bengali"
+                            android:scaleType="fitXY"
+                            tools:ignore="ContentDescription"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/vowel_bengali"
+                            android:textColor="@android:color/white"
+                            android:background="@color/colorPrimary"
+                            android:padding="@dimen/activity_half_margin"
+                            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                            android:layout_marginVertical="@dimen/activity_3x_margin"
+                            android:textSize="20sp"
+                            android:textStyle="bold"/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/wrapperAlphabetBengali"
+                        android:layout_width="0dp"
+                        android:layout_height="200dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="@drawable/bg_round"
+                        android:onClick="onClickItem"
+                        android:layout_marginEnd="@dimen/activity_horizontal_margin">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="@dimen/activity_half_margin"
+                            android:src="@drawable/alphabet_bengali"
+                            android:scaleType="fitXY"
+                            tools:ignore="ContentDescription"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/alphabet_bengali"
+                            android:textColor="@android:color/white"
+                            android:background="@color/colorPrimary"
+                            android:padding="@dimen/activity_half_margin"
+                            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                            android:layout_marginVertical="@dimen/activity_3x_margin"
+                            android:textSize="20sp"
+                            android:textStyle="bold"/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/wrapperNumberBengali"
+                        android:layout_width="0dp"
+                        android:layout_height="200dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:onClick="onClickItem"
+                        android:background="@drawable/bg_round">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="@dimen/activity_half_margin"
+                            android:src="@drawable/number_bengali"
+                            android:scaleType="fitXY"
+                            tools:ignore="ContentDescription"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/number_bengali"
+                            android:textColor="@android:color/white"
+                            android:background="@color/colorPrimary"
+                            android:padding="@dimen/activity_half_margin"
+                            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                            android:layout_marginVertical="@dimen/activity_3x_margin"
+                            android:textSize="20sp"
+                            android:textStyle="bold"/>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/number"
+                    android:text="@string/english"
                     android:textColor="@android:color/white"
-                    android:background="@color/colorPrimary"
-                    android:padding="@dimen/activity_half_margin"
-                    android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
-                    android:layout_marginVertical="@dimen/activity_3x_margin"
-                    android:textSize="25sp"/>
+                    android:background="@drawable/bg_item_name"
+                    android:textAlignment="center"
+                    android:textSize="20sp"
+                    android:layout_marginBottom="@dimen/activity_half_margin"/>
 
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/wrapperAnimal"
-                android:layout_width="0dp"
-                android:layout_height="200dp"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="@drawable/bg_round"
-                android:onClick="onClickItem">
-
-                <ImageView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:padding="@dimen/activity_half_margin"
-                    android:src="@drawable/animals"
-                    android:scaleType="fitXY"
-                    tools:ignore="ContentDescription"/>
+                    android:orientation="horizontal"
+                    android:baselineAligned="false">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/animal"
-                    android:textColor="@android:color/white"
-                    android:background="@color/colorPrimary"
-                    android:padding="@dimen/activity_half_margin"
-                    android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
-                    android:layout_marginVertical="@dimen/activity_3x_margin"
-                    android:textSize="25sp"/>
+                    <RelativeLayout
+                        android:id="@+id/wrapperAlphabetEnglish"
+                        android:layout_width="0dp"
+                        android:layout_height="200dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="@drawable/bg_round"
+                        android:onClick="onClickItem"
+                        android:layout_marginEnd="@dimen/activity_horizontal_margin">
 
-            </RelativeLayout>
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="@dimen/activity_half_margin"
+                            android:src="@drawable/alphabet"
+                            android:scaleType="fitXY"
+                            tools:ignore="ContentDescription"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/alphabet_english"
+                            android:textColor="@android:color/white"
+                            android:background="@color/colorPrimary"
+                            android:padding="@dimen/activity_half_margin"
+                            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                            android:layout_marginVertical="@dimen/activity_3x_margin"
+                            android:textSize="20sp"
+                            android:textStyle="bold"/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/wrapperNumberEnglish"
+                        android:layout_width="0dp"
+                        android:layout_height="200dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="@drawable/bg_round"
+                        android:onClick="onClickItem"
+                        android:layout_marginEnd="@dimen/activity_horizontal_margin">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="@dimen/activity_half_margin"
+                            android:src="@drawable/number"
+                            android:scaleType="fitXY"
+                            tools:ignore="ContentDescription"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/number_english"
+                            android:textColor="@android:color/white"
+                            android:background="@color/colorPrimary"
+                            android:padding="@dimen/activity_half_margin"
+                            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                            android:layout_marginVertical="@dimen/activity_3x_margin"
+                            android:textSize="20sp"
+                            android:textStyle="bold"/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/wrapperAnimalEnglish"
+                        android:layout_width="0dp"
+                        android:layout_height="200dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:onClick="onClickItem"
+                        android:background="@drawable/bg_round">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="@dimen/activity_half_margin"
+                            android:src="@drawable/animals"
+                            android:scaleType="fitXY"
+                            tools:ignore="ContentDescription"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/animal_english"
+                            android:textColor="@android:color/white"
+                            android:background="@color/colorPrimary"
+                            android:padding="@dimen/activity_half_margin"
+                            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                            android:layout_marginVertical="@dimen/activity_3x_margin"
+                            android:textSize="20sp"
+                            android:textStyle="bold"/>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
 
         </LinearLayout>
 

@@ -8,6 +8,7 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -26,6 +27,7 @@ import androidx.lifecycle.OnLifecycleEvent;
 import androidx.lifecycle.ProcessLifecycleOwner;
 
 import com.almasud.intro.model.entity.ArModel;
+import com.almasud.intro.model.entity.Voice;
 import com.almasud.intro.service.DownloadService;
 import com.almasud.intro.service.UnzipService;
 
@@ -42,38 +44,38 @@ import java.util.Set;
  * @author Abdullah Almasud
  */
 public class BaseApplication extends Application implements LifecycleObserver {
-    public static final String ACTIVITY_NAME = "Activity_Name";
-    public static final String ACTIVITY_LEARN = "Activity_Learn";
-    public static final String ACTIVITY_TEST = "Activity_Test";
-    public static final String ACTIVITY_SCAN = "Activity_Scan";
     public static final String BUNDLE = "Bundle";
+    public static final String SERVICE_NAME = "Service_Name";
+    public static final String SERVICE_LEARN = "Learn";
+    public static final String SERVICE_TEST = "Test";
+    public static final String SERVICE_SCAN = "Scan";
     public static final int LEARN = 0;
     public static final int TEST = 1;
     public static final int SCAN = 2;
-    public static final String ITEM_LIST = "Item_List";
-    public static final String SELECTED_ITEM = "Selected_Item";
-    public static final String MODEL_TYPE = "Model_Type";
-    public static final String MODEL_ALPHABET = "Model_Alphabet";
-    public static final String MODEL_NUMBER = "Model_Number";
-    public static final String MODEL_ANIMAL = "Model_Animal";
-    public static final int ALPHABET = 0;
-    public static final int NUMBER = 1;
-    public static final int ANIMAL = 2;
+    public static final String MODEL_CATEGORY = "Model_Category";
+    public static final String DIRECTORY_MODELS = "models";
+    public static final String DIRECTORY_VOWELS_BENGALI = "vowels_bengali_with_extra";
+    public static final String DIRECTORY_ALPHABETS_BENGALI = "alphabets_bengali_with_extra";
+    public static final String DIRECTORY_NUMBERS_BENGALI = "numbers_bengali";
+    public static final String DIRECTORY_ALPHABETS_ENGLISH = "alphabets";
+    public static final String DIRECTORY_NUMBERS_ENGLISH = "numbers";
+    public static final String DIRECTORY_ANIMALS_ENGLISH = "animals";
+    public static final String DOWNLOAD_URL_ALPHABETS_ENGLISH = "http://almasud.000webhostapp.com/alphabets.zip";
+    public static final String DOWNLOAD_URL_NUMBERS_ENGLISH = "http://almasud.000webhostapp.com/numbers.zip";
+    public static final String DOWNLOAD_URL_ANIMALS_ENGLISH = "http://almasud.000webhostapp.com/animals.zip";
+
     private static final double MIN_OPEN_GL_VERSION = 3.0;
-    private static final String DIRECTORY_MODELS = "models";
-    public static final String DIRECTORY_ALPHABETS = "alphabets";
-    public static final String DIRECTORY_NUMBERS = "numbers";
-    public static final String DIRECTORY_ANIMALS = "animals";
     public static final String NOTIFICATION_CHANNEL_DOWNLOADER = "Downloader_Channel";
     public static final String NOTIFICATION_CHANNEL_UNZIP = "Unzip_Channel";
-    public static final String DOWNLOAD_URL_ALPHABETS = "http://almasud.000webhostapp.com/alphabets.zip";
-    public static final String DOWNLOAD_URL_NUMBERS = "http://almasud.000webhostapp.com/numbers.zip";
-    public static final String DOWNLOAD_URL_ANIMALS = "http://almasud.000webhostapp.com/animals.zip";
 
     private static final String TAG = BaseApplication.class.getSimpleName();
     private static final BaseApplication INSTANCE = new BaseApplication();
     private static AppVisibilityListener sAppVisibilityListener;
     private static volatile TextToSpeech sTTS;
+    private static MediaPlayer sMediaVowelsBengali, sMediaVowelsBengaliWithExtra,
+            sMediaAlphabetsBengali, sMediaAlphabetsBengaliWithExtra, sMediaNumbersBengali,
+            sMediaAlphabetsEnglish, sMediaAlphabetsEnglishWithExtra, sMediaNumbersEnglish,
+            sMediaAnimalsEnglish;
 
     @Override
     public void onCreate() {
@@ -81,6 +83,7 @@ public class BaseApplication extends Application implements LifecycleObserver {
 
         // Add observer
         ProcessLifecycleOwner.get().getLifecycle().addObserver(this);
+
         // Create downloader and unzip notification channel
         createDownloadNotificationChannel();
         createUnzipNotificationChannel();
@@ -118,8 +121,39 @@ public class BaseApplication extends Application implements LifecycleObserver {
         Log.d(TAG, "onEnterForeground: The app is in foreground.");
         setAppInBackground(false);
 
-        // Load the TTS engine
-        loadTTSEngine(getApplicationContext());
+        // Create media players for Vowels, Alphabets, Numbers and Animals
+        sMediaVowelsBengali = MediaPlayer.create(
+                getApplicationContext(), R.raw.vowels_bengali
+        );
+        sMediaVowelsBengaliWithExtra = MediaPlayer.create(
+                getApplicationContext(), R.raw.vowels_bengali_with_extra
+        );
+
+        sMediaAlphabetsBengali = MediaPlayer.create(
+                getApplicationContext(), R.raw.alphabets_bengali
+        );
+        sMediaAlphabetsBengaliWithExtra = MediaPlayer.create(
+                getApplicationContext(), R.raw.alphabets_bengali_with_extra
+        );
+
+        sMediaNumbersBengali = MediaPlayer.create(
+                getApplicationContext(), R.raw.numbers_bengali
+        );
+
+        sMediaAlphabetsEnglish = MediaPlayer.create(
+                getApplicationContext(), R.raw.alphabets_english
+        );
+        sMediaAlphabetsEnglishWithExtra = MediaPlayer.create(
+                getApplicationContext(), R.raw.alphabets_english_with_extra
+        );
+
+        sMediaNumbersEnglish = MediaPlayer.create(
+                getApplicationContext(), R.raw.numbers_english
+        );
+
+        sMediaAnimalsEnglish = MediaPlayer.create(
+                getApplicationContext(), R.raw.animals_english
+        );
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
@@ -127,8 +161,46 @@ public class BaseApplication extends Application implements LifecycleObserver {
         Log.d(TAG, "onEnterBackground: The app is in background.");
         setAppInBackground(true);
 
-        // Unload the TTS engine
-        unloadTTSEngine();
+        // Stop the media players if playing
+        if (sMediaVowelsBengali.isPlaying())
+            sMediaVowelsBengali.stop();
+        if (sMediaVowelsBengaliWithExtra.isPlaying())
+            sMediaVowelsBengaliWithExtra.stop();
+
+        if (sMediaAlphabetsBengali.isPlaying())
+            sMediaAlphabetsBengali.stop();
+        if (sMediaAlphabetsBengaliWithExtra.isPlaying())
+            sMediaAlphabetsBengaliWithExtra.stop();
+
+        if (sMediaNumbersBengali.isPlaying())
+            sMediaNumbersBengali.stop();
+
+        if (sMediaAlphabetsEnglish.isPlaying())
+            sMediaAlphabetsEnglish.stop();
+        if (sMediaAlphabetsEnglishWithExtra.isPlaying())
+            sMediaAlphabetsEnglishWithExtra.stop();
+
+        if (sMediaNumbersEnglish.isPlaying())
+            sMediaNumbersEnglish.stop();
+
+        if (sMediaAnimalsEnglish.isPlaying())
+            sMediaAnimalsEnglish.stop();
+
+        // Release the medial players
+        sMediaVowelsBengali.release();
+        sMediaVowelsBengaliWithExtra.release();
+
+        sMediaAlphabetsBengali.release();
+        sMediaAlphabetsBengaliWithExtra.release();
+
+        sMediaNumbersBengali.release();
+
+        sMediaAlphabetsEnglish.release();
+        sMediaAlphabetsEnglishWithExtra.release();
+
+        sMediaNumbersEnglish.release();
+
+        sMediaAnimalsEnglish.release();
     }
 
     /**
@@ -194,16 +266,109 @@ public class BaseApplication extends Application implements LifecycleObserver {
     }
 
     /**
-     * Check whether the TTS {@link TextToSpeech} engine is loaded or not.
-     * @return true if the {@link TextToSpeech} is loaded otherwise false.
+     * Generate an {@link Integer} array of a given number of unique {@link Random}
+     * number from a given bound number.
+     * @param boundNumber The number to be bounded for generating {@link Random} number.
+     * @param totalNumber The number of array size to generated.
+     * @return An {@link Integer} array of unique {@link Random} numbers.
      */
-    public static boolean isTTSEngineLoaded() {
-        return sTTS != null;
+    public static int[] getUniqueRandNumbers(int boundNumber, int totalNumber) {
+        // Random set to hold unique random number.
+        Set<Integer> randSet = new HashSet<>(totalNumber);
+        // Add resultSize of random numbers to set
+        while (randSet.size() < totalNumber)
+            while (!randSet.add(new Random().nextInt(boundNumber)));
+        // Convert the randSet into an integer array to return
+        int[] randArray = new int[totalNumber];
+        int i = 0;
+        for (Integer integer : randSet)
+            randArray[i++] = integer;
+        return randArray;
+    }
+
+    /**
+     * Play a {@link Voice} from a given {@link ArModel}.
+     * @param arModel An instance of {@link ArModel} to be played.
+     * @param isExtraPlay true if the {@link Voice} to be played form extra of
+     * {@link ArModel} otherwise false.
+     */
+    public static void playVoice(ArModel arModel, boolean isExtraPlay) {
+        int start = isExtraPlay?
+                arModel.getVoice().getExtraStart(): arModel.getVoice().getStart();
+        int end = isExtraPlay?
+                arModel.getVoice().getExtraEnd(): arModel.getVoice().getEnd();
+
+        // Check whether the end time is grater than start or not
+        if (end > start) {
+            new Thread(() -> {
+                // Determine which media player need to play
+                MediaPlayer[] mediaPlayer = new MediaPlayer[1];
+                if (!isExtraPlay) {
+                    switch (arModel.getVoice().getId()) {
+                        case Voice.VOICE_VOWELS_BENGALI:
+                            mediaPlayer[0] = sMediaVowelsBengali;
+                            Log.d(TAG, "playVoice: playing vowels bengali");
+                            break;
+                        case Voice.VOICE_ALPHABETS_BENGALI:
+                            mediaPlayer[0] = sMediaAlphabetsBengali;
+                            Log.d(TAG, "playVoice: playing alphabets bengali");
+                            break;
+                        case Voice.VOICE_NUMBERS_BENGALI:
+                            mediaPlayer[0] = sMediaNumbersBengali;
+                            Log.d(TAG, "playVoice: playing numbers bengali");
+                            break;
+                        case Voice.VOICE_ALPHABETS_ENGLISH:
+                            mediaPlayer[0] = sMediaAlphabetsEnglish;
+                            Log.d(TAG, "playVoice: playing alphabets english");
+                            break;
+                        case Voice.VOICE_NUMBERS_ENGLISH:
+                            mediaPlayer[0] = sMediaNumbersEnglish;
+                            Log.d(TAG, "playVoice: playing numbers english");
+                            break;
+                        case Voice.VOICE_ANIMALS_ENGLISH:
+                            mediaPlayer[0] = sMediaAnimalsEnglish;
+                            Log.d(TAG, "playVoice: playing animals english");
+                            break;
+                    }
+                 } else {
+                    switch (arModel.getVoice().getId()) {
+                        case Voice.VOICE_VOWELS_BENGALI:
+                            mediaPlayer[0] = sMediaVowelsBengaliWithExtra;
+                            Log.d(TAG, "playVoice: playing vowels bengali with extra");
+                            break;
+                        case Voice.VOICE_ALPHABETS_BENGALI:
+                            mediaPlayer[0] = sMediaAlphabetsBengaliWithExtra;
+                            Log.d(TAG, "playVoice: playing alphabets bengali with extra");
+                            break;
+                        case Voice.VOICE_ALPHABETS_ENGLISH:
+                            mediaPlayer[0] = sMediaAlphabetsEnglishWithExtra;
+                            Log.d(TAG, "playVoice: playing vowels bengali with extra");
+                            break;
+                    }
+                }
+
+                // Start and pause the media player according to start and end time
+                if (mediaPlayer[0] != null) {
+                    if (!mediaPlayer[0].isPlaying()) {
+                        mediaPlayer[0].seekTo(start);
+                        mediaPlayer[0].start();
+                        try {
+                            Thread.sleep((end - start));
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        mediaPlayer[0].pause();
+                    }
+                }
+            }).start();
+        } else {
+            Log.e(TAG, "playVoice: end must be grater than start time");
+        }
     }
 
     /**
      * Load a TTS ({@link TextToSpeech}) engine (TTS engine initialization takes some times) with thread safe.
-     * @param context The {@link Context} of the application.
+     * @param context The {@link Context} of {@link Application}.
      */
     private static void loadTTSEngine(@NonNull Context context) {
         synchronized (BaseApplication.class) {
@@ -241,6 +406,14 @@ public class BaseApplication extends Application implements LifecycleObserver {
     }
 
     /**
+     * Check whether the TTS {@link TextToSpeech} engine is loaded or not.
+     * @return true if the {@link TextToSpeech} is loaded otherwise false.
+     */
+    public static boolean isTTSEngineLoaded() {
+        return sTTS != null;
+    }
+
+    /**
      * The custom speak() method of {@link TextToSpeech}.
      * @param text A {@link String} to be spoken.
      */
@@ -256,27 +429,6 @@ public class BaseApplication extends Application implements LifecycleObserver {
         } else {
             Log.e(TAG, "speak: The TTS engine is not loaded yet!");
         }
-    }
-
-    /**
-     * Generate an {@link Integer} array of a given number of unique {@link Random}
-     * number from a given bound number.
-     * @param boundNumber The number to be bounded for generating {@link Random} number.
-     * @param totalNumber The number of array size to generated.
-     * @return An {@link Integer} array of unique {@link Random} numbers.
-     */
-    public static int[] getUniqueRandNumbers(int boundNumber, int totalNumber) {
-        // Random set to hold unique random number.
-        Set<Integer> randSet = new HashSet<>(totalNumber);
-        // Add resultSize of random numbers to set
-        while (randSet.size() < totalNumber)
-            while (!randSet.add(new Random().nextInt(boundNumber)));
-        // Convert the randSet into an integer array to return
-        int[] randArray = new int[totalNumber];
-        int i = 0;
-        for (Integer integer : randSet)
-            randArray[i++] = integer;
-        return randArray;
     }
 
     /**
@@ -328,6 +480,7 @@ public class BaseApplication extends Application implements LifecycleObserver {
 
     /**
      * Unzip a given zip {@link File} into a given target directory.
+     * @param context The context of {@link Application}.
      * @param zipFile A zip {@link File} to be extracted.
      * @param targetDirectory A target directory {@link File} where extracted files to be placed.
      */
@@ -352,7 +505,7 @@ public class BaseApplication extends Application implements LifecycleObserver {
     /**
      * Download a {@link File} from a given {@link URL} and unzip if downloaded file is zip
      * to a given target {@link File} directory.
-     * @param context The application {@link Context}.
+     * @param context The context of {@link Application}.
      * @param downloadURL An {@link URL} to be download from.
      * @param targetDirectory A {@link File} directory to be placed the downloaded {@link File}.
      */

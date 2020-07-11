@@ -14,7 +14,9 @@ import com.almasud.intro.BaseApplication;
 import com.almasud.intro.R;
 import com.almasud.intro.databinding.ActivityScanBinding;
 import com.almasud.intro.model.entity.ArModel;
+import com.almasud.intro.model.entity.Category;
 import com.almasud.intro.model.util.EventMessage;
+import com.almasud.intro.model.util.ModelUtils;
 import com.almasud.intro.ui.fragment.ScanArFragment;
 import com.almasud.intro.ui.util.SnackbarHelper;
 import com.almasud.intro.util.ArComponent;
@@ -48,7 +50,7 @@ public class ScanActivity extends AppCompatActivity {
     // image in the database.
     private final Map<AugmentedImage, AnchorNode> mAugmentedImageMap = new HashMap<>();
     private List<ArModel> mArModels = new ArrayList<>();
-    private static int MODEL_TYPE = -1;
+    private static int sModelCategory;
     private List<CompletableFuture<ModelRenderable>> mCompletableFutureModels = new ArrayList<>();
 
     @Override
@@ -60,54 +62,30 @@ public class ScanActivity extends AppCompatActivity {
         // Get the bundle from intent if exists
         Bundle bundle = getIntent().getBundleExtra(BaseApplication.BUNDLE);
         if (bundle != null) {
-            if (bundle.getString(BaseApplication.MODEL_TYPE).equals(BaseApplication.MODEL_ALPHABET))
-                MODEL_TYPE = BaseApplication.ALPHABET;
-            else if (bundle.getString(BaseApplication.MODEL_TYPE).equals(BaseApplication.MODEL_NUMBER))
-                MODEL_TYPE = BaseApplication.NUMBER;
-            else if (bundle.getString(BaseApplication.MODEL_TYPE).equals(BaseApplication.MODEL_ANIMAL))
-                MODEL_TYPE = BaseApplication.ANIMAL;
+            // Get the category of ArModel
+            sModelCategory = bundle.getInt(BaseApplication.MODEL_CATEGORY);
         }
 
         // Set toolbar as an actionbar
         setSupportActionBar((Toolbar) mViewBinding.toolbarScan.getRoot());
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         // Set a subtitle of the actionbar
-        if (MODEL_TYPE == BaseApplication.ALPHABET) {
-            getSupportActionBar().setSubtitle(
-                    new StringBuilder(getResources().getString(R.string.real_view))
-                            .append(" | ")
-                            .append(getResources().getString(R.string.alphabet))
-            );
-        }
-        else if (MODEL_TYPE == BaseApplication.NUMBER) {
-            getSupportActionBar().setSubtitle(
-                    new StringBuilder(getResources().getString(R.string.real_view))
-                            .append(" | ")
-                            .append(getResources().getString(R.string.number))
-            );
-        }
-        else if (MODEL_TYPE == BaseApplication.ANIMAL) {
-            getSupportActionBar().setSubtitle(
-                    new StringBuilder(getResources().getString(R.string.real_view))
-                            .append(" | ")
-                            .append(getResources().getString(R.string.animal))
-            );
-        }
+        getSupportActionBar().setSubtitle(new StringBuilder(
+                getResources().getString(R.string.real_view)).append(" | ")
+                .append(ModelUtils.getArModelCategoryName(this, sModelCategory))
+        );
 
         // Set the augmented image database
-        ScanArFragment.setImageDatabase(MODEL_TYPE);
+        ScanArFragment.setImageDatabase(sModelCategory);
 
         mScanArFragment = (ScanArFragment) getSupportFragmentManager().findFragmentById(R.id.ArFragmentScan);
         mScanArFragment.getArSceneView().getScene().addOnUpdateListener(this::onUpdateFrame);
 
         // Get an instance of ARViewModel
         ArViewModel arViewModel = new ViewModelProvider(this).get(ArViewModel.class);
-        // Get a list of ARModel live data from ARViewModel
-        LiveData<List<ArModel>> arModelListLiveData = (MODEL_TYPE == BaseApplication.ALPHABET)?
-                arViewModel.getAlphabetsLivedData(): (MODEL_TYPE == BaseApplication.NUMBER)?
-                arViewModel.getNumbersLivedData(): arViewModel.getAnimalsLivedData();
-
-        // Observe the list of ARModel from ARViewModel
+        // Get the list of live data of ArModel from ArViewModel
+        LiveData<List<ArModel>> arModelListLiveData = arViewModel.getArModelLivedData(sModelCategory);
+        // Observe the list of ArModel from ArViewModel
         arModelListLiveData.observe(this, arModels -> {
             // Set the value of mARModels (list of ARModel)
             mArModels = arModels;
@@ -173,8 +151,12 @@ public class ScanActivity extends AppCompatActivity {
                         // Set the detected ModelRenderable into TransformableModel
                         try {
                             // Set the initial scale of model
-                            float modelLocalScale = (MODEL_TYPE == BaseApplication.ALPHABET)? 0.3f
-                                    : (MODEL_TYPE == BaseApplication.NUMBER)? 0.25f: 15.0f;
+                            float modelLocalScale = (sModelCategory == Category.CATEGORY_ALPHABET_BENGALI
+                                    || sModelCategory == Category.CATEGORY_ALPHABET_ENGLISH)? 0.3f
+                                    : (sModelCategory == Category.CATEGORY_VOWEL_BENGALI
+                                    || sModelCategory == Category.CATEGORY_NUMBER_BENGALI
+                                    || sModelCategory == Category.CATEGORY_NUMBER_ENGLISH)? 0.25f
+                                    : (sModelCategory == Category.CATEGORY_ANIMAL_ENGLISH)? 15.0f: 1.0f;
 
                             // Set the transformable model
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {

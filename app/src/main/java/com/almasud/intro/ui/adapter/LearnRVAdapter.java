@@ -1,7 +1,6 @@
 package com.almasud.intro.ui.adapter;
 
 import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -45,7 +44,6 @@ public class LearnRVAdapter extends RecyclerView.Adapter<LearnRVAdapter.ArModelV
 
     @Override
     public void onBindViewHolder(@NonNull ArModelViewHolder holder, int position) {
-        Log.d(TAG, "onBindViewHolder: called.");
         ArModel arModel = mArModels.get(position);
         holder.setArModel(arModel);
         holder.itemView.setOnClickListener(view -> {

@@ -7,93 +7,104 @@ import com.google.ar.sceneform.rendering.ModelRenderable;
 import java.io.Serializable;
 
 /**
- * The model class of an {@link ArModel}.
+ * An entity model class for AR item.
  *
  * @author Abdullah Almasud
  */
 public class ArModel implements Serializable {
+    public static final String LIST_ITEM = "List_Item";
+    public static final String SELECTED_ITEM = "Selected_Item";
     private int id;
-    private String modelType;
     private String name;
     private int photo;
     private String modelPath;
-    private String labelName;
-    private int labelPhoto;
+    private Voice voice;
+    private Category category;
+    private String extraName;
+    private int extraPhoto;
 
-    public ArModel(int id, String modelType, String name, int photo, String modelPath) {
+    public ArModel(
+            int id, String name, int photo, String modelPath,
+            Voice voice, Category category) {
         this.id = id;
-        this.modelType = modelType;
         this.name = name;
         this.photo = photo;
         this.modelPath = modelPath;
+        this.voice = voice;
+        this.category = category;
     }
 
     /**
-     * @return A name of an {@link ArModel}.
+     * @return The name of {@link ArModel}.
      */
     public int getId() {
         return id;
     }
 
     /**
-     * @return A type of {@link ArModel}.
-     */
-    public String getModelType() {
-        return modelType;
-    }
-
-    /**
-     * @return A name of an {@link ArModel}.
+     * @return The name of {@link ArModel}.
      */
     public String getName() {
         return name;
     }
 
     /**
-     * @return A {@link DrawableRes} photo id of an {@link ArModel}.
+     * @return The {@link DrawableRes} photo id of {@link ArModel}.
      */
     public int getPhoto() {
         return photo;
     }
 
     /**
-     * @return A label name of an {@link ArModel}.
-     */
-    public String getLabelName() {
-        return labelName;
-    }
-
-    /**
-     * Set a label name of an {@link ArModel}. A label name describe the {@link ArModel}
-     * for what (i.e A for apple).
-     * @return An instance of {@link ArModel}.
-     */
-    public ArModel setLabelName(String labelName) {
-        this.labelName = labelName;
-        return this;
-    }
-
-    /**
-     * @return A {@link DrawableRes} label photo id of an {@link ArModel}.
-     */
-    public int getLabelPhoto() {
-        return labelPhoto;
-    }
-
-    /**
-     * Set a label photo of an {@link ArModel}. A label photo describe the {@link ArModel}
-     * for what (i.e A for apple photo)
-     * @return An instance of {@link ArModel}.
-     */
-    public ArModel setLabelPhoto(int labelPhoto) {
-        this.labelPhoto = labelPhoto;
-        return this;
-    }
-
-    /**
-     * @return A {@link ModelRenderable} path of an {@link ArModel}.
+     * @return The {@link ModelRenderable} path of {@link ArModel}.
      */
     public String getModelPath() {
         return modelPath;
+    }
+
+    /**
+     * @return The {@link Voice} of {@link ArModel}.
+     */
+    public Voice getVoice() {
+        return voice;
+    }
+
+    /**
+     * @return The {@link Category} of {@link ArModel}.
+     */
+    public Category getCategory() {
+        return category;
+    }
+
+    /**
+     * @return The extra name of {@link ArModel}.
+     */
+    public String getExtraName() {
+        return extraName;
+    }
+
+    /**
+     * Set the extra name of {@link ArModel}.
+     * @return An instance of {@link ArModel}.
+     */
+    public ArModel setExtraName(String extraName) {
+        this.extraName = extraName;
+        return this;
+    }
+
+    /**
+     * @return The {@link DrawableRes} extra photo id of {@link ArModel}.
+     */
+    public int getExtraPhoto() {
+        return extraPhoto;
+    }
+
+    /**
+     * Set the {@link DrawableRes} extra photo id of {@link ArModel}.
+     * @return An instance of {@link ArModel}.
+     */
+    public ArModel setExtraPhoto(int extraPhoto) {
+        this.extraPhoto = extraPhoto;
+        return this;
     }
 }

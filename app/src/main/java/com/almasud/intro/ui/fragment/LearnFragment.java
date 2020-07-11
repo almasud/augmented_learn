@@ -10,7 +10,6 @@ import android.view.animation.AnimationUtils;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.almasud.intro.BaseApplication;
 import com.almasud.intro.R;
 import com.almasud.intro.databinding.FragmentLearnBinding;
 import com.almasud.intro.model.entity.ArModel;
@@ -47,18 +46,15 @@ public class LearnFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        // Set the photo of ArModel
+        // Set the photo and name of ArModel
         mViewBinding.ivLearn.setImageResource(mArModel.getPhoto());
 
-        // Set the label photo or name of ArModel
-        if (mArModel.getModelType().equals(BaseApplication.MODEL_ALPHABET)) {
-            mViewBinding.ivLearnLabel.setVisibility(View.VISIBLE);
-            mViewBinding.ivLearnLabel.setImageResource(mArModel.getLabelPhoto());
-        } else if (mArModel.getModelType().equals(BaseApplication.MODEL_NUMBER)) {
-            mViewBinding.tvLearnName.setVisibility(View.VISIBLE);
-            mViewBinding.tvLearnName.setText(mArModel.getName());
-        } else if (mArModel.getModelType().equals(BaseApplication.MODEL_ANIMAL)) {
-            mViewBinding.tvLearnName.setVisibility(View.VISIBLE);
+        // Check whether the extra photo and name of ArModel is exists or not
+        if (mArModel.getExtraName() != null) {
+            mViewBinding.ivLearnExtra.setVisibility(View.VISIBLE);
+            mViewBinding.ivLearnExtra.setImageResource(mArModel.getExtraPhoto());
+            mViewBinding.tvLearnName.setText(mArModel.getExtraName());
+        } else {
             mViewBinding.tvLearnName.setText(mArModel.getName());
         }
 

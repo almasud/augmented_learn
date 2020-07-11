@@ -13,7 +13,6 @@
         android:layout_width="250dp"
         android:layout_height="250dp"
         tools:src="@drawable/capital_a"
-        android:scaleType="fitCenter"
         android:layout_marginEnd="@dimen/activity_half_margin"
         tools:ignore="ContentDescription" />
 
@@ -25,8 +24,8 @@
 
         <ImageView
             android:id="@+id/ivLearnRealView"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:src="@drawable/ar"
             android:scaleType="centerCrop"
             android:clickable="true"
@@ -35,27 +34,25 @@
             android:layout_marginBottom="@dimen/activity_half_margin"
             tools:ignore="ContentDescription" />
 
-        <ImageView
-            android:id="@+id/ivLearnLabel"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            tools:src="@drawable/alphabet_apple"
-            android:scaleType="fitCenter"
-            android:layout_marginBottom="@dimen/activity_half_margin"
-            tools:ignore="ContentDescription"
-            android:visibility="gone"/>
-
         <TextView
             android:id="@+id/tvLearnName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="@string/lion"
-            android:textSize="40sp"
+            tools:text="@string/alphabet_apple"
+            android:textSize="30sp"
             android:textStyle="bold"
             android:padding="@dimen/activity_half_margin"
             android:textAlignment="center"
             android:textColor="@android:color/white"
             android:background="@color/colorPrimary"
+            android:layout_marginBottom="@dimen/activity_half_margin"/>
+
+        <ImageView
+            android:id="@+id/ivLearnExtra"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            tools:src="@drawable/alphabet_apple"
+            tools:ignore="ContentDescription"
             android:visibility="gone"/>
 
     </LinearLayout>
