@@ -33,13 +33,13 @@ public class ArViewModel extends AndroidViewModel {
     /**
      * @return The {@link List} of bengali vowel of {@link ArModel}.
      */
-    public List<ArModel> getBengaliVowels() {
+    private List<ArModel> getBengaliVowels() {
         List<ArModel> arModels = new ArrayList<>();
         arModels.add(new ArModel(
                 0, mContext.getResources().getString(R.string.bn_vowel_01),
                 R.drawable.bn_vowel_01, "models/vowels_bengali/bn_vowel_01.sfb",
-                new Voice(Voice.VOICE_VOWELS_BENGALI, 500, 1500)
-                        .setExtraStart(500).setExtraEnd(4 * 1000),
+                new Voice(Voice.VOICE_VOWELS_BENGALI, 3500,  4400)
+                        .setExtraStart(1000 + 100).setExtraEnd((3 * 1000) + 900),
                 new Category(
                         Category.CATEGORY_VOWEL_BENGALI,
                         mContext.getResources().getString(R.string.vowel_bengali)
@@ -51,8 +51,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 1, mContext.getResources().getString(R.string.bn_vowel_02),
                 R.drawable.bn_vowel_02, "models/vowels_bengali/bn_vowel_02.sfb",
-                new Voice(Voice.VOICE_VOWELS_BENGALI, (2 * 1000) + 500, (3 * 1000) + 100)
-                        .setExtraStart(500).setExtraEnd(3 * 1000),
+                new Voice(Voice.VOICE_VOWELS_BENGALI, 6300, 7500)
+                        .setExtraStart((4 * 1000) + 300).setExtraEnd((6 * 1000) + 700),
                 new Category(
                         Category.CATEGORY_VOWEL_BENGALI,
                         mContext.getResources().getString(R.string.vowel_bengali)
@@ -63,8 +63,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 2, mContext.getResources().getString(R.string.bn_vowel_03),
                 R.drawable.bn_vowel_03, "models/vowels_bengali/bn_vowel_03.sfb",
-                new Voice(Voice.VOICE_VOWELS_BENGALI, 5 * 1000, (5 * 1000) + 500)
-                        .setExtraStart(500).setExtraEnd(3 * 1000),
+                new Voice(Voice.VOICE_VOWELS_BENGALI,  9500, 10700)
+                        .setExtraStart(7*1000).setExtraEnd((9 * 1000) + 300),
                 new Category(
                         Category.CATEGORY_VOWEL_BENGALI,
                         mContext.getResources().getString(R.string.vowel_bengali)
@@ -75,8 +75,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 3, mContext.getResources().getString(R.string.bn_vowel_04),
                 R.drawable.bn_vowel_04, "models/vowels_bengali/bn_vowel_04.sfb",
-                new Voice(Voice.VOICE_VOWELS_BENGALI, (7 * 1000) + 500, (8 * 1000) + 100)
-                        .setExtraStart(500).setExtraEnd(3 * 1000),
+                new Voice(Voice.VOICE_VOWELS_BENGALI, 11900, 13300)
+                        .setExtraStart((9 * 1000) + 800).setExtraEnd((11 * 1000) + 900),
                 new Category(
                         Category.CATEGORY_VOWEL_BENGALI,
                         mContext.getResources().getString(R.string.vowel_bengali)
@@ -87,8 +87,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 4, mContext.getResources().getString(R.string.bn_vowel_05),
                 R.drawable.bn_vowel_05, "models/vowels_bengali/bn_vowel_05.sfb",
-                new Voice(Voice.VOICE_VOWELS_BENGALI, (10 * 1000) + 100, (11 * 1000) + 100)
-                        .setExtraStart(500).setExtraEnd(3 * 1000),
+                new Voice(Voice.VOICE_VOWELS_BENGALI, 15800, 16900)
+                        .setExtraStart((12 * 1000) + 500).setExtraEnd((14 * 1000) + 500),
                 new Category(
                         Category.CATEGORY_VOWEL_BENGALI,
                         mContext.getResources().getString(R.string.vowel_bengali)
@@ -99,8 +99,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 5, mContext.getResources().getString(R.string.bn_vowel_06),
                 R.drawable.bn_vowel_06, "models/vowels_bengali/bn_vowel_06.sfb",
-                new Voice(Voice.VOICE_VOWELS_BENGALI, (12 * 1000) + 200, (13 * 1000) + 100)
-                        .setExtraStart(500).setExtraEnd(3 * 1000),
+                new Voice(Voice.VOICE_VOWELS_BENGALI, 18500, 19500)
+                        .setExtraStart(15 * 1000).setExtraEnd(17 * 1000) ,
                 new Category(
                         Category.CATEGORY_VOWEL_BENGALI,
                         mContext.getResources().getString(R.string.vowel_bengali)
@@ -111,8 +111,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 6, mContext.getResources().getString(R.string.bn_vowel_07),
                 R.drawable.bn_vowel_07, "models/vowels_bengali/bn_vowel_07.sfb",
-                new Voice(Voice.VOICE_VOWELS_BENGALI, (14 * 1000) + 200, (15 * 1000) + 500)
-                        .setExtraStart(500).setExtraEnd(3 * 1000),
+                new Voice(Voice.VOICE_VOWELS_BENGALI, 21000, 22300)
+                        .setExtraStart(18 * 1000) .setExtraEnd((20 * 1000)+500),
                 new Category(
                         Category.CATEGORY_VOWEL_BENGALI,
                         mContext.getResources().getString(R.string.vowel_bengali)
@@ -123,8 +123,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 7, mContext.getResources().getString(R.string.bn_vowel_08),
                 R.drawable.bn_vowel_08, "models/vowels_bengali/bn_vowel_08.sfb",
-                new Voice(Voice.VOICE_VOWELS_BENGALI, (16 * 1000) + 500, (17 * 1000) + 100)
-                        .setExtraStart(500).setExtraEnd(3 * 1000),
+                new Voice(Voice.VOICE_VOWELS_BENGALI, 24000, 25200)
+                        .setExtraStart(21 * 1000).setExtraEnd((23 * 1000) + 300),
                 new Category(
                         Category.CATEGORY_VOWEL_BENGALI,
                         mContext.getResources().getString(R.string.vowel_bengali)
@@ -135,8 +135,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 8, mContext.getResources().getString(R.string.bn_vowel_09),
                 R.drawable.bn_vowel_09, "models/vowels_bengali/bn_vowel_09.sfb",
-                new Voice(Voice.VOICE_VOWELS_BENGALI, (18 * 1000) + 500, (19 * 1000) + 500)
-                        .setExtraStart(500).setExtraEnd(3 * 1000),
+                new Voice(Voice.VOICE_VOWELS_BENGALI, 28000, 29000)
+                        .setExtraStart((23 * 1000) + 900).setExtraEnd(26 * 1000),
                 new Category(
                         Category.CATEGORY_VOWEL_BENGALI,
                         mContext.getResources().getString(R.string.vowel_bengali)
@@ -147,8 +147,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 9, mContext.getResources().getString(R.string.bn_vowel_10),
                 R.drawable.bn_vowel_10, "models/vowels_bengali/bn_vowel_10.sfb",
-                new Voice(Voice.VOICE_VOWELS_BENGALI, (20 * 1000), (20 * 1000) + 900)
-                        .setExtraStart(500).setExtraEnd(3 * 1000),
+                new Voice(Voice.VOICE_VOWELS_BENGALI, 30800, 31900)
+                        .setExtraStart(26 * 1000).setExtraEnd((28* 1000) +400),
                 new Category(
                         Category.CATEGORY_VOWEL_BENGALI,
                         mContext.getResources().getString(R.string.vowel_bengali)
@@ -159,8 +159,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 10, mContext.getResources().getString(R.string.bn_vowel_11),
                 R.drawable.bn_vowel_11, "models/vowels_bengali/bn_vowel_11.sfb",
-                new Voice(Voice.VOICE_VOWELS_BENGALI, (21 * 1000) + 500, (22 * 1000) + 200)
-                        .setExtraStart(500).setExtraEnd(3 * 1000),
+                new Voice(Voice.VOICE_VOWELS_BENGALI, 33200, 34800)
+                        .setExtraStart((28 * 1000) + 500).setExtraEnd((30 * 1000) + 800),
                 new Category(
                         Category.CATEGORY_VOWEL_BENGALI,
                         mContext.getResources().getString(R.string.vowel_bengali)
@@ -175,13 +175,13 @@ public class ArViewModel extends AndroidViewModel {
     /**
      * @return The {@link List} of bengali alphabet of {@link ArModel}.
      */
-    public List<ArModel> getBengaliAlphabets() {
+    private List<ArModel> getBengaliAlphabets() {
         List<ArModel> arModels = new ArrayList<>();
         arModels.add(new ArModel(
                 0, mContext.getResources().getString(R.string.bn_alphabet_01),
                 R.drawable.bn_alphabet_01, "models/alphabets_bengali/bn_alphabet_01.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_BENGALI, 1000, 5 * 1000)
-                        .setExtraStart(500).setExtraEnd((2 * 1000) + 500),
+                new Voice(Voice.VOICE_ALPHABETS_BENGALI, 2000, (2 * 1000) +900)
+                        .setExtraStart(2 * 1000).setExtraEnd((4 * 1000) + 300),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
                         mContext.getResources().getString(R.string.alphabet_bengali)
@@ -192,8 +192,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 1, mContext.getResources().getString(R.string.bn_alphabet_02),
                 R.drawable.bn_alphabet_02, "models/alphabets_bengali/bn_alphabet_02.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (3 * 1000) + 300, (4 * 1000) + 100)
-                        .setExtraStart(500).setExtraEnd((2 * 1000) + 500),
+                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (4 * 1000) + 100, (5 * 1000) + 100)
+                        .setExtraStart(5 * 1000).setExtraEnd((7 * 1000) + 500),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
                         mContext.getResources().getString(R.string.alphabet_bengali)
@@ -204,8 +204,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 2, mContext.getResources().getString(R.string.bn_alphabet_03),
                 R.drawable.bn_alphabet_03, "models/alphabets_bengali/bn_alphabet_03.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (5 * 1000) + 300, (6 * 1000) + 100)
-                        .setExtraStart(500).setExtraEnd((2 * 1000) + 500),
+                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (6 * 1000) + 100, (7 * 1000) + 100)
+                        .setExtraStart(8 * 1000).setExtraEnd((10 * 1000) + 500),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
                         mContext.getResources().getString(R.string.alphabet_bengali)
@@ -216,8 +216,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 3, mContext.getResources().getString(R.string.bn_alphabet_04),
                 R.drawable.bn_alphabet_04, "models/alphabets_bengali/bn_alphabet_04.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (7 * 1000) + 200, (8 * 1000) + 200)
-                        .setExtraStart(500).setExtraEnd((2 * 1000) + 500),
+                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (8 * 1000), (9 * 1000) + 100)
+                        .setExtraStart((10 * 1000) + 500).setExtraEnd(13 * 1000),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
                         mContext.getResources().getString(R.string.alphabet_bengali)
@@ -228,8 +228,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 4, mContext.getResources().getString(R.string.bn_alphabet_05),
                 R.drawable.bn_alphabet_05, "models/alphabets_bengali/bn_alphabet_05.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (9 * 1000) + 200, (10 * 1000) + 100)
-                        .setExtraStart(500).setExtraEnd((2 * 1000) + 500),
+                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (10 * 1000) + 200, (11 * 1000) + 200)
+                        .setExtraStart( (13 * 1000) + 500).setExtraEnd((15 * 1000) + 700),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
                         mContext.getResources().getString(R.string.alphabet_bengali)
@@ -240,8 +240,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 5, mContext.getResources().getString(R.string.bn_alphabet_06),
                 R.drawable.bn_alphabet_06, "models/alphabets_bengali/bn_alphabet_06.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (10 * 1000) + 800, (11 * 1000) + 500)
-                        .setExtraStart(500).setExtraEnd((2 * 1000) + 500),
+                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (12 * 1000) + 200, (13 * 1000) + 300)
+                        .setExtraStart(16 * 1000).setExtraEnd((19 * 1000) + 200),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
                         mContext.getResources().getString(R.string.alphabet_bengali)
@@ -252,8 +252,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 6, mContext.getResources().getString(R.string.bn_alphabet_07),
                 R.drawable.bn_alphabet_07, "models/alphabets_bengali/bn_alphabet_07.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (12 * 1000) + 600, (13 * 1000) + 500)
-                        .setExtraStart(500).setExtraEnd((2 * 1000) + 500),
+                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (14 * 1000) + 300, (15 * 1000) + 500)
+                        .setExtraStart((18 * 1000) + 800).setExtraEnd((21 * 1000) + 500),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
                         mContext.getResources().getString(R.string.alphabet_bengali)
@@ -264,8 +264,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 7, mContext.getResources().getString(R.string.bn_alphabet_08),
                 R.drawable.bn_alphabet_08, "models/alphabets_bengali/bn_alphabet_08.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (14 * 1000) + 700, (15 * 1000) + 700)
-                        .setExtraStart(500).setExtraEnd((2 * 1000) + 500),
+                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (16 * 1000) + 200, (17 * 1000) + 700)
+                        .setExtraStart(22 * 1000).setExtraEnd((24 * 1000) + 500),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
                         mContext.getResources().getString(R.string.alphabet_bengali)
@@ -276,8 +276,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 8, mContext.getResources().getString(R.string.bn_alphabet_09),
                 R.drawable.bn_alphabet_09, "models/alphabets_bengali/bn_alphabet_09.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (16 * 1000), (16 * 1000) + 900)
-                        .setExtraStart(500).setExtraEnd((2 * 1000) + 500),
+                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (18 * 1000) + 500, (19 * 1000) + 600)
+                        .setExtraStart(25 * 1000).setExtraEnd((27 * 1000) + 200),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
                         mContext.getResources().getString(R.string.alphabet_bengali)
@@ -288,8 +288,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 9, mContext.getResources().getString(R.string.bn_alphabet_10),
                 R.drawable.bn_alphabet_10, "models/alphabets_bengali/bn_alphabet_10.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (18 * 1000) + 500, (18 * 1000) + 900)
-                        .setExtraStart(500).setExtraEnd((2 * 1000) + 500),
+                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (20 * 1000) + 200, (21 * 1000) + 300)
+                        .setExtraStart((27 * 1000) + 500).setExtraEnd((29 * 1000) + 900),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
                         mContext.getResources().getString(R.string.alphabet_bengali)
@@ -300,8 +300,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 10, mContext.getResources().getString(R.string.bn_alphabet_11),
                 R.drawable.bn_alphabet_11, "models/alphabets_bengali/bn_alphabet_11.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (19 * 1000) + 500, (20 * 1000) + 300)
-                        .setExtraStart(500).setExtraEnd((2 * 1000) + 500),
+                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (22 * 1000), (23 * 1000) + 100)
+                        .setExtraStart(30 * 1000).setExtraEnd((32 * 1000) + 500),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
                         mContext.getResources().getString(R.string.alphabet_bengali)
@@ -312,8 +312,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 11, mContext.getResources().getString(R.string.bn_alphabet_12),
                 R.drawable.bn_alphabet_12, "models/alphabets_bengali/bn_alphabet_12.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (20 * 1000) + 200, 22 * 1000)
-                        .setExtraStart(500).setExtraEnd((2 * 1000) + 500),
+                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (24 * 1000) + 200, (25* 1000) + 100)
+                        .setExtraStart(33 * 1000).setExtraEnd((35 * 1000) + 800),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
                         mContext.getResources().getString(R.string.alphabet_bengali)
@@ -324,8 +324,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 12, mContext.getResources().getString(R.string.bn_alphabet_13),
                 R.drawable.bn_alphabet_13, "models/alphabets_bengali/bn_alphabet_13.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (23 * 1000) + 200, 24 * 1000)
-                        .setExtraStart(500).setExtraEnd((2 * 1000) + 500),
+                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (26 * 1000) + 200, (27 * 1000) + 300)
+                        .setExtraStart(36 * 1000).setExtraEnd((38 * 1000) + 800),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
                         mContext.getResources().getString(R.string.alphabet_bengali)
@@ -336,8 +336,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 13, mContext.getResources().getString(R.string.bn_alphabet_14),
                 R.drawable.bn_alphabet_14, "models/alphabets_bengali/bn_alphabet_14.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (24 * 1000) + 500, (25 * 1000) + 500)
-                        .setExtraStart(500).setExtraEnd((2 * 1000) + 500),
+                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (28 * 1000) + 300, (29 * 1000) + 300)
+                        .setExtraStart(39 * 1000).setExtraEnd((41 * 1000) + 500),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
                         mContext.getResources().getString(R.string.alphabet_bengali)
@@ -348,8 +348,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 14, mContext.getResources().getString(R.string.bn_alphabet_15),
                 R.drawable.bn_alphabet_15, "models/alphabets_bengali/bn_alphabet_15.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (26 * 1000) + 700, (27 * 1000) + 700)
-                        .setExtraStart(500).setExtraEnd((2 * 1000) + 500),
+                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (30 * 1000) + 300, (31 * 1000) + 600)
+                        .setExtraStart(42 * 1000).setExtraEnd((43 * 1000) + 800),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
                         mContext.getResources().getString(R.string.alphabet_bengali)
@@ -360,8 +360,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 15, mContext.getResources().getString(R.string.bn_alphabet_16),
                 R.drawable.bn_alphabet_16, "models/alphabets_bengali/bn_alphabet_16.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (28 * 1000) + 500, (29 * 1000) + 700)
-                        .setExtraStart(500).setExtraEnd((2 * 1000) + 500),
+                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (32 * 1000) + 300, (33 * 1000) + 300)
+                        .setExtraStart(44 * 1000).setExtraEnd((46 * 1000) + 700),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
                         mContext.getResources().getString(R.string.alphabet_bengali)
@@ -372,8 +372,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 16, mContext.getResources().getString(R.string.bn_alphabet_17),
                 R.drawable.bn_alphabet_17, "models/alphabets_bengali/bn_alphabet_17.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (30 * 1000) + 500, (31 * 1000) + 100)
-                        .setExtraStart(500).setExtraEnd((2 * 1000) + 500),
+                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (34 * 1000) + 200, (35 * 1000) + 300)
+                        .setExtraStart(47 * 1000).setExtraEnd((49 * 1000) + 500),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
                         mContext.getResources().getString(R.string.alphabet_bengali)
@@ -384,8 +384,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 17, mContext.getResources().getString(R.string.bn_alphabet_18),
                 R.drawable.bn_alphabet_18, "models/alphabets_bengali/bn_alphabet_18.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_BENGALI, 32 * 100, (33 * 1000) + 100)
-                        .setExtraStart(500).setExtraEnd((2 * 1000) + 500),
+                new Voice(Voice.VOICE_ALPHABETS_BENGALI, 36* 1000, (37 * 1000) + 100)
+                        .setExtraStart(50 * 1000).setExtraEnd((52 * 1000) + 300),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
                         mContext.getResources().getString(R.string.alphabet_bengali)
@@ -396,8 +396,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 18, mContext.getResources().getString(R.string.bn_alphabet_19),
                 R.drawable.bn_alphabet_19, "models/alphabets_bengali/bn_alphabet_19.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (33 * 1000) + 800, (34 * 1000) + 500)
-                        .setExtraStart(500).setExtraEnd((2 * 1000) + 500),
+                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (38 * 1000) + 100, (39 * 1000) + 200)
+                        .setExtraStart((52 * 1000) + 500).setExtraEnd((55 * 1000) + 100),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
                         mContext.getResources().getString(R.string.alphabet_bengali)
@@ -408,8 +408,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 19, mContext.getResources().getString(R.string.bn_alphabet_20),
                 R.drawable.bn_alphabet_20, "models/alphabets_bengali/bn_alphabet_20.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (37 * 1000) + 100, (38 * 1000) + 100)
-                        .setExtraStart(500).setExtraEnd((2 * 1000) + 500),
+                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (40 * 1000) + 100, (41 * 1000) + 100)
+                        .setExtraStart((55 * 1000) + 500).setExtraEnd((58 * 1000) + 200),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
                         mContext.getResources().getString(R.string.alphabet_bengali)
@@ -420,8 +420,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 20, mContext.getResources().getString(R.string.bn_alphabet_21),
                 R.drawable.bn_alphabet_21, "models/alphabets_bengali/bn_alphabet_21.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (39 * 1000) + 500, (40 * 1000) + 300)
-                        .setExtraStart(500).setExtraEnd((2 * 1000) + 500),
+                new Voice(Voice.VOICE_ALPHABETS_BENGALI, 42 * 1000, (43 * 1000) + 200)
+                        .setExtraStart((58 *1000) + 500).setExtraEnd((60 * 1000) + 500),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
                         mContext.getResources().getString(R.string.alphabet_bengali)
@@ -432,8 +432,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 21, mContext.getResources().getString(R.string.bn_alphabet_22),
                 R.drawable.bn_alphabet_22, "models/alphabets_bengali/bn_alphabet_22.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (41 * 1000) + 500, (42 * 1000) + 200)
-                        .setExtraStart(500).setExtraEnd((2 * 1000) + 500),
+                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (43 * 1000) + 800, 45 * 1000)
+                        .setExtraStart(61 * 1000).setExtraEnd((63 * 1000) + 200),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
                         mContext.getResources().getString(R.string.alphabet_bengali)
@@ -444,8 +444,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 22, mContext.getResources().getString(R.string.bn_alphabet_23),
                 R.drawable.bn_alphabet_23, "models/alphabets_bengali/bn_alphabet_23.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (43 * 1000) + 200, (44 * 1000) + 100)
-                        .setExtraStart(500).setExtraEnd((2 * 1000) + 500),
+                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (46 * 1000), (47 * 1000) + 100)
+                        .setExtraStart(64 * 1000).setExtraEnd((66 * 1000) + 100),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
                         mContext.getResources().getString(R.string.alphabet_bengali)
@@ -456,8 +456,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 23, mContext.getResources().getString(R.string.bn_alphabet_24),
                 R.drawable.bn_alphabet_24, "models/alphabets_bengali/bn_alphabet_24.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (45 * 1000) + 500, (46 * 1000) + 200)
-                        .setExtraStart(500).setExtraEnd((2 * 1000) + 500),
+                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (48 * 1000), (49 * 1000) + 100)
+                        .setExtraStart((66 * 1000) + 500).setExtraEnd((68 * 1000) + 900),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
                         mContext.getResources().getString(R.string.alphabet_bengali)
@@ -468,8 +468,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 24, mContext.getResources().getString(R.string.bn_alphabet_25),
                 R.drawable.bn_alphabet_25, "models/alphabets_bengali/bn_alphabet_25.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_BENGALI, 47 * 1000, (47 * 1000) + 800)
-                        .setExtraStart(500).setExtraEnd((2 * 1000) + 500),
+                new Voice(Voice.VOICE_ALPHABETS_BENGALI, 50 * 1000, (51 * 1000) + 100)
+                        .setExtraStart((69 * 1000) + 500).setExtraEnd((71 * 1000) + 900),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
                         mContext.getResources().getString(R.string.alphabet_bengali)
@@ -480,8 +480,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 25, mContext.getResources().getString(R.string.bn_alphabet_26),
                 R.drawable.bn_alphabet_26, "models/alphabets_bengali/bn_alphabet_26.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_BENGALI, 39 * 1000, 40 * 1000)
-                        .setExtraStart(500).setExtraEnd((2 * 1000) + 500),
+                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (52 * 1000) + 200, (53* 1000) + 300)
+                        .setExtraStart(72 * 1000).setExtraEnd((74 * 1000) + 800),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
                         mContext.getResources().getString(R.string.alphabet_bengali)
@@ -492,8 +492,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 26, mContext.getResources().getString(R.string.bn_alphabet_27),
                 R.drawable.bn_alphabet_27, "models/alphabets_bengali/bn_alphabet_27.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (51 * 1000) + 500, (52 * 1000))
-                        .setExtraStart(500).setExtraEnd((2 * 1000) + 500),
+                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (54 * 1000) + 100, (55 * 1000) + 200)
+                        .setExtraStart(75 * 1000).setExtraEnd((77 * 1000) + 100),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
                         mContext.getResources().getString(R.string.alphabet_bengali)
@@ -504,8 +504,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 27, mContext.getResources().getString(R.string.bn_alphabet_28),
                 R.drawable.bn_alphabet_28, "models/alphabets_bengali/bn_alphabet_28.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (53 * 1000) + 200, 54 * 1000)
-                        .setExtraStart(500).setExtraEnd((2 * 1000) + 500),
+                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (56 * 1000) + 200, (57 * 1000) + 200)
+                        .setExtraStart((77 * 1000) + 500).setExtraEnd((79 * 1000) + 800),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
                         mContext.getResources().getString(R.string.alphabet_bengali)
@@ -516,8 +516,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 28, mContext.getResources().getString(R.string.bn_alphabet_29),
                 R.drawable.bn_alphabet_29, "models/alphabets_bengali/bn_alphabet_29.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (55 * 1000) + 100, (56 * 1000) + 100)
-                        .setExtraStart(500).setExtraEnd((2 * 1000) + 500),
+                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (58 * 1000) + 100, (59 * 1000) + 500)
+                        .setExtraStart((80 * 1000) + 200).setExtraEnd((82 * 1000) + 700),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
                         mContext.getResources().getString(R.string.alphabet_bengali)
@@ -528,8 +528,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 29, mContext.getResources().getString(R.string.bn_alphabet_30),
                 R.drawable.bn_alphabet_30, "models/alphabets_bengali/bn_alphabet_30.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_BENGALI, 57 * 1000, (58 * 1000) + 200)
-                        .setExtraStart(500).setExtraEnd((2 * 1000) + 500),
+                new Voice(Voice.VOICE_ALPHABETS_BENGALI, 60 * 1000, (61 * 1000) + 400)
+                        .setExtraStart(83 * 1000).setExtraEnd((85 * 1000) + 400),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
                         mContext.getResources().getString(R.string.alphabet_bengali)
@@ -540,8 +540,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 30, mContext.getResources().getString(R.string.bn_alphabet_31),
                 R.drawable.bn_alphabet_31, "models/alphabets_bengali/bn_alphabet_31.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_BENGALI, 59 * 1000, (59 * 1000) + 900)
-                        .setExtraStart(500).setExtraEnd((2 * 1000) + 500),
+                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (61 * 1000) + 800, (63 * 1000) + 200)
+                        .setExtraStart((85 * 1000) + 800).setExtraEnd((87 * 1000) + 900),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
                         mContext.getResources().getString(R.string.alphabet_bengali)
@@ -552,8 +552,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 31, mContext.getResources().getString(R.string.bn_alphabet_32),
                 R.drawable.bn_alphabet_32, "models/alphabets_bengali/bn_alphabet_32.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_BENGALI, 60 * 1000, (60 * 1000) + 900)
-                        .setExtraStart(500).setExtraEnd((2 * 1000) + 500),
+                new Voice(Voice.VOICE_ALPHABETS_BENGALI, 64 * 1000, (65 * 1000) + 100)
+                        .setExtraStart((88 * 1000)+ 500).setExtraEnd((90 * 1000) + 700),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
                         mContext.getResources().getString(R.string.alphabet_bengali)
@@ -564,8 +564,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 32, mContext.getResources().getString(R.string.bn_alphabet_33),
                 R.drawable.bn_alphabet_33, "models/alphabets_bengali/bn_alphabet_33.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (61 * 1000) + 500, (62 * 1000) + 500)
-                        .setExtraStart(500).setExtraEnd((2 * 1000) + 500),
+                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (66 * 1000), (67 * 1000) + 800)
+                        .setExtraStart(91 * 1000).setExtraEnd((93 * 1000) + 900),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
                         mContext.getResources().getString(R.string.alphabet_bengali)
@@ -576,20 +576,20 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 33, mContext.getResources().getString(R.string.bn_alphabet_34),
                 R.drawable.bn_alphabet_34, "models/alphabets_bengali/bn_alphabet_34.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (63 * 1000) + 500, (64 * 1000) + 400)
-                        .setExtraStart(500).setExtraEnd((2 * 1000) + 500),
+                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (68 * 1000) + 200, 70 * 1000)
+                        .setExtraStart(94 * 1000).setExtraEnd((96 * 1000) + 800),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
                         mContext.getResources().getString(R.string.alphabet_bengali)
                 ))
-                .setExtraName(mContext.getResources().getString(R.string.bn_alphabet_34_extra))
+                .setExtraName("আষাঢ়")
                 .setExtraPhoto(R.drawable.bn_alphabet_34_extra)
         );
         arModels.add(new ArModel(
                 34, mContext.getResources().getString(R.string.bn_alphabet_35),
                 R.drawable.bn_alphabet_35, "models/alphabets_bengali/bn_alphabet_35.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (65 * 1000) + 500, (66 * 1000) + 500)
-                        .setExtraStart(500).setExtraEnd((2 * 1000) + 500),
+                new Voice(Voice.VOICE_ALPHABETS_BENGALI,  72 * 1000, (73 * 1000) + 500)
+                        .setExtraStart(97 * 1000).setExtraEnd((99 * 1000) + 200),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
                         mContext.getResources().getString(R.string.alphabet_bengali)
@@ -600,8 +600,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 35, mContext.getResources().getString(R.string.bn_alphabet_36),
                 R.drawable.bn_alphabet_36, "models/alphabets_bengali/bn_alphabet_36.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (67 * 1000) + 600, (68 * 1000) + 500)
-                        .setExtraStart(500).setExtraEnd((2 * 1000) + 500),
+                new Voice(Voice.VOICE_ALPHABETS_BENGALI, 75 * 1000, (76 * 1000) + 500)
+                        .setExtraStart(100 * 1000).setExtraEnd((103 * 1000) + 500),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
                         mContext.getResources().getString(R.string.alphabet_bengali)
@@ -612,8 +612,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 36, mContext.getResources().getString(R.string.bn_alphabet_37),
                 R.drawable.bn_alphabet_37, "models/alphabets_bengali/bn_alphabet_37.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (69 * 1000) + 500, (70 * 1000) + 500)
-                        .setExtraStart(500).setExtraEnd((2 * 1000) + 500),
+                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (77 * 1000) + 500, (78 * 1000) + 700)
+                        .setExtraStart((102 * 1000) + 500).setExtraEnd((104 * 1000) + 500),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
                         mContext.getResources().getString(R.string.alphabet_bengali)
@@ -624,8 +624,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 37, mContext.getResources().getString(R.string.bn_alphabet_38),
                 R.drawable.bn_alphabet_38, "models/alphabets_bengali/bn_alphabet_38.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_BENGALI, 71 * 1000, (72 * 1000) + 300)
-                        .setExtraStart(500).setExtraEnd((2 * 1000) + 500),
+                new Voice(Voice.VOICE_ALPHABETS_BENGALI, 80 * 1000, (81 * 1000) + 400)
+                        .setExtraStart(105 * 1000).setExtraEnd((106 * 1000) + 600),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
                         mContext.getResources().getString(R.string.alphabet_bengali)
@@ -636,8 +636,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 38, mContext.getResources().getString(R.string.bn_alphabet_39),
                 R.drawable.bn_alphabet_39, "models/alphabets_bengali/bn_alphabet_39.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_BENGALI, 73 * 1000, 74 * 1000)
-                        .setExtraStart(500).setExtraEnd((2 * 1000) + 500),
+                new Voice(Voice.VOICE_ALPHABETS_BENGALI, (82 * 1000) + 500, (83 * 1000) +900)
+                        .setExtraStart((107 * 1000) + 100).setExtraEnd(110 * 1000),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
                         mContext.getResources().getString(R.string.alphabet_bengali)
@@ -652,12 +652,12 @@ public class ArViewModel extends AndroidViewModel {
     /**
      * @return The {@link List} of bengali alphabet of {@link ArModel}.
      */
-    public List<ArModel> getBengaliNumbers() {
+    private List<ArModel> getBengaliNumbers() {
         List<ArModel> arModels = new ArrayList<>();
         arModels.add(new ArModel(
                 0, mContext.getResources().getString(R.string.bn_number_1),
                 R.drawable.bn_number_1, "models/numbers_bengali/bn_number_1.sfb",
-                new Voice(Voice.VOICE_NUMBERS_BENGALI, 500, 1500),
+                new Voice(Voice.VOICE_NUMBERS_BENGALI, 2300, 3200),
                 new Category(
                         Category.CATEGORY_NUMBER_BENGALI,
                         mContext.getResources().getString(R.string.number_bengali)
@@ -666,7 +666,7 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 1, mContext.getResources().getString(R.string.bn_number_2),
                 R.drawable.bn_number_2, "models/numbers_bengali/bn_number_2.sfb",
-                new Voice(Voice.VOICE_NUMBERS_BENGALI, 500, 1500),
+                new Voice(Voice.VOICE_NUMBERS_BENGALI, 4800, 5500),
                 new Category(
                         Category.CATEGORY_NUMBER_BENGALI,
                         mContext.getResources().getString(R.string.number_bengali)
@@ -675,7 +675,7 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 2, mContext.getResources().getString(R.string.bn_number_3),
                 R.drawable.bn_number_3, "models/numbers_bengali/bn_number_3.sfb",
-                new Voice(Voice.VOICE_NUMBERS_BENGALI, 500, 1500),
+                new Voice(Voice.VOICE_NUMBERS_BENGALI, 7300, 8300),
                 new Category(
                         Category.CATEGORY_NUMBER_BENGALI,
                         mContext.getResources().getString(R.string.number_bengali)
@@ -684,7 +684,7 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 3, mContext.getResources().getString(R.string.bn_number_4),
                 R.drawable.bn_number_4, "models/numbers_bengali/bn_number_4.sfb",
-                new Voice(Voice.VOICE_NUMBERS_BENGALI, 500, 1500),
+                new Voice(Voice.VOICE_NUMBERS_BENGALI, 9500, 10500),
                 new Category(
                         Category.CATEGORY_NUMBER_BENGALI,
                         mContext.getResources().getString(R.string.number_bengali)
@@ -693,7 +693,7 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 4, mContext.getResources().getString(R.string.bn_number_5),
                 R.drawable.bn_number_5, "models/numbers_bengali/bn_number_5.sfb",
-                new Voice(Voice.VOICE_NUMBERS_BENGALI, 500, 1500),
+                new Voice(Voice.VOICE_NUMBERS_BENGALI, 13000, 14000),
                 new Category(
                         Category.CATEGORY_NUMBER_BENGALI,
                         mContext.getResources().getString(R.string.number_bengali)
@@ -702,7 +702,7 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 5, mContext.getResources().getString(R.string.bn_number_6),
                 R.drawable.bn_number_6, "models/numbers_bengali/bn_number_6.sfb",
-                new Voice(Voice.VOICE_NUMBERS_BENGALI, 500, 1500),
+                new Voice(Voice.VOICE_NUMBERS_BENGALI, 15500, 16500),
                 new Category(
                         Category.CATEGORY_NUMBER_BENGALI,
                         mContext.getResources().getString(R.string.number_bengali)
@@ -711,7 +711,7 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 6, mContext.getResources().getString(R.string.bn_number_7),
                 R.drawable.bn_number_7, "models/numbers_bengali/bn_number_7.sfb",
-                new Voice(Voice.VOICE_NUMBERS_BENGALI, 500, 1500),
+                new Voice(Voice.VOICE_NUMBERS_BENGALI, 18000, 19100),
                 new Category(
                         Category.CATEGORY_NUMBER_BENGALI,
                         mContext.getResources().getString(R.string.number_bengali)
@@ -720,7 +720,7 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 7, mContext.getResources().getString(R.string.bn_number_8),
                 R.drawable.bn_number_8, "models/numbers_bengali/bn_number_8.sfb",
-                new Voice(Voice.VOICE_NUMBERS_BENGALI, 500, 1500),
+                new Voice(Voice.VOICE_NUMBERS_BENGALI, 21200, 22000),
                 new Category(
                         Category.CATEGORY_NUMBER_BENGALI,
                         mContext.getResources().getString(R.string.number_bengali)
@@ -729,7 +729,7 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 8, mContext.getResources().getString(R.string.bn_number_9),
                 R.drawable.bn_number_9, "models/numbers_bengali/bn_number_9.sfb",
-                new Voice(Voice.VOICE_NUMBERS_BENGALI, 500, 1500),
+                new Voice(Voice.VOICE_NUMBERS_BENGALI, 24100, 25500),
                 new Category(
                         Category.CATEGORY_NUMBER_BENGALI,
                         mContext.getResources().getString(R.string.number_bengali)
@@ -742,12 +742,12 @@ public class ArViewModel extends AndroidViewModel {
     /**
      * @return The {@link List} of english alphabet of {@link ArModel}.
      */
-    public List<ArModel> getEnglishAlphabets() {
+    private List<ArModel> getEnglishAlphabets() {
         List<ArModel> arModels = new ArrayList<>();
         arModels.add(new ArModel(
                 0, mContext.getResources().getString(R.string.capital_a),
                 R.drawable.capital_a, "models/alphabets/capital_a.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_ENGLISH, (2 * 1000), (3 * 1000))
+                new Voice(Voice.VOICE_ALPHABETS_ENGLISH, 1300, 2400)
                         .setExtraStart(2 * 1000).setExtraEnd(4 * 1000),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
@@ -759,7 +759,7 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 1, mContext.getResources().getString(R.string.capital_b),
                 R.drawable.capital_b, "models/alphabets/capital_b.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_ENGLISH, (5 * 1000), (5 * 1000) + 500)
+                new Voice(Voice.VOICE_ALPHABETS_ENGLISH, (3 * 1000), (4 * 1000) + 300)
                         .setExtraStart(5 * 1000).setExtraEnd((6 * 1000) + 500),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
@@ -771,7 +771,7 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 2, mContext.getResources().getString(R.string.capital_c),
                 R.drawable.capital_c, "models/alphabets/capital_c.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_ENGLISH, (8 * 1000), (8 * 1000) + 500)
+                new Voice(Voice.VOICE_ALPHABETS_ENGLISH, (5 * 1000) + 300, (6 * 1000) + 500)
                         .setExtraStart(8 * 1000).setExtraEnd((9 * 1000) + 200),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
@@ -783,7 +783,7 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 3, mContext.getResources().getString(R.string.capital_d),
                 R.drawable.capital_d, "models/alphabets/capital_d.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_ENGLISH, (10 * 1000) + 500, (10 * 1000) + 1000)
+                new Voice(Voice.VOICE_ALPHABETS_ENGLISH, (7 * 1000) + 500, (8 * 1000) + 600)
                         .setExtraStart((10 * 1000) + 500).setExtraEnd((12 * 1000)),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
@@ -795,7 +795,7 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 4, mContext.getResources().getString(R.string.capital_e),
                 R.drawable.capital_e, "models/alphabets/capital_e.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_ENGLISH, (13 * 1000), (13 * 1000) + 500)
+                new Voice(Voice.VOICE_ALPHABETS_ENGLISH, (9 * 1000) + 600, (10 * 1000) + 800)
                         .setExtraStart(13 * 1000).setExtraEnd((14 * 1000) + 800),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
@@ -807,8 +807,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 5, mContext.getResources().getString(R.string.capital_f),
                 R.drawable.capital_f, "models/alphabets/capital_f.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_ENGLISH, (16 * 1000), (16 * 1000) + 500)
-                        .setExtraStart(16 * 1000).setExtraEnd(18 * 1000),
+                new Voice(Voice.VOICE_ALPHABETS_ENGLISH, (11 * 1000) + 300, (12 * 1000) + 500)
+                        .setExtraStart(16 * 1000).setExtraEnd((17 * 1000) + 700),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
                         mContext.getResources().getString(R.string.alphabet_english)
@@ -819,7 +819,7 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 6, mContext.getResources().getString(R.string.capital_g),
                 R.drawable.capital_g, "models/alphabets/capital_g.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_ENGLISH, (19 * 1000), (19 * 1000) + 500)
+                new Voice(Voice.VOICE_ALPHABETS_ENGLISH, (14 * 1000) + 200, (15 * 1000) + 500)
                         .setExtraStart(19 * 1000).setExtraEnd(21 * 1000),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
@@ -831,7 +831,7 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 7, mContext.getResources().getString(R.string.capital_h),
                 R.drawable.capital_h, "models/alphabets/capital_h.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_ENGLISH, (22 * 1000), (22 * 1000) + 500)
+                new Voice(Voice.VOICE_ALPHABETS_ENGLISH, (17 * 1000) + 200, (18 * 1000) + 300)
                         .setExtraStart(22 * 1000).setExtraEnd((23 * 1000) + 500),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
@@ -843,8 +843,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 8, mContext.getResources().getString(R.string.capital_i),
                 R.drawable.capital_i, "models/alphabets/capital_i.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_ENGLISH, (25 * 1000), (25 * 1000) + 500)
-                        .setExtraStart(25 * 1000).setExtraEnd((26 * 1000) + 500),
+                new Voice(Voice.VOICE_ALPHABETS_ENGLISH, (19 * 1000) + 300, (20 * 1000) + 900)
+                        .setExtraStart(25 * 1000).setExtraEnd((26 * 1000) + 400),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
                         mContext.getResources().getString(R.string.alphabet_english)
@@ -855,7 +855,7 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 9, mContext.getResources().getString(R.string.capital_j),
                 R.drawable.capital_j, "models/alphabets/capital_j.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_ENGLISH, (27 * 1000), (27 * 1000) + 500)
+                new Voice(Voice.VOICE_ALPHABETS_ENGLISH, (22 * 1000) + 300, (23 * 1000) + 500)
                         .setExtraStart(27 * 1000).setExtraEnd(29 * 1000),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
@@ -867,7 +867,7 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 10, mContext.getResources().getString(R.string.capital_k),
                 R.drawable.capital_k, "models/alphabets/capital_k.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_ENGLISH, (30 * 1000), (30 * 1000) + 500)
+                new Voice(Voice.VOICE_ALPHABETS_ENGLISH, (25 * 1000) + 300, (26 * 1000) + 500)
                         .setExtraStart(30 * 1000).setExtraEnd((31 * 1000) + 500),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
@@ -879,7 +879,7 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 11, mContext.getResources().getString(R.string.capital_l),
                 R.drawable.capital_l, "models/alphabets/capital_l.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_ENGLISH, (33 * 1000), (33 * 1000) + 500)
+                new Voice(Voice.VOICE_ALPHABETS_ENGLISH, (28 * 1000) + 200, (29 * 1000) + 100)
                         .setExtraStart(33 * 1000).setExtraEnd((34 * 1000) + 500),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
@@ -891,8 +891,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 12, mContext.getResources().getString(R.string.capital_m),
                 R.drawable.capital_m, "models/alphabets/capital_m.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_ENGLISH, (36 * 1000), (36 * 1000) + 500)
-                        .setExtraStart(36 * 1000).setExtraEnd(38 * 1000),
+                new Voice(Voice.VOICE_ALPHABETS_ENGLISH, (30 * 1000) + 500, (31 * 1000) + 900)
+                        .setExtraStart(36 * 1000).setExtraEnd((37 * 1000) + 500),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
                         mContext.getResources().getString(R.string.alphabet_english)
@@ -903,7 +903,7 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 13, mContext.getResources().getString(R.string.capital_n),
                 R.drawable.capital_n, "models/alphabets/capital_n.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_ENGLISH, (39 * 1000), (39 * 1000) + 500)
+                new Voice(Voice.VOICE_ALPHABETS_ENGLISH, (33 * 1000) + 200, (34 * 1000) + 300)
                         .setExtraStart(39 * 1000).setExtraEnd((40 * 1000) + 400),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
@@ -915,7 +915,7 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 14, mContext.getResources().getString(R.string.capital_o),
                 R.drawable.capital_o, "models/alphabets/capital_o.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_ENGLISH, (41 * 1000), (41 * 1000) + 500)
+                new Voice(Voice.VOICE_ALPHABETS_ENGLISH, (36 * 1000), (37 * 1000) + 100)
                         .setExtraStart((41 * 1000) + 500).setExtraEnd((43 * 1000) + 200),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
@@ -927,7 +927,7 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 15, mContext.getResources().getString(R.string.capital_p),
                 R.drawable.capital_p, "models/alphabets/capital_p.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_ENGLISH, (44 * 1000), (44 * 1000) + 500)
+                new Voice(Voice.VOICE_ALPHABETS_ENGLISH, (38 * 1000) + 800, (39 * 1000) + 700)
                         .setExtraStart(44 * 1000).setExtraEnd((45 * 1000) + 500),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
@@ -939,7 +939,7 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 16, mContext.getResources().getString(R.string.capital_q),
                 R.drawable.capital_q, "models/alphabets/capital_q.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_ENGLISH, (47 * 1000), (47 * 1000) + 500)
+                new Voice(Voice.VOICE_ALPHABETS_ENGLISH, (41 * 1000) + 500, (42 * 1000) + 900)
                         .setExtraStart(47 * 1000).setExtraEnd((48 * 1000) + 500),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
@@ -951,8 +951,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 17, mContext.getResources().getString(R.string.capital_r),
                 R.drawable.capital_r, "models/alphabets/capital_r.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_ENGLISH, (50 * 1000), (50 * 1000) + 500)
-                        .setExtraStart(50 * 1000).setExtraEnd(52 * 1000),
+                new Voice(Voice.VOICE_ALPHABETS_ENGLISH, (44 * 1000) + 800, (45 * 1000) + 900)
+                        .setExtraStart(50 * 1000).setExtraEnd((51 * 1000) + 500),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
                         mContext.getResources().getString(R.string.alphabet_english)
@@ -963,8 +963,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 18, mContext.getResources().getString(R.string.capital_s),
                 R.drawable.capital_s, "models/alphabets/capital_s.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_ENGLISH, (53 * 1000), (53 * 1000) + 500)
-                        .setExtraStart(53 * 1000).setExtraEnd(55 * 1000),
+                new Voice(Voice.VOICE_ALPHABETS_ENGLISH, (48 * 1000), (49 * 1000) + 200)
+                        .setExtraStart(53 * 1000).setExtraEnd((54 * 1000) + 500),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
                         mContext.getResources().getString(R.string.alphabet_english)
@@ -975,8 +975,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 19, mContext.getResources().getString(R.string.capital_t),
                 R.drawable.capital_t, "models/alphabets/capital_t.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_ENGLISH, (55 * 1000), (55 * 1000) + 500)
-                        .setExtraStart((55 * 1000) + 500).setExtraEnd((57 * 1000) + 500),
+                new Voice(Voice.VOICE_ALPHABETS_ENGLISH, (51 * 1000), (52 * 1000) + 500)
+                        .setExtraStart((55 * 1000) + 500).setExtraEnd((57 * 1000) + 400),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
                         mContext.getResources().getString(R.string.alphabet_english)
@@ -987,7 +987,7 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 20, mContext.getResources().getString(R.string.capital_u),
                 R.drawable.capital_u, "models/alphabets/capital_u.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_ENGLISH, (58 * 1000), (58 * 1000) + 500)
+                new Voice(Voice.VOICE_ALPHABETS_ENGLISH, (54 * 1000), (55 * 1000) + 300)
                         .setExtraStart(58 * 1000).setExtraEnd((59 * 1000) + 500),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
@@ -999,7 +999,7 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 21, mContext.getResources().getString(R.string.capital_v),
                 R.drawable.capital_v, "models/alphabets/capital_v.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_ENGLISH, ((60 * 1000) + 500), (60 + 1) * 1000)
+                new Voice(Voice.VOICE_ALPHABETS_ENGLISH, (56 * 1000) + 500, (57 * 1000) + 800)
                         .setExtraStart((60 * 1000) + 500).setExtraEnd(((60 + 2) * 1000) + 200),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
@@ -1011,7 +1011,7 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 22, mContext.getResources().getString(R.string.capital_w),
                 R.drawable.capital_w, "models/alphabets/capital_w.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_ENGLISH, ((60 + 4) * 1000), ((60 + 4) * 1000) + 300)
+                new Voice(Voice.VOICE_ALPHABETS_ENGLISH, (61 * 1000), (62  * 1000) + 300)
                         .setExtraStart((60 + 4) * 1000).setExtraEnd(((60 + 5) * 1000) + 500),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
@@ -1023,8 +1023,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 23, mContext.getResources().getString(R.string.capital_x),
                 R.drawable.capital_x, "models/alphabets/capital_x.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_ENGLISH, ((60 + 7) * 1000), ((60 + 7) * 1000) + 500)
-                        .setExtraStart((60 + 7) * 1000).setExtraEnd((60 + 9) * 1000),
+                new Voice(Voice.VOICE_ALPHABETS_ENGLISH, (63 * 1000) + 700, (64 * 1000) + 700)
+                        .setExtraStart((60 + 7) * 1000).setExtraEnd(((60 + 8) * 1000) + 500),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
                         mContext.getResources().getString(R.string.alphabet_english)
@@ -1035,8 +1035,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 24, mContext.getResources().getString(R.string.capital_y),
                 R.drawable.capital_y, "models/alphabets/capital_y.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_ENGLISH, ((60 + 10) * 1000), ((60 + 10) * 1000) + 500)
-                        .setExtraStart((60 + 10) * 1000).setExtraEnd((60 + 12) * 1000),
+                new Voice(Voice.VOICE_ALPHABETS_ENGLISH, (67 * 1000), (68 * 1000) + 500)
+                        .setExtraStart((60 + 10) * 1000).setExtraEnd(((60 + 11) * 1000) + 700),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
                         mContext.getResources().getString(R.string.alphabet_english)
@@ -1047,8 +1047,8 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 25, mContext.getResources().getString(R.string.capital_z),
                 R.drawable.capital_z, "models/alphabets/capital_z.sfb",
-                new Voice(Voice.VOICE_ALPHABETS_ENGLISH, ((60 + 13) * 1000), ((60 + 13) * 1000) + 500)
-                        .setExtraStart((60 + 13) * 1000).setExtraEnd((60 + 15) * 1000),
+                new Voice(Voice.VOICE_ALPHABETS_ENGLISH, (69 * 1000), (70 * 1000) + 800)
+                        .setExtraStart((60 + 13) * 1000).setExtraEnd(((60 + 14) * 1000) + 700),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
                         mContext.getResources().getString(R.string.alphabet_english)
@@ -1063,12 +1063,12 @@ public class ArViewModel extends AndroidViewModel {
     /**
      * @return The {@link List} of english number of {@link ArModel}.
      */
-    public List<ArModel> getEnglishNumbers() {
+    private List<ArModel> getEnglishNumbers() {
         List<ArModel> arModels = new ArrayList<>();
         arModels.add(new ArModel(
                 0, mContext.getResources().getString(R.string.number_one),
                 R.drawable.number_1, "models/numbers/number_1.sfb",
-                new Voice(Voice.VOICE_NUMBERS_ENGLISH, 600, 1800),
+                new Voice(Voice.VOICE_NUMBERS_ENGLISH, 700, 1900),
                 new Category(
                         Category.CATEGORY_NUMBER_ENGLISH,
                         mContext.getResources().getString(R.string.number_english)
@@ -1086,7 +1086,7 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 2, mContext.getResources().getString(R.string.number_three),
                 R.drawable.number_3, "models/numbers/number_3.sfb",
-                new Voice(Voice.VOICE_NUMBERS_ENGLISH, 4 * 1000, (5 * 1000) + 700),
+                new Voice(Voice.VOICE_NUMBERS_ENGLISH, (4 * 1000) + 400, (5 * 1000) + 900),
                 new Category(
                         Category.CATEGORY_NUMBER_ENGLISH,
                         mContext.getResources().getString(R.string.number_english)
@@ -1095,7 +1095,7 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 3, mContext.getResources().getString(R.string.number_four),
                 R.drawable.number_4, "models/numbers/number_4.sfb",
-                new Voice(Voice.VOICE_NUMBERS_ENGLISH, (6 * 1000) + 600, 8 * 1000),
+                new Voice(Voice.VOICE_NUMBERS_ENGLISH, (6 * 1000) + 600, (8 * 1000) + 200),
                 new Category(
                         Category.CATEGORY_NUMBER_ENGLISH,
                         mContext.getResources().getString(R.string.number_english)
@@ -1113,7 +1113,7 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 5, mContext.getResources().getString(R.string.number_six),
                 R.drawable.number_6, "models/numbers/number_6.sfb",
-                new Voice(Voice.VOICE_NUMBERS_ENGLISH, 12 * 1000, (13 * 1000) + 500),
+                new Voice(Voice.VOICE_NUMBERS_ENGLISH, 12 * 1000, 13 * 1000),
                 new Category(
                         Category.CATEGORY_NUMBER_ENGLISH,
                         mContext.getResources().getString(R.string.number_english)
@@ -1122,7 +1122,7 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 6, mContext.getResources().getString(R.string.number_seven),
                 R.drawable.number_7, "models/numbers/number_7.sfb",
-                new Voice(Voice.VOICE_NUMBERS_ENGLISH, 14 * 1000, (16 * 1000) + 500),
+                new Voice(Voice.VOICE_NUMBERS_ENGLISH, 14 * 1000, 15 * 1000),
                 new Category(
                         Category.CATEGORY_NUMBER_ENGLISH,
                         mContext.getResources().getString(R.string.number_english)
@@ -1131,7 +1131,7 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 7, mContext.getResources().getString(R.string.number_eight),
                 R.drawable.number_8, "models/numbers/number_8.sfb",
-                new Voice(Voice.VOICE_NUMBERS_ENGLISH, (16 * 1000) + 200, (17 * 1000) + 200),
+                new Voice(Voice.VOICE_NUMBERS_ENGLISH, (16 * 1000) + 500, (17 * 1000) + 200),
                 new Category(
                         Category.CATEGORY_NUMBER_ENGLISH,
                         mContext.getResources().getString(R.string.number_english)
@@ -1140,7 +1140,7 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 8, mContext.getResources().getString(R.string.number_nine),
                 R.drawable.number_9, "models/numbers/number_9.sfb",
-                new Voice(Voice.VOICE_NUMBERS_ENGLISH, (18 * 1000) + 400, 20 * 1000),
+                new Voice(Voice.VOICE_NUMBERS_ENGLISH, (18 * 1000) + 400, (19 * 1000) + 700),
                 new Category(
                         Category.CATEGORY_NUMBER_ENGLISH,
                         mContext.getResources().getString(R.string.number_english)
@@ -1153,12 +1153,12 @@ public class ArViewModel extends AndroidViewModel {
     /**
      * @return The {@link List} of english animal of {@link ArModel}.
      */
-    public List<ArModel> getAnimals() {
+    private List<ArModel> getAnimals() {
         List<ArModel> arModels = new ArrayList<>();
         arModels.add(new ArModel(
                 0, mContext.getResources().getString(R.string.bear),
                 R.drawable.animal_bear, "models/animals/bear.sfb",
-                new Voice(Voice.VOICE_ANIMALS_ENGLISH, 500, 2 * 1000),
+                new Voice(Voice.VOICE_ANIMALS_ENGLISH, 500, 1800),
                 new Category(
                         Category.CATEGORY_ANIMAL_ENGLISH,
                         mContext.getResources().getString(R.string.animal_english)
@@ -1194,7 +1194,7 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 4, mContext.getResources().getString(R.string.dog),
                 R.drawable.animal_dog, "models/animals/dog.sfb",
-                new Voice(Voice.VOICE_ANIMALS_ENGLISH, 9 * 1000, 10 * 1000),
+                new Voice(Voice.VOICE_ANIMALS_ENGLISH, 9 * 1000, (9 * 1000) + 900),
                 new Category(
                         Category.CATEGORY_ANIMAL_ENGLISH,
                         mContext.getResources().getString(R.string.animal_english)
@@ -1203,7 +1203,7 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 5, mContext.getResources().getString(R.string.elephant),
                 R.drawable.animal_elephant, "models/animals/elephant.sfb",
-                new Voice(Voice.VOICE_ANIMALS_ENGLISH, 11 * 1000, 12 * 1000),
+                new Voice(Voice.VOICE_ANIMALS_ENGLISH, 11 * 1000, (11 * 1000) + 900),
                 new Category(
                         Category.CATEGORY_ANIMAL_ENGLISH,
                         mContext.getResources().getString(R.string.animal_english)
@@ -1212,7 +1212,7 @@ public class ArViewModel extends AndroidViewModel {
         arModels.add(new ArModel(
                 6, mContext.getResources().getString(R.string.hippopotamus),
                 R.drawable.animal_hippopotamus, "models/animals/hippopotamus.sfb",
-                new Voice(Voice.VOICE_ANIMALS_ENGLISH, 13 * 1000, (14 * 1000) + 500),
+                new Voice(Voice.VOICE_ANIMALS_ENGLISH, 13 * 1000, (14 * 1000) + 400),
                 new Category(
                         Category.CATEGORY_ANIMAL_ENGLISH,
                         mContext.getResources().getString(R.string.animal_english)
