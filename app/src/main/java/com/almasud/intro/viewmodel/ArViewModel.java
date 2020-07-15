@@ -601,7 +601,7 @@ public class ArViewModel extends AndroidViewModel {
                 35, mContext.getResources().getString(R.string.bn_alphabet_36),
                 R.drawable.bn_alphabet_36, "models/alphabets_bengali/bn_alphabet_36.sfb",
                 new Voice(Voice.VOICE_ALPHABETS_BENGALI, 75 * 1000, (76 * 1000) + 500)
-                        .setExtraStart(100 * 1000).setExtraEnd((103 * 1000) + 500),
+                        .setExtraStart(100 * 1000).setExtraEnd((101 * 1000) + 500),
                 new Category(
                         Category.CATEGORY_ALPHABET_ENGLISH,
                         mContext.getResources().getString(R.string.alphabet_bengali)
