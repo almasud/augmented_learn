@@ -200,7 +200,7 @@ public class ArComponent {
                         nameTransformableNode.setLocalPosition(
                                 new Vector3(
                                         transformableNode.getLocalPosition().x,
-                                        transformableNode.getLocalPosition().y + 0.85f,
+                                        transformableNode.getLocalPosition().y + 0.80f,
                                         transformableNode.getLocalPosition().z
                                 ));
                         // Set the parent after setting all local custom value

@@ -60,9 +60,12 @@ public class BaseApplication extends Application implements LifecycleObserver {
     public static final String DIRECTORY_ALPHABETS_ENGLISH = "alphabets";
     public static final String DIRECTORY_NUMBERS_ENGLISH = "numbers";
     public static final String DIRECTORY_ANIMALS_ENGLISH = "animals";
-    public static final String DOWNLOAD_URL_ALPHABETS_ENGLISH = "http://almasud.000webhostapp.com/alphabets.zip";
-    public static final String DOWNLOAD_URL_NUMBERS_ENGLISH = "http://almasud.000webhostapp.com/numbers.zip";
-    public static final String DOWNLOAD_URL_ANIMALS_ENGLISH = "http://almasud.000webhostapp.com/animals.zip";
+    public static final String DOWNLOAD_URL_VOWELS_BENGALI = "http://almasud.000webhostapp.com/download/vowels_bengali.zip";
+    public static final String DOWNLOAD_URL_ALPHABETS_BENGALI = "http://almasud.000webhostapp.com/download/alphabets_bengali.zip";
+    public static final String DOWNLOAD_URL_NUMBERS_BENGALI = "http://almasud.000webhostapp.com/download/numbers_bengali.zip";
+    public static final String DOWNLOAD_URL_ALPHABETS_ENGLISH = "http://almasud.000webhostapp.com/download/alphabets.zip";
+    public static final String DOWNLOAD_URL_NUMBERS_ENGLISH = "http://almasud.000webhostapp.com/download/numbers.zip";
+    public static final String DOWNLOAD_URL_ANIMALS_ENGLISH = "http://almasud.000webhostapp.com/download/animals.zip";
 
     private static final double MIN_OPEN_GL_VERSION = 3.0;
     public static final String NOTIFICATION_CHANNEL_DOWNLOADER = "Downloader_Channel";
