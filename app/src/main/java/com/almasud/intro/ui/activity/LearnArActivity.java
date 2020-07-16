@@ -13,7 +13,7 @@ import com.almasud.intro.BaseApplication;
 import com.almasud.intro.R;
 import com.almasud.intro.databinding.ActivityLearnArBinding;
 import com.almasud.intro.model.entity.ArModel;
-import com.almasud.intro.model.entity.Category;
+import com.almasud.intro.model.entity.Subject;
 import com.almasud.intro.model.util.EventMessage;
 import com.almasud.intro.model.util.ModelUtils;
 import com.almasud.intro.ui.adapter.LearnRVAdapter;
@@ -40,7 +40,7 @@ public class LearnArActivity extends AppCompatActivity {
     private ArFragment mArFragment;
     private LearnRVAdapter mRVAdapter;
     private List<ArModel> mArModels;
-    private int mModelCategory;
+    private static int sModelSubject;
     private int mSelectedItem;
     private List<CompletableFuture<ModelRenderable>> mCompletableFutureModels = new ArrayList<>();
 
@@ -56,7 +56,7 @@ public class LearnArActivity extends AppCompatActivity {
             // Get the list of ArModel.
             mArModels = (List<ArModel>) bundle.getSerializable(ArModel.LIST_ITEM);
             // Get the category of ArModel
-            mModelCategory = bundle.getInt(BaseApplication.MODEL_CATEGORY);
+            sModelSubject = bundle.getInt(ArModel.SUBJECT);
             // Get the selected item of ArModel.
             mSelectedItem = bundle.getInt(ArModel.SELECTED_ITEM);
         }
@@ -67,7 +67,7 @@ public class LearnArActivity extends AppCompatActivity {
         // Set a subtitle of the actionbar
         getSupportActionBar().setSubtitle(new StringBuilder(
                 getResources().getString(R.string.real_view)).append(" | ")
-                .append(ModelUtils.getArModelCategoryName(this, mModelCategory))
+                .append(ModelUtils.getArModelCategoryName(this, sModelSubject))
         );
 
         // Initialize the RV adapter
@@ -96,12 +96,12 @@ public class LearnArActivity extends AppCompatActivity {
             // Set the selected ModelRenderable into TransformableModel
             try {
                 // Set the initial scale of model.
-                float modelLocalScale = (mModelCategory == Category.CATEGORY_ALPHABET_BENGALI
-                        || mModelCategory == Category.CATEGORY_ALPHABET_ENGLISH)? 0.3f
-                        : (mModelCategory == Category.CATEGORY_VOWEL_BENGALI
-                        || mModelCategory == Category.CATEGORY_NUMBER_BENGALI
-                        || mModelCategory == Category.CATEGORY_NUMBER_ENGLISH)? 0.25f
-                        : (mModelCategory == Category.CATEGORY_ANIMAL_ENGLISH)? 15.0f: 1.0f;
+                float modelLocalScale = (sModelSubject == Subject.SUBJECT_ALPHABET_BENGALI
+                        || sModelSubject == Subject.SUBJECT_ALPHABET_ENGLISH)? 0.3f
+                        : (sModelSubject == Subject.SUBJECT_VOWEL_BENGALI
+                        || sModelSubject == Subject.SUBJECT_NUMBER_BENGALI
+                        || sModelSubject == Subject.SUBJECT_NUMBER_ENGLISH)? 0.25f
+                        : (sModelSubject == Subject.SUBJECT_ANIMAL_ENGLISH)? 15.0f: 1.0f;
 
                 // Set the transformable model.
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {

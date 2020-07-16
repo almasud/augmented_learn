@@ -14,7 +14,7 @@ import com.almasud.intro.BaseApplication;
 import com.almasud.intro.R;
 import com.almasud.intro.databinding.ActivityScanBinding;
 import com.almasud.intro.model.entity.ArModel;
-import com.almasud.intro.model.entity.Category;
+import com.almasud.intro.model.entity.Subject;
 import com.almasud.intro.model.util.EventMessage;
 import com.almasud.intro.model.util.ModelUtils;
 import com.almasud.intro.ui.fragment.ScanArFragment;
@@ -50,7 +50,7 @@ public class ScanActivity extends AppCompatActivity {
     // image in the database.
     private final Map<AugmentedImage, AnchorNode> mAugmentedImageMap = new HashMap<>();
     private List<ArModel> mArModels = new ArrayList<>();
-    private static int sModelCategory;
+    private static int sModelSubject;
     private List<CompletableFuture<ModelRenderable>> mCompletableFutureModels = new ArrayList<>();
 
     @Override
@@ -63,7 +63,7 @@ public class ScanActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getBundleExtra(BaseApplication.BUNDLE);
         if (bundle != null) {
             // Get the category of ArModel
-            sModelCategory = bundle.getInt(BaseApplication.MODEL_CATEGORY);
+            sModelSubject = bundle.getInt(ArModel.SUBJECT);
         }
 
         // Set toolbar as an actionbar
@@ -72,11 +72,11 @@ public class ScanActivity extends AppCompatActivity {
         // Set a subtitle of the actionbar
         getSupportActionBar().setSubtitle(new StringBuilder(
                 getResources().getString(R.string.real_view)).append(" | ")
-                .append(ModelUtils.getArModelCategoryName(this, sModelCategory))
+                .append(ModelUtils.getArModelCategoryName(this, sModelSubject))
         );
 
         // Set the augmented image database
-        ScanArFragment.setImageDatabase(sModelCategory);
+        ScanArFragment.setImageDatabase(sModelSubject);
 
         mScanArFragment = (ScanArFragment) getSupportFragmentManager().findFragmentById(R.id.ArFragmentScan);
         mScanArFragment.getArSceneView().getScene().addOnUpdateListener(this::onUpdateFrame);
@@ -84,7 +84,7 @@ public class ScanActivity extends AppCompatActivity {
         // Get an instance of ARViewModel
         ArViewModel arViewModel = new ViewModelProvider(this).get(ArViewModel.class);
         // Get the list of live data of ArModel from ArViewModel
-        LiveData<List<ArModel>> arModelListLiveData = arViewModel.getArModelLivedData(sModelCategory);
+        LiveData<List<ArModel>> arModelListLiveData = arViewModel.getArModelLivedData(sModelSubject);
         // Observe the list of ArModel from ArViewModel
         arModelListLiveData.observe(this, arModels -> {
             // Set the value of mARModels (list of ARModel)
@@ -151,12 +151,12 @@ public class ScanActivity extends AppCompatActivity {
                         // Set the detected ModelRenderable into TransformableModel
                         try {
                             // Set the initial scale of model
-                            float modelLocalScale = (sModelCategory == Category.CATEGORY_ALPHABET_BENGALI
-                                    || sModelCategory == Category.CATEGORY_ALPHABET_ENGLISH)? 0.3f
-                                    : (sModelCategory == Category.CATEGORY_VOWEL_BENGALI
-                                    || sModelCategory == Category.CATEGORY_NUMBER_BENGALI
-                                    || sModelCategory == Category.CATEGORY_NUMBER_ENGLISH)? 0.25f
-                                    : (sModelCategory == Category.CATEGORY_ANIMAL_ENGLISH)? 15.0f: 1.0f;
+                            float modelLocalScale = (sModelSubject == Subject.SUBJECT_ALPHABET_BENGALI
+                                    || sModelSubject == Subject.SUBJECT_ALPHABET_ENGLISH)? 0.3f
+                                    : (sModelSubject == Subject.SUBJECT_VOWEL_BENGALI
+                                    || sModelSubject == Subject.SUBJECT_NUMBER_BENGALI
+                                    || sModelSubject == Subject.SUBJECT_NUMBER_ENGLISH)? 0.25f
+                                    : (sModelSubject == Subject.SUBJECT_ANIMAL_ENGLISH)? 15.0f: 1.0f;
 
                             // Set the transformable model
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {

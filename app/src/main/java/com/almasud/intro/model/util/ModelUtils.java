@@ -4,7 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.almasud.intro.R;
-import com.almasud.intro.model.entity.Category;
+import com.almasud.intro.model.entity.Subject;
 
 /**
  * An utility class for model classes.
@@ -15,22 +15,22 @@ public final class ModelUtils {
 
     /**
      * @param context The context of {@link Application}.
-     * @param categoryId The ID of {@link Category}.
-     * @return A {@link String} of {@link Category} name.
+     * @param categoryId The ID of {@link Subject}.
+     * @return A {@link String} of {@link Subject} name.
      */
     public static String getArModelCategoryName(Context context, int categoryId) {
         switch (categoryId) {
-            case Category.CATEGORY_VOWEL_BENGALI:
+            case Subject.SUBJECT_VOWEL_BENGALI:
                 return context.getResources().getString(R.string.vowel_bengali);
-            case Category.CATEGORY_ALPHABET_BENGALI:
+            case Subject.SUBJECT_ALPHABET_BENGALI:
                 return context.getResources().getString(R.string.alphabet_bengali);
-            case Category.CATEGORY_NUMBER_BENGALI:
+            case Subject.SUBJECT_NUMBER_BENGALI:
                 return context.getResources().getString(R.string.number_bengali);
-            case Category.CATEGORY_ALPHABET_ENGLISH:
+            case Subject.SUBJECT_ALPHABET_ENGLISH:
                 return context.getResources().getString(R.string.alphabet_english);
-            case Category.CATEGORY_NUMBER_ENGLISH:
+            case Subject.SUBJECT_NUMBER_ENGLISH:
                 return context.getResources().getString(R.string.number_english);
-            case Category.CATEGORY_ANIMAL_ENGLISH:
+            case Subject.SUBJECT_ANIMAL_ENGLISH:
                 return context.getResources().getString(R.string.animal_english);
         }
         return null;

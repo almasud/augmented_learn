@@ -72,21 +72,21 @@ public class HomeActivity extends AppCompatActivity {
                             bundle.putString(BaseApplication.SERVICE_NAME, BaseApplication.SERVICE_LEARN);
                             BaseApplication.getInstance()
                                     .startNewActivity(HomeActivity.this,
-                                            ServiceChooseActivity.class, bundle
+                                            SubjectChooseActivity.class, bundle
                                     );
                             break;
                         case R.id.wrapperTest:
                             bundle.putString(BaseApplication.SERVICE_NAME, BaseApplication.SERVICE_TEST);
                             BaseApplication.getInstance()
                                     .startNewActivity(HomeActivity.this,
-                                            ServiceChooseActivity.class, bundle
+                                            SubjectChooseActivity.class, bundle
                                     );
                             break;
                         case R.id.wrapperScan:
                             bundle.putString(BaseApplication.SERVICE_NAME, BaseApplication.SERVICE_SCAN);
                             BaseApplication.getInstance()
                                     .startNewActivity(HomeActivity.this,
-                                            ServiceChooseActivity.class, bundle
+                                            SubjectChooseActivity.class, bundle
                                     );
                             break;
                     }

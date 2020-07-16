@@ -14,24 +14,25 @@ import java.io.Serializable;
 public class ArModel implements Serializable {
     public static final String LIST_ITEM = "List_Item";
     public static final String SELECTED_ITEM = "Selected_Item";
+    public static final String SUBJECT = "Subject";
     private int id;
     private String name;
     private int photo;
     private String modelPath;
     private Voice voice;
-    private Category category;
+    private Subject subject;
     private String extraName;
     private int extraPhoto;
 
     public ArModel(
             int id, String name, int photo, String modelPath,
-            Voice voice, Category category) {
+            Voice voice, Subject subject) {
         this.id = id;
         this.name = name;
         this.photo = photo;
         this.modelPath = modelPath;
         this.voice = voice;
-        this.category = category;
+        this.subject = subject;
     }
 
     /**
@@ -70,10 +71,10 @@ public class ArModel implements Serializable {
     }
 
     /**
-     * @return The {@link Category} of {@link ArModel}.
+     * @return The {@link Subject} of {@link ArModel}.
      */
-    public Category getCategory() {
-        return category;
+    public Subject getSubject() {
+        return subject;
     }
 
     /**

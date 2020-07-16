@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import androidx.annotation.Nullable;
 
 import com.almasud.intro.model.entity.ArModel;
-import com.almasud.intro.model.entity.Category;
+import com.almasud.intro.model.entity.Subject;
 import com.almasud.intro.ui.util.SnackbarHelper;
 import com.google.ar.core.AugmentedImageDatabase;
 import com.google.ar.core.Config;
@@ -91,22 +91,22 @@ public class ScanArFragment extends ArFragment {
    */
   public static void setImageDatabase(int modelType) {
     switch (modelType) {
-      case Category.CATEGORY_VOWEL_BENGALI:
+      case Subject.SUBJECT_VOWEL_BENGALI:
         sImageDbPath = "vowels_bengali.imgdb";
         break;
-      case Category.CATEGORY_ALPHABET_BENGALI:
+      case Subject.SUBJECT_ALPHABET_BENGALI:
         sImageDbPath = "alphabets_bengali.imgdb";
         break;
-      case Category.CATEGORY_NUMBER_BENGALI:
+      case Subject.SUBJECT_NUMBER_BENGALI:
         sImageDbPath = "numbers_bengali.imgdb";
         break;
-      case Category.CATEGORY_ALPHABET_ENGLISH:
+      case Subject.SUBJECT_ALPHABET_ENGLISH:
         sImageDbPath = "alphabets.imgdb";
         break;
-      case Category.CATEGORY_NUMBER_ENGLISH:
+      case Subject.SUBJECT_NUMBER_ENGLISH:
         sImageDbPath = "numbers.imgdb";
         break;
-      case Category.CATEGORY_ANIMAL_ENGLISH:
+      case Subject.SUBJECT_ANIMAL_ENGLISH:
         sImageDbPath = "animals.imgdb";
         break;
     }

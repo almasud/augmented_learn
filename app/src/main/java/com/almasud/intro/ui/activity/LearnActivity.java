@@ -30,11 +30,10 @@ import java.util.List;
 import io.reactivex.Completable;
 
 public class LearnActivity extends AppCompatActivity {
-    private static final String TAG = LearnActivity.class.getSimpleName();
     private ActivityLearnBinding mViewBinding;
     private LearnFSAdapter mPagerAdapter;
     private List<ArModel> mArModels = new ArrayList<>();
-    private static int sModelCategory;
+    private static int sModelSubject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +45,7 @@ public class LearnActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getBundleExtra(BaseApplication.BUNDLE);
         if (bundle != null) {
             // Get the category of ArModel
-            sModelCategory = bundle.getInt(BaseApplication.MODEL_CATEGORY);
+            sModelSubject = bundle.getInt(ArModel.SUBJECT);
         }
 
         // Set toolbar as an actionbar
@@ -55,7 +54,7 @@ public class LearnActivity extends AppCompatActivity {
         // Set a subtitle of the actionbar
         getSupportActionBar().setSubtitle(new StringBuilder(
                 getResources().getString(R.string.learn)).append(" | ")
-                .append(ModelUtils.getArModelCategoryName(this, sModelCategory))
+                .append(ModelUtils.getArModelCategoryName(this, sModelSubject))
         );
 
         // Initialize the adapter
@@ -66,7 +65,7 @@ public class LearnActivity extends AppCompatActivity {
         // Get an instance of ARViewModel
         ArViewModel arViewModel = new ViewModelProvider(this).get(ArViewModel.class);
         // Get the list of live data of ArModel from ArViewModel
-        LiveData<List<ArModel>> arModelListLiveData = arViewModel.getArModelLivedData(sModelCategory);
+        LiveData<List<ArModel>> arModelListLiveData = arViewModel.getArModelLivedData(sModelSubject);
         // Observe the list of ARModel from ARViewModel
         arModelListLiveData.observe(this, arModels -> {
             // Set the value of mARModels (list of ARModel)
@@ -151,7 +150,7 @@ public class LearnActivity extends AppCompatActivity {
                     bundle.putSerializable(ArModel.LIST_ITEM, (Serializable) mArModels);
                     // Specify the model category to determine what category should be
                     // rendered in the real view.
-                    bundle.putInt(BaseApplication.MODEL_CATEGORY, sModelCategory);
+                    bundle.putInt(ArModel.SUBJECT, sModelSubject);
                     bundle.putInt(ArModel.SELECTED_ITEM, selectedItem);
                     BaseApplication.getInstance()
                             .startNewActivity(

@@ -52,7 +52,6 @@ public class BaseApplication extends Application implements LifecycleObserver {
     public static final int LEARN = 0;
     public static final int TEST = 1;
     public static final int SCAN = 2;
-    public static final String MODEL_CATEGORY = "Model_Category";
     public static final String DIRECTORY_MODELS = "models";
     public static final String DIRECTORY_VOWELS_BENGALI = "vowels_bengali_with_extra";
     public static final String DIRECTORY_ALPHABETS_BENGALI = "alphabets_bengali_with_extra";

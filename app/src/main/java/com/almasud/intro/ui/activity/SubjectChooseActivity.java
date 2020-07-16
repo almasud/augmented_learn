@@ -12,7 +12,8 @@ import androidx.appcompat.widget.Toolbar;
 import com.almasud.intro.BaseApplication;
 import com.almasud.intro.R;
 import com.almasud.intro.databinding.ActivityServiceChooseBinding;
-import com.almasud.intro.model.entity.Category;
+import com.almasud.intro.model.entity.ArModel;
+import com.almasud.intro.model.entity.Subject;
 import com.almasud.intro.model.util.EventMessage;
 import com.almasud.intro.ui.util.SnackbarHelper;
 
@@ -20,7 +21,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-public class ServiceChooseActivity extends AppCompatActivity {
+public class SubjectChooseActivity extends AppCompatActivity {
     private ActivityServiceChooseBinding mViewBinding;
     private Animation mAnimation;
     private int mChooseService;
@@ -103,22 +104,22 @@ public class ServiceChooseActivity extends AppCompatActivity {
                     // Set the type of ArModel
                     switch (view.getId()) {
                         case R.id.wrapperVowelBengali:
-                            bundle.putInt(BaseApplication.MODEL_CATEGORY, Category.CATEGORY_VOWEL_BENGALI);
+                            bundle.putInt(ArModel.SUBJECT, Subject.SUBJECT_VOWEL_BENGALI);
                             break;
                         case R.id.wrapperAlphabetBengali:
-                            bundle.putInt(BaseApplication.MODEL_CATEGORY, Category.CATEGORY_ALPHABET_BENGALI);
+                            bundle.putInt(ArModel.SUBJECT, Subject.SUBJECT_ALPHABET_BENGALI);
                             break;
                         case R.id.wrapperNumberBengali:
-                            bundle.putInt(BaseApplication.MODEL_CATEGORY, Category.CATEGORY_NUMBER_BENGALI);
+                            bundle.putInt(ArModel.SUBJECT, Subject.SUBJECT_NUMBER_BENGALI);
                             break;
                         case R.id.wrapperAlphabetEnglish:
-                            bundle.putInt(BaseApplication.MODEL_CATEGORY, Category.CATEGORY_ALPHABET_ENGLISH);
+                            bundle.putInt(ArModel.SUBJECT, Subject.SUBJECT_ALPHABET_ENGLISH);
                             break;
                         case R.id.wrapperNumberEnglish:
-                            bundle.putInt(BaseApplication.MODEL_CATEGORY, Category.CATEGORY_NUMBER_ENGLISH);
+                            bundle.putInt(ArModel.SUBJECT, Subject.SUBJECT_NUMBER_ENGLISH);
                             break;
                         case R.id.wrapperAnimalEnglish:
-                            bundle.putInt(BaseApplication.MODEL_CATEGORY, Category.CATEGORY_ANIMAL_ENGLISH);
+                            bundle.putInt(ArModel.SUBJECT, Subject.SUBJECT_ANIMAL_ENGLISH);
                             break;
                     }
 
@@ -126,23 +127,23 @@ public class ServiceChooseActivity extends AppCompatActivity {
                     if (mChooseService == BaseApplication.LEARN) {
                         BaseApplication.getInstance()
                                 .startNewActivity(
-                                        ServiceChooseActivity.this,
+                                        SubjectChooseActivity.this,
                                         LearnActivity.class, bundle
                                 );
                     } else if (mChooseService == BaseApplication.TEST) {
                         BaseApplication.getInstance()
                                 .startNewActivity(
-                                        ServiceChooseActivity.this,
+                                        SubjectChooseActivity.this,
                                         TestActivity.class, bundle
                                 );
                     } else if (mChooseService == BaseApplication.SCAN) {
                         // Check whether the sceneform is supported for this device or not
                         // to avoid crashing the application.
                         if (BaseApplication.isSupportedSceneformOrShowDialog(
-                                ServiceChooseActivity.this)) {
+                                SubjectChooseActivity.this)) {
                             BaseApplication.getInstance()
                                     .startNewActivity(
-                                            ServiceChooseActivity.this,
+                                            SubjectChooseActivity.this,
                                             ScanActivity.class, bundle
                                     );
                         }

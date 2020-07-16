@@ -34,11 +34,10 @@ import java.util.Locale;
 import java.util.Random;
 
 public class TestActivity extends AppCompatActivity {
-    private static final String TAG = TestActivity.class.getSimpleName();
     private ActivityTestBinding mViewBinding;
     private Animation mAnimation;
     private List<ArModel> mArModels;
-    private static int sModelCategory;
+    private static int sModelSubject;
     private final int ITEMS_IN_SINGLE_TEST = 4;
     private int[] mTestRandNumbers;
     private int mNumberOfTest, mNumberOfTotalTest, mNumberOfTry;
@@ -54,7 +53,7 @@ public class TestActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getBundleExtra(BaseApplication.BUNDLE);
         if (bundle != null) {
             // Get the category of ArModel
-            sModelCategory = bundle.getInt(BaseApplication.MODEL_CATEGORY);
+            sModelSubject = bundle.getInt(ArModel.SUBJECT);
         }
 
         // Set toolbar as an actionbar
@@ -63,7 +62,7 @@ public class TestActivity extends AppCompatActivity {
         // Set a subtitle of the actionbar
         getSupportActionBar().setSubtitle(new StringBuilder(
                 getResources().getString(R.string.test)).append(" | ")
-                .append(ModelUtils.getArModelCategoryName(this, sModelCategory))
+                .append(ModelUtils.getArModelCategoryName(this, sModelSubject))
         );
 
         // Load an animation for navigation items
@@ -76,7 +75,7 @@ public class TestActivity extends AppCompatActivity {
         // Get an instance of ARViewModel
         ArViewModel arViewModel = new ViewModelProvider(this).get(ArViewModel.class);
         // Get the list of live data of ArModel from ArViewModel
-        LiveData<List<ArModel>> arModelListLiveData = arViewModel.getArModelLivedData(sModelCategory);
+        LiveData<List<ArModel>> arModelListLiveData = arViewModel.getArModelLivedData(sModelSubject);
         // Observe the list of ArModel from ArViewModel
         arModelListLiveData.observe(this, arModels -> {
             // Set the value of mArModels (list of ArModel).
@@ -85,7 +84,7 @@ public class TestActivity extends AppCompatActivity {
             if (mArModels.size() > 0) {
                 // Set the name of model type
                 mViewBinding.tvTestModelType.setText(
-                        ModelUtils.getArModelCategoryName(this, sModelCategory)
+                        ModelUtils.getArModelCategoryName(this, sModelSubject)
                 );
 
                 // Initialize the test
@@ -213,7 +212,7 @@ public class TestActivity extends AppCompatActivity {
                                 // Start the test again
                                 Intent intent = new Intent(this, TestActivity.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                new Bundle().putInt(BaseApplication.MODEL_CATEGORY, sModelCategory);
+                                new Bundle().putInt(ArModel.SUBJECT, sModelSubject);
                                 startActivity(intent);
                             });
                             dialogBuilder.setNegativeButton(getResources().getString(R.string.test_finish), (dialogInterface, i) -> {

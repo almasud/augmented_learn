@@ -59,7 +59,7 @@
             android:screenOrientation="landscape"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".ui.activity.ServiceChooseActivity"
+            android:name=".ui.activity.SubjectChooseActivity"
             android:screenOrientation="landscape"
             tools:ignore="LockedOrientationActivity" />
         <activity
