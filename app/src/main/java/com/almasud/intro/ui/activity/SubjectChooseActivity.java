@@ -11,7 +11,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.almasud.intro.BaseApplication;
 import com.almasud.intro.R;
-import com.almasud.intro.databinding.ActivityServiceChooseBinding;
+import com.almasud.intro.databinding.ActivitySubjectChooseBinding;
 import com.almasud.intro.model.entity.ArModel;
 import com.almasud.intro.model.entity.Subject;
 import com.almasud.intro.model.util.EventMessage;
@@ -22,14 +22,14 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 public class SubjectChooseActivity extends AppCompatActivity {
-    private ActivityServiceChooseBinding mViewBinding;
+    private ActivitySubjectChooseBinding mViewBinding;
     private Animation mAnimation;
     private int mChooseService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mViewBinding = ActivityServiceChooseBinding.inflate(getLayoutInflater());
+        mViewBinding = ActivitySubjectChooseBinding.inflate(getLayoutInflater());
         setContentView(mViewBinding.getRoot());
 
         // Get the bundle from intent if exists
