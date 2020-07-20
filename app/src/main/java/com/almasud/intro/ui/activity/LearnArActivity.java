@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -62,7 +61,7 @@ public class LearnArActivity extends AppCompatActivity {
         }
 
         // Set toolbar as an actionbar
-        setSupportActionBar((Toolbar) mViewBinding.toolbarRealView.getRoot());
+        setSupportActionBar(mViewBinding.toolbarRealView.getRoot());
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         // Set a subtitle of the actionbar
         getSupportActionBar().setSubtitle(new StringBuilder(

@@ -7,7 +7,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import com.almasud.intro.BaseApplication;
 import com.almasud.intro.R;
@@ -30,11 +29,20 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(mViewBinding.getRoot());
 
         // Set a toolbar as an actionbar
-        setSupportActionBar((Toolbar) mViewBinding.toolbarHome.getRoot());
+        setSupportActionBar(mViewBinding.toolbarHome.getRoot());
         getSupportActionBar().setSubtitle(R.string.learn_with_reality);
 
         // Load an animation for navigation items
         mAnimation = AnimationUtils.loadAnimation(this, R.anim.click_item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        BaseApplication.setAlertDialog(
+                this, getResources().getString(R.string.action_choose),
+                R.drawable.ic_help_gray, getResources().getString(R.string.want_to_exit),
+                super::onBackPressed, null, () ->{}, null
+        );
     }
 
     /**
@@ -83,11 +91,16 @@ public class HomeActivity extends AppCompatActivity {
                                     );
                             break;
                         case R.id.wrapperScan:
-                            bundle.putString(BaseApplication.SERVICE_NAME, BaseApplication.SERVICE_SCAN);
-                            BaseApplication.getInstance()
-                                    .startNewActivity(HomeActivity.this,
-                                            SubjectChooseActivity.class, bundle
-                                    );
+                            // Check whether the AR is supported for this device or not
+                            // to avoid crashing the application.
+                            if (BaseApplication.isSupportedAROrShowDialog(
+                                    HomeActivity.this)) {
+                                bundle.putString(BaseApplication.SERVICE_NAME, BaseApplication.SERVICE_SCAN);
+                                BaseApplication.getInstance()
+                                        .startNewActivity(HomeActivity.this,
+                                                SubjectChooseActivity.class, bundle
+                                        );
+                            }
                             break;
                     }
                 });

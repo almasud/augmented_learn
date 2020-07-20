@@ -5,10 +5,12 @@ import android.app.ActivityManager;
 import android.app.Application;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -17,6 +19,7 @@ import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -30,6 +33,8 @@ import com.almasud.intro.model.entity.ArModel;
 import com.almasud.intro.model.entity.Voice;
 import com.almasud.intro.service.DownloadService;
 import com.almasud.intro.service.UnzipService;
+import com.almasud.intro.util.OnSingleAction;
+import com.google.ar.core.ArCoreApk;
 
 import java.io.File;
 import java.net.URL;
@@ -215,8 +220,8 @@ public class BaseApplication extends Application implements LifecycleObserver {
 
     /**
      * Start an activity with a new task.
-     * @param activity The activity start from.
-     * @param destination The activity to be started.
+     * @param activity An instance of the {@link Activity} where start from.
+     * @param destination A {@link Class} of an {@link Activity} to be started.
      * @param bundle The bundle to be send with the {@link Intent}.
      */
     public void startNewActivity(@NonNull Activity activity,
@@ -229,42 +234,175 @@ public class BaseApplication extends Application implements LifecycleObserver {
     }
 
     /**
-     * Check whether the sceneform is supported for this device or not. Show a dialog message
-     * if not supported. Sceneform requires Android N as well as OpenGL ES 3.0 or above capabilities.
-     * @param activity A {@link Activity} of the application.
-     * @return true if sceneform is supported for this device otherwise false.
+     * Set an alert dialog with only a positive button to inform a user.
+     * @param activity An instance of the {@link Activity} where the function to be called.
+     * @param title A {@link String} for {@link AlertDialog} title.
+     * @param iconRes A {@link DrawableRes} for {@link AlertDialog} icon.
+     * @param message A {@link String} for {@link AlertDialog} message.
+     * @param positiveButtonAction An {@link OnSingleAction} for positive button of {@link AlertDialog}.
+     * @param positiveButtonText A {@link String} for positive button
      */
-    public static boolean isSupportedSceneformOrShowDialog(@NonNull Activity activity) {
+    public static void setAlertDialog(
+            Activity activity, String title, int iconRes, String message,
+            OnSingleAction positiveButtonAction, String positiveButtonText) {
+
+        // Set only required parameter to the setAlertDialog
+        setAlertDialog(
+                activity, title, iconRes, message,
+                positiveButtonAction, positiveButtonText,
+                null, null,
+                null, null
+        );
+    }
+
+    /**
+     * Set an alert dialog with positive and negative button to get an action form the user.
+     * @param activity An instance of the {@link Activity} where the function to be called.
+     * @param title A {@link String} for {@link AlertDialog} title.
+     * @param iconRes A {@link DrawableRes} for {@link AlertDialog} icon.
+     * @param message A {@link String} for {@link AlertDialog} message.
+     * @param positiveButtonAction An {@link OnSingleAction} for positive button of {@link AlertDialog}.
+     * @param positiveButtonText A {@link String} for positive button
+     * @param negativeButtonAction An {@link OnSingleAction} for negative button of {@link AlertDialog}.
+     * @param negativeButtonText A {@link String} for negative button
+     */
+    public static void setAlertDialog(
+            Activity activity, String title, int iconRes, String message,
+            OnSingleAction positiveButtonAction, String positiveButtonText,
+            OnSingleAction negativeButtonAction, String negativeButtonText) {
+
+        // Set only required parameter to the setAlertDialog
+        setAlertDialog(
+                activity, title, iconRes, message,
+                positiveButtonAction, positiveButtonText,
+                negativeButtonAction, negativeButtonText,
+                null, null
+        );
+    }
+
+    /**
+     * Set an alert dialog with positive, negative and neutral button to get an action form the user.
+     * @param activity An instance of the {@link Activity} where the function to be called.
+     * @param title A {@link String} for {@link AlertDialog} title.
+     * @param iconRes A {@link DrawableRes} for {@link AlertDialog} icon.
+     * @param message A {@link String} for {@link AlertDialog} message.
+     * @param positiveButtonAction An {@link OnSingleAction} for positive button of {@link AlertDialog}.
+     * @param positiveButtonText A {@link String} for positive button
+     * @param negativeButtonAction An {@link OnSingleAction} for negative button of {@link AlertDialog}.
+     * @param negativeButtonText A {@link String} for negative button
+     * @param neutralButtonAction An {@link OnSingleAction} for neutral button of {@link AlertDialog}.
+     * @param neutralButtonText A {@link String} for neutral button
+     */
+    public static void setAlertDialog(
+            Activity activity, String title, int iconRes, String message,
+            OnSingleAction positiveButtonAction, String positiveButtonText,
+            OnSingleAction negativeButtonAction, String negativeButtonText,
+            OnSingleAction neutralButtonAction, String neutralButtonText) {
+
+        // Create an alert dialog to show a dialog message
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
+        dialogBuilder.setCancelable(false);
+        dialogBuilder.setTitle(title);
+        dialogBuilder.setIcon(iconRes);
+        dialogBuilder.setMessage(message);
+
+        // Set an action for positive button
+        if (positiveButtonAction != null) {
+            dialogBuilder.setPositiveButton(
+                    (positiveButtonText != null)? positiveButtonText
+                            : activity.getResources().getString(R.string.yes),
+                    (dialog, which) -> positiveButtonAction.onAction()
+            );
+        }
+
+        // Set an action for negative button
+        if (negativeButtonAction != null) {
+            dialogBuilder.setNegativeButton(
+                    (negativeButtonText != null)? negativeButtonText
+                            : activity.getResources().getString(R.string.no),
+                    (dialog, which) -> negativeButtonAction.onAction()
+            );
+        }
+
+        // Set an action for neutral button
+        if (neutralButtonAction != null) {
+            dialogBuilder.setNeutralButton(
+                    (neutralButtonText != null)? neutralButtonText
+                            : activity.getResources().getString(R.string.not_sure),
+                    (dialog, which) -> neutralButtonAction.onAction()
+            );
+        }
+
+        // To avoid the block of UI (main) thread execute the task within a new thread.
+        new Handler().post(() -> {
+            AlertDialog dialog = dialogBuilder.create();
+            dialog.show();
+
+            // This line always placed after the dialog.show() otherwise get a Null Pinter Exception.
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setAllCaps(false);
+            dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setAllCaps(false);
+            dialog.getButton(AlertDialog.BUTTON_NEUTRAL).setAllCaps(false);
+        });
+    }
+
+    /**
+     * Check whether the AR is supported for this device or not. Show a dialog message
+     * if not supported.
+     * @param activity An instance of the {@link Activity} where the function to be called.
+     * @return true if AR is supported for this device otherwise false.
+     */
+    public static boolean isSupportedAROrShowDialog(@NonNull Activity activity) {
         String openGlVersionString =
                 ((ActivityManager) activity.getSystemService(Context.ACTIVITY_SERVICE))
                         .getDeviceConfigurationInfo()
                         .getGlEsVersion();
         Log.i(TAG, "OpenGL ES Version: " + openGlVersionString);
 
+        // Check for Sceneform support
         if ((Build.VERSION.SDK_INT < Build.VERSION_CODES.N)
                 || (Double.parseDouble(openGlVersionString) < MIN_OPEN_GL_VERSION)) {
 
-            // Create an alert dialog to show a dialog message
-            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
-            dialogBuilder.setCancelable(false);
-            dialogBuilder.setTitle(activity.getResources().getString(R.string.opps));
-            dialogBuilder.setIcon(R.drawable.ic_sentiment_dissatisfied_black);
-            dialogBuilder.setMessage(activity.getResources().getString(R.string.not_supported_sceneform));
-            dialogBuilder.setPositiveButton(activity.getResources().getString(R.string.okay_understand), (dialog, which) ->
-                    Toast.makeText(activity, activity.getResources().getString(R.string.hope_understand), Toast.LENGTH_SHORT).show());
+            // Set an alert dialog to inform
+            setAlertDialog(
+                    activity, activity.getResources().getString(R.string.opps),
+                    R.drawable.ic_sentiment_dissatisfied_black,
+                    activity.getResources().getString(R.string.not_supported_sceneform),
+                    () -> Toast.makeText(
+                            activity,
+                            activity.getResources().getString(R.string.hope_understand),
+                            Toast.LENGTH_SHORT
+                    ).show(), activity.getResources().getString(R.string.okay_understand)
+            );
 
-            // To avoid the block of UI (main) thread execute the task within a new thread.
-            new Handler().post(() -> {
-                AlertDialog dialog = dialogBuilder.create();
-                dialog.show();
+        } // Check for ArCore support
+        else if (!ArCoreApk.getInstance().checkAvailability(activity).isSupported()) {
 
-                // This line always placed after the dialog.show() otherwise get a Null Pinter Exception.
-                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setAllCaps(false);
-            });
+            // Set an alert dialog
+            setAlertDialog(
+                    activity, activity.getResources().getString(R.string.action_choose),
+                    R.drawable.ic_help_gray,
+                    activity.getResources().getString(R.string.not_supported_ar_core),
+                    () -> {
+                        final String appPackageName = "com.google.ar.core";
+                        try {
+                            activity.startActivity(
+                                    new Intent(Intent.ACTION_VIEW,
+                                            Uri.parse("market://details?id=" + appPackageName)
+                                    )
+                            );
+                        } catch (ActivityNotFoundException ex) {
+                            activity.startActivity(
+                                    new Intent(Intent.ACTION_VIEW,
+                                            Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)
+                                    )
+                            );
+                        }
+                    }, null, () -> {}, null);
         }
 
         return !((Build.VERSION.SDK_INT < Build.VERSION_CODES.N)
-                || (Double.parseDouble(openGlVersionString) < MIN_OPEN_GL_VERSION));
+                || (Double.parseDouble(openGlVersionString) < MIN_OPEN_GL_VERSION)
+                || (!ArCoreApk.getInstance().checkAvailability(activity).isSupported()));
     }
 
     /**

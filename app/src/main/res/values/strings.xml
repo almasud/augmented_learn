@@ -22,7 +22,7 @@
     <string name="alphabet_english">Alphabet</string>
     <string name="number_english">Number</string>
     <string name="animal_english">Animal</string>
-    <string name="scan_book">Scan Intro Book</string>
+    <string name="scan_book">Scan Book</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
@@ -222,6 +222,8 @@
 
     <!-- Message strings -->
     <string name="opps">Opps!</string>
+    <string name="action_choose">Choose an action</string>
+    <string name="want_to_exit">Do you want to exit?</string>
     <string name="congratulations">Congratulations!</string>
     <string name="good">Good!</string>
     <string name="not_bad">Not bad!</string>
@@ -231,6 +233,7 @@
     <string name="try_all_wrong_message">You may have not learned! Your tries have corrected with all wrong. Learn more to good. Hope you good in next time.</string>
     <string name="try_most_wrong_message">Your tries have corrected with most wrong. Learn more to good. Hope you good in next time</string>
     <string name="not_supported_sceneform">Your device is not supported this feature. To support your device requires Android N as well as OpenGL ES 3.0 or above capabilities.</string>
+    <string name="not_supported_ar_core">\"Google play services for AR\" is required to support this feature. Would you like to install now?</string>
     <string name="correct">Correct</string>
     <string name="wrong">Wrong</string>
     <string name="hope_understand">Hope, you understand.</string>
@@ -240,6 +243,9 @@
 
     <!-- Button strings -->
     <string name="okay_understand">Okay, I understand</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="not_sure">Not Sure</string>
     <string name="test_finish">Finish Test</string>
     <string name="test_again">Test Again</string>
 

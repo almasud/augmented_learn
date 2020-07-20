@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
@@ -49,7 +48,7 @@ public class LearnActivity extends AppCompatActivity {
         }
 
         // Set toolbar as an actionbar
-        setSupportActionBar((Toolbar) mViewBinding.toolbarLearnAlphabet.getRoot());
+        setSupportActionBar(mViewBinding.toolbarLearnAlphabet.getRoot());
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         // Set a subtitle of the actionbar
         getSupportActionBar().setSubtitle(new StringBuilder(
@@ -145,7 +144,7 @@ public class LearnActivity extends AppCompatActivity {
             try {
                 // Check whether the sceneform is supported for this device or not
                 // to avoid crashing the application.
-                if (BaseApplication.isSupportedSceneformOrShowDialog(this)) {
+                if (BaseApplication.isSupportedAROrShowDialog(this)) {
                     Bundle bundle = new Bundle();
                     bundle.putSerializable(ArModel.LIST_ITEM, (Serializable) mArModels);
                     // Specify the model category to determine what category should be

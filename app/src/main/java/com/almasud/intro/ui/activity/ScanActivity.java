@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -67,7 +66,7 @@ public class ScanActivity extends AppCompatActivity {
         }
 
         // Set toolbar as an actionbar
-        setSupportActionBar((Toolbar) mViewBinding.toolbarScan.getRoot());
+        setSupportActionBar(mViewBinding.toolbarScan.getRoot());
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         // Set a subtitle of the actionbar
         getSupportActionBar().setSubtitle(new StringBuilder(

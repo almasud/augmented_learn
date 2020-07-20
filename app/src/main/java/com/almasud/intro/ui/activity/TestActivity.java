@@ -10,9 +10,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -57,7 +55,7 @@ public class TestActivity extends AppCompatActivity {
         }
 
         // Set toolbar as an actionbar
-        setSupportActionBar((Toolbar) mViewBinding.toolbarTest.getRoot());
+        setSupportActionBar(mViewBinding.toolbarTest.getRoot());
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         // Set a subtitle of the actionbar
         getSupportActionBar().setSubtitle(new StringBuilder(
@@ -183,47 +181,44 @@ public class TestActivity extends AppCompatActivity {
                         // test state must be corrected before proceed to another test state,
                         // So here we consider only the number of try to evaluate the result.
                         if (mNumberOfTest == mNumberOfTotalTest) {
-                            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+                            String dialogTitle;
+                            int dialogIconRes;
+                            String dialogMessage;
 
                             if ((mNumberOfTry - mNumberOfTotalTest) == 0) {
                                 // Try without any wrong
-                                dialogBuilder.setTitle(getResources().getString(R.string.congratulations));
-                                dialogBuilder.setIcon(R.drawable.ic_sentiment_satisfied_black);
-                                dialogBuilder.setMessage(getResources().getString(R.string.try_all_correct_message));
+                                dialogTitle = getResources().getString(R.string.congratulations);
+                                dialogIconRes = R.drawable.ic_sentiment_satisfied_black;
+                                dialogMessage = getResources().getString(R.string.try_all_correct_message);
                             } else if (mNumberOfTry <= ((mNumberOfTotalTest * ITEMS_IN_SINGLE_TEST) / 2)) {
                                 // Try with some wrong
-                                dialogBuilder.setTitle(getResources().getString(R.string.good));
-                                dialogBuilder.setIcon(R.drawable.ic_sentiment_satisfied_black);
-                                dialogBuilder.setMessage(getResources().getString(R.string.try_average_correct_message));
+                                dialogTitle = getResources().getString(R.string.good);
+                                dialogIconRes = R.drawable.ic_sentiment_satisfied_black;
+                                dialogMessage = getResources().getString(R.string.try_average_correct_message);
                             } else if (((mNumberOfTotalTest * ITEMS_IN_SINGLE_TEST) - mNumberOfTry) == 0) {
                                 // Try with all wrong (except corrected one)
-                                dialogBuilder.setTitle(getResources().getString(R.string.bad));
-                                dialogBuilder.setIcon(R.drawable.ic_sentiment_dissatisfied_black);
-                                dialogBuilder.setMessage(getResources().getString(R.string.try_all_wrong_message));
+                                dialogTitle = getResources().getString(R.string.bad);
+                                dialogIconRes = R.drawable.ic_sentiment_dissatisfied_black;
+                                dialogMessage = getResources().getString(R.string.try_all_wrong_message);
                             } else {
                                 // Try with most wrong
-                                dialogBuilder.setTitle(getResources().getString(R.string.not_bad));
-                                dialogBuilder.setIcon(R.drawable.ic_sentiment_neutral_black);
-                                dialogBuilder.setMessage(getResources().getString(R.string.try_most_wrong_message));
+                                dialogTitle = getResources().getString(R.string.not_bad);
+                                dialogIconRes = R.drawable.ic_sentiment_neutral_black;
+                                dialogMessage = getResources().getString(R.string.try_most_wrong_message);
                             }
 
-                            dialogBuilder.setCancelable(false);
-                            dialogBuilder.setPositiveButton(getResources().getString(R.string.test_again), (dialog, which) -> {
-                                // Start the test again
-                                Intent intent = new Intent(this, TestActivity.class);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                new Bundle().putInt(ArModel.SUBJECT, sModelSubject);
-                                startActivity(intent);
-                            });
-                            dialogBuilder.setNegativeButton(getResources().getString(R.string.test_finish), (dialogInterface, i) -> {
-                                // Exit (finish) the test screen (Activity)
-                                finish();
-                            });
-                            AlertDialog dialog = dialogBuilder.create();
-                            dialog.show();
-                            // This line always placed after the dialog.show() otherwise get a Null Pinter Exception.
-                            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setAllCaps(false);
-                            dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setAllCaps(false);
+                            // Set an alert dialog to show the test result
+                            BaseApplication.setAlertDialog(
+                                    this, dialogTitle, dialogIconRes, dialogMessage,
+                                    () -> {
+                                        // Start the test again for positive action button
+                                        Intent intent = new Intent(this, TestActivity.class);
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                        new Bundle().putInt(ArModel.SUBJECT, sModelSubject);
+                                        startActivity(intent);
+                                    }, getResources().getString(R.string.test_again),
+                                    this::finish, getResources().getString(R.string.test_finish)
+                            );
                         }
                     }
                 }, mMediaPlayerCorrect.getDuration());

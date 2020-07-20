@@ -7,7 +7,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import com.almasud.intro.BaseApplication;
 import com.almasud.intro.R;
@@ -44,7 +43,7 @@ public class SubjectChooseActivity extends AppCompatActivity {
         }
 
         // Set a toolbar as an actionbar
-        setSupportActionBar((Toolbar) mViewBinding.toolServiceChoose.getRoot());
+        setSupportActionBar(mViewBinding.toolServiceChoose.getRoot());
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         if (mChooseService == BaseApplication.LEARN)
             getSupportActionBar().setSubtitle(R.string.learn);
@@ -137,9 +136,9 @@ public class SubjectChooseActivity extends AppCompatActivity {
                                         TestActivity.class, bundle
                                 );
                     } else if (mChooseService == BaseApplication.SCAN) {
-                        // Check whether the sceneform is supported for this device or not
+                        // Check whether the AR is supported for this device or not
                         // to avoid crashing the application.
-                        if (BaseApplication.isSupportedSceneformOrShowDialog(
+                        if (BaseApplication.isSupportedAROrShowDialog(
                                 SubjectChooseActivity.this)) {
                             BaseApplication.getInstance()
                                     .startNewActivity(
