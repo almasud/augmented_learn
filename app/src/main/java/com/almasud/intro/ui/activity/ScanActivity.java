@@ -15,7 +15,6 @@ import com.almasud.intro.databinding.ActivityScanBinding;
 import com.almasud.intro.model.entity.ArModel;
 import com.almasud.intro.model.entity.Subject;
 import com.almasud.intro.model.util.EventMessage;
-import com.almasud.intro.model.util.ModelUtils;
 import com.almasud.intro.ui.fragment.ScanArFragment;
 import com.almasud.intro.ui.util.SnackbarHelper;
 import com.almasud.intro.util.ArComponent;
@@ -30,6 +29,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -49,7 +49,7 @@ public class ScanActivity extends AppCompatActivity {
     // image in the database.
     private final Map<AugmentedImage, AnchorNode> mAugmentedImageMap = new HashMap<>();
     private List<ArModel> mArModels = new ArrayList<>();
-    private static int sModelSubject;
+    private static Bundle sBundle;
     private List<CompletableFuture<ModelRenderable>> mCompletableFutureModels = new ArrayList<>();
 
     @Override
@@ -59,11 +59,8 @@ public class ScanActivity extends AppCompatActivity {
         setContentView(mViewBinding.getRoot());
 
         // Get the bundle from intent if exists
-        Bundle bundle = getIntent().getBundleExtra(BaseApplication.BUNDLE);
-        if (bundle != null) {
-            // Get the category of ArModel
-            sModelSubject = bundle.getInt(ArModel.SUBJECT);
-        }
+        if (getIntent().getBundleExtra(BaseApplication.BUNDLE) != null)
+            sBundle = getIntent().getBundleExtra(BaseApplication.BUNDLE);
 
         // Set toolbar as an actionbar
         setSupportActionBar(mViewBinding.toolbarScan.getRoot());
@@ -71,11 +68,11 @@ public class ScanActivity extends AppCompatActivity {
         // Set a subtitle of the actionbar
         getSupportActionBar().setSubtitle(new StringBuilder(
                 getResources().getString(R.string.real_view)).append(" | ")
-                .append(ModelUtils.getArModelCategoryName(this, sModelSubject))
+                .append(Subject.getSubjectName(this, sBundle.getInt(ArModel.SUBJECT)))
         );
 
         // Set the augmented image database
-        ScanArFragment.setImageDatabase(sModelSubject);
+        ScanArFragment.setImageDatabase(sBundle.getInt(ArModel.SUBJECT));
 
         mScanArFragment = (ScanArFragment) getSupportFragmentManager().findFragmentById(R.id.ArFragmentScan);
         mScanArFragment.getArSceneView().getScene().addOnUpdateListener(this::onUpdateFrame);
@@ -83,7 +80,7 @@ public class ScanActivity extends AppCompatActivity {
         // Get an instance of ARViewModel
         ArViewModel arViewModel = new ViewModelProvider(this).get(ArViewModel.class);
         // Get the list of live data of ArModel from ArViewModel
-        LiveData<List<ArModel>> arModelListLiveData = arViewModel.getArModelLivedData(sModelSubject);
+        LiveData<List<ArModel>> arModelListLiveData = arViewModel.getArModelLivedData(sBundle.getInt(ArModel.SUBJECT));
         // Observe the list of ArModel from ArViewModel
         arModelListLiveData.observe(this, arModels -> {
             // Set the value of mARModels (list of ARModel)
@@ -93,7 +90,7 @@ public class ScanActivity extends AppCompatActivity {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 mCompletableFutureModels =
                         new ArComponent.ArComponentBuilder(this).build()
-                                .getAllCompletableFutureModels(arModels);
+                                .getAllCompletableFutureModels(arModels, (File) sBundle.getSerializable(ArModel.MODEL_DIRECTORY));
             }
         });
     }
@@ -150,12 +147,12 @@ public class ScanActivity extends AppCompatActivity {
                         // Set the detected ModelRenderable into TransformableModel
                         try {
                             // Set the initial scale of model
-                            float modelLocalScale = (sModelSubject == Subject.SUBJECT_ALPHABET_BENGALI
-                                    || sModelSubject == Subject.SUBJECT_ALPHABET_ENGLISH)? 0.3f
-                                    : (sModelSubject == Subject.SUBJECT_VOWEL_BENGALI
-                                    || sModelSubject == Subject.SUBJECT_NUMBER_BENGALI
-                                    || sModelSubject == Subject.SUBJECT_NUMBER_ENGLISH)? 0.25f
-                                    : (sModelSubject == Subject.SUBJECT_ANIMAL_ENGLISH)? 15.0f: 1.0f;
+                            float modelLocalScale = (sBundle.getInt(ArModel.SUBJECT) == Subject.SUBJECT_ALPHABET_BENGALI
+                                    || sBundle.getInt(ArModel.SUBJECT) == Subject.SUBJECT_ALPHABET_ENGLISH)? 0.3f
+                                    : (sBundle.getInt(ArModel.SUBJECT) == Subject.SUBJECT_VOWEL_BENGALI
+                                    || sBundle.getInt(ArModel.SUBJECT) == Subject.SUBJECT_NUMBER_BENGALI
+                                    || sBundle.getInt(ArModel.SUBJECT) == Subject.SUBJECT_NUMBER_ENGLISH)? 0.25f
+                                    : (sBundle.getInt(ArModel.SUBJECT) == Subject.SUBJECT_ANIMAL_ENGLISH)? 15.0f: 1.0f;
 
                             // Set the transformable model
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {

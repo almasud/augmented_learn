@@ -15,6 +15,7 @@ import com.almasud.intro.BaseApplication;
 import com.almasud.intro.R;
 import com.almasud.intro.model.util.EventMessage;
 import com.almasud.intro.ui.activity.HomeActivity;
+import com.almasud.intro.util.PreferenceManager;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -37,11 +38,13 @@ public class DownloadService extends Service {
     public static final String DOWNLOAD_URL = "Download_Link";
     public static final String TARGET_DIRECTORY = "Target_Directory";
     public static final String UNZIP_SERVICE = "UNZIP_SERVICE";
+    private PreferenceManager mPreferenceManager;
 
     @Override
     public void onCreate() {
         super.onCreate();
         Log.d(TAG, "onCreate: The download service is created");
+        mPreferenceManager = new PreferenceManager(this);
     }
 
     @Override
@@ -125,6 +128,9 @@ public class DownloadService extends Service {
 
             // Download the file if the successStatus is true
             if (successStatus) {
+                // Set the download status true in preferences
+                mPreferenceManager.setDownloadStatus(true);
+
                 try {
                     URL url = new URL(downloadURL);
                     URLConnection connection = url.openConnection();
@@ -220,6 +226,9 @@ public class DownloadService extends Service {
                 unzipServiceIntent.putExtra(UnzipService.TARGET_DIRECTORY, targetDirectory);
                 ContextCompat.startForegroundService(getApplicationContext(), unzipServiceIntent);
             }
+
+            // Set the download status false in preferences
+            mPreferenceManager.setDownloadStatus(false);
 
             // After completing the task stop the foreground service with keep the notification
             // and after a while system will automatically kill the service.

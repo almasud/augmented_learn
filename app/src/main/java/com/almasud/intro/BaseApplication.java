@@ -34,6 +34,7 @@ import com.almasud.intro.model.entity.Voice;
 import com.almasud.intro.service.DownloadService;
 import com.almasud.intro.service.UnzipService;
 import com.almasud.intro.util.OnSingleAction;
+import com.almasud.intro.util.PreferenceManager;
 import com.google.ar.core.ArCoreApk;
 
 import java.io.File;
@@ -57,19 +58,19 @@ public class BaseApplication extends Application implements LifecycleObserver {
     public static final int LEARN = 0;
     public static final int TEST = 1;
     public static final int SCAN = 2;
-    public static final String DIRECTORY_MODELS = "models";
-    public static final String DIRECTORY_VOWELS_BENGALI = "vowels_bengali_with_extra";
-    public static final String DIRECTORY_ALPHABETS_BENGALI = "alphabets_bengali_with_extra";
+    public static final String DIRECTORY_MODELS_ROOT = "models";
+    public static final String DIRECTORY_VOWELS_BENGALI = "vowels_bengali";
+    public static final String DIRECTORY_ALPHABETS_BENGALI = "alphabets_bengali";
     public static final String DIRECTORY_NUMBERS_BENGALI = "numbers_bengali";
-    public static final String DIRECTORY_ALPHABETS_ENGLISH = "alphabets";
-    public static final String DIRECTORY_NUMBERS_ENGLISH = "numbers";
-    public static final String DIRECTORY_ANIMALS_ENGLISH = "animals";
-    public static final String DOWNLOAD_URL_VOWELS_BENGALI = "http://almasud.000webhostapp.com/download/vowels_bengali.zip";
-    public static final String DOWNLOAD_URL_ALPHABETS_BENGALI = "http://almasud.000webhostapp.com/download/alphabets_bengali.zip";
-    public static final String DOWNLOAD_URL_NUMBERS_BENGALI = "http://almasud.000webhostapp.com/download/numbers_bengali.zip";
-    public static final String DOWNLOAD_URL_ALPHABETS_ENGLISH = "http://almasud.000webhostapp.com/download/alphabets.zip";
-    public static final String DOWNLOAD_URL_NUMBERS_ENGLISH = "http://almasud.000webhostapp.com/download/numbers.zip";
-    public static final String DOWNLOAD_URL_ANIMALS_ENGLISH = "http://almasud.000webhostapp.com/download/animals.zip";
+    public static final String DIRECTORY_ALPHABETS_ENGLISH = "alphabets_english";
+    public static final String DIRECTORY_NUMBERS_ENGLISH = "numbers_english";
+    public static final String DIRECTORY_ANIMALS_ENGLISH = "animals_english";
+    public static final String URL_VOWELS_BENGALI = "https://almasud.000webhostapp.com/download/vowels_bengali.zip";
+    public static final String URL_ALPHABETS_BENGALI = "https://almasud.000webhostapp.com/download/alphabets_bengali.zip";
+    public static final String URL_NUMBERS_BENGALI = "https://almasud.000webhostapp.com/download/numbers_bengali.zip";
+    public static final String URL_ALPHABETS_ENGLISH = "https://almasud.000webhostapp.com/download/alphabets.zip";
+    public static final String URL_NUMBERS_ENGLISH = "https://almasud.000webhostapp.com/download/numbers.zip";
+    public static final String URL_ANIMALS_ENGLISH = "https://almasud.000webhostapp.com/download/animals.zip";
 
     private static final double MIN_OPEN_GL_VERSION = 3.0;
     public static final String NOTIFICATION_CHANNEL_DOWNLOADER = "Downloader_Channel";
@@ -580,11 +581,11 @@ public class BaseApplication extends Application implements LifecycleObserver {
     }
 
     /**
-     * @return A {@link File} directory of {@link ArModel}s.
+     * @return A {@link File}  root directory of {@link ArModel}s.
      */
-    public static File getExternalFileModelsDir(@NonNull Context context, @NonNull String directory) {
+    public static File getExternalFileDirModelsRoot(@NonNull Context context, @NonNull String directory) {
         return context.getExternalFilesDir(
-                File.separator + DIRECTORY_MODELS + File.separator + directory
+                File.separator + DIRECTORY_MODELS_ROOT + File.separator + directory
         );
     }
 
@@ -633,37 +634,38 @@ public class BaseApplication extends Application implements LifecycleObserver {
 
         // Start the service as foreground
         ContextCompat.startForegroundService(context, unzipServiceIntent);
-
-        // Use the code for unzip where needed
-//        BaseApplication.unzip(
-//                this,
-//                new File("/storage/14EE-270F/Android/data/com.almasud.intro/files/models/numbers.zip"),
-//                new File("/storage/14EE-270F/Android/data/com.almasud.intro/files/models")
-//        );
     }
 
     /**
      * Download a {@link File} from a given {@link URL} and unzip if downloaded file is zip
      * to a given target {@link File} directory.
-     * @param context The context of {@link Application}.
+     * @param activity The {@link Activity}.
      * @param downloadURL An {@link URL} to be download from.
      * @param targetDirectory A {@link File} directory to be placed the downloaded {@link File}.
      */
     public static void download(
-            @NonNull Context context, @NonNull final String downloadURL, @NonNull File targetDirectory) {
-        // Start download service to download the file
-        Intent downloadServiceIntent = new Intent(context, DownloadService.class);
-        downloadServiceIntent.putExtra(DownloadService.DOWNLOAD_URL, downloadURL);
-        downloadServiceIntent.putExtra(DownloadService.TARGET_DIRECTORY, targetDirectory);
+            @NonNull Activity activity, @NonNull final String downloadURL, @NonNull File targetDirectory) {
+        Log.d(TAG, "download: The download url: "+ downloadURL);
+        PreferenceManager preferenceManager = new PreferenceManager(activity);
 
-        // Start the service as foreground
-        ContextCompat.startForegroundService(context, downloadServiceIntent);
+        // Check the download is already in progress or not
+        if (preferenceManager.isDownloadProgress()) {
+            BaseApplication.setAlertDialog(
+                    activity, activity.getResources().getString(R.string.opps),
+                    R.drawable.ic_sentiment_dissatisfied_black, activity.getResources().getString(R.string.download_continuing),
+                    () -> Toast.makeText(
+                            activity, activity.getResources().getString(R.string.hope_understand), Toast.LENGTH_SHORT
+                    ).show(),
+                    activity.getResources().getString(R.string.okay_understand)
+            );
+        } else {
+            // Start download service to download the file
+            Intent downloadServiceIntent = new Intent(activity, DownloadService.class);
+            downloadServiceIntent.putExtra(DownloadService.DOWNLOAD_URL, downloadURL);
+            downloadServiceIntent.putExtra(DownloadService.TARGET_DIRECTORY, targetDirectory);
 
-        // Use the code for download where needed
-//        BaseApplication.download(
-//                this,
-//                BaseApplication.DOWNLOAD_URL_NUMBERS,
-//                new File("/storage/6405-3F21/Android/data/com.almasud.intro/files/models")
-//        );
+            // Start the service as foreground
+            ContextCompat.startForegroundService(activity, downloadServiceIntent);
+        }
     }
 }

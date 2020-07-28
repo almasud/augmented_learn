@@ -18,8 +18,8 @@ import com.almasud.intro.BaseApplication;
 import com.almasud.intro.R;
 import com.almasud.intro.databinding.ActivityTestBinding;
 import com.almasud.intro.model.entity.ArModel;
+import com.almasud.intro.model.entity.Subject;
 import com.almasud.intro.model.util.EventMessage;
-import com.almasud.intro.model.util.ModelUtils;
 import com.almasud.intro.ui.util.SnackbarHelper;
 import com.almasud.intro.viewmodel.ArViewModel;
 
@@ -35,7 +35,7 @@ public class TestActivity extends AppCompatActivity {
     private ActivityTestBinding mViewBinding;
     private Animation mAnimation;
     private List<ArModel> mArModels;
-    private static int sModelSubject;
+    private static Bundle sBundle;
     private final int ITEMS_IN_SINGLE_TEST = 4;
     private int[] mTestRandNumbers;
     private int mNumberOfTest, mNumberOfTotalTest, mNumberOfTry;
@@ -48,11 +48,8 @@ public class TestActivity extends AppCompatActivity {
         setContentView(mViewBinding.getRoot());
 
         // Get the bundle from intent if exists
-        Bundle bundle = getIntent().getBundleExtra(BaseApplication.BUNDLE);
-        if (bundle != null) {
-            // Get the category of ArModel
-            sModelSubject = bundle.getInt(ArModel.SUBJECT);
-        }
+        if (getIntent().getBundleExtra(BaseApplication.BUNDLE) != null)
+            sBundle = getIntent().getBundleExtra(BaseApplication.BUNDLE);
 
         // Set toolbar as an actionbar
         setSupportActionBar(mViewBinding.toolbarTest.getRoot());
@@ -60,7 +57,7 @@ public class TestActivity extends AppCompatActivity {
         // Set a subtitle of the actionbar
         getSupportActionBar().setSubtitle(new StringBuilder(
                 getResources().getString(R.string.test)).append(" | ")
-                .append(ModelUtils.getArModelCategoryName(this, sModelSubject))
+                .append(Subject.getSubjectName(this, sBundle.getInt(ArModel.SUBJECT)))
         );
 
         // Load an animation for navigation items
@@ -73,7 +70,7 @@ public class TestActivity extends AppCompatActivity {
         // Get an instance of ARViewModel
         ArViewModel arViewModel = new ViewModelProvider(this).get(ArViewModel.class);
         // Get the list of live data of ArModel from ArViewModel
-        LiveData<List<ArModel>> arModelListLiveData = arViewModel.getArModelLivedData(sModelSubject);
+        LiveData<List<ArModel>> arModelListLiveData = arViewModel.getArModelLivedData(sBundle.getInt(ArModel.SUBJECT));
         // Observe the list of ArModel from ArViewModel
         arModelListLiveData.observe(this, arModels -> {
             // Set the value of mArModels (list of ArModel).
@@ -82,7 +79,7 @@ public class TestActivity extends AppCompatActivity {
             if (mArModels.size() > 0) {
                 // Set the name of model type
                 mViewBinding.tvTestModelType.setText(
-                        ModelUtils.getArModelCategoryName(this, sModelSubject)
+                        Subject.getSubjectName(this, sBundle.getInt(ArModel.SUBJECT))
                 );
 
                 // Initialize the test
@@ -214,7 +211,7 @@ public class TestActivity extends AppCompatActivity {
                                         // Start the test again for positive action button
                                         Intent intent = new Intent(this, TestActivity.class);
                                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                        new Bundle().putInt(ArModel.SUBJECT, sModelSubject);
+                                        intent.putExtra(BaseApplication.BUNDLE, sBundle);
                                         startActivity(intent);
                                     }, getResources().getString(R.string.test_again),
                                     this::finish, getResources().getString(R.string.test_finish)

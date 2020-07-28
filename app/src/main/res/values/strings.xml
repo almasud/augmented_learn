@@ -240,6 +240,8 @@
     <string name="find_the_correct">Find the correct</string>
     <string name="test_set">Test:</string>
     <string name="test_number_n_out_of">0/0</string>
+    <string name="need_download_models">Need to download (for first time only) the models of this subject for real view. Would you like to download now?</string>
+    <string name="download_continuing">Download is still in progress, please wait until finished the progress.</string>
 
     <!-- Button strings -->
     <string name="okay_understand">Okay, I understand</string>

@@ -14,7 +14,6 @@ import com.almasud.intro.databinding.ActivityLearnArBinding;
 import com.almasud.intro.model.entity.ArModel;
 import com.almasud.intro.model.entity.Subject;
 import com.almasud.intro.model.util.EventMessage;
-import com.almasud.intro.model.util.ModelUtils;
 import com.almasud.intro.ui.adapter.LearnRVAdapter;
 import com.almasud.intro.ui.util.SnackbarHelper;
 import com.almasud.intro.util.ArComponent;
@@ -27,6 +26,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -38,8 +38,7 @@ public class LearnArActivity extends AppCompatActivity {
     private ActivityLearnArBinding mViewBinding;
     private ArFragment mArFragment;
     private LearnRVAdapter mRVAdapter;
-    private List<ArModel> mArModels;
-    private static int sModelSubject;
+    private static Bundle sBundle;
     private int mSelectedItem;
     private List<CompletableFuture<ModelRenderable>> mCompletableFutureModels = new ArrayList<>();
 
@@ -50,14 +49,9 @@ public class LearnArActivity extends AppCompatActivity {
         setContentView(mViewBinding.getRoot());
 
         // Get the bundle from intent if exists
-        Bundle bundle = getIntent().getBundleExtra(BaseApplication.BUNDLE);
-        if (bundle != null) {
-            // Get the list of ArModel.
-            mArModels = (List<ArModel>) bundle.getSerializable(ArModel.LIST_ITEM);
-            // Get the category of ArModel
-            sModelSubject = bundle.getInt(ArModel.SUBJECT);
-            // Get the selected item of ArModel.
-            mSelectedItem = bundle.getInt(ArModel.SELECTED_ITEM);
+        if (getIntent().getBundleExtra(BaseApplication.BUNDLE) != null) {
+            sBundle = getIntent().getBundleExtra(BaseApplication.BUNDLE);
+            mSelectedItem = sBundle.getInt(ArModel.SELECTED_ITEM);
         }
 
         // Set toolbar as an actionbar
@@ -66,11 +60,11 @@ public class LearnArActivity extends AppCompatActivity {
         // Set a subtitle of the actionbar
         getSupportActionBar().setSubtitle(new StringBuilder(
                 getResources().getString(R.string.real_view)).append(" | ")
-                .append(ModelUtils.getArModelCategoryName(this, sModelSubject))
+                .append(Subject.getSubjectName(this, sBundle.getInt(ArModel.SUBJECT)))
         );
 
         // Initialize the RV adapter
-        mRVAdapter = new LearnRVAdapter(mArModels, this, mSelectedItem);
+        mRVAdapter = new LearnRVAdapter((List<ArModel>) sBundle.getSerializable(ArModel.LIST_ITEM), this, mSelectedItem);
         // Set a layout manager to RV
         mViewBinding.rvRealView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
         // Set the adapter to RV
@@ -83,7 +77,7 @@ public class LearnArActivity extends AppCompatActivity {
         // Load all the models asynchronously
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             mCompletableFutureModels = new ArComponent.ArComponentBuilder(this)
-                    .build().getAllCompletableFutureModels(mArModels);
+                    .build().getAllCompletableFutureModels((List<ArModel>) sBundle.getSerializable(ArModel.LIST_ITEM), (File) sBundle.getSerializable(ArModel.MODEL_DIRECTORY));
         }
 
         // After tap on plane add the model
@@ -95,12 +89,12 @@ public class LearnArActivity extends AppCompatActivity {
             // Set the selected ModelRenderable into TransformableModel
             try {
                 // Set the initial scale of model.
-                float modelLocalScale = (sModelSubject == Subject.SUBJECT_ALPHABET_BENGALI
-                        || sModelSubject == Subject.SUBJECT_ALPHABET_ENGLISH)? 0.3f
-                        : (sModelSubject == Subject.SUBJECT_VOWEL_BENGALI
-                        || sModelSubject == Subject.SUBJECT_NUMBER_BENGALI
-                        || sModelSubject == Subject.SUBJECT_NUMBER_ENGLISH)? 0.25f
-                        : (sModelSubject == Subject.SUBJECT_ANIMAL_ENGLISH)? 15.0f: 1.0f;
+                float modelLocalScale = (sBundle.getInt(ArModel.SUBJECT) == Subject.SUBJECT_ALPHABET_BENGALI
+                        || sBundle.getInt(ArModel.SUBJECT) == Subject.SUBJECT_ALPHABET_ENGLISH)? 0.3f
+                        : (sBundle.getInt(ArModel.SUBJECT) == Subject.SUBJECT_VOWEL_BENGALI
+                        || sBundle.getInt(ArModel.SUBJECT) == Subject.SUBJECT_NUMBER_BENGALI
+                        || sBundle.getInt(ArModel.SUBJECT) == Subject.SUBJECT_NUMBER_ENGLISH)? 0.25f
+                        : (sBundle.getInt(ArModel.SUBJECT) == Subject.SUBJECT_ANIMAL_ENGLISH)? 15.0f: 1.0f;
 
                 // Set the transformable model.
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -110,7 +104,8 @@ public class LearnArActivity extends AppCompatActivity {
                             .setTransformableModel(
                                     mCompletableFutureModels.get(mSelectedItem)
                                             .getNow(null),
-                                    mArModels.get(mSelectedItem), modelLocalScale
+                                    ((List<ArModel>) sBundle.getSerializable(ArModel.LIST_ITEM)).get(mSelectedItem),
+                                    modelLocalScale
                             );
                 }
             } catch (Exception e) {

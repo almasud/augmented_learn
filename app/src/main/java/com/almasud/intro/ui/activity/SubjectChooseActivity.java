@@ -2,6 +2,7 @@ package com.almasud.intro.ui.activity;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -20,7 +21,11 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.File;
+import java.util.Arrays;
+
 public class SubjectChooseActivity extends AppCompatActivity {
+    private static final String TAG = SubjectChooseActivity.class.getSimpleName();
     private ActivitySubjectChooseBinding mViewBinding;
     private Animation mAnimation;
     private int mChooseService;
@@ -100,27 +105,51 @@ public class SubjectChooseActivity extends AppCompatActivity {
                 // To avoid the block of UI (main) thread execute the tasks within a new thread.
                 new Handler().post(() -> {
                     Bundle bundle = new Bundle();
+                    String modelDirectoryName = null;
+                    String modelDownloadURL = null;
+                    int modelSubject = -1;
+
                     // Set the type of ArModel
                     switch (view.getId()) {
                         case R.id.wrapperVowelBengali:
-                            bundle.putInt(ArModel.SUBJECT, Subject.SUBJECT_VOWEL_BENGALI);
+                            modelSubject = Subject.SUBJECT_VOWEL_BENGALI;
+                            modelDirectoryName = BaseApplication.DIRECTORY_VOWELS_BENGALI;
+                            modelDownloadURL = BaseApplication.URL_VOWELS_BENGALI;
                             break;
                         case R.id.wrapperAlphabetBengali:
-                            bundle.putInt(ArModel.SUBJECT, Subject.SUBJECT_ALPHABET_BENGALI);
+                            modelSubject = Subject.SUBJECT_ALPHABET_BENGALI;
+                            modelDirectoryName = BaseApplication.DIRECTORY_ALPHABETS_BENGALI;
+                            modelDownloadURL = BaseApplication.URL_ALPHABETS_BENGALI;
                             break;
                         case R.id.wrapperNumberBengali:
-                            bundle.putInt(ArModel.SUBJECT, Subject.SUBJECT_NUMBER_BENGALI);
+                            modelSubject = Subject.SUBJECT_NUMBER_BENGALI;
+                            modelDirectoryName = BaseApplication.DIRECTORY_NUMBERS_BENGALI;
+                            modelDownloadURL = BaseApplication.URL_NUMBERS_BENGALI;
                             break;
                         case R.id.wrapperAlphabetEnglish:
-                            bundle.putInt(ArModel.SUBJECT, Subject.SUBJECT_ALPHABET_ENGLISH);
+                            modelSubject = Subject.SUBJECT_ALPHABET_ENGLISH;
+                            modelDirectoryName = BaseApplication.DIRECTORY_ALPHABETS_ENGLISH;
+                            modelDownloadURL = BaseApplication.URL_ALPHABETS_ENGLISH;
                             break;
                         case R.id.wrapperNumberEnglish:
-                            bundle.putInt(ArModel.SUBJECT, Subject.SUBJECT_NUMBER_ENGLISH);
+                            modelSubject = Subject.SUBJECT_NUMBER_ENGLISH;
+                            modelDirectoryName = BaseApplication.DIRECTORY_NUMBERS_ENGLISH;
+                            modelDownloadURL = BaseApplication.URL_NUMBERS_ENGLISH;
                             break;
                         case R.id.wrapperAnimalEnglish:
-                            bundle.putInt(ArModel.SUBJECT, Subject.SUBJECT_ANIMAL_ENGLISH);
+                            modelSubject = Subject.SUBJECT_ANIMAL_ENGLISH;
+                            modelDirectoryName = BaseApplication.DIRECTORY_ANIMALS_ENGLISH;
+                            modelDownloadURL = BaseApplication.URL_ANIMALS_ENGLISH;
                             break;
                     }
+
+                    // Put the information into the bundle
+                    bundle.putInt(ArModel.SUBJECT, modelSubject);
+                    bundle.putString(ArModel.MODEL_DOWNLOAD_URL, modelDownloadURL);
+                    File modelDirectory = BaseApplication.getExternalFileDirModelsRoot(
+                            SubjectChooseActivity.this, modelDirectoryName
+                    );
+                    bundle.putSerializable(ArModel.MODEL_DIRECTORY, modelDirectory);
 
                     // Set an activity for each service
                     if (mChooseService == BaseApplication.LEARN) {
@@ -136,15 +165,36 @@ public class SubjectChooseActivity extends AppCompatActivity {
                                         TestActivity.class, bundle
                                 );
                     } else if (mChooseService == BaseApplication.SCAN) {
-                        // Check whether the AR is supported for this device or not
-                        // to avoid crashing the application.
-                        if (BaseApplication.isSupportedAROrShowDialog(
-                                SubjectChooseActivity.this)) {
-                            BaseApplication.getInstance()
-                                    .startNewActivity(
-                                            SubjectChooseActivity.this,
-                                            ScanActivity.class, bundle
-                                    );
+                        // Check whether the AR is supported for this device or not to avoid crashing the application
+                        if (BaseApplication.isSupportedAROrShowDialog(SubjectChooseActivity.this)) {
+                            File downloadDirectory = BaseApplication.getExternalFileDirModelsRoot(
+                                    SubjectChooseActivity.this, ""
+                            );
+                            Log.d(TAG, "onAnimationEnd: modelDirectory: "+ modelDirectory);
+                            Log.d(TAG, "onAnimationEnd: modelDirectory list: "+ Arrays.asList(modelDirectory.list()));
+
+                            // Check whether the model directory contains any item or not
+                            if (modelDirectory.list().length > 1) {
+                                BaseApplication.getInstance()
+                                        .startNewActivity(
+                                                SubjectChooseActivity.this,
+                                                ScanActivity.class, bundle
+                                        );
+                            } else {
+                                // If the model directory not contains any item
+                                String downloadURL = modelDownloadURL;
+                                BaseApplication.setAlertDialog(
+                                        SubjectChooseActivity.this, getResources().getString(R.string.action_choose),
+                                        R.drawable.ic_help_gray, getResources().getString(R.string.need_download_models),
+                                        () -> {
+                                            if (downloadURL != null) {
+                                                BaseApplication.download(
+                                                        SubjectChooseActivity.this, downloadURL, downloadDirectory
+                                                );
+                                            }
+                                        }, null, () -> {}, null
+                                );
+                            }
                         }
                     }
                 });

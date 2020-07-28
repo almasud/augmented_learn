@@ -23,6 +23,7 @@ import com.google.ar.sceneform.rendering.ViewRenderable;
 import com.google.ar.sceneform.ux.ArFragment;
 import com.google.ar.sceneform.ux.TransformableNode;
 
+import java.io.File;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
@@ -97,15 +98,14 @@ public class ArComponent {
     }
 
     /**
-     * Set a {@link ModelRenderable} to a {@link TransformableNode} on the top of an {@link AnchorNode}.
+     * Set a {@link TransformableNode} of {@link ModelRenderable} from a given {@link ArModel}
+     * on the top of an {@link AnchorNode}.
      * @param modelRenderable A {@link ModelRenderable} to be set on {@link TransformableNode}.
-     * @param arModel An {@link ArModel} class to get the {@link ModelRenderable}'s data.
+     * @param arModel An {@link ArModel} instance to get the {@link ModelRenderable}'s data.
      * @param localScale An initial scale of the {@link TransformableNode}.
      */
     public void setTransformableModel(
-            @NonNull ModelRenderable modelRenderable,
-            @NonNull ArModel arModel, final float localScale) {
-
+            @NonNull ModelRenderable modelRenderable, @NonNull ArModel arModel, final float localScale) {
         // Get a transformable node from arFragment
         TransformableNode transformableNode = new TransformableNode(mArFragment.getTransformationSystem());
         // Set the model to transformableNode
@@ -129,18 +129,20 @@ public class ArComponent {
     }
 
     /**
-     * Set a {@link ModelRenderable} of given {@link ArModel} to a {@link TransformableNode}
-     * on the top of an {@link AnchorNode}.
+     * Set a {@link TransformableNode} of {@link ModelRenderable} from a given {@link ArModel} and
+     * {@link File} directory on the top of an {@link AnchorNode}.
      * @param arModel An {@link ArModel} class to get the {@link ModelRenderable}'s data.
      * @param localScale An initial scale of the {@link TransformableNode}.
+     * @param fileDirectory A {@link File} directory to be load the {@link ModelRenderable}.
      */
-    public void setTransformableModel(@NonNull ArModel arModel, final float localScale) {
+    public void setTransformableModel(
+            @NonNull ArModel arModel, final float localScale, @NonNull File fileDirectory) {
         // Get a transformable node from arFragment
         TransformableNode transformableNode = new TransformableNode(mArFragment.getTransformationSystem());
 
         // Start loading the models asynchronously
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            CompletableFuture<ModelRenderable> completableFuture = getCompletableFutureModel(arModel);
+            CompletableFuture<ModelRenderable> completableFuture = getCompletableFutureModel(arModel, fileDirectory);
 
             // If the model is not loaded, then recurse when is loaded.
             if (!completableFuture.isDone()) {
@@ -149,7 +151,7 @@ public class ArComponent {
 
                 Log.i(TAG, "setTransformableModel: The " + arModel.getName() + " model is not loaded yet!, Trying to reload the model again...");
                 CompletableFuture.allOf(completableFuture)
-                        .thenAccept(aVoid -> setTransformableModel(arModel, localScale))
+                        .thenAccept(aVoid -> setTransformableModel(arModel, localScale, fileDirectory))
                         .exceptionally(throwable -> {
                             Log.e(TAG, "setTransformableModel: Couldn't load the " + arModel.getName() + " model: " + throwable.getMessage());
                             return null;
@@ -179,7 +181,7 @@ public class ArComponent {
 
     /**
      * Set a {@link ViewRenderable} to a {@link TransformableNode} to show a {@link Layout}
-     * to be hold a name, a speak and cancel button of the {@link ArModel}.
+     * to be hold a name, a listen and cancel button of the {@link ArModel}.
      * @param transformableNode The {@link TransformableNode} to get the position
      * to be placed a new {@link TransformableNode} on the top of it.
      * @param arModel An {@link ArModel} to get the {@link ModelRenderable}'s data.
@@ -250,17 +252,18 @@ public class ArComponent {
     }
 
     /**
-     * Used to load and get a {@link List} of {@link ModelRenderable}'s {@link CompletableFuture} asynchronously.
-     * @param models The {@link List} of {@link ArModel} to be extract {@link ModelRenderable}s.
-     * @return The {@link List} of {@link ModelRenderable}'s {@link CompletableFuture}.
+     * Used to load and get a {@link List} of {@link CompletableFuture} of {@link ModelRenderable}'s asynchronously.
+     * @param models A {@link List} of {@link ArModel} to get the {@link File}s name.
+     * @param fileDirectory A {@link File} directory where the {@link File}s are located.
+     * @return A {@link List} of {@link CompletableFuture} of {@link ModelRenderable}'s.
      */
     @RequiresApi(api = Build.VERSION_CODES.N)
     public List<CompletableFuture<ModelRenderable>> getAllCompletableFutureModels(
-            @NonNull List<ArModel> models) {
+            @NonNull List<ArModel> models, @NonNull File fileDirectory) {
         // Start loading the models asynchronously.
         List<CompletableFuture<ModelRenderable>> completableFutures = models.stream()
                .map(arModel -> ModelRenderable.builder()
-                       .setSource(mContext, Uri.parse(arModel.getModelPath()))
+                       .setSource(mContext, Uri.parse(fileDirectory.getAbsolutePath() + File.separator + arModel.getFileName()))
                        .build()
                ).collect(Collectors.toList());
 
@@ -268,7 +271,7 @@ public class ArComponent {
         if (!completableFutures.get(0).isDone()) {
             Log.i(TAG, "getAllCompletableFutureModels: The models are all not loaded yet!, Trying to reload the models again...");
             CompletableFuture.allOf(completableFutures.toArray(new CompletableFuture[models.size()]))
-                    .thenAccept(aVoid -> getAllCompletableFutureModels(models))
+                    .thenAccept(aVoid -> getAllCompletableFutureModels(models, fileDirectory))
                     .exceptionally(throwable -> {
                         Log.e(TAG, "getAllCompletableFutureModels: Couldn't load the models: " + throwable.getMessage());
                         return null;
@@ -280,14 +283,15 @@ public class ArComponent {
 
     /**
      * Used to load and get a {@link ModelRenderable}'s {@link CompletableFuture} asynchronously.
-     * @param arModel The {@link ArModel} to be extract {@link ModelRenderable}s.
-     * @return A {@link ModelRenderable}'s {@link CompletableFuture}.
+     * @param arModel The {@link ArModel} to to get the {@link File}s name.
+     * @param fileDirectory A {@link File} directory where the {@link File}s are located.
+     * @return A {@link CompletableFuture} of {@link ModelRenderable}.
      */
     @RequiresApi(api = Build.VERSION_CODES.N)
     public CompletableFuture<ModelRenderable> getCompletableFutureModel(
-            @NonNull ArModel arModel) {
+            @NonNull ArModel arModel, @NonNull File fileDirectory) {
 
         return ModelRenderable.builder()
-                .setSource(mContext, Uri.parse(arModel.getModelPath())).build();
+                .setSource(mContext, Uri.parse(fileDirectory.getAbsolutePath() + File.separator + arModel.getFileName())).build();
     }
 }

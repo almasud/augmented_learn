@@ -86,11 +86,11 @@ public class ScanArFragment extends ArFragment {
   }
 
   /**
-   * Set {@link AugmentedImageDatabase} based on the type of {@link ArModel}.
-   * @param modelType The type of {@link ArModel}.
+   * Set {@link AugmentedImageDatabase} based on the type of {@link Subject}.
+   * @param subjectType The type of {@link Subject}.
    */
-  public static void setImageDatabase(int modelType) {
-    switch (modelType) {
+  public static void setImageDatabase(int subjectType) {
+    switch (subjectType) {
       case Subject.SUBJECT_VOWEL_BENGALI:
         sImageDbPath = "vowels_bengali.imgdb";
         break;

@@ -1,6 +1,7 @@
 package com.almasud.intro.ui.activity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,8 +13,8 @@ import com.almasud.intro.BaseApplication;
 import com.almasud.intro.R;
 import com.almasud.intro.databinding.ActivityLearnBinding;
 import com.almasud.intro.model.entity.ArModel;
+import com.almasud.intro.model.entity.Subject;
 import com.almasud.intro.model.util.EventMessage;
-import com.almasud.intro.model.util.ModelUtils;
 import com.almasud.intro.ui.adapter.LearnFSAdapter;
 import com.almasud.intro.ui.util.SnackbarHelper;
 import com.almasud.intro.viewmodel.ArViewModel;
@@ -22,17 +23,20 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import io.reactivex.Completable;
 
 public class LearnActivity extends AppCompatActivity {
+    private static final String TAG = LearnActivity.class.getSimpleName();
     private ActivityLearnBinding mViewBinding;
     private LearnFSAdapter mPagerAdapter;
     private List<ArModel> mArModels = new ArrayList<>();
-    private static int sModelSubject;
+    private static Bundle sBundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,11 +45,8 @@ public class LearnActivity extends AppCompatActivity {
         setContentView(mViewBinding.getRoot());
 
         // Get the bundle from intent if exists
-        Bundle bundle = getIntent().getBundleExtra(BaseApplication.BUNDLE);
-        if (bundle != null) {
-            // Get the category of ArModel
-            sModelSubject = bundle.getInt(ArModel.SUBJECT);
-        }
+       if (getIntent().getBundleExtra(BaseApplication.BUNDLE) != null)
+           sBundle = getIntent().getBundleExtra(BaseApplication.BUNDLE);
 
         // Set toolbar as an actionbar
         setSupportActionBar(mViewBinding.toolbarLearnAlphabet.getRoot());
@@ -53,7 +54,7 @@ public class LearnActivity extends AppCompatActivity {
         // Set a subtitle of the actionbar
         getSupportActionBar().setSubtitle(new StringBuilder(
                 getResources().getString(R.string.learn)).append(" | ")
-                .append(ModelUtils.getArModelCategoryName(this, sModelSubject))
+                .append(Subject.getSubjectName(this, sBundle.getInt(ArModel.SUBJECT)))
         );
 
         // Initialize the adapter
@@ -64,7 +65,7 @@ public class LearnActivity extends AppCompatActivity {
         // Get an instance of ARViewModel
         ArViewModel arViewModel = new ViewModelProvider(this).get(ArViewModel.class);
         // Get the list of live data of ArModel from ArViewModel
-        LiveData<List<ArModel>> arModelListLiveData = arViewModel.getArModelLivedData(sModelSubject);
+        LiveData<List<ArModel>> arModelListLiveData = arViewModel.getArModelLivedData(sBundle.getInt(ArModel.SUBJECT));
         // Observe the list of ARModel from ARViewModel
         arModelListLiveData.observe(this, arModels -> {
             // Set the value of mARModels (list of ARModel)
@@ -145,16 +146,35 @@ public class LearnActivity extends AppCompatActivity {
                 // Check whether the sceneform is supported for this device or not
                 // to avoid crashing the application.
                 if (BaseApplication.isSupportedAROrShowDialog(this)) {
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable(ArModel.LIST_ITEM, (Serializable) mArModels);
-                    // Specify the model category to determine what category should be
-                    // rendered in the real view.
-                    bundle.putInt(ArModel.SUBJECT, sModelSubject);
-                    bundle.putInt(ArModel.SELECTED_ITEM, selectedItem);
-                    BaseApplication.getInstance()
-                            .startNewActivity(
-                                    LearnActivity.this, LearnArActivity.class, bundle
-                            );
+                    File downloadDirectory = BaseApplication.getExternalFileDirModelsRoot(
+                            LearnActivity.this, ""
+                    );
+                    Log.d(TAG, "getArViewCallback: modelDirectory: " + ((File) sBundle.getSerializable(ArModel.MODEL_DIRECTORY)).getAbsolutePath());
+                    Log.d(TAG, "getArViewCallback: modelDirectory list: "+ Arrays.asList(((File) sBundle.getSerializable(ArModel.MODEL_DIRECTORY)).list()));
+
+                    // Check whether the model directory contains any item or not
+                    if (((File) sBundle.getSerializable(ArModel.MODEL_DIRECTORY)).list().length > 1) {
+                        sBundle.putSerializable(ArModel.LIST_ITEM, (Serializable) mArModels);
+                        sBundle.putInt(ArModel.SELECTED_ITEM, selectedItem);
+                        BaseApplication.getInstance()
+                                .startNewActivity(
+                                        LearnActivity.this, LearnArActivity.class, sBundle
+                                );
+                    } else {
+                        // If the model directory not contains any item
+                        String downloadURL = sBundle.getString(ArModel.MODEL_DOWNLOAD_URL);
+                        BaseApplication.setAlertDialog(
+                                LearnActivity.this, getResources().getString(R.string.action_choose),
+                                R.drawable.ic_help_gray, getResources().getString(R.string.need_download_models),
+                                () -> {
+                                    if (downloadURL != null) {
+                                        BaseApplication.download(
+                                                LearnActivity.this, downloadURL, downloadDirectory
+                                        );
+                                    }
+                                }, null, () -> {}, null
+                        );
+                    }
                 }
                 // Signal the subscribers for completing the task
                 emitter.onComplete();

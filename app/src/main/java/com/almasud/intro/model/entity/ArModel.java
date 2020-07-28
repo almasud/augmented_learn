@@ -2,8 +2,6 @@ package com.almasud.intro.model.entity;
 
 import androidx.annotation.DrawableRes;
 
-import com.google.ar.sceneform.rendering.ModelRenderable;
-
 import java.io.Serializable;
 
 /**
@@ -15,22 +13,25 @@ public class ArModel implements Serializable {
     public static final String LIST_ITEM = "List_Item";
     public static final String SELECTED_ITEM = "Selected_Item";
     public static final String SUBJECT = "Subject";
+    public static final String MODEL_DIRECTORY = "model_directory";
+    public static final String MODEL_DOWNLOAD_URL = "model_download_url";
+
     private int id;
     private String name;
     private int photo;
-    private String modelPath;
+    private String fileName;
     private Voice voice;
     private Subject subject;
     private String extraName;
     private int extraPhoto;
 
     public ArModel(
-            int id, String name, int photo, String modelPath,
+            int id, String name, int photo, String fileName,
             Voice voice, Subject subject) {
         this.id = id;
         this.name = name;
         this.photo = photo;
-        this.modelPath = modelPath;
+        this.fileName = fileName;
         this.voice = voice;
         this.subject = subject;
     }
@@ -57,10 +58,10 @@ public class ArModel implements Serializable {
     }
 
     /**
-     * @return The {@link ModelRenderable} path of {@link ArModel}.
+     * @return A {@link String} file name of {@link ArModel}.
      */
-    public String getModelPath() {
-        return modelPath;
+    public String getFileName() {
+        return fileName;
     }
 
     /**
