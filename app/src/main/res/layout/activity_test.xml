@@ -251,7 +251,7 @@
                 android:textAlignment="center"
                 android:textColor="@color/colorPrimary"
                 android:textSize="22sp"
-                tools:text="@string/animal" />
+                tools:text="@string/animal_english" />
 
             <TextView
                 android:id="@+id/tvTestItemName"

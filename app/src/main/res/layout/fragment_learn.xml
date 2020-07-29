@@ -26,7 +26,7 @@
             android:id="@+id/ivLearnRealView"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/ar"
+            android:src="@drawable/ar_view"
             android:scaleType="centerCrop"
             android:clickable="true"
             android:focusable="true"

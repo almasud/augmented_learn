@@ -15,6 +15,7 @@ import com.almasud.intro.BaseApplication;
 import com.almasud.intro.R;
 import com.almasud.intro.model.util.EventMessage;
 import com.almasud.intro.ui.activity.HomeActivity;
+import com.almasud.intro.ui.activity.SubjectChooseActivity;
 import com.almasud.intro.util.PreferenceManager;
 
 import org.greenrobot.eventbus.EventBus;
@@ -69,7 +70,7 @@ public class DownloadService extends Service {
             );
 
             // Create a notify pending intent
-            Intent notifyIntent = new Intent(this, HomeActivity.class);
+            Intent notifyIntent = new Intent(this, SubjectChooseActivity.class);
             PendingIntent notifyPendingIntent = PendingIntent.getActivity(
                     this, 0, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT
             );
