@@ -1,12 +1,17 @@
 package com.almasud.intro.ui.activity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.almasud.intro.BaseApplication;
@@ -65,6 +70,21 @@ public class SubjectChooseActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         finish();
         return true;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_subject_choose, menu);
+        if (mChooseService != BaseApplication.SCAN)
+            menu.findItem(R.id.action_get_ar_book).setVisible(false);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.action_get_ar_book)
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(BaseApplication.URL_AR_BOOK)));
+        return super.onOptionsItemSelected(item);  // This makes sure onSupportNavigateUp() is called
     }
 
     /**
@@ -185,7 +205,7 @@ public class SubjectChooseActivity extends AppCompatActivity {
                                 String downloadURL = modelDownloadURL;
                                 BaseApplication.setAlertDialog(
                                         SubjectChooseActivity.this, getResources().getString(R.string.action_choose),
-                                        R.drawable.ic_help_gray, getResources().getString(R.string.need_download_models),
+                                        R.drawable.ic_help, getResources().getString(R.string.need_download_models),
                                         () -> {
                                             if (downloadURL != null) {
                                                 BaseApplication.download(

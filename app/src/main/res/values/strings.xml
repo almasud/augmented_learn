@@ -13,6 +13,7 @@
 
     <!-- Strings used for navigation -->
     <string name="action_settings">Settings</string>
+    <string name="action_get_ar_book">Have no AR book?</string>
     <string name="learn">Learn</string>
     <string name="test">Test</string>
     <string name="scan">Scan</string>

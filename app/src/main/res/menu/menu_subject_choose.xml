@@ -1,0 +1,9 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.almasud.intro.ui.activity.SubjectChooseActivity">
+    <item
+        android:id="@+id/action_get_ar_book"
+        android:title="@string/action_get_ar_book"
+        app:showAsAction="always" />
+</menu>

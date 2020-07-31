@@ -165,7 +165,7 @@ public class LearnActivity extends AppCompatActivity {
                         String downloadURL = sBundle.getString(ArModel.MODEL_DOWNLOAD_URL);
                         BaseApplication.setAlertDialog(
                                 LearnActivity.this, getResources().getString(R.string.action_choose),
-                                R.drawable.ic_help_gray, getResources().getString(R.string.need_download_models),
+                                R.drawable.ic_help, getResources().getString(R.string.need_download_models),
                                 () -> {
                                     if (downloadURL != null) {
                                         BaseApplication.download(

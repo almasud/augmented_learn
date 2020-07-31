@@ -40,7 +40,7 @@ public class HomeActivity extends AppCompatActivity {
     public void onBackPressed() {
         BaseApplication.setAlertDialog(
                 this, getResources().getString(R.string.action_choose),
-                R.drawable.ic_help_gray, getResources().getString(R.string.want_to_exit),
+                R.drawable.ic_help, getResources().getString(R.string.want_to_exit),
                 super::onBackPressed, null, () ->{}, null
         );
     }

@@ -71,6 +71,7 @@ public class BaseApplication extends Application implements LifecycleObserver {
     public static final String URL_ALPHABETS_ENGLISH = "https://almasud.000webhostapp.com/download/alphabets.zip";
     public static final String URL_NUMBERS_ENGLISH = "https://almasud.000webhostapp.com/download/numbers.zip";
     public static final String URL_ANIMALS_ENGLISH = "https://almasud.000webhostapp.com/download/animals.zip";
+    public static final String URL_AR_BOOK = "https://almasud.000webhostapp.com/download/ar_book.pdf";
 
     private static final double MIN_OPEN_GL_VERSION = 3.0;
     public static final String NOTIFICATION_CHANNEL_DOWNLOADER = "Downloader_Channel";
@@ -381,7 +382,7 @@ public class BaseApplication extends Application implements LifecycleObserver {
             // Set an alert dialog
             setAlertDialog(
                     activity, activity.getResources().getString(R.string.action_choose),
-                    R.drawable.ic_help_gray,
+                    R.drawable.ic_help,
                     activity.getResources().getString(R.string.not_supported_ar_core),
                     () -> {
                         final String appPackageName = "com.google.ar.core";
