@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.github.com.almasud.augmented_school.ui.activity.ScanActivity">
+    tools:context="com.github.com.almasud.Augmented_School.ui.activity.ScanActivity">
 
     <include
         android:id="@+id/toolbarScan"
@@ -18,7 +18,7 @@
 
 
         <fragment
-            android:name="com.github.com.almasud.augmented_school.ui.fragment.ScanArFragment"
+            android:name="com.github.com.almasud.Augmented_School.ui.fragment.ScanArFragment"
             android:id="@+id/ArFragmentScan"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

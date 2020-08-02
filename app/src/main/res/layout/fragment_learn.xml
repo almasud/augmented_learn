@@ -6,7 +6,7 @@
     android:orientation="horizontal"
     android:layout_gravity="center"
     android:gravity="center"
-    tools:context="com.github.com.almasud.augmented_school.ui.fragment.LearnFragment">
+    tools:context="com.github.com.almasud.Augmented_School.ui.fragment.LearnFragment">
 
     <ImageView
         android:id="@+id/ivLearn"

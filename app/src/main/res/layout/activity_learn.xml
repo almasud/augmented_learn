@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.github.com.almasud.augmented_school.ui.activity.LearnActivity">
+    tools:context="com.github.com.almasud.Augmented_School.ui.activity.LearnActivity">
 
     <include
         android:id="@+id/toolbarLearnAlphabet"
