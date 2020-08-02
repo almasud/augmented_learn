@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activity.SubjectChooseActivity">
+    tools:context="com.github.com.almasud.augmented_school.ui.activity.SubjectChooseActivity">
 
     <include
         android:id="@+id/toolServiceChoose"

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    tools:context=".ui.activity.LauncherActivity">
+    tools:context="com.github.com.almasud.augmented_school.ui.activity.LauncherActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,14 +20,32 @@
             android:src="@drawable/school_children"
             tools:ignore="ContentDescription" />
 
-        <ImageView
-            android:id="@+id/imageAppLogo"
+        <LinearLayout
+            android:id="@+id/wrapperImageAppName"
             android:layout_width="200dp"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="15dp"
-            android:src="@drawable/intro_logo"
-            android:layout_marginTop="-20dp"
-            tools:ignore="ContentDescription" />
+            android:layout_marginTop="-40dp"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/imageAppNameOne"
+                android:layout_width="200dp"
+                android:layout_height="100dp"
+                android:src="@drawable/augmented_logo"
+                tools:ignore="ContentDescription" />
+
+            <ImageView
+                android:id="@+id/imageAppNameTwo"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:src="@drawable/school_logo"
+                android:layout_marginTop="-45dp"
+                android:visibility="invisible"
+                tools:ignore="ContentDescription" />
+
+        </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
@@ -36,6 +54,7 @@
             android:text="@string/learn_with_reality"
             android:textColor="@android:color/white"
             android:textSize="24sp"
+            android:layout_marginTop="-10dp"
             android:textStyle="bold" />
 
     </LinearLayout>
