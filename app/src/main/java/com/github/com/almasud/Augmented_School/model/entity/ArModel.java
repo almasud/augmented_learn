@@ -14,7 +14,6 @@ public class ArModel implements Serializable {
     public static final String SELECTED_ITEM = "Selected_Item";
     public static final String SUBJECT = "Subject";
     public static final String MODEL_DIRECTORY = "model_directory";
-    public static final String MODEL_DOWNLOAD_URL = "model_download_url";
 
     private int id;
     private String name;
@@ -37,21 +36,21 @@ public class ArModel implements Serializable {
     }
 
     /**
-     * @return The name of {@link ArModel}.
+     * @return An Id of {@link ArModel}.
      */
     public int getId() {
         return id;
     }
 
     /**
-     * @return The name of {@link ArModel}.
+     * @return A {@link String} name of {@link ArModel}.
      */
     public String getName() {
         return name;
     }
 
     /**
-     * @return The {@link DrawableRes} photo id of {@link ArModel}.
+     * @return A {@link DrawableRes} photo id of {@link ArModel}.
      */
     public int getPhoto() {
         return photo;
@@ -65,28 +64,28 @@ public class ArModel implements Serializable {
     }
 
     /**
-     * @return The {@link Voice} of {@link ArModel}.
+     * @return A {@link Voice} of {@link ArModel}.
      */
     public Voice getVoice() {
         return voice;
     }
 
     /**
-     * @return The {@link Subject} of {@link ArModel}.
+     * @return A {@link Subject} of {@link ArModel}.
      */
     public Subject getSubject() {
         return subject;
     }
 
     /**
-     * @return The extra name of {@link ArModel}.
+     * @return A {@link String} extra name of {@link ArModel}.
      */
     public String getExtraName() {
         return extraName;
     }
 
     /**
-     * Set the extra name of {@link ArModel}.
+     * Set an extra name of {@link ArModel}.
      * @return An instance of {@link ArModel}.
      */
     public ArModel setExtraName(String extraName) {
@@ -95,14 +94,14 @@ public class ArModel implements Serializable {
     }
 
     /**
-     * @return The {@link DrawableRes} extra photo id of {@link ArModel}.
+     * @return A {@link DrawableRes} extra photo id of {@link ArModel}.
      */
     public int getExtraPhoto() {
         return extraPhoto;
     }
 
     /**
-     * Set the {@link DrawableRes} extra photo id of {@link ArModel}.
+     * Set a {@link DrawableRes} extra photo id of {@link ArModel}.
      * @return An instance of {@link ArModel}.
      */
     public ArModel setExtraPhoto(int extraPhoto) {

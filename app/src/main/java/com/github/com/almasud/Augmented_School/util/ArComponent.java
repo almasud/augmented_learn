@@ -1,6 +1,7 @@
 package com.github.com.almasud.Augmented_School.util;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
 import android.text.Layout;
@@ -235,6 +236,11 @@ public class ArComponent {
                             // Get the view of name and hear button
                             ImageButton hearButton = parentView.findViewById(R.id.ibItemHear);
                             TextView nameTV = parentView.findViewById(R.id.tvItemName);
+                            // Add a font according to language type
+                            BaseApplication.changeTextViewFont(
+                                    mContext, arModel.getSubject().getLanguage().getId(),
+                                    Typeface.NORMAL, nameTV
+                            );
 
                             // Set the name of item except vowel & alphabet category of ArModel
                             if (arModel.getExtraName() == null)

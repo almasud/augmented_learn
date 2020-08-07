@@ -1,66 +1,74 @@
 package com.github.com.almasud.Augmented_School.model.entity;
 
-import android.content.Context;
-
-import com.github.com.almasud.Augmented_School.R;
+import androidx.annotation.DrawableRes;
 
 import java.io.Serializable;
 
 /**
- * An entity model class for subject of {@link ArModel}.
+ * An entity subject model class for {@link ArModel}.
  *
  * @author Abdullah Almasud
  */
 public class Subject implements Serializable {
-    public static final int SUBJECT_VOWEL_BENGALI = 0;
-    public static final int SUBJECT_ALPHABET_BENGALI = 1;
-    public static final int SUBJECT_NUMBER_BENGALI = 2;
-    public static final int SUBJECT_ALPHABET_ENGLISH = 3;
-    public static final int SUBJECT_NUMBER_ENGLISH = 4;
-    public static final int SUBJECT_ANIMAL_ENGLISH = 5;
+    public static final int VOWEL_BENGALI = 0;
+    public static final int ALPHABET_BENGALI = 1;
+    public static final int NUMBER_BENGALI = 2;
+    public static final int ALPHABET_ENGLISH = 3;
+    public static final int NUMBER_ENGLISH = 4;
+    public static final int ANIMAL_ENGLISH = 5;
+    public static final String DOWNLOAD_URL_VOWELS_BENGALI = "https://almasud.000webhostapp.com/download/vowels_bengali.zip";
+    public static final String DOWNLOAD_URL_ALPHABETS_BENGALI = "https://almasud.000webhostapp.com/download/alphabets_bengali.zip";
+    public static final String DOWNLOAD_URL_NUMBERS_BENGALI = "https://almasud.000webhostapp.com/download/numbers_bengali.zip";
+    public static final String DOWNLOAD_URL_ALPHABETS_ENGLISH = "https://almasud.000webhostapp.com/download/alphabets.zip";
+    public static final String DOWNLOAD_URL_NUMBERS_ENGLISH = "https://almasud.000webhostapp.com/download/numbers.zip";
+    public static final String DOWNLOAD_URL_ANIMALS_ENGLISH = "https://almasud.000webhostapp.com/download/animals.zip";
+
     private int id;
     private String name;
+    private int coverPhoto;
+    private Language language;
+    private String downloadURL;
 
-    public Subject(int id, String name) {
+    public Subject(int id, String name, int coverPhoto, Language language, String downloadURL) {
         this.id = id;
         this.name = name;
+        this.coverPhoto = coverPhoto;
+        this.language = language;
+        this.downloadURL = downloadURL;
     }
 
     /**
-     * @return The ID of {@link Subject}.
+     * @return An Id of {@link Subject}.
      */
     public int getId() {
         return id;
     }
 
     /**
-     * @return The name of {@link Subject}.
+     * @return A name of {@link Subject}.
      */
     public String getName() {
         return name;
     }
 
     /**
-     *
-     * @param context The {@link Context}.
-     * @param subjectId An integer Id of {@link Subject}.
-     * @return A {@link String} name of {@link Subject}.
+     * @return A {@link DrawableRes} cover photo id of {@link Subject}.
      */
-    public static String getSubjectName(Context context, int subjectId) {
-        switch (subjectId) {
-            case Subject.SUBJECT_VOWEL_BENGALI:
-                return context.getResources().getString(R.string.vowel_bengali);
-            case Subject.SUBJECT_ALPHABET_BENGALI:
-                return context.getResources().getString(R.string.alphabet_bengali);
-            case Subject.SUBJECT_NUMBER_BENGALI:
-                return context.getResources().getString(R.string.number_bengali);
-            case Subject.SUBJECT_ALPHABET_ENGLISH:
-                return context.getResources().getString(R.string.alphabet_english);
-            case Subject.SUBJECT_NUMBER_ENGLISH:
-                return context.getResources().getString(R.string.number_english);
-            case Subject.SUBJECT_ANIMAL_ENGLISH:
-                return context.getResources().getString(R.string.animal_english);
-        }
-        return null;
+    public int getCoverPhoto() {
+        return coverPhoto;
+    }
+
+    /**
+     * @return A {@link Language} of {@link Subject}.
+     */
+    public Language getLanguage() {
+        return language;
+    }
+
+    /**
+     * @return A {@link String} url of {@link Subject}.
+     */
+    public String getDownloadURL() {
+        return downloadURL;
     }
 }

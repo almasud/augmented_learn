@@ -1,5 +1,6 @@
 package com.github.com.almasud.Augmented_School.ui.activity;
 
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -58,9 +59,14 @@ public class LearnArActivity extends AppCompatActivity {
         setSupportActionBar(mViewBinding.toolbarRealView.getRoot());
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         // Set a subtitle of the actionbar
-        getSupportActionBar().setSubtitle(new StringBuilder(
-                getResources().getString(R.string.real_view)).append(" | ")
-                .append(Subject.getSubjectName(this, sBundle.getInt(ArModel.SUBJECT)))
+        getSupportActionBar().setSubtitle(
+                getResources().getString(R.string.real_view) + " | " +
+                        ((Subject) sBundle.getSerializable(ArModel.SUBJECT)).getName()
+        );
+        // Change the toolbar title and subtitle font
+        BaseApplication.changeToolbarTitleFont(
+                this, ((Subject) sBundle.getSerializable(ArModel.SUBJECT)).getLanguage().getId(),
+                Typeface.NORMAL, mViewBinding.toolbarRealView.getRoot()
         );
 
         // Initialize the RV adapter
@@ -89,12 +95,12 @@ public class LearnArActivity extends AppCompatActivity {
             // Set the selected ModelRenderable into TransformableModel
             try {
                 // Set the initial scale of model.
-                float modelLocalScale = (sBundle.getInt(ArModel.SUBJECT) == Subject.SUBJECT_ALPHABET_BENGALI
-                        || sBundle.getInt(ArModel.SUBJECT) == Subject.SUBJECT_ALPHABET_ENGLISH)? 0.3f
-                        : (sBundle.getInt(ArModel.SUBJECT) == Subject.SUBJECT_VOWEL_BENGALI
-                        || sBundle.getInt(ArModel.SUBJECT) == Subject.SUBJECT_NUMBER_BENGALI
-                        || sBundle.getInt(ArModel.SUBJECT) == Subject.SUBJECT_NUMBER_ENGLISH)? 0.25f
-                        : (sBundle.getInt(ArModel.SUBJECT) == Subject.SUBJECT_ANIMAL_ENGLISH)? 15.0f: 1.0f;
+                float modelLocalScale = (sBundle.getInt(ArModel.SUBJECT) == Subject.ALPHABET_BENGALI
+                        || sBundle.getInt(ArModel.SUBJECT) == Subject.ALPHABET_ENGLISH)? 0.3f
+                        : (sBundle.getInt(ArModel.SUBJECT) == Subject.VOWEL_BENGALI
+                        || sBundle.getInt(ArModel.SUBJECT) == Subject.NUMBER_BENGALI
+                        || sBundle.getInt(ArModel.SUBJECT) == Subject.NUMBER_ENGLISH)? 0.25f
+                        : (sBundle.getInt(ArModel.SUBJECT) == Subject.ANIMAL_ENGLISH)? 15.0f: 1.0f;
 
                 // Set the transformable model.
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {

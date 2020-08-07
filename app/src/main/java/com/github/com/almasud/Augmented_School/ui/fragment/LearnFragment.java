@@ -1,5 +1,6 @@
 package com.github.com.almasud.Augmented_School.ui.fragment;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.view.animation.AnimationUtils;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.github.com.almasud.Augmented_School.BaseApplication;
 import com.github.com.almasud.Augmented_School.R;
 import com.github.com.almasud.Augmented_School.databinding.FragmentLearnBinding;
 import com.github.com.almasud.Augmented_School.model.entity.ArModel;
@@ -27,8 +29,8 @@ public class LearnFragment extends Fragment {
     private FragmentLearnBinding mViewBinding;
     private ArModel mArModel;
 
-    public LearnFragment(ArModel ARModel) {
-        mArModel = ARModel;
+    public LearnFragment(ArModel arModel) {
+        mArModel = arModel;
     }
 
     @Override
@@ -48,6 +50,11 @@ public class LearnFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         // Set the photo and name of ArModel
         mViewBinding.ivLearn.setImageResource(mArModel.getPhoto());
+        // Add text view font according to language type
+        BaseApplication.changeTextViewFont(
+                getContext(), mArModel.getSubject().getLanguage().getId(), Typeface.NORMAL,
+                mViewBinding.tvLearnName
+        );
 
         // Check whether the extra photo and name of ArModel is exists or not
         if (mArModel.getExtraName() != null) {

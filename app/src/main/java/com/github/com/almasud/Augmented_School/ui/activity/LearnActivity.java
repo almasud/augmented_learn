@@ -1,5 +1,6 @@
 package com.github.com.almasud.Augmented_School.ui.activity;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +14,7 @@ import com.github.com.almasud.Augmented_School.BaseApplication;
 import com.github.com.almasud.Augmented_School.R;
 import com.github.com.almasud.Augmented_School.databinding.ActivityLearnBinding;
 import com.github.com.almasud.Augmented_School.model.entity.ArModel;
+import com.github.com.almasud.Augmented_School.model.entity.Language;
 import com.github.com.almasud.Augmented_School.model.entity.Subject;
 import com.github.com.almasud.Augmented_School.model.util.EventMessage;
 import com.github.com.almasud.Augmented_School.ui.adapter.LearnFSAdapter;
@@ -49,12 +51,17 @@ public class LearnActivity extends AppCompatActivity {
            sBundle = getIntent().getBundleExtra(BaseApplication.BUNDLE);
 
         // Set toolbar as an actionbar
-        setSupportActionBar(mViewBinding.toolbarLearnAlphabet.getRoot());
+        setSupportActionBar(mViewBinding.toolbarLearn.getRoot());
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         // Set a subtitle of the actionbar
-        getSupportActionBar().setSubtitle(new StringBuilder(
-                getResources().getString(R.string.learn)).append(" | ")
-                .append(Subject.getSubjectName(this, sBundle.getInt(ArModel.SUBJECT)))
+        getSupportActionBar().setSubtitle(
+                getResources().getString(R.string.learn) + " | " +
+                ((Subject) sBundle.getSerializable(ArModel.SUBJECT)).getName()
+        );
+        // Change the toolbar title and subtitle font
+        BaseApplication.changeToolbarTitleFont(
+                this, ((Subject) sBundle.getSerializable(ArModel.SUBJECT)).getLanguage().getId(),
+                Typeface.NORMAL, mViewBinding.toolbarLearn.getRoot()
         );
 
         // Initialize the adapter
@@ -62,13 +69,13 @@ public class LearnActivity extends AppCompatActivity {
         // Set the adapter to view pager2
         mViewBinding.viewPagerLearn.setAdapter(mPagerAdapter);
 
-        // Get an instance of ARViewModel
+        // Get an instance of ArViewModel
         ArViewModel arViewModel = new ViewModelProvider(this).get(ArViewModel.class);
         // Get the list of live data of ArModel from ArViewModel
-        LiveData<List<ArModel>> arModelListLiveData = arViewModel.getArModelLivedData(sBundle.getInt(ArModel.SUBJECT));
-        // Observe the list of ARModel from ARViewModel
-        arModelListLiveData.observe(this, arModels -> {
-            // Set the value of mARModels (list of ARModel)
+        LiveData<List<ArModel>> arModelsLiveData = arViewModel.getArModelsBySubjectLivedData(((Subject) sBundle.getSerializable(ArModel.SUBJECT)).getId());
+        // Observe the list of ArModel from ARViewModel
+        arModelsLiveData.observe(this, arModels -> {
+            // Set the value of mArModels (list of ARModel)
             mArModels = arModels;
 
             if (mArModels.size() > 0) {
@@ -162,7 +169,7 @@ public class LearnActivity extends AppCompatActivity {
                                 );
                     } else {
                         // If the model directory not contains any item
-                        String downloadURL = sBundle.getString(ArModel.MODEL_DOWNLOAD_URL);
+                        String downloadURL = mArModels.get(selectedItem).getSubject().getDownloadURL();
                         BaseApplication.setAlertDialog(
                                 LearnActivity.this, getResources().getString(R.string.action_choose),
                                 R.drawable.ic_help, getResources().getString(R.string.need_download_models),

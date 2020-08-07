@@ -1,6 +1,7 @@
 package com.github.com.almasud.Augmented_School.ui.activity;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -55,9 +56,14 @@ public class TestActivity extends AppCompatActivity {
         setSupportActionBar(mViewBinding.toolbarTest.getRoot());
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         // Set a subtitle of the actionbar
-        getSupportActionBar().setSubtitle(new StringBuilder(
-                getResources().getString(R.string.test)).append(" | ")
-                .append(Subject.getSubjectName(this, sBundle.getInt(ArModel.SUBJECT)))
+        getSupportActionBar().setSubtitle(
+                getResources().getString(R.string.test) + " | " +
+                ((Subject) sBundle.getSerializable(ArModel.SUBJECT)).getName()
+        );
+        // Change the toolbar title and subtitle font
+        BaseApplication.changeToolbarTitleFont(
+                this, ((Subject) sBundle.getSerializable(ArModel.SUBJECT)).getLanguage().getId(),
+                Typeface.NORMAL, mViewBinding.toolbarTest.getRoot()
         );
 
         // Load an animation for navigation items
@@ -70,16 +76,21 @@ public class TestActivity extends AppCompatActivity {
         // Get an instance of ARViewModel
         ArViewModel arViewModel = new ViewModelProvider(this).get(ArViewModel.class);
         // Get the list of live data of ArModel from ArViewModel
-        LiveData<List<ArModel>> arModelListLiveData = arViewModel.getArModelLivedData(sBundle.getInt(ArModel.SUBJECT));
+        LiveData<List<ArModel>> arModelListLiveData = arViewModel.getArModelsBySubjectLivedData(((Subject) sBundle.getSerializable(ArModel.SUBJECT)).getId());
         // Observe the list of ArModel from ArViewModel
         arModelListLiveData.observe(this, arModels -> {
             // Set the value of mArModels (list of ArModel).
             mArModels = arModels;
 
             if (mArModels.size() > 0) {
+                // Add a font according to language type
+                BaseApplication.changeTextViewFont(
+                        this, ((Subject) sBundle.getSerializable(ArModel.SUBJECT)).getLanguage().getId(),
+                        Typeface.NORMAL, mViewBinding.tvTestModelType, mViewBinding.tvTestItemName
+                );
                 // Set the name of model type
                 mViewBinding.tvTestModelType.setText(
-                        Subject.getSubjectName(this, sBundle.getInt(ArModel.SUBJECT))
+                        ((Subject) sBundle.getSerializable(ArModel.SUBJECT)).getName()
                 );
 
                 // Initialize the test

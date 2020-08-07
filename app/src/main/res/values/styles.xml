@@ -28,6 +28,10 @@
         <item name="android:textColorPrimary">@android:color/white</item>
         <!-- Customize color of navigation drawer and back arrow icons -->
         <item name="colorControlNormal">@android:color/white</item>
+        <!-- Customize navigation item of toolbar -->
+        <item name="navigationIcon">@drawable/ic_arrow_back_ios</item>
+        <!-- Customize the font of toolbar -->
+<!--        <item name="fontFamily">cursive</item>-->
     </style>
 
     <!-- Customize text appearance for toolbar subtitle -->

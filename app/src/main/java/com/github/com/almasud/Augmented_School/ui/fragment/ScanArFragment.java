@@ -87,26 +87,26 @@ public class ScanArFragment extends ArFragment {
 
   /**
    * Set {@link AugmentedImageDatabase} based on the type of {@link Subject}.
-   * @param subjectType The type of {@link Subject}.
+   * @param subjectId The Id of {@link Subject}.
    */
-  public static void setImageDatabase(int subjectType) {
-    switch (subjectType) {
-      case Subject.SUBJECT_VOWEL_BENGALI:
+  public static void setImageDatabase(int subjectId) {
+    switch (subjectId) {
+      case Subject.VOWEL_BENGALI:
         sImageDbPath = "vowels_bengali.imgdb";
         break;
-      case Subject.SUBJECT_ALPHABET_BENGALI:
+      case Subject.ALPHABET_BENGALI:
         sImageDbPath = "alphabets_bengali.imgdb";
         break;
-      case Subject.SUBJECT_NUMBER_BENGALI:
+      case Subject.NUMBER_BENGALI:
         sImageDbPath = "numbers_bengali.imgdb";
         break;
-      case Subject.SUBJECT_ALPHABET_ENGLISH:
+      case Subject.ALPHABET_ENGLISH:
         sImageDbPath = "alphabets.imgdb";
         break;
-      case Subject.SUBJECT_NUMBER_ENGLISH:
+      case Subject.NUMBER_ENGLISH:
         sImageDbPath = "numbers.imgdb";
         break;
-      case Subject.SUBJECT_ANIMAL_ENGLISH:
+      case Subject.ANIMAL_ENGLISH:
         sImageDbPath = "animals.imgdb";
         break;
     }

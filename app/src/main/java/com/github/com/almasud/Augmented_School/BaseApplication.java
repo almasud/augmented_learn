@@ -9,6 +9,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
@@ -17,12 +18,15 @@ import android.os.Environment;
 import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
@@ -30,6 +34,7 @@ import androidx.lifecycle.OnLifecycleEvent;
 import androidx.lifecycle.ProcessLifecycleOwner;
 
 import com.github.com.almasud.Augmented_School.model.entity.ArModel;
+import com.github.com.almasud.Augmented_School.model.entity.Language;
 import com.github.com.almasud.Augmented_School.model.entity.Voice;
 import com.github.com.almasud.Augmented_School.service.DownloadService;
 import com.github.com.almasud.Augmented_School.service.UnzipService;
@@ -62,16 +67,10 @@ public class BaseApplication extends Application implements LifecycleObserver {
     public static final String DIRECTORY_VOWELS_BENGALI = "vowels_bengali";
     public static final String DIRECTORY_ALPHABETS_BENGALI = "alphabets_bengali";
     public static final String DIRECTORY_NUMBERS_BENGALI = "numbers_bengali";
-    public static final String DIRECTORY_ALPHABETS_ENGLISH = "alphabets_english";
-    public static final String DIRECTORY_NUMBERS_ENGLISH = "numbers_english";
-    public static final String DIRECTORY_ANIMALS_ENGLISH = "animals_english";
-    public static final String URL_VOWELS_BENGALI = "https://almasud.000webhostapp.com/download/vowels_bengali.zip";
-    public static final String URL_ALPHABETS_BENGALI = "https://almasud.000webhostapp.com/download/alphabets_bengali.zip";
-    public static final String URL_NUMBERS_BENGALI = "https://almasud.000webhostapp.com/download/numbers_bengali.zip";
-    public static final String URL_ALPHABETS_ENGLISH = "https://almasud.000webhostapp.com/download/alphabets.zip";
-    public static final String URL_NUMBERS_ENGLISH = "https://almasud.000webhostapp.com/download/numbers.zip";
-    public static final String URL_ANIMALS_ENGLISH = "https://almasud.000webhostapp.com/download/animals.zip";
-    public static final String URL_AR_BOOK = "https://almasud.000webhostapp.com/download/ar_book.pdf";
+    public static final String DIRECTORY_ALPHABETS_ENGLISH = "alphabets";
+    public static final String DIRECTORY_NUMBERS_ENGLISH = "numbers";
+    public static final String DIRECTORY_ANIMALS_ENGLISH = "animals";
+    public static final String DOWNLOAD_URL_AR_BOOK = "https://almasud.000webhostapp.com/download/ar_book.pdf";
 
     private static final double MIN_OPEN_GL_VERSION = 3.0;
     public static final String NOTIFICATION_CHANNEL_DOWNLOADER = "Downloader_Channel";
@@ -226,8 +225,8 @@ public class BaseApplication extends Application implements LifecycleObserver {
      * @param destination A {@link Class} of an {@link Activity} to be started.
      * @param bundle The bundle to be send with the {@link Intent}.
      */
-    public void startNewActivity(@NonNull Activity activity,
-                                 @NonNull Class destination, @Nullable Bundle bundle) {
+    public void startNewActivity(
+            @NonNull Activity activity, @NonNull Class destination, @Nullable Bundle bundle) {
         Intent intent = new Intent(activity, destination);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         if (bundle != null)
@@ -645,8 +644,10 @@ public class BaseApplication extends Application implements LifecycleObserver {
      * @param targetDirectory A {@link File} directory to be placed the downloaded {@link File}.
      */
     public static void download(
-            @NonNull Activity activity, @NonNull final String downloadURL, @NonNull File targetDirectory) {
+            @NonNull Activity activity, @NonNull final String downloadURL,
+            @NonNull File targetDirectory) {
         Log.d(TAG, "download: The download url: "+ downloadURL);
+        Log.d(TAG, "download: The target directory: "+ targetDirectory.getAbsolutePath());
         PreferenceManager preferenceManager = new PreferenceManager(activity);
 
         // Check the download is already in progress or not
@@ -667,6 +668,67 @@ public class BaseApplication extends Application implements LifecycleObserver {
 
             // Start the service as foreground
             ContextCompat.startForegroundService(activity, downloadServiceIntent);
+        }
+    }
+
+    /**
+     * Change the {@link Typeface} of {@link TextView} (s) according to the {@link Language}.
+     * @param context The context of {@link Application}.
+     * @param language A type of {@link Language}.
+     * @param style A style of the {@link Typeface}.
+     * @param textViews {@link TextView} (s) to be set the {@link Typeface}.
+     */
+    public static void changeTextViewFont(
+            @NonNull Context context, int language, int style, @NonNull TextView ...textViews) {
+
+        // Set a custom font according to language
+        String fontPath = null;
+        switch (language) {
+            case Language.BENGALI:
+                fontPath = "fonts/bengali/SolaimanLipi.ttf";
+                Log.d(TAG, "changeTextViewFont: Bengali language loaded.");
+                break;
+            case Language.ENGLISH:
+                fontPath = "fonts/english/BerkshireSwash-Regular.ttf";
+                Log.d(TAG, "changeTextViewFont: English language loaded.");
+                break;
+        }
+
+        // Create type face from asset
+        Typeface typeface = Typeface.createFromAsset(context.getAssets(), fontPath);
+        // Set typeface of the text view (s)
+        for (TextView textView: textViews) {
+            textView.setTypeface(typeface, style);
+        }
+    }
+
+    /**
+     * Change the {@link Typeface} of {@link Toolbar} title and subtitle
+     * according to the {@link Language}.
+     * @param activity An instance of {@link Activity}.
+     * @param language A type of {@link Language}.
+     * @param style A style of the {@link Typeface}.
+     * @param toolbar A {@link Toolbar} that title to be changed.
+     */
+    public static void changeToolbarTitleFont(
+            @NonNull Activity activity, int language, int style, @NonNull Toolbar toolbar) {
+
+        for (int i = 0; i < toolbar.getChildCount(); i++) {
+            View view = toolbar.getChildAt(i);
+            if (view instanceof TextView) {
+                TextView textView = (TextView) view;
+                // For toolbar title
+                if (textView.getText().equals(toolbar.getTitle())) {
+                    textView.setTextSize(16f);
+                    changeTextViewFont(activity, Language.ENGLISH, style, textView);
+                }
+                // For toolbar subtitle
+                if (textView.getText().equals(toolbar.getSubtitle())) {
+                    Log.d(TAG, "changeToolbarTitleFont: Subtitle reached.");
+                    if (language != Language.ENGLISH)
+                        changeTextViewFont(activity, language, style, textView);
+                }
+            }
         }
     }
 }

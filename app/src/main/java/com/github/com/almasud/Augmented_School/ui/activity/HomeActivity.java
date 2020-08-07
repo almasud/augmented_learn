@@ -1,5 +1,7 @@
 package com.github.com.almasud.Augmented_School.ui.activity;
 
+import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -11,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.github.com.almasud.Augmented_School.BaseApplication;
 import com.github.com.almasud.Augmented_School.R;
 import com.github.com.almasud.Augmented_School.databinding.ActivityHomeBinding;
+import com.github.com.almasud.Augmented_School.model.entity.Language;
 import com.github.com.almasud.Augmented_School.model.util.EventMessage;
 import com.github.com.almasud.Augmented_School.ui.util.SnackbarHelper;
 
@@ -30,7 +33,20 @@ public class HomeActivity extends AppCompatActivity {
 
         // Set a toolbar as an actionbar
         setSupportActionBar(mViewBinding.toolbarHome.getRoot());
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setSubtitle(R.string.learn_with_reality);
+
+        // Change the toolbar title and subtitle font
+        BaseApplication.changeToolbarTitleFont(
+                this, Language.ENGLISH, Typeface.NORMAL,
+                mViewBinding.toolbarHome.getRoot()
+        );
+
+        // Add text view font according to language type
+        BaseApplication.changeTextViewFont(
+                this, Language.ENGLISH, Typeface.NORMAL,
+                mViewBinding.tvHomeLearn, mViewBinding.tvHomeTest, mViewBinding.tvHomeScan
+        );
 
         // Load an animation for navigation items
         mAnimation = AnimationUtils.loadAnimation(this, R.anim.click_item);
@@ -41,7 +57,13 @@ public class HomeActivity extends AppCompatActivity {
         BaseApplication.setAlertDialog(
                 this, getResources().getString(R.string.action_choose),
                 R.drawable.ic_help, getResources().getString(R.string.want_to_exit),
-                super::onBackPressed, null, () ->{}, null
+                () -> {
+                    Intent intent = new Intent(Intent.ACTION_MAIN);
+                    intent.addCategory(Intent.CATEGORY_HOME);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                    finish();
+                }, null, () ->{}, null
         );
     }
 
@@ -52,14 +74,14 @@ public class HomeActivity extends AppCompatActivity {
     public void onClickItem(View view) {
         // start an animation for each item
         switch (view.getId()) {
-            case R.id.wrapperLearn:
-                mViewBinding.wrapperLearn.startAnimation(mAnimation);
+            case R.id.wrapperHomeLearn:
+                mViewBinding.wrapperHomeLearn.startAnimation(mAnimation);
                 break;
-            case R.id.wrapperTest:
-                mViewBinding.wrapperTest.startAnimation(mAnimation);
+            case R.id.wrapperHomeTest:
+                mViewBinding.wrapperHomeTest.startAnimation(mAnimation);
                 break;
-            case R.id.wrapperScan:
-                mViewBinding.wrapperScan.startAnimation(mAnimation);
+            case R.id.wrapperHomeScan:
+                mViewBinding.wrapperHomeScan.startAnimation(mAnimation);
                 break;
         }
         // Set an animation listener for each item
@@ -76,21 +98,21 @@ public class HomeActivity extends AppCompatActivity {
                     Bundle bundle = new Bundle();
                     // Set an Activity for each item
                     switch (view.getId()) {
-                        case R.id.wrapperLearn:
+                        case R.id.wrapperHomeLearn:
                             bundle.putString(BaseApplication.SERVICE_NAME, BaseApplication.SERVICE_LEARN);
                             BaseApplication.getInstance()
                                     .startNewActivity(HomeActivity.this,
                                             SubjectChooseActivity.class, bundle
                                     );
                             break;
-                        case R.id.wrapperTest:
+                        case R.id.wrapperHomeTest:
                             bundle.putString(BaseApplication.SERVICE_NAME, BaseApplication.SERVICE_TEST);
                             BaseApplication.getInstance()
                                     .startNewActivity(HomeActivity.this,
                                             SubjectChooseActivity.class, bundle
                                     );
                             break;
-                        case R.id.wrapperScan:
+                        case R.id.wrapperHomeScan:
                             // Check whether the AR is supported for this device or not
                             // to avoid crashing the application.
                             if (BaseApplication.isSupportedAROrShowDialog(

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:background="@drawable/bg_round"
+    android:layout_marginEnd="@dimen/activity_horizontal_margin">
+
+    <ImageView
+        android:id="@+id/ivSubjectCover"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:padding="@dimen/activity_half_margin"
+        tools:src="@drawable/vowel_bengali"
+        android:scaleType="fitXY"
+        tools:ignore="ContentDescription"/>
+
+    <TextView
+        android:id="@+id/tvSubjectName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+        android:layout_marginVertical="@dimen/activity_3x_margin"
+        android:background="@color/colorPrimary"
+        android:padding="@dimen/activity_half_margin"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        tools:text="@string/vowel_bengali" />
+
+</RelativeLayout>

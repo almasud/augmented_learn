@@ -23,14 +23,13 @@ import io.reactivex.schedulers.Schedulers;
  * @author Abdullah Almasud
  */
 public class LearnRVAdapter extends RecyclerView.Adapter<LearnRVAdapter.ArModelViewHolder> {
-    private static final String TAG = LearnRVAdapter.class.getSimpleName();
     private ItemArBinding mViewBinding;
     private List<ArModel> mArModels;
     private LearnArActivity mActivity;
     private int mRowIndex;
 
-    public LearnRVAdapter(List<ArModel> ArModels, LearnArActivity activity, int selectedItem) {
-        mArModels = ArModels;
+    public LearnRVAdapter(List<ArModel> arModels, LearnArActivity activity, int selectedItem) {
+        mArModels = arModels;
         mActivity = activity;
         mRowIndex = selectedItem;
     }

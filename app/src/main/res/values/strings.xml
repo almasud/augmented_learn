@@ -7,9 +7,9 @@
     <string name="service_download">"Augmented School Download"</string>
     <string name="service_unzip">"Augmented School Unzip"</string>
 
-    <!-- Strings used for model type -->
-    <string name="bengali">বাংলা</string>
-    <string name="english">English</string>
+    <!-- Strings used for language type -->
+    <string name="language_bengali">বাংলা</string>
+    <string name="language_english">English</string>
 
     <!-- Strings used for navigation -->
     <string name="action_share">Share</string>

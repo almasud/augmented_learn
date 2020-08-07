@@ -1,5 +1,6 @@
 package com.github.com.almasud.Augmented_School.ui.activity;
 
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -66,13 +67,18 @@ public class ScanActivity extends AppCompatActivity {
         setSupportActionBar(mViewBinding.toolbarScan.getRoot());
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         // Set a subtitle of the actionbar
-        getSupportActionBar().setSubtitle(new StringBuilder(
-                getResources().getString(R.string.real_view)).append(" | ")
-                .append(Subject.getSubjectName(this, sBundle.getInt(ArModel.SUBJECT)))
+        getSupportActionBar().setSubtitle(
+                getResources().getString(R.string.real_view) + " | " +
+                ((Subject) sBundle.getSerializable(ArModel.SUBJECT)).getName()
+        );
+        // Change the toolbar title and subtitle font
+        BaseApplication.changeToolbarTitleFont(
+                this, ((Subject) sBundle.getSerializable(ArModel.SUBJECT)).getLanguage().getId(),
+                Typeface.NORMAL, mViewBinding.toolbarScan.getRoot()
         );
 
         // Set the augmented image database
-        ScanArFragment.setImageDatabase(sBundle.getInt(ArModel.SUBJECT));
+        ScanArFragment.setImageDatabase(((Subject) sBundle.getSerializable(ArModel.SUBJECT)).getId());
 
         mScanArFragment = (ScanArFragment) getSupportFragmentManager().findFragmentById(R.id.ArFragmentScan);
         mScanArFragment.getArSceneView().getScene().addOnUpdateListener(this::onUpdateFrame);
@@ -80,7 +86,7 @@ public class ScanActivity extends AppCompatActivity {
         // Get an instance of ARViewModel
         ArViewModel arViewModel = new ViewModelProvider(this).get(ArViewModel.class);
         // Get the list of live data of ArModel from ArViewModel
-        LiveData<List<ArModel>> arModelListLiveData = arViewModel.getArModelLivedData(sBundle.getInt(ArModel.SUBJECT));
+        LiveData<List<ArModel>> arModelListLiveData = arViewModel.getArModelsBySubjectLivedData(((Subject) sBundle.getSerializable(ArModel.SUBJECT)).getId());
         // Observe the list of ArModel from ArViewModel
         arModelListLiveData.observe(this, arModels -> {
             // Set the value of mARModels (list of ARModel)
@@ -147,12 +153,12 @@ public class ScanActivity extends AppCompatActivity {
                         // Set the detected ModelRenderable into TransformableModel
                         try {
                             // Set the initial scale of model
-                            float modelLocalScale = (sBundle.getInt(ArModel.SUBJECT) == Subject.SUBJECT_ALPHABET_BENGALI
-                                    || sBundle.getInt(ArModel.SUBJECT) == Subject.SUBJECT_ALPHABET_ENGLISH)? 0.3f
-                                    : (sBundle.getInt(ArModel.SUBJECT) == Subject.SUBJECT_VOWEL_BENGALI
-                                    || sBundle.getInt(ArModel.SUBJECT) == Subject.SUBJECT_NUMBER_BENGALI
-                                    || sBundle.getInt(ArModel.SUBJECT) == Subject.SUBJECT_NUMBER_ENGLISH)? 0.25f
-                                    : (sBundle.getInt(ArModel.SUBJECT) == Subject.SUBJECT_ANIMAL_ENGLISH)? 15.0f: 1.0f;
+                            float modelLocalScale = (sBundle.getInt(ArModel.SUBJECT) == Subject.ALPHABET_BENGALI
+                                    || sBundle.getInt(ArModel.SUBJECT) == Subject.ALPHABET_ENGLISH)? 0.3f
+                                    : (sBundle.getInt(ArModel.SUBJECT) == Subject.VOWEL_BENGALI
+                                    || sBundle.getInt(ArModel.SUBJECT) == Subject.NUMBER_BENGALI
+                                    || sBundle.getInt(ArModel.SUBJECT) == Subject.NUMBER_ENGLISH)? 0.25f
+                                    : (sBundle.getInt(ArModel.SUBJECT) == Subject.ANIMAL_ENGLISH)? 15.0f: 1.0f;
 
                             // Set the transformable model
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
