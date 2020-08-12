@@ -140,7 +140,7 @@ public class SubjectChooseSubjectRVAdapter extends RecyclerView.Adapter<SubjectC
                                 Log.d(TAG, "onAnimationEnd: modelDirectory list: "+ Arrays.asList(modelDirectory.list()));
 
                                 // Check whether the model directory contains any item or not
-                                if (modelDirectory.list().length > 1) {
+                                if (modelDirectory.listFiles().length > 1) {
                                     BaseApplication.getInstance()
                                             .startNewActivity(
                                                     mActivity, ScanActivity.class, bundle
@@ -149,7 +149,7 @@ public class SubjectChooseSubjectRVAdapter extends RecyclerView.Adapter<SubjectC
                                     // If the model directory not contains any item
                                     String downloadURL = subject.getDownloadURL();
                                     BaseApplication.setAlertDialog(
-                                            mActivity, mActivity.getResources().getString(R.string.action_choose),
+                                            mActivity, null, mActivity.getResources().getString(R.string.action_choose),
                                             R.drawable.ic_help, mActivity.getResources().getString(R.string.need_download_models),
                                             () -> BaseApplication.download(
                                                     mActivity, downloadURL, downloadDirectory

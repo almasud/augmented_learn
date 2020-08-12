@@ -67,9 +67,9 @@ public class BaseApplication extends Application implements LifecycleObserver {
     public static final String DIRECTORY_VOWELS_BENGALI = "vowels_bengali";
     public static final String DIRECTORY_ALPHABETS_BENGALI = "alphabets_bengali";
     public static final String DIRECTORY_NUMBERS_BENGALI = "numbers_bengali";
-    public static final String DIRECTORY_ALPHABETS_ENGLISH = "alphabets";
-    public static final String DIRECTORY_NUMBERS_ENGLISH = "numbers";
-    public static final String DIRECTORY_ANIMALS_ENGLISH = "animals";
+    public static final String DIRECTORY_ALPHABETS_ENGLISH = "alphabets_english";
+    public static final String DIRECTORY_NUMBERS_ENGLISH = "numbers_english";
+    public static final String DIRECTORY_ANIMALS_ENGLISH = "animals_english";
     public static final String DOWNLOAD_URL_AR_BOOK = "https://almasud.000webhostapp.com/download/ar_book.pdf";
 
     private static final double MIN_OPEN_GL_VERSION = 3.0;
@@ -235,21 +235,22 @@ public class BaseApplication extends Application implements LifecycleObserver {
     }
 
     /**
-     * Set an alert dialog with only a positive button to inform a user.
+     * Set an {@link AlertDialog} with only a positive action button.
      * @param activity An instance of the {@link Activity} where the function to be called.
+     * @param customView A custom {@link View} of {@link AlertDialog}.
      * @param title A {@link String} for {@link AlertDialog} title.
      * @param iconRes A {@link DrawableRes} for {@link AlertDialog} icon.
      * @param message A {@link String} for {@link AlertDialog} message.
-     * @param positiveButtonAction An {@link OnSingleAction} for positive button of {@link AlertDialog}.
-     * @param positiveButtonText A {@link String} for positive button
+     * @param positiveButtonAction An {@link OnSingleAction} for positive action button.
+     * @param positiveButtonText A {@link String} for positive action button.
      */
     public static void setAlertDialog(
-            Activity activity, String title, int iconRes, String message,
+            Activity activity, View customView, String title, int iconRes, String message,
             OnSingleAction positiveButtonAction, String positiveButtonText) {
 
-        // Set only required parameter to the setAlertDialog
+        // Set only required parameter to the main method
         setAlertDialog(
-                activity, title, iconRes, message,
+                activity, customView, title, iconRes, message,
                 positiveButtonAction, positiveButtonText,
                 null, null,
                 null, null
@@ -257,24 +258,25 @@ public class BaseApplication extends Application implements LifecycleObserver {
     }
 
     /**
-     * Set an alert dialog with positive and negative button to get an action form the user.
+     * Set an {@link AlertDialog} with positive and negative action button.
      * @param activity An instance of the {@link Activity} where the function to be called.
+     * @param customView A custom {@link View} of {@link AlertDialog}.
      * @param title A {@link String} for {@link AlertDialog} title.
      * @param iconRes A {@link DrawableRes} for {@link AlertDialog} icon.
      * @param message A {@link String} for {@link AlertDialog} message.
-     * @param positiveButtonAction An {@link OnSingleAction} for positive button of {@link AlertDialog}.
-     * @param positiveButtonText A {@link String} for positive button
-     * @param negativeButtonAction An {@link OnSingleAction} for negative button of {@link AlertDialog}.
-     * @param negativeButtonText A {@link String} for negative button
+     * @param positiveButtonAction An {@link OnSingleAction} for positive action button.
+     * @param positiveButtonText A {@link String} for positive action button.
+     * @param negativeButtonAction An {@link OnSingleAction} for negative action button.
+     * @param negativeButtonText A {@link String} for negative action button.
      */
     public static void setAlertDialog(
-            Activity activity, String title, int iconRes, String message,
+            Activity activity, View customView, String title, int iconRes, String message,
             OnSingleAction positiveButtonAction, String positiveButtonText,
             OnSingleAction negativeButtonAction, String negativeButtonText) {
 
-        // Set only required parameter to the setAlertDialog
+        // Set only required parameter to the main method
         setAlertDialog(
-                activity, title, iconRes, message,
+                activity, customView, title, iconRes, message,
                 positiveButtonAction, positiveButtonText,
                 negativeButtonAction, negativeButtonText,
                 null, null
@@ -282,20 +284,21 @@ public class BaseApplication extends Application implements LifecycleObserver {
     }
 
     /**
-     * Set an alert dialog with positive, negative and neutral button to get an action form the user.
+     * Set an {@link AlertDialog} with a custom {@link View} and positive, negative and neutral action button.
      * @param activity An instance of the {@link Activity} where the function to be called.
+     * @param customView A custom {@link View} of {@link AlertDialog}.
      * @param title A {@link String} for {@link AlertDialog} title.
      * @param iconRes A {@link DrawableRes} for {@link AlertDialog} icon.
      * @param message A {@link String} for {@link AlertDialog} message.
-     * @param positiveButtonAction An {@link OnSingleAction} for positive button of {@link AlertDialog}.
-     * @param positiveButtonText A {@link String} for positive button
-     * @param negativeButtonAction An {@link OnSingleAction} for negative button of {@link AlertDialog}.
-     * @param negativeButtonText A {@link String} for negative button
-     * @param neutralButtonAction An {@link OnSingleAction} for neutral button of {@link AlertDialog}.
-     * @param neutralButtonText A {@link String} for neutral button
+     * @param positiveButtonAction An {@link OnSingleAction} for positive action button.
+     * @param positiveButtonText A {@link String} for positive action button.
+     * @param negativeButtonAction An {@link OnSingleAction} for negative action button.
+     * @param negativeButtonText A {@link String} for negative action button.
+     * @param neutralButtonAction An {@link OnSingleAction} for neutral action button.
+     * @param neutralButtonText A {@link String} for neutral action button.
      */
     public static void setAlertDialog(
-            Activity activity, String title, int iconRes, String message,
+            Activity activity, View customView, String title, int iconRes, String message,
             OnSingleAction positiveButtonAction, String positiveButtonText,
             OnSingleAction negativeButtonAction, String negativeButtonText,
             OnSingleAction neutralButtonAction, String neutralButtonText) {
@@ -303,9 +306,18 @@ public class BaseApplication extends Application implements LifecycleObserver {
         // Create an alert dialog to show a dialog message
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
         dialogBuilder.setCancelable(false);
-        dialogBuilder.setTitle(title);
-        dialogBuilder.setIcon(iconRes);
-        dialogBuilder.setMessage(message);
+        // Set a custom view
+        if (customView != null)
+            dialogBuilder.setView(customView);
+        // Set a title
+        if (title != null)
+            dialogBuilder.setTitle(title);
+        // Set an image resource
+        if (iconRes != -1)
+            dialogBuilder.setIcon(iconRes);
+        // Set a message
+        if (message != null)
+            dialogBuilder.setMessage(message);
 
         // Set an action for positive button
         if (positiveButtonAction != null) {
@@ -340,9 +352,18 @@ public class BaseApplication extends Application implements LifecycleObserver {
             dialog.show();
 
             // This line always placed after the dialog.show() otherwise get a Null Pinter Exception.
+            // Set all caps false to al alert dialog buttons
             dialog.getButton(AlertDialog.BUTTON_POSITIVE).setAllCaps(false);
             dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setAllCaps(false);
             dialog.getButton(AlertDialog.BUTTON_NEUTRAL).setAllCaps(false);
+
+            // Set custom font type face for alert dialog views
+            BaseApplication.changeTextViewFont(
+                    activity, Language.ENGLISH, Typeface.NORMAL,
+                    dialog.findViewById(R.id.alertTitle), dialog.findViewById(android.R.id.message),
+                    dialog.findViewById(android.R.id.button1), dialog.findViewById(android.R.id.button2),
+                    dialog.findViewById(android.R.id.button3)
+            );
         });
     }
 
@@ -365,7 +386,7 @@ public class BaseApplication extends Application implements LifecycleObserver {
 
             // Set an alert dialog to inform
             setAlertDialog(
-                    activity, activity.getResources().getString(R.string.opps),
+                    activity, null, activity.getResources().getString(R.string.opps),
                     R.drawable.ic_sentiment_dissatisfied_black,
                     activity.getResources().getString(R.string.not_supported_sceneform),
                     () -> Toast.makeText(
@@ -380,7 +401,7 @@ public class BaseApplication extends Application implements LifecycleObserver {
 
             // Set an alert dialog
             setAlertDialog(
-                    activity, activity.getResources().getString(R.string.action_choose),
+                    activity, null, activity.getResources().getString(R.string.action_choose),
                     R.drawable.ic_help,
                     activity.getResources().getString(R.string.not_supported_ar_core),
                     () -> {
@@ -620,23 +641,6 @@ public class BaseApplication extends Application implements LifecycleObserver {
     }
 
     /**
-     * Unzip a given zip {@link File} into a given target directory.
-     * @param context The context of {@link Application}.
-     * @param zipFile A zip {@link File} to be extracted.
-     * @param targetDirectory A target directory {@link File} where extracted files to be placed.
-     */
-    public static void unzip(
-            @NonNull Context context, @NonNull File zipFile, @NonNull File targetDirectory) {
-        // Start unzip service to unzip the file
-        Intent unzipServiceIntent = new Intent(context, UnzipService.class);
-        unzipServiceIntent.putExtra(UnzipService.ZIP_FILE, zipFile);
-        unzipServiceIntent.putExtra(UnzipService.TARGET_DIRECTORY, targetDirectory);
-
-        // Start the service as foreground
-        ContextCompat.startForegroundService(context, unzipServiceIntent);
-    }
-
-    /**
      * Download a {@link File} from a given {@link URL} and unzip if downloaded file is zip
      * to a given target {@link File} directory.
      * @param activity The {@link Activity}.
@@ -653,8 +657,8 @@ public class BaseApplication extends Application implements LifecycleObserver {
         // Check the download is already in progress or not
         if (preferenceManager.isDownloadProgress()) {
             BaseApplication.setAlertDialog(
-                    activity, activity.getResources().getString(R.string.opps),
-                    R.drawable.ic_sentiment_dissatisfied_black, activity.getResources().getString(R.string.download_continuing),
+                    activity, null, activity.getResources().getString(R.string.opps),
+                    R.drawable.ic_sentiment_dissatisfied_black, activity.getResources().getString(R.string.downloading_another_file),
                     () -> Toast.makeText(
                             activity, activity.getResources().getString(R.string.hope_understand), Toast.LENGTH_SHORT
                     ).show(),
@@ -669,6 +673,23 @@ public class BaseApplication extends Application implements LifecycleObserver {
             // Start the service as foreground
             ContextCompat.startForegroundService(activity, downloadServiceIntent);
         }
+    }
+
+    /**
+     * Unzip a given zip {@link File} into a given target directory.
+     * @param context The context of {@link Application}.
+     * @param zipFile A zip {@link File} to be extracted.
+     * @param targetDirectory A target directory {@link File} where extracted files to be placed.
+     */
+    public static void unzip(
+            @NonNull Context context, @NonNull File zipFile, @NonNull File targetDirectory) {
+        // Start unzip service to unzip the file
+        Intent unzipServiceIntent = new Intent(context, UnzipService.class);
+        unzipServiceIntent.putExtra(UnzipService.ZIP_FILE, zipFile);
+        unzipServiceIntent.putExtra(UnzipService.TARGET_DIRECTORY, targetDirectory);
+
+        // Start the service as foreground
+        ContextCompat.startForegroundService(context, unzipServiceIntent);
     }
 
     /**

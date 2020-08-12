@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/wrapperAboutDialog"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/wrapperAboutDialogHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:background="@color/colorPrimary"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/aboutDialogCoverPhoto"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                tool:src="@drawable/app_logo"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/activity_half_margin"
+                tool:ignore="ContentDescription"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/wrapperAboutDialogContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:paddingHorizontal="@dimen/activity_horizontal_margin">
+
+            <TextView
+                android:id="@+id/aboutDialogTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tool:text="Title is goes here..."
+                android:layout_gravity="center_horizontal"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="@dimen/activity_half_margin"/>
+
+            <TextView
+                android:id="@+id/about_dialog_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tool:text="@string/need_download_models"
+                android:textSize="16sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/wrapperAboutDialogFooter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:paddingHorizontal="@dimen/activity_horizontal_margin"
+            android:layout_marginBottom="@dimen/activity_vertical_margin">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/developed_by"
+                android:textSize="14sp"
+                android:textStyle="italic"/>
+
+            <TextView
+                android:id="@+id/aboutDialogDeveloperName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                android:textColor="@color/colorPrimary"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                tool:text="@string/developer_name" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

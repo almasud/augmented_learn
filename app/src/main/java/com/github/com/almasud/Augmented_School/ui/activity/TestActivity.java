@@ -22,7 +22,7 @@ import com.github.com.almasud.Augmented_School.model.entity.ArModel;
 import com.github.com.almasud.Augmented_School.model.entity.Subject;
 import com.github.com.almasud.Augmented_School.model.util.EventMessage;
 import com.github.com.almasud.Augmented_School.ui.util.SnackbarHelper;
-import com.github.com.almasud.Augmented_School.viewmodel.ArViewModel;
+import com.github.com.almasud.Augmented_School.viewmodel.ArVM;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -73,10 +73,10 @@ public class TestActivity extends AppCompatActivity {
         mMediaPlayerCorrect = MediaPlayer.create(TestActivity.this, R.raw.correct_answer);
         mMediaPlayerWrong = MediaPlayer.create(TestActivity.this, R.raw.wrong_answer);
 
-        // Get an instance of ARViewModel
-        ArViewModel arViewModel = new ViewModelProvider(this).get(ArViewModel.class);
+        // Get an instance of ViewModel
+        ArVM arVM = new ViewModelProvider(this).get(ArVM.class);
         // Get the list of live data of ArModel from ArViewModel
-        LiveData<List<ArModel>> arModelListLiveData = arViewModel.getArModelsBySubjectLivedData(((Subject) sBundle.getSerializable(ArModel.SUBJECT)).getId());
+        LiveData<List<ArModel>> arModelListLiveData = arVM.getArModelsBySubjectLivedData(((Subject) sBundle.getSerializable(ArModel.SUBJECT)).getId());
         // Observe the list of ArModel from ArViewModel
         arModelListLiveData.observe(this, arModels -> {
             // Set the value of mArModels (list of ArModel).
@@ -217,7 +217,7 @@ public class TestActivity extends AppCompatActivity {
 
                             // Set an alert dialog to show the test result
                             BaseApplication.setAlertDialog(
-                                    this, dialogTitle, dialogIconRes, dialogMessage,
+                                    this, null, dialogTitle, dialogIconRes, dialogMessage,
                                     () -> {
                                         // Start the test again for positive action button
                                         Intent intent = new Intent(this, TestActivity.class);
@@ -225,7 +225,7 @@ public class TestActivity extends AppCompatActivity {
                                         intent.putExtra(BaseApplication.BUNDLE, sBundle);
                                         startActivity(intent);
                                     }, getResources().getString(R.string.test_again),
-                                    this::finish, getResources().getString(R.string.test_finish)
+                                    this::finish, getResources().getString(R.string.finish)
                             );
                         }
                     }

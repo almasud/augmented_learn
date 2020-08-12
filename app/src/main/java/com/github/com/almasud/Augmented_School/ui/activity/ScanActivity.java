@@ -19,7 +19,7 @@ import com.github.com.almasud.Augmented_School.model.util.EventMessage;
 import com.github.com.almasud.Augmented_School.ui.fragment.ScanArFragment;
 import com.github.com.almasud.Augmented_School.ui.util.SnackbarHelper;
 import com.github.com.almasud.Augmented_School.util.ArComponent;
-import com.github.com.almasud.Augmented_School.viewmodel.ArViewModel;
+import com.github.com.almasud.Augmented_School.viewmodel.ArVM;
 import com.google.ar.core.AugmentedImage;
 import com.google.ar.core.Frame;
 import com.google.ar.sceneform.AnchorNode;
@@ -83,10 +83,10 @@ public class ScanActivity extends AppCompatActivity {
         mScanArFragment = (ScanArFragment) getSupportFragmentManager().findFragmentById(R.id.ArFragmentScan);
         mScanArFragment.getArSceneView().getScene().addOnUpdateListener(this::onUpdateFrame);
 
-        // Get an instance of ARViewModel
-        ArViewModel arViewModel = new ViewModelProvider(this).get(ArViewModel.class);
+        // Get an instance of ViewModel
+        ArVM arVM = new ViewModelProvider(this).get(ArVM.class);
         // Get the list of live data of ArModel from ArViewModel
-        LiveData<List<ArModel>> arModelListLiveData = arViewModel.getArModelsBySubjectLivedData(((Subject) sBundle.getSerializable(ArModel.SUBJECT)).getId());
+        LiveData<List<ArModel>> arModelListLiveData = arVM.getArModelsBySubjectLivedData(((Subject) sBundle.getSerializable(ArModel.SUBJECT)).getId());
         // Observe the list of ArModel from ArViewModel
         arModelListLiveData.observe(this, arModels -> {
             // Set the value of mARModels (list of ARModel)

@@ -79,7 +79,6 @@
         android:layout_height="20dp"
         android:src="@drawable/ic_cancel_black"
         android:scaleType="centerCrop"
-        android:tint="@color/colorFailed"
         android:background="@android:color/transparent"
         android:layout_alignParentEnd="true"
         tools:ignore="ContentDescription" />

@@ -11,6 +11,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="actionOverflowMenuStyle">@style/ParentTheme.OverflowMenu</item>
     </style>
 
     <style name="ParentTheme.NoActionBar">
@@ -38,6 +39,12 @@
     <style name="ParentTheme.TextAppearanceToolbarSubtitle" parent="@android:style/TextAppearance">
         <item name="android:textColor">@android:color/white</item>
         <item name="android:fontFamily">cursive</item>
+    </style>
+
+    <!-- Customize popup overflow menu style -->
+    <style name="ParentTheme.OverflowMenu" parent="Widget.AppCompat.PopupMenu.Overflow">
+        <item name="overlapAnchor">false</item>
+        <item name="android:dropDownVerticalOffset">3.dp</item>
     </style>
 
 </resources>

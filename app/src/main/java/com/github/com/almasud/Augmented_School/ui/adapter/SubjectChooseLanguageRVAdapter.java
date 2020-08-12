@@ -15,7 +15,7 @@ import com.github.com.almasud.Augmented_School.databinding.SubjectChooseLanguage
 import com.github.com.almasud.Augmented_School.model.entity.Language;
 import com.github.com.almasud.Augmented_School.model.entity.Subject;
 import com.github.com.almasud.Augmented_School.ui.activity.SubjectChooseActivity;
-import com.github.com.almasud.Augmented_School.viewmodel.ArViewModel;
+import com.github.com.almasud.Augmented_School.viewmodel.ArVM;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,10 +63,10 @@ public class SubjectChooseLanguageRVAdapter extends RecyclerView.Adapter<Subject
                 holder.chooseLanguageRowBinding.textViewLanguage
         );
 
-        // Get an instance of ArViewModel
-        ArViewModel arViewModel = new ViewModelProvider(mActivity).get(ArViewModel.class);
+        // Get an instance of ViewModel
+        ArVM arVM = new ViewModelProvider(mActivity).get(ArVM.class);
         // Get the list of live data from ArViewModel
-        LiveData<List<Subject>> subjectsLivedData = arViewModel.getSubjectsLivedData(language.getId());
+        LiveData<List<Subject>> subjectsLivedData = arVM.getSubjectsLivedData(language.getId());
         // Observe the list of live data
         subjectsLivedData.observe(mActivity, subjects -> {
 

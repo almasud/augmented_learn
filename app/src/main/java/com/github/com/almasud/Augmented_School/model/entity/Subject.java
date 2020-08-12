@@ -16,12 +16,12 @@ public class Subject implements Serializable {
     public static final int ALPHABET_ENGLISH = 3;
     public static final int NUMBER_ENGLISH = 4;
     public static final int ANIMAL_ENGLISH = 5;
-    public static final String DOWNLOAD_URL_VOWELS_BENGALI = "https://almasud.000webhostapp.com/download/vowels_bengali.zip";
-    public static final String DOWNLOAD_URL_ALPHABETS_BENGALI = "https://almasud.000webhostapp.com/download/alphabets_bengali.zip";
-    public static final String DOWNLOAD_URL_NUMBERS_BENGALI = "https://almasud.000webhostapp.com/download/numbers_bengali.zip";
-    public static final String DOWNLOAD_URL_ALPHABETS_ENGLISH = "https://almasud.000webhostapp.com/download/alphabets.zip";
-    public static final String DOWNLOAD_URL_NUMBERS_ENGLISH = "https://almasud.000webhostapp.com/download/numbers.zip";
-    public static final String DOWNLOAD_URL_ANIMALS_ENGLISH = "https://almasud.000webhostapp.com/download/animals.zip";
+    public static final String DOWNLOAD_URL_VOWELS_BENGALI = "https://almasud.000webhostapp.com/Augmented_School/download/vowels_bengali.zip";
+    public static final String DOWNLOAD_URL_ALPHABETS_BENGALI = "https://almasud.000webhostapp.com/Augmented_School/download/alphabets_bengali.zip";
+    public static final String DOWNLOAD_URL_NUMBERS_BENGALI = "https://almasud.000webhostapp.com/Augmented_School/download/numbers_bengali.zip";
+    public static final String DOWNLOAD_URL_ALPHABETS_ENGLISH = "https://almasud.000webhostapp.com/Augmented_School/download/alphabets_english.zip";
+    public static final String DOWNLOAD_URL_NUMBERS_ENGLISH = "https://almasud.000webhostapp.com/Augmented_School/download/numbers_english.zip";
+    public static final String DOWNLOAD_URL_ANIMALS_ENGLISH = "https://almasud.000webhostapp.com/Augmented_School/download/animals_english.zip";
 
     private int id;
     private String name;

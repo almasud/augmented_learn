@@ -1,6 +1,10 @@
 <resources>
 
     <string name="app_name">Augmented School</string>
+    <string name="developer_name">Abdullah Almasud</string>
+    <string name="contact_email">almasud.arm@gmail.com</string>
+    <string name="report_email">almasud.arm@hotmail.com</string>
+    <string name="app_download_link">https://bit.ly/Augmented_School_App</string>
     <string name="learn_with_reality">Learn with Reality</string>
     <string name="app_greeting">"Hello, Welcome to Intro"</string>
     <string name="real_view">"Real View"</string>
@@ -13,7 +17,9 @@
 
     <!-- Strings used for navigation -->
     <string name="action_share">Share</string>
-    <string name="action_report">Report</string>
+    <string name="more">More</string>
+    <string name="action_check_update">Check for update</string>
+    <string name="action_report">Report a problem</string>
     <string name="action_about">About</string>
     <string name="action_get_ar_book">Have no AR book?</string>
     <string name="learn">Learn</string>
@@ -226,7 +232,7 @@
     <!-- Message strings -->
     <string name="opps">Opps!</string>
     <string name="action_choose">Choose an action</string>
-    <string name="want_to_exit">Do you want to exit?</string>
+    <string name="want_to_exit">Do you really want to exit?</string>
     <string name="congratulations">Congratulations!</string>
     <string name="good">Good!</string>
     <string name="not_bad">Not bad!</string>
@@ -244,14 +250,22 @@
     <string name="test_set">Test:</string>
     <string name="test_number_n_out_of">0/0</string>
     <string name="need_download_models">Need to download (for first time only) the models of this subject for real view. Would you like to download now?</string>
-    <string name="download_continuing">Download is still in progress, please wait until finished the progress.</string>
+    <string name="downloading_another_file">Another download is still in progress, please wait until finished the progress.</string>
+    <string name="developed_by">Developed by:</string>
+    <string name="update_available">Update Available</string>
+    <string name="update_available_message">A new version is available and ready to update.</string>
+    <string name="current_version">The current version is:</string>
+    <string name="available_version">The available version is:</string>
+    <string name="not_update_available">"No update available! You have already a latest version. Keep always update to get new features."</string>
 
     <!-- Button strings -->
     <string name="okay_understand">Okay, I understand</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="not_sure">Not Sure</string>
-    <string name="test_finish">Finish Test</string>
+    <string name="finish">Finish</string>
     <string name="test_again">Test Again</string>
+    <string name="update_now">Update Now</string>
+    <string name="update_later">Update Later</string>
 
 </resources>

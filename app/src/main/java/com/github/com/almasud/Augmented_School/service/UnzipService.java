@@ -75,7 +75,7 @@ public class UnzipService extends Service {
             notificationBuilder.setOngoing(true);
             notificationBuilder.setAutoCancel(false);
             notificationBuilder.setOnlyAlertOnce(true);
-            notificationBuilder.setSmallIcon(R.drawable.ic_file_download);
+            notificationBuilder.setSmallIcon(R.drawable.ic_get_app);
             notificationBuilder.setContentTitle("Unzipping");
             notificationBuilder.setContentText("0%");
             notificationBuilder.setProgress(100, 0, false);

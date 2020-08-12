@@ -7,18 +7,27 @@
         android:id="@+id/action_share"
         android:title="@string/action_share"
         android:icon="@drawable/ic_share"
-        app:showAsAction="never" />
+        app:showAsAction="always"/>
 
-    <item
-        android:id="@+id/action_report"
-        android:title="@string/action_report"
-        android:icon="@drawable/ic_report"
-        app:showAsAction="never" />
+    <item android:id="@+id/action_more"
+        android:title="@string/more"
+        app:showAsAction="ifRoom">
+        <menu>
+            <item
+                android:id="@+id/action_check_update"
+                android:title="@string/action_check_update"
+                android:icon="@drawable/ic_update" />
 
-    <item
-        android:id="@+id/action_about"
-        android:title="@string/action_about"
-        android:icon="@drawable/ic_help"
-        app:showAsAction="never" />
+            <item
+                android:id="@+id/action_report"
+                android:title="@string/action_report"
+                android:icon="@drawable/ic_report_problem" />
+
+            <item
+                android:id="@+id/action_about"
+                android:title="@string/action_about"
+                android:icon="@drawable/ic_info"/>
+        </menu>
+    </item>
 
 </menu>

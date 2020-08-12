@@ -10,7 +10,8 @@
     <!-- FOREGROUND_SERVICE permission is required from Android Oreo or API level 26 or higher. -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!-- Request permission for apk install -->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
     <application
         android:name="com.github.com.almasud.Augmented_School.BaseApplication"
@@ -27,6 +28,16 @@
         <meta-data
             android:name="com.google.ar.core"
             android:value="optional" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_provider_paths" />
+        </provider>
 
         <service
             android:name="com.github.com.almasud.Augmented_School.service.UnzipService"

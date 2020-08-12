@@ -66,7 +66,7 @@ public final class SnackbarHelper {
                 Snackbar.make(
                         activity.findViewById(android.R.id.content),
                         message,
-                        Snackbar.LENGTH_SHORT);
+                        Snackbar.LENGTH_LONG);
         messageSnackbar.getView().setBackgroundColor(activity.getResources().getColor(R.color.colorPrimaryTransparent_66));
         if (dismissBehavior != DismissBehavior.HIDE) {
             messageSnackbar.setAction(

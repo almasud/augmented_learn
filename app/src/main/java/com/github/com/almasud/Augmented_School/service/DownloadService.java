@@ -3,6 +3,8 @@ package com.github.com.almasud.Augmented_School.service;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.IBinder;
 import android.os.SystemClock;
 import android.util.Log;
@@ -10,8 +12,10 @@ import android.webkit.URLUtil;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 
 import com.github.com.almasud.Augmented_School.BaseApplication;
+import com.github.com.almasud.Augmented_School.BuildConfig;
 import com.github.com.almasud.Augmented_School.R;
 import com.github.com.almasud.Augmented_School.model.util.EventMessage;
 import com.github.com.almasud.Augmented_School.ui.activity.SubjectChooseActivity;
@@ -37,7 +41,6 @@ public class DownloadService extends Service {
     private static final String TAG = DownloadService.class.getSimpleName();
     public static final String DOWNLOAD_URL = "Download_Link";
     public static final String TARGET_DIRECTORY = "Target_Directory";
-    public static final String UNZIP_SERVICE = "UNZIP_SERVICE";
     private PreferenceManager mPreferenceManager;
 
     @Override
@@ -83,7 +86,7 @@ public class DownloadService extends Service {
             notificationBuilder.setOngoing(true);
             notificationBuilder.setAutoCancel(false);
             notificationBuilder.setOnlyAlertOnce(true);
-            notificationBuilder.setSmallIcon(R.drawable.ic_file_download);
+            notificationBuilder.setSmallIcon(R.drawable.ic_get_app);
             notificationBuilder.setContentTitle("Downloading");
             notificationBuilder.setContentText("0%");
             notificationBuilder.setProgress(100, 0, false);
@@ -154,7 +157,6 @@ public class DownloadService extends Service {
                             notificationBuilder.setContentTitle(fileName);
                             notificationBuilder.setContentText(percent + "%");
                             notificationBuilder.setProgress(100, percent, false);
-
                             // Notify by starting the foreground service.
                             startForeground(notificationId, notificationBuilder.build());
                         }
@@ -200,10 +202,11 @@ public class DownloadService extends Service {
             notificationBuilder.setOngoing(false);
             notificationBuilder.setAutoCancel(true);
             notificationBuilder.setProgress(0, 0, false);
-
             // Notify by starting the foreground service.
             startForeground(notificationId, notificationBuilder.build());
 
+            // Set the download status false in preferences
+            mPreferenceManager.setDownloadStatus(false);
             // Dispatch an EventMessage to it's subscribers
             if (successStatus) {
                 EventBus.getDefault().post(
@@ -217,9 +220,9 @@ public class DownloadService extends Service {
                 );
             }
 
-            // If downloaded file is zip start unzip foreground service.
+            // If the downloaded file is zip start unzip foreground service.
             if (successStatus && file.getName().lastIndexOf(".zip") != -1) {
-                Log.d(TAG, "onStartCommand: The download file is a zip file.");
+                Log.d(TAG, "onStartCommand: The downloaded file is a zip file.");
 
                 Intent unzipServiceIntent = new Intent(getApplicationContext(), UnzipService.class);
                 unzipServiceIntent.putExtra(UnzipService.ZIP_FILE, file);
@@ -227,8 +230,35 @@ public class DownloadService extends Service {
                 ContextCompat.startForegroundService(getApplicationContext(), unzipServiceIntent);
             }
 
-            // Set the download status false in preferences
-            mPreferenceManager.setDownloadStatus(false);
+            // If the downloaded file is apk then open it in installation package manager.
+            if (successStatus && file.getName().lastIndexOf(".apk") != -1) {
+                Log.d(TAG, "onStartCommand: The downloaded file is an apk file.");
+
+                final String fileBasePath = "file://";
+                final String providerPath = ".provider";
+                final String appInstallPath = "\"application/vnd.android.package-archive\"";
+                final String destination = targetDirectory + "/" + file.getName();
+                final Uri uri = Uri.parse(fileBasePath + destination);
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    Uri contentUri = FileProvider.getUriForFile(
+                            this,
+                            BuildConfig.APPLICATION_ID + providerPath,
+                            new File(destination)
+                    );
+                    Intent install = new Intent(Intent.ACTION_VIEW);
+                    install.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    install.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    install.putExtra(Intent.EXTRA_NOT_UNKNOWN_SOURCE, true);
+                    install.setData(contentUri);
+                    startActivity(install);
+                } else {
+                    Intent install = new Intent(Intent.ACTION_VIEW);
+                    install.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    install.setDataAndType(uri, appInstallPath);
+                    startActivity(install);
+                }
+            }
 
             // After completing the task stop the foreground service with keep the notification
             // and after a while system will automatically kill the service.

@@ -14,12 +14,11 @@ import com.github.com.almasud.Augmented_School.BaseApplication;
 import com.github.com.almasud.Augmented_School.R;
 import com.github.com.almasud.Augmented_School.databinding.ActivityLearnBinding;
 import com.github.com.almasud.Augmented_School.model.entity.ArModel;
-import com.github.com.almasud.Augmented_School.model.entity.Language;
 import com.github.com.almasud.Augmented_School.model.entity.Subject;
 import com.github.com.almasud.Augmented_School.model.util.EventMessage;
 import com.github.com.almasud.Augmented_School.ui.adapter.LearnFSAdapter;
 import com.github.com.almasud.Augmented_School.ui.util.SnackbarHelper;
-import com.github.com.almasud.Augmented_School.viewmodel.ArViewModel;
+import com.github.com.almasud.Augmented_School.viewmodel.ArVM;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -69,10 +68,10 @@ public class LearnActivity extends AppCompatActivity {
         // Set the adapter to view pager2
         mViewBinding.viewPagerLearn.setAdapter(mPagerAdapter);
 
-        // Get an instance of ArViewModel
-        ArViewModel arViewModel = new ViewModelProvider(this).get(ArViewModel.class);
+        // Get an instance of ViewModel
+        ArVM arVM = new ViewModelProvider(this).get(ArVM.class);
         // Get the list of live data of ArModel from ArViewModel
-        LiveData<List<ArModel>> arModelsLiveData = arViewModel.getArModelsBySubjectLivedData(((Subject) sBundle.getSerializable(ArModel.SUBJECT)).getId());
+        LiveData<List<ArModel>> arModelsLiveData = arVM.getArModelsBySubjectLivedData(((Subject) sBundle.getSerializable(ArModel.SUBJECT)).getId());
         // Observe the list of ArModel from ARViewModel
         arModelsLiveData.observe(this, arModels -> {
             // Set the value of mArModels (list of ARModel)
@@ -160,7 +159,7 @@ public class LearnActivity extends AppCompatActivity {
                     Log.d(TAG, "getArViewCallback: modelDirectory list: "+ Arrays.asList(((File) sBundle.getSerializable(ArModel.MODEL_DIRECTORY)).list()));
 
                     // Check whether the model directory contains any item or not
-                    if (((File) sBundle.getSerializable(ArModel.MODEL_DIRECTORY)).list().length > 1) {
+                    if (((File) sBundle.getSerializable(ArModel.MODEL_DIRECTORY)).listFiles().length > 1) {
                         sBundle.putSerializable(ArModel.LIST_ITEM, (Serializable) mArModels);
                         sBundle.putInt(ArModel.SELECTED_ITEM, selectedItem);
                         BaseApplication.getInstance()
@@ -171,7 +170,7 @@ public class LearnActivity extends AppCompatActivity {
                         // If the model directory not contains any item
                         String downloadURL = mArModels.get(selectedItem).getSubject().getDownloadURL();
                         BaseApplication.setAlertDialog(
-                                LearnActivity.this, getResources().getString(R.string.action_choose),
+                                LearnActivity.this, null, getResources().getString(R.string.action_choose),
                                 R.drawable.ic_help, getResources().getString(R.string.need_download_models),
                                 () -> {
                                     if (downloadURL != null) {

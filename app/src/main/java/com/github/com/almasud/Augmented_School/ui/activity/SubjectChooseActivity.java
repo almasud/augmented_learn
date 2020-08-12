@@ -21,7 +21,7 @@ import com.github.com.almasud.Augmented_School.model.entity.Language;
 import com.github.com.almasud.Augmented_School.model.util.EventMessage;
 import com.github.com.almasud.Augmented_School.ui.adapter.SubjectChooseLanguageRVAdapter;
 import com.github.com.almasud.Augmented_School.ui.util.SnackbarHelper;
-import com.github.com.almasud.Augmented_School.viewmodel.ArViewModel;
+import com.github.com.almasud.Augmented_School.viewmodel.ArVM;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -103,10 +103,10 @@ public class SubjectChooseActivity extends AppCompatActivity {
         // Register EventBus to get event message
         EventBus.getDefault().register(this);
 
-        // Get an instance of ArViewModel
-        ArViewModel arViewModel = new ViewModelProvider(this).get(ArViewModel.class);
+        // Get an instance of ViewModel
+        ArVM arVM = new ViewModelProvider(this).get(ArVM.class);
         // Get the list of live data from ArViewModel
-        LiveData<List<Language>> languagesLiveData = arViewModel.getLanguagesLivedData();
+        LiveData<List<Language>> languagesLiveData = arVM.getLanguagesLivedData();
         // Observe the list of live data
         languagesLiveData.observe(this, languages -> {
 
