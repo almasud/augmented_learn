@@ -1,5 +1,7 @@
 package com.github.com.almasud.Augmented_School.model.entity;
 
+import androidx.annotation.Keep;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -8,6 +10,7 @@ import com.google.gson.annotations.SerializedName;
  *
  * @author Abdullah Almasud
  */
+@Keep
 public class App {
     public static final String DIRECTORY_APP = "app";
     @SerializedName("name")
@@ -19,6 +22,9 @@ public class App {
     @SerializedName("versionCode")
     @Expose
     private Integer versionCode;
+    @SerializedName("versionDescription")
+    @Expose
+    private String versionDescription;
     @SerializedName("downloadURL")
     @Expose
     private String downloadURL;
@@ -45,6 +51,14 @@ public class App {
 
     public void setVersionCode(Integer versionCode) {
         this.versionCode = versionCode;
+    }
+
+    public String getVersionDescription() {
+        return versionDescription;
+    }
+
+    public void setVersionDescription(String versionDescription) {
+        this.versionDescription = versionDescription;
     }
 
     public String getDownloadURL() {

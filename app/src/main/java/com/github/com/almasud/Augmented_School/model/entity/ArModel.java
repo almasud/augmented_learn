@@ -1,6 +1,7 @@
 package com.github.com.almasud.Augmented_School.model.entity;
 
 import androidx.annotation.DrawableRes;
+import androidx.annotation.Keep;
 
 import java.io.Serializable;
 
@@ -9,6 +10,7 @@ import java.io.Serializable;
  *
  * @author Abdullah Almasud
  */
+@Keep
 public class ArModel implements Serializable {
     public static final String LIST_ITEM = "List_Item";
     public static final String SELECTED_ITEM = "Selected_Item";

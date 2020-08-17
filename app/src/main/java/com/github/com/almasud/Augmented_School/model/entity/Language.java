@@ -1,5 +1,7 @@
 package com.github.com.almasud.Augmented_School.model.entity;
 
+import androidx.annotation.Keep;
+
 import java.io.Serializable;
 
 /**
@@ -7,6 +9,7 @@ import java.io.Serializable;
  *
  * @author Abdullah Almasud
  */
+@Keep
 public class Language implements Serializable {
     public static final int BENGALI = 0;
     public static final int ENGLISH = 1;

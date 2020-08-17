@@ -6,8 +6,9 @@
     <color name="colorPrimaryTransparent_44">#44009688</color>
     <color name="colorPrimaryTransparent_66">#66009688</color>
     <color name="colorGray">#88eeeeee</color>
+    <color name="colorGrayLight">#ADB8BA</color>
     <color name="colorBlackTransparent">#80333609</color>
-    <color name="colorFailed">#C61212</color>
-    <color name="colorFailedTransparent">#66C61212</color>
-    <color name="colorSuccess">#0C9F0C</color>
+    <color name="colorFailed">#F44336</color>
+    <color name="colorFailedTransparent">#66F44336</color>
+    <color name="colorSuccess">#43A047</color>
 </resources>

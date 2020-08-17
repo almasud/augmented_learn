@@ -1,0 +1,35 @@
+<animated-vector
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    tools:targetApi="lollipop">
+    <aapt:attr name="android:drawable">
+        <vector
+            android:name="vector"
+            android:width="50dp"
+            android:height="50dp"
+            android:viewportWidth="50"
+            android:viewportHeight="50">
+            <path
+                android:name="avd_check_mark"
+                android:pathData="M 7 28.9 L 21.9 42.4 L 43 9.7"
+                android:strokeColor="#000000"
+                android:strokeWidth="2"
+                android:trimPathEnd="0"
+                android:strokeLineCap="round"
+                android:strokeLineJoin="round"
+                android:strokeMiterLimit="10"/>
+        </vector>
+    </aapt:attr>
+    <target android:name="avd_check_mark">
+        <aapt:attr name="android:animation">
+            <objectAnimator
+                android:propertyName="trimPathEnd"
+                android:duration="500"
+                android:valueFrom="0"
+                android:valueTo="1"
+                android:valueType="floatType"
+                android:interpolator="@android:interpolator/fast_out_slow_in"/>
+        </aapt:attr>
+    </target>
+</animated-vector>

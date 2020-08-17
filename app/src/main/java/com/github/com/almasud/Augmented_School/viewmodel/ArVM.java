@@ -23,8 +23,7 @@ import java.util.List;
  */
 public class ArVM extends AndroidViewModel {
     private Application mApplication;
-    private MutableLiveData<List<ArModel>> mMutableLiveDataListArModelByLanguage,
-            mMutableLiveDataListArModelBySubject;
+    private MutableLiveData<List<ArModel>> mMutableLiveDataListArModel;
     private MutableLiveData<List<Language>> mMutableLiveDataListLanguage;
     private MutableLiveData<List<Subject>> mMutableLiveDataListSubject;
 
@@ -871,9 +870,9 @@ public class ArVM extends AndroidViewModel {
      * @return A {@link LiveData} {@link List} of {@link ArModel} for a given {@link Subject}.
      * to be observed.
      */
-    public LiveData<List<ArModel>> getArModelsBySubjectLivedData(int subject) {
-        if (mMutableLiveDataListArModelBySubject == null) {
-            mMutableLiveDataListArModelBySubject = new MutableLiveData<>();
+    public LiveData<List<ArModel>> getArModelsLivedData(int subject) {
+        if (mMutableLiveDataListArModel == null) {
+            mMutableLiveDataListArModel = new MutableLiveData<>();
 
             // The list of items (ArModel) to be set in mMutableLiveDataList
             List<ArModel> arModels = new ArrayList<>();
@@ -900,10 +899,10 @@ public class ArVM extends AndroidViewModel {
             }
 
             // Set the value of MutableLiveData
-            mMutableLiveDataListArModelBySubject.setValue(arModels);
+            mMutableLiveDataListArModel.setValue(arModels);
         }
 
-        return mMutableLiveDataListArModelBySubject;
+        return mMutableLiveDataListArModel;
     }
 
     /**

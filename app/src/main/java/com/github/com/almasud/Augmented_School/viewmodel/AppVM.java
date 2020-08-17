@@ -56,7 +56,7 @@ public class AppVM extends AndroidViewModel {
                             // Dispatch an EventMessage to it's subscribers
                             EventBus.getDefault().post(
                                     new EventMessage(
-                                            "Failed to establish connection! Check your internet connection and try again.",
+                                            "Failed to establish connection! Couldn't fetch the app information.",
                                             EventMessage.TYPE_ERROR
                                     )
                             );

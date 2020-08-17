@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.github.com.almasud.Augmented_School.ui.activity.TestActivity">
+    tools:context="com.github.com.almasud.Augmented_School.view.activity.TestActivity">
 
     <include
         android:id="@+id/toolbarTest"
@@ -55,19 +55,13 @@
                         android:scaleType="fitCenter"
                         tools:ignore="ContentDescription"/>
 
-                    <TextView
-                        android:id="@+id/tvTestResultOneOne"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        tools:text="@string/learn"
-                        android:textColor="@android:color/white"
-                        android:background="@color/colorPrimary"
-                        android:padding="@dimen/activity_half_margin"
-                        android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
-                        android:layout_marginVertical="@dimen/activity_3x_margin"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:visibility="gone"/>
+                    <ImageView
+                        android:id="@+id/ivTestResultOneOne"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        tools:src="@drawable/check_mark"
+                        android:visibility="gone"
+                        tools:ignore="ContentDescription" />
 
                 </RelativeLayout>
 
@@ -90,19 +84,13 @@
                         android:scaleType="fitCenter"
                         tools:ignore="ContentDescription"/>
 
-                    <TextView
-                        android:id="@+id/tvTestResultOneTwo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        tools:text="@string/learn"
-                        android:textColor="@android:color/white"
-                        android:background="@color/colorPrimary"
-                        android:padding="@dimen/activity_half_margin"
-                        android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
-                        android:layout_marginVertical="@dimen/activity_3x_margin"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:visibility="gone"/>
+                    <ImageView
+                        android:id="@+id/ivTestResultOneTwo"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        tools:src="@drawable/cross_mark"
+                        android:visibility="gone"
+                        tools:ignore="ContentDescription" />
 
                 </RelativeLayout>
 
@@ -129,24 +117,18 @@
                         android:id="@+id/ivTestTwoOne"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:padding="@dimen/activity_half_margin"
                         tools:src="@drawable/animal_hippopotamus"
                         android:scaleType="fitCenter"
+                        android:padding="@dimen/activity_half_margin"
                         tools:ignore="ContentDescription"/>
 
-                    <TextView
-                        android:id="@+id/tvTestResultTwoOne"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        tools:text="@string/learn"
-                        android:textColor="@android:color/white"
-                        android:background="@color/colorPrimary"
-                        android:padding="@dimen/activity_half_margin"
-                        android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
-                        android:layout_marginVertical="@dimen/activity_3x_margin"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:visibility="gone"/>
+                    <ImageView
+                        android:id="@+id/ivTestResultTwoOne"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        tools:src="@drawable/check_mark"
+                        android:visibility="gone"
+                        tools:ignore="ContentDescription" />
 
                 </RelativeLayout>
 
@@ -169,19 +151,13 @@
                         android:scaleType="fitCenter"
                         tools:ignore="ContentDescription"/>
 
-                    <TextView
-                        android:id="@+id/tvTestResultTwoTwo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        tools:text="@string/learn"
-                        android:textColor="@android:color/white"
-                        android:background="@color/colorPrimary"
-                        android:padding="@dimen/activity_half_margin"
-                        android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
-                        android:layout_marginVertical="@dimen/activity_3x_margin"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:visibility="gone"/>
+                    <ImageView
+                        android:id="@+id/ivTestResultTwoTwo"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        tools:src="@drawable/cross_mark"
+                        android:visibility="gone"
+                        tools:ignore="ContentDescription" />
 
                 </RelativeLayout>
 

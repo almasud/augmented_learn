@@ -18,7 +18,7 @@ import com.github.com.almasud.Augmented_School.BaseApplication;
 import com.github.com.almasud.Augmented_School.BuildConfig;
 import com.github.com.almasud.Augmented_School.R;
 import com.github.com.almasud.Augmented_School.model.util.EventMessage;
-import com.github.com.almasud.Augmented_School.ui.activity.SubjectChooseActivity;
+import com.github.com.almasud.Augmented_School.view.activity.SubjectChooseActivity;
 import com.github.com.almasud.Augmented_School.util.PreferenceManager;
 
 import org.greenrobot.eventbus.EventBus;
@@ -38,7 +38,7 @@ import java.net.URLConnection;
  * A {@link Service} class for file download.
  */
 public class DownloadService extends Service {
-    private static final String TAG = DownloadService.class.getSimpleName();
+    private static final String TAG = "DownloadService";
     public static final String DOWNLOAD_URL = "Download_Link";
     public static final String TARGET_DIRECTORY = "Target_Directory";
     private PreferenceManager mPreferenceManager;
@@ -86,7 +86,7 @@ public class DownloadService extends Service {
             notificationBuilder.setOngoing(true);
             notificationBuilder.setAutoCancel(false);
             notificationBuilder.setOnlyAlertOnce(true);
-            notificationBuilder.setSmallIcon(R.drawable.ic_get_app);
+            notificationBuilder.setSmallIcon(R.drawable.installing_update_animation);
             notificationBuilder.setContentTitle("Downloading");
             notificationBuilder.setContentText("0%");
             notificationBuilder.setProgress(100, 0, false);
@@ -196,7 +196,7 @@ public class DownloadService extends Service {
                 }
             }
 
-            notificationBuilder.setSmallIcon(successStatus? R.drawable.ic_done_black: R.drawable.ic_error);
+            notificationBuilder.setSmallIcon(successStatus? R.drawable.ic_done : R.drawable.ic_error);
             notificationBuilder.setContentTitle(successStatus? "Done": "Failed");
             notificationBuilder.setContentText(successStatus? "Download completed": "Download is not completed");
             notificationBuilder.setOngoing(false);

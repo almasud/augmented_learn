@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -33,6 +34,7 @@ import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.lifecycle.ProcessLifecycleOwner;
 
+import com.github.com.almasud.Augmented_School.model.entity.App;
 import com.github.com.almasud.Augmented_School.model.entity.ArModel;
 import com.github.com.almasud.Augmented_School.model.entity.Language;
 import com.github.com.almasud.Augmented_School.model.entity.Voice;
@@ -55,6 +57,7 @@ import java.util.Set;
  * @author Abdullah Almasud
  */
 public class BaseApplication extends Application implements LifecycleObserver {
+    private static final String TAG = "BaseApplication";
     public static final String BUNDLE = "Bundle";
     public static final String SERVICE_NAME = "Service_Name";
     public static final String SERVICE_LEARN = "Learn";
@@ -70,13 +73,12 @@ public class BaseApplication extends Application implements LifecycleObserver {
     public static final String DIRECTORY_ALPHABETS_ENGLISH = "alphabets_english";
     public static final String DIRECTORY_NUMBERS_ENGLISH = "numbers_english";
     public static final String DIRECTORY_ANIMALS_ENGLISH = "animals_english";
-    public static final String DOWNLOAD_URL_AR_BOOK = "https://almasud.000webhostapp.com/download/ar_book.pdf";
+    public static final String DOWNLOAD_URL_AR_BOOK = "https://almasud.000webhostapp.com/Augmented_School/download/ar_book.pdf";
 
     private static final double MIN_OPEN_GL_VERSION = 3.0;
     public static final String NOTIFICATION_CHANNEL_DOWNLOADER = "Downloader_Channel";
     public static final String NOTIFICATION_CHANNEL_UNZIP = "Unzip_Channel";
 
-    private static final String TAG = BaseApplication.class.getSimpleName();
     private static final BaseApplication INSTANCE = new BaseApplication();
     private static AppVisibilityListener sAppVisibilityListener;
     private static volatile TextToSpeech sTTS;
@@ -751,5 +753,62 @@ public class BaseApplication extends Application implements LifecycleObserver {
                 }
             }
         }
+    }
+
+    /**
+     * Determines whether the internet connection is available or not.
+     * @param activity An instance of {@link Activity}.
+     * @return True if internet connection is available otherwise false.
+     */
+    public static boolean isInternetAvailable(Activity activity) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
+        return connectivityManager.getActiveNetworkInfo() != null
+                && connectivityManager.getActiveNetworkInfo().isConnected();
+    }
+
+    /**
+     * Check whether an update is available for the {@link App} or not. If available download
+     * the app and install by using the {@link DownloadService}.
+     * @param activity An instance of {@link Activity}.
+     * @param app An instance of {@link App}.
+     */
+    public static void checkUpdateWithDownload(Activity activity, App app) {
+        BaseApplication.setAlertDialog(
+                activity, null, activity.getResources().getString(R.string.update_available),
+                R.drawable.ic_update, String.format(
+                        activity.getResources().getString(R.string.update_available_message) + "\n"
+                                + " %s\n"
+                                + activity.getResources().getString(R.string.current_version) + " %s\n"
+                                + activity.getResources().getString(R.string.available_version) + " %s",
+                        app.getVersionDescription(), BuildConfig.VERSION_NAME,
+                        app.getVersionName()
+                ), () -> {
+                    File appDirectory = activity.getExternalFilesDir(
+                            File.separator + App.DIRECTORY_APP
+                    );
+                    // Create a directory if is not exist
+                    if (!appDirectory.exists())
+                        appDirectory.mkdirs();
+
+                    if (appDirectory.isDirectory()) {
+                        // Check whether the directory contains any item or not
+                        if (appDirectory.listFiles().length >= 1) {
+                            Log.d(TAG, "onOptionsItemSelected: " + appDirectory.getAbsolutePath() + " contains old file (s).");
+                            // Delete the existing files from the directory
+                            for (File file: appDirectory.listFiles()) {
+                                file.delete();
+                                Log.d(TAG, "onOptionsItemSelected: " + file.getName() + " is deleted.");
+                            }
+                        }
+
+                        // Start download & install the updated app.
+                        BaseApplication.download(
+                                activity, app.getDownloadURL(), appDirectory
+                        );
+                    }
+
+                }, activity.getResources().getString(R.string.update_now),
+                () -> {}, activity.getResources().getString(R.string.update_later)
+        );
     }
 }

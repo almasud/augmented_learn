@@ -4,7 +4,7 @@
     <string name="developer_name">Abdullah Almasud</string>
     <string name="contact_email">almasud.arm@gmail.com</string>
     <string name="report_email">almasud.arm@hotmail.com</string>
-    <string name="app_download_link">https://bit.ly/Augmented_School_App</string>
+    <string name="app_download_link">https://bit.ly/Augmented_School</string>
     <string name="learn_with_reality">Learn with Reality</string>
     <string name="app_greeting">"Hello, Welcome to Intro"</string>
     <string name="real_view">"Real View"</string>
@@ -132,7 +132,7 @@
     <string name="bn_alphabet_27_extra">রাণী</string>
     <string name="bn_alphabet_28_extra">লাল</string>
     <string name="bn_alphabet_29_extra">শসা</string>
-    <string name="bn_alphabet_30_extra">ষাড়</string>
+    <string name="bn_alphabet_30_extra">ষাঁড়</string>
     <string name="bn_alphabet_31_extra">সিংহ</string>
     <string name="bn_alphabet_32_extra">হাতি</string>
     <string name="bn_alphabet_34_extra">ঢ়</string>
@@ -256,7 +256,8 @@
     <string name="update_available_message">A new version is available and ready to update.</string>
     <string name="current_version">The current version is:</string>
     <string name="available_version">The available version is:</string>
-    <string name="not_update_available">"No update available! You have already a latest version. Keep always update to get new features."</string>
+    <string name="not_update_available">No update is available! You have already a latest version. Keep always update to get new features.</string>
+    <string name="not_internet_available">Opps! You have no internet connection. Please connect to the internet and try again.</string>
 
     <!-- Button strings -->
     <string name="okay_understand">Okay, I understand</string>

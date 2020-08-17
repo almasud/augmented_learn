@@ -77,7 +77,7 @@
         android:id="@+id/buttonCancelItemName"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:src="@drawable/ic_cancel_black"
+        android:src="@drawable/ic_cancel"
         android:scaleType="centerCrop"
         android:background="@android:color/transparent"
         android:layout_alignParentEnd="true"

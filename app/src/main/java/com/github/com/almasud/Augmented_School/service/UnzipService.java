@@ -12,7 +12,7 @@ import androidx.core.app.NotificationCompat;
 import com.github.com.almasud.Augmented_School.BaseApplication;
 import com.github.com.almasud.Augmented_School.R;
 import com.github.com.almasud.Augmented_School.model.util.EventMessage;
-import com.github.com.almasud.Augmented_School.ui.activity.SubjectChooseActivity;
+import com.github.com.almasud.Augmented_School.view.activity.SubjectChooseActivity;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -29,7 +29,7 @@ import java.util.zip.ZipInputStream;
  * A {@link Service} class for file unzip.
  */
 public class UnzipService extends Service {
-    private static final String TAG = UnzipService.class.getSimpleName();
+    private static final String TAG = "UnzipService";
     public static final String ZIP_FILE = "ZIP_FILE";
     public static final String TARGET_DIRECTORY = "Target_Directory";
 
@@ -75,7 +75,7 @@ public class UnzipService extends Service {
             notificationBuilder.setOngoing(true);
             notificationBuilder.setAutoCancel(false);
             notificationBuilder.setOnlyAlertOnce(true);
-            notificationBuilder.setSmallIcon(R.drawable.ic_get_app);
+            notificationBuilder.setSmallIcon(R.drawable.installing_update_animation);
             notificationBuilder.setContentTitle("Unzipping");
             notificationBuilder.setContentText("0%");
             notificationBuilder.setProgress(100, 0, false);
@@ -126,7 +126,6 @@ public class UnzipService extends Service {
                         tempPercent = percent;
                         notificationBuilder.setContentText(percent + "%");
                         notificationBuilder.setProgress(100, percent, false);
-
                         // Notify by starting the foreground service.
                         startForeground(notificationId, notificationBuilder.build());
                     }
@@ -158,13 +157,12 @@ public class UnzipService extends Service {
                 );
             }
 
-            notificationBuilder.setSmallIcon(successStatus? R.drawable.ic_done_black: R.drawable.ic_error);
+            notificationBuilder.setSmallIcon(successStatus? R.drawable.ic_done : R.drawable.ic_error);
             notificationBuilder.setContentTitle(successStatus? "Done": "Failed");
             notificationBuilder.setContentText(successStatus? "Unzip completed": "Unzip is not completed");
             notificationBuilder.setOngoing(false);
             notificationBuilder.setAutoCancel(true);
             notificationBuilder.setProgress(0, 0, false);
-
             // Notify by starting the foreground service.
             startForeground(notificationId, notificationBuilder.build());
 

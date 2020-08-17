@@ -5,12 +5,14 @@
 
     <!-- Both "AR Optional" and "AR Required" apps require CAMERA permission. -->
     <uses-permission android:name="android.permission.CAMERA" />
+    <!-- ACCESS_NETWORK_STATE permission is required to check internet availability. -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <!-- INTERNET permission is required to download files from server. -->
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- FOREGROUND_SERVICE permission is required from Android Oreo or API level 26 or higher. -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <!-- Request permission for apk install -->
+    <!-- REQUEST_INSTALL_PACKAGES permission for apk install -->
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
     <application
@@ -54,31 +56,31 @@
             android:label="@string/service_download" />
 
         <activity
-            android:name="com.github.com.almasud.Augmented_School.ui.activity.LearnArActivity"
+            android:name="com.github.com.almasud.Augmented_School.view.activity.LearnArActivity"
             android:screenOrientation="landscape"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.github.com.almasud.Augmented_School.ui.activity.LearnActivity"
+            android:name="com.github.com.almasud.Augmented_School.view.activity.LearnActivity"
             android:screenOrientation="landscape"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.github.com.almasud.Augmented_School.ui.activity.ScanActivity"
+            android:name="com.github.com.almasud.Augmented_School.view.activity.ScanActivity"
             android:screenOrientation="landscape"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.github.com.almasud.Augmented_School.ui.activity.TestActivity"
+            android:name="com.github.com.almasud.Augmented_School.view.activity.TestActivity"
             android:screenOrientation="landscape"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.github.com.almasud.Augmented_School.ui.activity.SubjectChooseActivity"
+            android:name="com.github.com.almasud.Augmented_School.view.activity.SubjectChooseActivity"
             android:screenOrientation="landscape"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.github.com.almasud.Augmented_School.ui.activity.HomeActivity"
+            android:name="com.github.com.almasud.Augmented_School.view.activity.HomeActivity"
             android:screenOrientation="landscape"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.github.com.almasud.Augmented_School.ui.activity.LauncherActivity"
+            android:name="com.github.com.almasud.Augmented_School.view.activity.LauncherActivity"
             android:label="@string/app_name"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme"
