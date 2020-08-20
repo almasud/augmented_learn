@@ -10,7 +10,7 @@
 
     <ImageView
         android:id="@+id/iv_item_real_view"
-        tools:src="@drawable/animal_horse"
+        tools:src="@drawable/learn"
         android:layout_width="100dp"
         android:layout_height="100dp"
         tools:ignore="ContentDescription"/>

@@ -6,7 +6,7 @@ android {
     buildToolsVersion "29.0.2"
 
     defaultConfig {
-        applicationId "com.github.com.almasud.Augmented_School"
+        applicationId "com.github.com.almasud.Augmented_Learn"
         // "AR Optional" apps must declare minSdkVersion >= 14.
         minSdkVersion 17
         targetSdkVersion 29
@@ -30,7 +30,7 @@ android {
 
     buildTypes {
         debug {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
 
@@ -66,6 +66,9 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.6.1'
     implementation 'com.squareup.retrofit2:converter-gson:2.6.1'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    // Glide
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
@@ -77,11 +80,11 @@ dependencies {
 
 //apply plugin: 'com.google.ar.sceneform.plugin'
 //
-//sceneform.asset('sampledata/models/vowels_bengali/bn_vowel_01.fbx', // 'Source Asset Path' specified during import.
+//sceneform.asset('sampledata/models/bn_vowels/bn_vowel_01.fbx', // 'Source Asset Path' specified during import.
 //        'default',                    // 'Material Path' specified during import.
-//        'sampledata/models/vowels_bengali/bn_vowel_01.sfa', // '.sfa Output Path' specified during import.
-//        'src/main/assets/models/vowels_bengali/bn_vowel_01')      // '.sfb Output Path' specified during import.
-//sceneform.asset('sampledata/models/vowels_bengali/bn_vowel_02.fbx',
+//        'sampledata/models/bn_vowels/bn_vowel_01.sfa', // '.sfa Output Path' specified during import.
+//        'src/main/assets/models/bn_vowels/bn_vowel_01')      // '.sfb Output Path' specified during import.
+//sceneform.asset('sampledata/models/bn_vowels/bn_vowel_02.fbx',
 //        'default',
-//        'sampledata/models/vowels_bengali/bn_vowel_02.sfa',
-//        'src/main/assets/models/vowels_bengali/bn_vowel_02')
+//        'sampledata/models/bn_vowels/bn_vowel_02.sfa',
+//        'src/main/assets/models/bn_vowels/bn_vowel_02')

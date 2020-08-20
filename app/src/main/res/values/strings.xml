@@ -1,10 +1,10 @@
 <resources>
 
-    <string name="app_name">Augmented School</string>
+    <string name="app_name">Augmented Learn</string>
     <string name="developer_name">Abdullah Almasud</string>
-    <string name="contact_email">almasud.arm@gmail.com</string>
+    <string name="developer_website">https://almasud.github.io</string>
     <string name="report_email">almasud.arm@hotmail.com</string>
-    <string name="app_download_link">https://bit.ly/Augmented_School</string>
+    <string name="app_download_link">http://bit.ly/Augmented_Learn</string>
     <string name="learn_with_reality">Learn with Reality</string>
     <string name="app_greeting">"Hello, Welcome to Intro"</string>
     <string name="real_view">"Real View"</string>
@@ -15,10 +15,11 @@
     <string name="language_bengali">বাংলা</string>
     <string name="language_english">English</string>
 
-    <!-- Strings used for navigation -->
+    <!-- Strings used for action button and navigation -->
     <string name="action_share">Share</string>
     <string name="more">More</string>
     <string name="action_check_update">Check for update</string>
+    <string name="action_rate_app">Rate 5 Star</string>
     <string name="action_report">Report a problem</string>
     <string name="action_about">About</string>
     <string name="action_get_ar_book">Have no AR book?</string>
@@ -34,6 +35,15 @@
     <string name="scan_book">Scan Book</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+    <string name="okay_understand">Okay, I understand</string>
+    <string name="action_yes">Yes</string>
+    <string name="action_no">No</string>
+    <string name="action_not_sure">Not Sure</string>
+    <string name="action_close">Close</string>
+    <string name="action_test_again">Test Again</string>
+    <string name="action_update_now">Update Now</string>
+    <string name="action_update_later">Update Later</string>
+    <string name="action_get_from_google_play">Get from Google Play</string>
 
     <!-- Strings used for name of bengali vowels -->
     <string name="bn_vowel_01">অ</string>
@@ -257,16 +267,6 @@
     <string name="current_version">The current version is:</string>
     <string name="available_version">The available version is:</string>
     <string name="not_update_available">No update is available! You have already a latest version. Keep always update to get new features.</string>
-    <string name="not_internet_available">Opps! You have no internet connection. Please connect to the internet and try again.</string>
-
-    <!-- Button strings -->
-    <string name="okay_understand">Okay, I understand</string>
-    <string name="yes">Yes</string>
-    <string name="no">No</string>
-    <string name="not_sure">Not Sure</string>
-    <string name="finish">Finish</string>
-    <string name="test_again">Test Again</string>
-    <string name="update_now">Update Now</string>
-    <string name="update_later">Update Later</string>
+    <string name="internet_not_available">Opps! You have no internet connection. Please connect to the internet and try again.</string>
 
 </resources>

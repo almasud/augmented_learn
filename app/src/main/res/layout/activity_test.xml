@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.github.com.almasud.Augmented_School.view.activity.TestActivity">
+    tools:context="com.github.com.almasud.Augmented_Learn.view.activity.TestActivity">
 
     <include
         android:id="@+id/toolbarTest"
@@ -51,7 +51,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:padding="@dimen/activity_half_margin"
-                        tools:src="@drawable/animal_lion"
+                        tools:src="@drawable/learn"
                         android:scaleType="fitCenter"
                         tools:ignore="ContentDescription"/>
 
@@ -80,7 +80,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:padding="@dimen/activity_half_margin"
-                        tools:src="@drawable/animal_cow"
+                        tools:src="@drawable/test"
                         android:scaleType="fitCenter"
                         tools:ignore="ContentDescription"/>
 
@@ -117,7 +117,7 @@
                         android:id="@+id/ivTestTwoOne"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        tools:src="@drawable/animal_hippopotamus"
+                        tools:src="@drawable/scan_book"
                         android:scaleType="fitCenter"
                         android:padding="@dimen/activity_half_margin"
                         tools:ignore="ContentDescription"/>
@@ -147,7 +147,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:padding="@dimen/activity_half_margin"
-                        tools:src="@drawable/animal_horse"
+                        tools:src="@drawable/app_logo"
                         android:scaleType="fitCenter"
                         tools:ignore="ContentDescription"/>
 
@@ -212,7 +212,7 @@
                 android:id="@+id/ibTestHear"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/ic_hearing_black"
+                app:srcCompat="@drawable/ic_hearing_black"
                 android:background="@color/colorPrimary"
                 android:tint="@android:color/white"
                 android:layout_gravity="center_horizontal"

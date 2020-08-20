@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/wrapperAboutDialog"
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -34,6 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:layout_below="@+id/wrapperAboutDialogHeader"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:paddingHorizontal="@dimen/activity_horizontal_margin">
 
@@ -62,6 +63,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center_horizontal"
+            android:layout_below="@+id/wrapperAboutDialogContent"
             android:paddingHorizontal="@dimen/activity_horizontal_margin"
             android:layout_marginBottom="@dimen/activity_vertical_margin">
 
@@ -85,6 +87,6 @@
 
         </LinearLayout>
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </ScrollView>

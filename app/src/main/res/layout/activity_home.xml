@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.github.com.almasud.Augmented_School.view.activity.HomeActivity">
+    tools:context="com.github.com.almasud.Augmented_Learn.view.activity.HomeActivity">
 
     <include
         android:id="@+id/toolbarHome"
@@ -36,10 +36,11 @@
                 android:layout_marginEnd="@dimen/activity_horizontal_margin">
 
                 <ImageView
+                    android:id="@+id/ivLearn"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:padding="@dimen/activity_half_margin"
-                    android:src="@drawable/learn"
+                    tools:src="@drawable/learn"
                     android:scaleType="fitXY"
                     tools:ignore="ContentDescription"/>
 
@@ -69,11 +70,12 @@
                 android:layout_marginEnd="@dimen/activity_horizontal_margin">
 
                 <ImageView
+                    android:id="@+id/ivTest"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:padding="@dimen/activity_half_margin"
                     android:scaleType="fitXY"
-                    android:src="@drawable/test"
+                    tools:src="@drawable/test"
                     tools:ignore="ContentDescription"/>
 
                 <TextView
@@ -101,10 +103,11 @@
                 android:onClick="onClickItem">
 
                 <ImageView
+                    android:id="@+id/ivScan"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:padding="@dimen/activity_half_margin"
-                    android:src="@drawable/scan_book"
+                    tools:src="@drawable/scan_book"
                     android:scaleType="fitXY"
                     tools:ignore="ContentDescription"/>
 

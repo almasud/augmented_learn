@@ -3,13 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:layout_gravity="center"
     android:gravity="center"
-    tools:context="com.github.com.almasud.Augmented_School.view.fragment.LearnFragment">
+    tools:context="com.github.com.almasud.Augmented_Learn.view.fragment.LearnFragment">
 
     <ImageView
-        android:id="@+id/ivLearn"
+        android:id="@+id/ivLearnItem"
         android:layout_width="200dp"
         android:layout_height="200dp"
         tools:src="@drawable/capital_a"
@@ -30,7 +31,7 @@
             android:scaleType="centerCrop"
             android:clickable="true"
             android:focusable="true"
-            android:tint="@color/colorPrimary"
+            app:tint="@color/colorPrimary"
             android:layout_marginBottom="@dimen/activity_half_margin"
             tools:ignore="ContentDescription" />
 
