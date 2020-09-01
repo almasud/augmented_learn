@@ -4,12 +4,13 @@
     <string name="developer_name">Abdullah Almasud</string>
     <string name="developer_website">https://almasud.github.io</string>
     <string name="report_email">almasud.arm@hotmail.com</string>
-    <string name="app_download_link">http://bit.ly/Augmented_Learn</string>
+    <string name="app_download_link">http://bit.ly/augmented_learn_apk</string>
     <string name="learn_with_reality">Learn with Reality</string>
-    <string name="app_greeting">"Hello, Welcome to Intro"</string>
     <string name="real_view">"Real View"</string>
-    <string name="service_download">"Augmented School Download"</string>
-    <string name="service_unzip">"Augmented School Unzip"</string>
+    <string name="service_download">"Download Service"</string>
+    <string name="service_unzip">"Unzip Service"</string>
+    <string name="notification_channel_download">Download Notification</string>
+    <string name="notification_channel_unzip">Unzip Notification</string>
 
     <!-- Strings used for language type -->
     <string name="language_bengali">বাংলা</string>
@@ -19,7 +20,6 @@
     <string name="action_share">Share</string>
     <string name="more">More</string>
     <string name="action_check_update">Check for update</string>
-    <string name="action_rate_app">Rate 5 Star</string>
     <string name="action_report">Report a problem</string>
     <string name="action_about">About</string>
     <string name="action_get_ar_book">Have no AR book?</string>
@@ -43,7 +43,6 @@
     <string name="action_test_again">Test Again</string>
     <string name="action_update_now">Update Now</string>
     <string name="action_update_later">Update Later</string>
-    <string name="action_get_from_google_play">Get from Google Play</string>
 
     <!-- Strings used for name of bengali vowels -->
     <string name="bn_vowel_01">অ</string>

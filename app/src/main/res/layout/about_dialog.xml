@@ -11,7 +11,7 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
-            android:id="@+id/wrapperAboutDialogHeader"
+            android:id="@+id/wrapperHeaderAboutDialog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
@@ -19,7 +19,7 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/aboutDialogCoverPhoto"
+                android:id="@+id/coverPhotoAboutDialog"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 tool:src="@drawable/app_logo"
@@ -30,16 +30,16 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/wrapperAboutDialogContent"
+            android:id="@+id/wrapperContentAboutDialog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_below="@+id/wrapperAboutDialogHeader"
+            android:layout_below="@+id/wrapperHeaderAboutDialog"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:paddingHorizontal="@dimen/activity_horizontal_margin">
 
             <TextView
-                android:id="@+id/aboutDialogTitle"
+                android:id="@+id/titleAboutDialog"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tool:text="Title is goes here..."
@@ -49,7 +49,7 @@
                 android:layout_marginBottom="@dimen/activity_half_margin"/>
 
             <TextView
-                android:id="@+id/about_dialog_content"
+                android:id="@+id/contentAboutDialog"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tool:text="@string/need_download_models"
@@ -58,12 +58,12 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/wrapperAboutDialogFooter"
+            android:id="@+id/wrapperFooterAboutDialog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center_horizontal"
-            android:layout_below="@+id/wrapperAboutDialogContent"
+            android:layout_below="@+id/wrapperContentAboutDialog"
             android:paddingHorizontal="@dimen/activity_horizontal_margin"
             android:layout_marginBottom="@dimen/activity_vertical_margin">
 
@@ -75,7 +75,7 @@
                 android:textStyle="italic"/>
 
             <TextView
-                android:id="@+id/aboutDialogDeveloperName"
+                android:id="@+id/developerNameAboutDialog"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="true"
