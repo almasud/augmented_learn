@@ -23,13 +23,13 @@ public class Subject implements Serializable {
     public static final String SUBJECT_ENGLISH_ALPHABET = "en_alphabet";
     public static final String SUBJECT_ENGLISH_NUMBER = "en_number";
     public static final String SUBJECT_ENGLISH_ANIMAL = "en_animal";
-    public static final String URL_MODEL_BENGALI_VOWELS = "https://github.com/almasud/augmented_learn/documents/download/models/bengali_vowels.zip";
-    public static final String URL_MODEL_BENGALI_ALPHABETS = "https://github.com/almasud/augmented_learn/documents/download/models/bengali_alphabets.zip";
-    public static final String URL_MODEL_BENGALI_NUMBERS = "https://github.com/almasud/augmented_learn/documents/download/models/bengali_numbers.zip";
-    public static final String URL_MODEL_ENGLISH_ALPHABETS = "https://github.com/almasud/augmented_learn/documents/download/models/english_alphabets.zip";
-    public static final String URL_MODEL_ENGLISH_NUMBERS = "https://github.com/almasud/augmented_learn/documents/download/models/english_numbers.zip";
-    public static final String URL_MODEL_ENGLISH_ANIMALS = "https://github.com/almasud/augmented_learn/documents/download/models/english_animals.zip";
-    public static final String URL_AR_BOOK = "https://github.com/almasud/augmented_learn/documents/download/pdf/ar_book.pdf";
+    public static final String URL_MODEL_BENGALI_VOWELS = "https://github.com/almasud/augmented_learn/raw/master/documents/download/models/bengali_vowels.zip";
+    public static final String URL_MODEL_BENGALI_ALPHABETS = "https://github.com/almasud/augmented_learn/raw/master/documents/download/models/bengali_alphabets.zip";
+    public static final String URL_MODEL_BENGALI_NUMBERS = "https://github.com/almasud/augmented_learn/raw/master/documents/download/models/bengali_numbers.zip";
+    public static final String URL_MODEL_ENGLISH_ALPHABETS = "https://github.com/almasud/augmented_learn/raw/master/documents/download/models/english_alphabets.zip";
+    public static final String URL_MODEL_ENGLISH_NUMBERS = "https://github.com/almasud/augmented_learn/raw/master/documents/download/models/english_numbers.zip";
+    public static final String URL_MODEL_ENGLISH_ANIMALS = "https://github.com/almasud/augmented_learn/raw/master/documents/download/models/english_animals.zip";
+    public static final String URL_AR_BOOK = "https://github.com/almasud/augmented_learn/raw/master/documents/download/pdf/ar_book.pdf";
 
     private int id;
     private String name;

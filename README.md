@@ -1,8 +1,14 @@
-![App feature photo](https://github.com/almasud/augmented_learn/blob/master/documents/download/screenshots/feature_photo.jpg)
+<p align="center">
+  <img src="https://github.com/almasud/augmented_learn/blob/master/documents/download/screenshots/feature_photo.jpg" alt="Feature Photo"/>
+</p>
 
-[![App download button](https://github.com/almasud/augmented_learn/blob/master/documents/app_download.jpg)](https://github.com/almasud/augmented_learn/blob/master/app/release/app-release.apk)
+<p align="center">
+  <a target="_blank" href="https://github.com/almasud/augmented_learn/raw/master/app/release/app-release.apk">
+    <img width="300" height="100" src="https://github.com/almasud/augmented_learn/blob/master/documents/app_download.jpg" alt="App download button"/>
+  </a>
+</p>
 
-```Augmented Learn``` application is developed to provide interactive learning
+Augmented Learn application is developed to provide interactive learning
 with Augmented Reality for preschool children. Our application is AR-Optional that means designed for both non-AR and AR supported devices.
 The application serves three services: -
 
@@ -26,5 +32,7 @@ In this section, the app scans an item (s) for a particular subject from a dedic
 the top of it. While a user scans an item from the book the application is trying to detect the scanning image. Once the image is detected then it proceeds to track the image
 to render a single or multiple 3D models for each scanned item on the top of it. Note that this feature works only for AR supported devices.
 
-##### Thank you all and happy codding...
-[Abdullah Almasud](https://facebook.com/almasud.arm)
+
+<p align="center">&copy; All right reserved at
+  <a target="_blank" href="https://facebook.com/almasud.arm">Abdullah Almasud</a>
+</p>

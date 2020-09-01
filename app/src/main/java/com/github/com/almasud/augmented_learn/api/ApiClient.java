@@ -10,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * @author Abdullah Almasud
  */
 public class ApiClient {
-    public static final String BASE_URL = "https://github.com/almasud/augmented_learn/documents/";
+    public static final String BASE_URL = "https://raw.githubusercontent.com/almasud/augmented_learn/master/documents/";
     public static Retrofit sRetrofit;
 
     public static Retrofit getClient() {
