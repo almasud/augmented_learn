@@ -4,7 +4,7 @@
 
 <p align="center">
   <a target="_blank" href="https://github.com/almasud/augmented_learn/raw/master/app/release/app-release.apk">
-    <img width="300" height="100" src="https://github.com/almasud/augmented_learn/blob/master/documents/app_download.jpg" alt="App download button"/>
+    <img width="250" height="80" src="https://github.com/almasud/augmented_learn/blob/master/documents/app_download.jpg" alt="App download button"/>
   </a>
 </p>
 
@@ -33,6 +33,7 @@ the top of it. While a user scans an item from the book the application is tryin
 to render a single or multiple 3D models for each scanned item on the top of it. Note that this feature works only for AR supported devices.
 
 
-<p align="center">&copy; All right reserved at
-  <a target="_blank" href="https://facebook.com/almasud.arm">Abdullah Almasud</a>
-</p>
+#### Thanks to
+[EDMT Dev](https://www.youtube.com/user/eddydn71) for 3D models of the Animals
+and
+[Shamaima Sohale](https://facebook.com/shamima.sohale) for providing the rest of the 3D models and the kid voices.
