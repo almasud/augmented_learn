@@ -1,7 +1,0 @@
-{
-    "name": "Augmented Learn",
-    "versionName": "1.0",
-    "versionCode": 1,
-    "versionDescription": "Changelog:\n1. Delete downloaded old apk files from the app directory after re-launch the app\n2. Other bug fixes.",
-    "downloadURL": "https://github.com/almasud/augmented_learn/raw/master/app/release/app-release.apk"
-}

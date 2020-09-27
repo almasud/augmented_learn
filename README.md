@@ -1,10 +1,10 @@
 <p align="center">
-  <img src="https://github.com/almasud/augmented_learn/blob/master/documents/download/screenshots/feature_photo.jpg" alt="Feature Photo"/>
+  <img src="https://github.com/almasud/almasud.github.io/raw/master/projects/augmented_learn/images/screenshots/feature_photo.jpg" alt="Feature Photo"/>
 </p>
 
 <p align="center">
   <a target="_blank" href="https://github.com/almasud/augmented_learn/raw/master/app/release/app-release.apk">
-    <img width="250" height="80" src="https://github.com/almasud/augmented_learn/blob/master/documents/app_download.jpg" alt="App download button"/>
+    <img width="220" height="90" src="https://github.com/almasud/almasud.github.io/raw/master/projects/augmented_learn/images/direct_apk_download.png" alt="App download button"/>
   </a>
 </p>
 
