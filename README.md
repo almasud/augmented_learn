@@ -31,9 +31,3 @@ correct answers are tracking to make a Test result.
 In this section, the app scans an item (s) for a particular subject from a dedicated Augmented Reality based book for this app to render the 3D model of the scanned item on
 the top of it. While a user scans an item from the book the application is trying to detect the scanning image. Once the image is detected then it proceeds to track the image
 to render a single or multiple 3D models for each scanned item on the top of it. Note that this feature works only for AR supported devices.
-
-
-#### Thanks to
-[EDMT Dev](https://www.youtube.com/user/eddydn71) for 3D models of the Animals
-and
-[Shamaima Sohale](https://facebook.com/shamima.sohale) for providing the rest of the 3D models and the kid voices.
