@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.github.com.almasud.augmented_learn.view.activity.HomeActivity">
+    tools:context="com.github.com.almasud.Augmented_Learn.view.activity.HomeActivity">
 
     <item
         android:id="@+id/action_share"
@@ -17,6 +17,11 @@
                 android:id="@+id/action_check_update"
                 android:title="@string/action_check_update"
                 android:icon="@drawable/ic_update" />
+
+            <item
+                android:id="@+id/action_rate_us"
+                android:title="@string/action_rate_us"
+                android:icon="@drawable/ic_star_rate" />
 
             <item
                 android:id="@+id/action_report"
