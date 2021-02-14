@@ -6,12 +6,12 @@ android {
     buildToolsVersion "29.0.2"
 
     defaultConfig {
-        applicationId "com.github.com.almasud.Augmented_Learn"
+        applicationId "com.github.com.almasud.augmented_learn"
         // "AR Optional" apps must declare minSdkVersion >= 14.
         minSdkVersion 17
         targetSdkVersion 29
-        versionCode 4
-        versionName "1.3"
+        versionCode 1
+        versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true

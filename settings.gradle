@@ -1,2 +1,2 @@
-rootProject.name='Augmented_Learn'
+rootProject.name='augmented_learn'
 include ':app'
