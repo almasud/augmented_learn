@@ -8,6 +8,12 @@
   </a>
 </p>
 
+<p align="center">
+  <a target="_blank" href="https://play.google.com/store/apps/details?id=com.github.com.almasud.augmented_learn">
+    <img width="220" height="90" src="https://github.com/almasud/almasud.github.io/raw/master/projects/augmented_learn/images/google-play-badge.png" alt="App download button"/>
+  </a>
+</p>
+
 Augmented Learn application is developed to provide interactive learning
 with Augmented Reality for preschool children. Our application is AR-Optional that means designed for both non-AR and AR supported devices.
 The application serves three services: -
