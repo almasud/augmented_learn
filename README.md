@@ -14,12 +14,6 @@
   </a>
 </p>
 
-<p align="center">
-  <a target="_blank" href="https://play.google.com/store/apps/details?id=com.github.com.almasud.augmented_learn">
-    <img width="220" height="90" src="https://github.com/almasud/almasud.github.io/raw/master/projects/augmented_learn/images/google-play-badge.png" alt="App download button"/>
-  </a>
-</p>
-
 Augmented Learn application is developed to provide interactive learning
 with Augmented Reality for preschool children. Our application is AR-Optional that means designed for both non-AR and AR supported devices.
 The application serves three services: -
@@ -46,6 +40,5 @@ to render a single or multiple 3D models for each scanned item on the top of it.
 
 
 #### Thanks to
-[EDMT Dev](https://www.youtube.com/user/eddydn71) for sharing the [video tutorial](https://www.youtube.com/watch?v=2xkZUPUbgoM&list=PLaoF-xhnnrRXD1Q354EN0tbjNU_UKsGPV) about AR with 3D models of the Animals
-and
-[Shamaima Sohale](https://facebook.com/shamima.sohale) for providing the rest of the 3D models and the kid voices.
+[EDMT Dev](https://www.youtube.com/user/eddydn71) for sharing the [video tutorial](https://www.youtube.com/watch?v=2xkZUPUbgoM&list=PLaoF-xhnnrRXD1Q354EN0tbjNU_UKsGPV) on AR with 3D models of the Animals
+and [Shamaima Sohale](https://facebook.com/shamima.sohale) for providing the rest of the 3D models and the kid voices.
