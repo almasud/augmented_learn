@@ -4,7 +4,7 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.github.com.almasud.augmented_learn",
+  "applicationId": "com.github.almasud.augmented_learn",
   "variantName": "processReleaseResources",
   "elements": [
     {

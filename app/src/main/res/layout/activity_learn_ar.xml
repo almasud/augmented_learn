@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.github.com.almasud.augmented_learn.view.activity.LearnArActivity">
+    tools:context="com.github.almasud.augmented_learn.view.activity.LearnArActivity">
 
     <include
         android:id="@+id/toolbarRealView"

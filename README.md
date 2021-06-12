@@ -3,8 +3,14 @@
 </p>
 
 <p align="center">
-  <a target="_blank" href="https://github.com/almasud/augmented_learn/raw/master/app/release/app-release.apk">
-    <img width="220" height="90" src="https://github.com/almasud/almasud.github.io/raw/master/projects/augmented_learn/images/direct_apk_download.png" alt="App download button"/>
+  <a target="_blank" href="https://github.com/almasud/almasud.github.io/raw/master/projects/augmented_learn/download/app/augmented_learn_v1.0.apk">
+    <img width="220" height="90" src="https://github.com/almasud/almasud.github.io/raw/master/projects/augmented_learn/images/direct_apk_download.png" alt="App direct download button"/>
+  </a>
+</p>
+
+<p align="center">
+  <a target="_blank" href="https://play.google.com/store/apps/details?id=com.github.almasud.augmented_learn">
+    <img width="220" height="90" src="https://github.com/almasud/almasud.github.io/raw/master/projects/augmented_learn/images/google-play-badge.png" alt="App download button"/>
   </a>
 </p>
 
@@ -17,9 +23,9 @@ The application serves three services: -
 3. Scan book (Works only for AR supported devices).
 
 ### Learn:
-In this section, the app introduces (teaches) to preschool children some basic subjects (i.e. স্বরবর্ণ, ব্যঞ্জনবর্ণ, সংখ্যা, Alphabets, Numbers and Animals) by listening names and
-showing associated pictures and names (If necessary) one by one by pressing a navigation button. For every item of every learn there is available an AR view button (Works only
-for AR supported devices) to view the item in real-world by opening the camera of the device.
+In this section, the app introduces (teaches) to preschool children some basic subjects (i.e. স্বরবর্ণ, ব্যঞ্জনবর্ণ, সংখ্যা, Alphabets, Numbers and Animals) by playing each item name and
+showing the associated picture with name (If necessary) one by one by pressing a next/previous button. For every item of every learn there is available an AR view
+button (Works only for AR supported devices) to view the item in real-world by opening the camera of the device.
 
 ### Test:
 In this section, the application gets a test from the preschool children which they have already learned from the Learn section. Every Test contains a set of Test pages based
@@ -31,3 +37,9 @@ correct answers are tracking to make a Test result.
 In this section, the app scans an item (s) for a particular subject from a dedicated Augmented Reality based book for this app to render the 3D model of the scanned item on
 the top of it. While a user scans an item from the book the application is trying to detect the scanning image. Once the image is detected then it proceeds to track the image
 to render a single or multiple 3D models for each scanned item on the top of it. Note that this feature works only for AR supported devices.
+
+
+#### Thanks to
+[EDMT Dev](https://www.youtube.com/user/eddydn71) for sharing the [video tutorial](https://www.youtube.com/watch?v=2xkZUPUbgoM&list=PLaoF-xhnnrRXD1Q354EN0tbjNU_UKsGPV) about AR with 3D models of the Animals
+and
+[Shamaima Sohale](https://facebook.com/shamima.sohale) for providing the rest of the 3D models and the kid voices.

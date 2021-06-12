@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.github.com.almasud.augmented_learn">
+    package="com.github.almasud.augmented_learn">
 
     <!-- Both "AR Optional" and "AR Required" apps require CAMERA permission. -->
     <uses-permission android:name="android.permission.CAMERA" />
@@ -16,7 +16,7 @@
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
     <application
-        android:name="com.github.com.almasud.augmented_learn.BaseApplication"
+        android:name="com.github.almasud.augmented_learn.BaseApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -42,45 +42,45 @@
         </provider>
 
         <service
-            android:name="com.github.com.almasud.augmented_learn.service.UnzipService"
+            android:name="com.github.almasud.augmented_learn.service.UnzipService"
             android:enabled="true"
             android:exported="false"
             android:icon="@drawable/app_logo"
             android:label="@string/service_unzip" />
 
         <service
-            android:name="com.github.com.almasud.augmented_learn.service.DownloadService"
+            android:name="com.github.almasud.augmented_learn.service.DownloadService"
             android:enabled="true"
             android:exported="false"
             android:icon="@drawable/app_logo"
             android:label="@string/service_download" />
 
         <activity
-            android:name="com.github.com.almasud.augmented_learn.view.activity.LearnArActivity"
+            android:name="com.github.almasud.augmented_learn.view.activity.LearnArActivity"
             android:screenOrientation="landscape"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.github.com.almasud.augmented_learn.view.activity.LearnActivity"
+            android:name="com.github.almasud.augmented_learn.view.activity.LearnActivity"
             android:screenOrientation="landscape"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.github.com.almasud.augmented_learn.view.activity.ScanActivity"
+            android:name="com.github.almasud.augmented_learn.view.activity.ScanActivity"
             android:screenOrientation="landscape"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.github.com.almasud.augmented_learn.view.activity.TestActivity"
+            android:name="com.github.almasud.augmented_learn.view.activity.TestActivity"
             android:screenOrientation="landscape"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.github.com.almasud.augmented_learn.view.activity.SubjectChooseActivity"
+            android:name="com.github.almasud.augmented_learn.view.activity.SubjectChooseActivity"
             android:screenOrientation="landscape"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.github.com.almasud.augmented_learn.view.activity.HomeActivity"
+            android:name="com.github.almasud.augmented_learn.view.activity.HomeActivity"
             android:screenOrientation="landscape"
             tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name="com.github.com.almasud.augmented_learn.view.activity.LauncherActivity"
+            android:name="com.github.almasud.augmented_learn.view.activity.LauncherActivity"
             android:label="@string/app_name"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme"

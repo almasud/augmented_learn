@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    tools:context="com.github.com.almasud.augmented_learn.view.activity.LauncherActivity">
+    tools:context="com.github.almasud.augmented_learn.view.activity.LauncherActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

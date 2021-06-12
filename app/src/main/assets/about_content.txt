@@ -4,7 +4,7 @@
 2. Test and
 3. Scan book (Works only for AR supported devices).
 
-Learn: In this section, the app introduces (teaches) to preschool children some basic subjects (i.e. স্বরবর্ণ, ব্যঞ্জনবর্ণ, সংখ্যা, Alphabets, Numbers and Animals) by listening names and showing associated pictures and names (If necessary) one by one by pressing a navigation button. For every item of every learn there is available an AR view button (Works only for AR supported devices) to view the item in real-world by opening the camera of the device.
+Learn: In this section, the app introduces (teaches) to preschool children some basic subjects (i.e. স্বরবর্ণ, ব্যঞ্জনবর্ণ, সংখ্যা, Alphabets, Numbers and Animals) by playing each item name and showing the associated picture with name (If necessary) one by one by pressing a next/previous button. For every item of every learn there is available an AR view button (Works only for AR supported devices) to view the item in real-world by opening the camera of the device.
 
 Test: In this section, the application gets a test from the preschool children which they have already learned from the Learn section. Every Test contains a set of Test pages based on the number of the Test items. Each test page holds four items to choose the correct one by playing a voice that needs to choose. The examinee gets a wrong warning if the clicked item is not correct. After clicking a correct one the test page proceeds to the next one. The process is continuing until the rest of the items. All the wrong and correct answers are tracking to make a Test result.
 
