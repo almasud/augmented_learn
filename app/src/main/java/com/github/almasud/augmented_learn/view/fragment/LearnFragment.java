@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
@@ -29,34 +30,35 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class LearnFragment extends Fragment {
     private FragmentLearnBinding mViewBinding;
-    private ArModel mArModel;
+    private final ArModel mArModel;
 
     public LearnFragment(ArModel arModel) {
         mArModel = arModel;
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         mViewBinding = FragmentLearnBinding.inflate(getLayoutInflater(), container, false);
         // Load the animation for real view button
-        Animation animation = AnimationUtils.loadAnimation(getActivity().getApplicationContext(), R.anim.click_item);
+        Animation animation = AnimationUtils.loadAnimation(requireActivity().getApplicationContext(), R.anim.click_item);
         // start an animation for real view button
         mViewBinding.ivLearnRealView.startAnimation(animation);
         return mViewBinding.getRoot();
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
         // Load the images using Glide to remove the unexpected white background for gif transparent images
         // Set the photo and name of ArModel
         Glide.with(this).load(AppResource.getAssetImageUri(mArModel.getPhoto()))
                 .into(mViewBinding.ivLearnItem);
         // Add text view font according to language type
         BaseApplication.changeTextViewFont(
-                getContext(), mArModel.getSubject().getLanguage().getId(), Typeface.NORMAL,
+                requireContext(), mArModel.getSubject().getLanguage().getId(), Typeface.NORMAL,
                 mViewBinding.tvLearnName
         );
 
@@ -71,8 +73,8 @@ public class LearnFragment extends Fragment {
         }
 
         // Set a click lister for the real view button
-        mViewBinding.ivLearnRealView.setOnClickListener(view -> {
-            LearnActivity activity = (LearnActivity) getActivity();
+        mViewBinding.ivLearnRealView.setOnClickListener(v -> {
+            LearnActivity activity = (LearnActivity) requireActivity();
             // Set the id of ARModel as an argument to the callback method of the activity.
             activity.getArViewCallback(mArModel.getId())
                     .observeOn(Schedulers.io())
@@ -80,4 +82,5 @@ public class LearnFragment extends Fragment {
                     .subscribe();
         });
     }
+
 }

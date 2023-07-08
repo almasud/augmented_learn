@@ -81,7 +81,7 @@ public class LearnArActivity extends AppCompatActivity {
         mViewBinding.rvRealView.smoothScrollToPosition(mSelectedItem);
 
         // Get Fragment
-        mArFragment = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.arFragmentAnimal);
+        mArFragment = (ArFragment) getSupportFragmentManager().findFragmentById(R.id.arFragment);
         // Load all the models asynchronously
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             mCompletableFutureModels = new ArComponent.ArComponentBuilder(this)
@@ -93,40 +93,47 @@ public class LearnArActivity extends AppCompatActivity {
         }
 
         // After tap on plane add the model
-        mArFragment.setOnTapArPlaneListener((hitResult, plane, motionEvent) -> {
-            Anchor anchor = hitResult.createAnchor();
-            AnchorNode anchorNode = new AnchorNode(anchor);
-            anchorNode.setParent(mArFragment.getArSceneView().getScene());
+        if (mArFragment != null) {
+            mArFragment.setOnTapArPlaneListener((hitResult, plane, motionEvent) -> {
+                Anchor anchor = hitResult.createAnchor();
+                AnchorNode anchorNode = new AnchorNode(anchor);
+                anchorNode.setParent(mArFragment.getArSceneView().getScene());
 
-            // Set the selected ModelRenderable into TransformableModel
-            try {
-                // Set the initial scale of model.
-                float modelLocalScale = (mSubject.getId() == Subject.BENGALI_ALPHABET
-                        || mSubject.getId() == Subject.ENGLISH_ALPHABET)? 0.3f
-                        : (mSubject.getId() == Subject.BENGALI_VOWEL
-                        || mSubject.getId() == Subject.BENGALI_NUMBER
-                        || mSubject.getId() == Subject.ENGLISH_NUMBER)? 0.25f
-                        : (mSubject.getId() == Subject.ENGLISH_ANIMAL)? 15.0f: 1.0f;
+                // Set the selected ModelRenderable into TransformableModel
+                try {
+                    // Set the initial scale of model.
+                    float modelLocalScale = (mSubject.getId() == Subject.BENGALI_ALPHABET
+                            || mSubject.getId() == Subject.ENGLISH_ALPHABET)? 0.3f
+                            : (mSubject.getId() == Subject.BENGALI_VOWEL
+                            || mSubject.getId() == Subject.BENGALI_NUMBER
+                            || mSubject.getId() == Subject.ENGLISH_NUMBER)? 0.25f
+                            : (mSubject.getId() == Subject.ENGLISH_ANIMAL)? 15.0f: 1.0f;
 
-                // Set the transformable model.
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    new ArComponent.ArComponentBuilder(this)
-                            .setArFragment(mArFragment)
-                            .setAnchorNode(anchorNode).build()
-                            .setTransformableModel(
-                                    mCompletableFutureModels.get(mSelectedItem)
-                                            .getNow(null),
-                                    mArModels.get(mSelectedItem),
-                                    modelLocalScale
-                            );
+                    // Set the transformable model.
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        new ArComponent.ArComponentBuilder(this)
+                                .setArFragment(mArFragment)
+                                .setAnchorNode(anchorNode).build()
+                                .setTransformableModel(
+                                        mCompletableFutureModels.get(mSelectedItem)
+                                                .getNow(null),
+                                        mArModels.get(mSelectedItem),
+                                        modelLocalScale
+                                );
+                    }
+                } catch (Exception e) {
+                    Log.e(TAG, "onCreate: Couldn't render the model: " + e.getMessage());
+                    SnackbarHelper.getInstance().showMessage(
+                            this, "Error: Couldn't render the model!"
+                    );
                 }
-            } catch (Exception e) {
-                Log.e(TAG, "onCreate: Couldn't render the model: " + e.getMessage());
-                SnackbarHelper.getInstance().showMessage(
-                        this, "Error: Couldn't render the model!"
-                );
-            }
-        });
+            });
+        } else {
+            Log.e(TAG, "onCreate: mArFragment is null!");
+            SnackbarHelper.getInstance().showMessage(
+                    this, "Error: Couldn't render the model!"
+            );
+        }
     }
 
     @Override
