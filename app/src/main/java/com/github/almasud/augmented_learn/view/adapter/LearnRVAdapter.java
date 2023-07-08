@@ -26,8 +26,8 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class LearnRVAdapter extends RecyclerView.Adapter<LearnRVAdapter.ArModelViewHolder> {
     private ItemArBinding mViewBinding;
-    private List<ArModel> mArModels;
-    private LearnArActivity mActivity;
+    private final List<ArModel> mArModels;
+    private final LearnArActivity mActivity;
     private int mRowIndex;
 
     public LearnRVAdapter(List<ArModel> arModels, LearnArActivity activity, int selectedItem) {
@@ -50,11 +50,11 @@ public class LearnRVAdapter extends RecyclerView.Adapter<LearnRVAdapter.ArModelV
         holder.itemView.setOnClickListener(view -> {
             // Subscribe to selectModelCallback() observable of the activity
             // to get the selected item.
-            mActivity.selectModelCallback(position)
+            mActivity.selectModelCallback(holder.getAdapterPosition())
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe();
-            mRowIndex = position;
+            mRowIndex = holder.getAdapterPosition();
             notifyDataSetChanged();
         });
         if (mRowIndex == position)
@@ -69,7 +69,7 @@ public class LearnRVAdapter extends RecyclerView.Adapter<LearnRVAdapter.ArModelV
     }
 
     public class ArModelViewHolder extends RecyclerView.ViewHolder {
-        private ItemArBinding viewBinding;
+        private final ItemArBinding viewBinding;
 
         public ArModelViewHolder(@NonNull ItemArBinding viewBinding) {
             super(viewBinding.getRoot());

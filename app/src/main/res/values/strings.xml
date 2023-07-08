@@ -42,6 +42,7 @@
     <string name="action_close">Close</string>
     <string name="action_test_again">Test Again</string>
     <string name="action_update_now">Update Now</string>
+    <string name="action_get_from_website">Get from website</string>
     <string name="action_get_from_play_store">Get from Play Store</string>
     <string name="action_update_later">Update Later</string>
 
@@ -268,5 +269,7 @@
     <string name="available_version">The available version is:</string>
     <string name="not_update_available">No update is available! You have already a latest version. Keep always update to get new features.</string>
     <string name="internet_not_available">Opps! You have no internet connection. Please connect to the internet and try again.</string>
+    <string name="permission_required">Permission required</string>
+    <string name="notification_permission_required_to_show_action_progress">To show the progress of this action need the notification permission</string>
 
 </resources>

@@ -74,7 +74,7 @@ public class DownloadService extends Service {
             // Create a notify pending intent
             Intent notifyIntent = new Intent(this, SubjectChooseActivity.class);
             PendingIntent notifyPendingIntent = PendingIntent.getActivity(
-                    this, 0, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT
+                    this, 0, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
             );
 
             // Create a notification builder before starting the download
@@ -190,9 +190,9 @@ public class DownloadService extends Service {
                         new EventMessage("Download failed!", EventMessage.TYPE_ERROR)
                 );
             } finally {
-                notificationBuilder.setSmallIcon(successStatus? R.drawable.ic_done : R.drawable.ic_error);
-                notificationBuilder.setContentTitle(successStatus? "Done": "Failed");
-                notificationBuilder.setContentText(successStatus? "Download completed": "Download is not completed");
+                notificationBuilder.setSmallIcon(successStatus ? R.drawable.ic_done : R.drawable.ic_error);
+                notificationBuilder.setContentTitle(successStatus ? "Done" : "Failed");
+                notificationBuilder.setContentText(successStatus ? "Download completed" : "Download is not completed");
                 notificationBuilder.setOngoing(false);
                 notificationBuilder.setAutoCancel(true);
                 notificationBuilder.setProgress(0, 0, false);
@@ -208,8 +208,7 @@ public class DownloadService extends Service {
                 EventBus.getDefault().post(
                         new EventMessage("Download completed!", EventMessage.TYPE_ERROR)
                 );
-            }
-            else {
+            } else {
                 SystemClock.sleep(2000);
                 EventBus.getDefault().post(
                         new EventMessage("Download is not completed!", EventMessage.TYPE_ERROR)
@@ -227,34 +226,34 @@ public class DownloadService extends Service {
             }
 
             // If the downloaded file is apk then open it in installation package manager.
-            if (successStatus && file.getName().endsWith(".apk")) {
-                Log.d(TAG, "onStartCommand: The downloaded file is an apk file.");
-
-                final String fileBasePath = "file://";
-                final String providerPath = ".provider";
-                final String appInstallPath = "\"application/vnd.android.package-archive\"";
-                final String destination = targetDirectory + "/" + file.getName();
-                final Uri uri = Uri.parse(fileBasePath + destination);
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    Uri contentUri = FileProvider.getUriForFile(
-                            this,
-                            BuildConfig.APPLICATION_ID + providerPath,
-                            new File(destination)
-                    );
-                    Intent install = new Intent(Intent.ACTION_VIEW);
-                    install.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                    install.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    install.putExtra(Intent.EXTRA_NOT_UNKNOWN_SOURCE, true);
-                    install.setData(contentUri);
-                    startActivity(install);
-                } else {
-                    Intent install = new Intent(Intent.ACTION_VIEW);
-                    install.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    install.setDataAndType(uri, appInstallPath);
-                    startActivity(install);
-                }
-            }
+//            if (successStatus && file.getName().endsWith(".apk")) {
+//                Log.d(TAG, "onStartCommand: The downloaded file is an apk file.");
+//
+//                final String fileBasePath = "file://";
+//                final String providerPath = ".provider";
+//                final String appInstallPath = "\"application/vnd.android.package-archive\"";
+//                final String destination = targetDirectory + "/" + file.getName();
+//                final Uri uri = Uri.parse(fileBasePath + destination);
+//
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//                    Uri contentUri = FileProvider.getUriForFile(
+//                            this,
+//                            BuildConfig.APPLICATION_ID + providerPath,
+//                            new File(destination)
+//                    );
+//                    Intent install = new Intent(Intent.ACTION_VIEW);
+//                    install.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//                    install.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                    install.putExtra(Intent.EXTRA_NOT_UNKNOWN_SOURCE, true);
+//                    install.setData(contentUri);
+//                    startActivity(install);
+//                } else {
+//                    Intent install = new Intent(Intent.ACTION_VIEW);
+//                    install.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                    install.setDataAndType(uri, appInstallPath);
+//                    startActivity(install);
+//                }
+//            }
 
             // After completing the task stop the foreground service with keep the notification
             // and after a while system will automatically kill the service.

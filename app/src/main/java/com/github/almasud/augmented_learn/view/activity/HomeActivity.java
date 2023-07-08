@@ -1,9 +1,11 @@
 package com.github.almasud.augmented_learn.view.activity;
 
+import android.Manifest;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -31,6 +33,12 @@ import com.github.almasud.augmented_learn.model.util.EventMessage;
 import com.github.almasud.augmented_learn.util.AppPreference;
 import com.github.almasud.augmented_learn.view.util.SnackbarHelper;
 import com.github.almasud.augmented_learn.viewmodel.AppVM;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -80,23 +88,23 @@ public class HomeActivity extends AppCompatActivity {
         // Load an existing App data
         mApp = AppPreference.getAppInfo(this);
 
-        // Set the directory to keep the updated app apk that will download from server
-        mAppDirectory = getExternalFilesDir(File.separator + App.DIRECTORY_APP);
-        // Create the directory if is not exist
-        if (!mAppDirectory.exists())
-            mAppDirectory.mkdirs();
-
-        if (mAppDirectory.isDirectory()) {
-            // Check whether the directory contains any item (old apk) or not, delete all if exists
-            if (mAppDirectory.listFiles().length >= 1) {
-                Log.d(TAG, "onCreate: " + mAppDirectory.getAbsolutePath() + " contains old file (s).");
-                // Delete the existing files from the directory
-                for (File file: mAppDirectory.listFiles()) {
-                    file.delete();
-                    Log.d(TAG, "onCreate: " + file.getName() + " is deleted.");
-                }
-            }
-        }
+//        // Set the directory to keep the updated app apk that will download from server
+//        mAppDirectory = getExternalFilesDir(File.separator + App.DIRECTORY_APP);
+//        // Create the directory if is not exist
+//        if (!mAppDirectory.exists())
+//            mAppDirectory.mkdirs();
+//
+//        if (mAppDirectory.isDirectory()) {
+//            // Check whether the directory contains any item (old apk) or not, delete all if exists
+//            if (mAppDirectory.listFiles().length >= 1) {
+//                Log.d(TAG, "onCreate: " + mAppDirectory.getAbsolutePath() + " contains old file (s).");
+//                // Delete the existing files from the directory
+//                for (File file: mAppDirectory.listFiles()) {
+//                    file.delete();
+//                    Log.d(TAG, "onCreate: " + file.getName() + " is deleted.");
+//                }
+//            }
+//        }
 
         // Check an update after launching the app
         if (BaseApplication.isInternetAvailable(this)) {

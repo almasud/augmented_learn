@@ -12,8 +12,10 @@
     <!-- FOREGROUND_SERVICE permission is required from Android Oreo or API level 26 or higher. -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <!-- REQUEST_INSTALL_PACKAGES permission for apk install -->
-    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+<!--    &lt;!&ndash; REQUEST_INSTALL_PACKAGES permission for apk install &ndash;&gt;-->
+<!--    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />-->
+    <!-- Target Android 13 ( API level 33) or higher -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
 
     <application
         android:name="com.github.almasud.augmented_learn.BaseApplication"
@@ -81,10 +83,10 @@
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name="com.github.almasud.augmented_learn.view.activity.LauncherActivity"
-            android:label="@string/app_name"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme"
-            tools:ignore="LockedOrientationActivity">
+            tools:ignore="LockedOrientationActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

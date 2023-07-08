@@ -63,7 +63,7 @@ public class UnzipService extends Service {
             // Create a notify pending intent
             Intent notifyIntent = new Intent(this, SubjectChooseActivity.class);
             PendingIntent notifyPendingIntent = PendingIntent.getActivity(
-                    this, 0, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT
+                    this, 0, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
             );
 
             // Create a notification builder before starting the download
@@ -156,9 +156,9 @@ public class UnzipService extends Service {
                         new EventMessage("Unzip failed!", EventMessage.TYPE_ERROR)
                 );
             } finally {
-                notificationBuilder.setSmallIcon(successStatus? R.drawable.ic_done : R.drawable.ic_error);
-                notificationBuilder.setContentTitle(successStatus? "Done": "Failed");
-                notificationBuilder.setContentText(successStatus? "Unzip completed": "Unzip is not completed");
+                notificationBuilder.setSmallIcon(successStatus ? R.drawable.ic_done : R.drawable.ic_error);
+                notificationBuilder.setContentTitle(successStatus ? "Done" : "Failed");
+                notificationBuilder.setContentText(successStatus ? "Unzip completed" : "Unzip is not completed");
                 notificationBuilder.setOngoing(false);
                 notificationBuilder.setAutoCancel(true);
                 notificationBuilder.setProgress(0, 0, false);
@@ -171,8 +171,7 @@ public class UnzipService extends Service {
                 EventBus.getDefault().post(
                         new EventMessage("Unzip completed!", EventMessage.TYPE_ERROR)
                 );
-            }
-            else {
+            } else {
                 SystemClock.sleep(2000);
                 EventBus.getDefault().post(
                         new EventMessage("Unzip is not completed!", EventMessage.TYPE_ERROR)
