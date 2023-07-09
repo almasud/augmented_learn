@@ -11,7 +11,7 @@
 </p>
 
 <p align="center">
-  <a target="_blank" href="https://github.com/almasud/almasud.github.io/raw/master/projects/augmented_learn/download/app/augmented_learn_v1.0.apk">
+  <a target="_blank" href="https://github.com/almasud/almasud.github.io/raw/master/projects/augmented_learn/download/app/augmented_learn_v2.0.apk">
     <img width="220" height="90" src="https://github.com/almasud/almasud.github.io/raw/master/projects/augmented_learn/images/direct_apk_download.png" alt="App direct download button"/>
   </a>
 </p>
