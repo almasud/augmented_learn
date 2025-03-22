@@ -2,16 +2,15 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.google.ar.sceneform.plugin'
 
 android {
-    compileSdkVersion 33
-    buildToolsVersion "29.0.2"
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.github.almasud.augmented_learn"
         // "AR Optional" apps must declare minSdkVersion >= 14.
         minSdkVersion 17
-        targetSdkVersion 33
-        versionCode 2
-        versionName "2.0"
+        targetSdkVersion 34
+        versionCode 3
+        versionName "v2.1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
@@ -79,16 +78,3 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }
 
-// "Import Sceneform Assets" option of Sceneform plugin cause failed in android 3.6. So have done this
-// manually instead using "Import Sceneform Assets" option of Sceneform plugin only once & then Rebuild.
-
-//apply plugin: 'com.google.ar.sceneform.plugin'
-//
-//sceneform.asset('sampledata/models/bn_vowels/bn_vowel_01.fbx', // 'Source Asset Path' specified during import.
-//        'default',                    // 'Material Path' specified during import.
-//        'sampledata/models/bn_vowels/bn_vowel_01.sfa', // '.sfa Output Path' specified during import.
-//        'src/main/assets/models/bn_vowels/bn_vowel_01')      // '.sfb Output Path' specified during import.
-//sceneform.asset('sampledata/models/bn_vowels/bn_vowel_02.fbx',
-//        'default',
-//        'sampledata/models/bn_vowels/bn_vowel_02.sfa',
-//        'src/main/assets/models/bn_vowels/bn_vowel_02')
