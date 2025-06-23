@@ -1,5 +1,13 @@
 <p align="center">
-  <img src="https://github.com/almasud/almasud.github.io/raw/master/projects/augmented_learn/images/screenshots/feature_photo.jpg" alt="Feature Photo"/>
+  <a href="https://youtu.be/qz1fsQ7wPsk" target="_blank">
+    <img src="https://github.com/almasud/almasud.github.io/raw/master/projects/augmented_learn/images/screenshots/feature_photo.jpg" alt="Feature Photo"/>
+  </a>
+</p>
+
+<p align="center">
+  <a href="https://youtu.be/qz1fsQ7wPsk" target="_blank">
+    <img width="180" height="90" src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg" alt="Youtube Logo"/>
+  </a>
 </p>
 
 <p align="center">
@@ -44,7 +52,7 @@ to render a single or multiple 3D models for each scanned item on the top of it.
 and [Shamaima Sohale](./#) for providing the rest of the 3D models and the kid voices.
 
 
-## 📄 License
+## License
 
 This project is licensed under the **GNU General Public License v3.0** (GPL-3.0).
 
