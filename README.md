@@ -11,7 +11,7 @@
 </p>
 
 <p align="center">
-  <a target="_blank" href="https://github.com/almasud/almasud.github.io/raw/master/projects/augmented_learn/download/app/augmented_learn_v2.0.apk">
+  <a target="_blank" href="https://github.com/almasud/augmented_learn/blob/master/app/release/app-release.apk">
     <img width="220" height="90" src="https://github.com/almasud/almasud.github.io/raw/master/projects/augmented_learn/images/direct_apk_download.png" alt="App direct download button"/>
   </a>
 </p>
@@ -49,4 +49,14 @@ to render a single or multiple 3D models for each scanned item on the top of it.
 
 #### Thanks to
 [EDMT Dev](https://www.youtube.com/user/eddydn71) for sharing the [video tutorial](https://www.youtube.com/watch?v=2xkZUPUbgoM&list=PLaoF-xhnnrRXD1Q354EN0tbjNU_UKsGPV) on AR with 3D models of the Animals
-and [Shamaima Sohale](https://facebook.com/shamima.sohale) for providing the rest of the 3D models and the kid voices.
+and [Shamaima Sohale](./#) for providing the rest of the 3D models and the kid voices.
+
+
+## License
+
+This project is licensed under the **GNU General Public License v3.0** (GPL-3.0).
+
+You are free to use, modify, and distribute this software under the terms of the license.  
+However, if you distribute modified versions, you must also share the source code under the same license.
+
+See the [LICENSE](./LICENSE) file for full license details.
