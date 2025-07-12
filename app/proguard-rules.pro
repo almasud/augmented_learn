@@ -78,3 +78,27 @@
 -keep class com.bumptech.glide.load.data.ParcelFileDescriptorRewinder$InternalRewinder {
   *** rewind();
 }
+
+# Keep all Sceneform classes
+-keep class com.google.ar.sceneform.** { *; }
+-dontwarn com.google.ar.sceneform.**
+
+# Keep animation classes
+-keep class com.google.ar.sceneform.animation.** { *; }
+-dontwarn com.google.ar.sceneform.animation.**
+
+# Keep assets classes
+-keep class com.google.ar.sceneform.assets.** { *; }
+-dontwarn com.google.ar.sceneform.assets.**
+
+# Keep utilities classes
+-keep class com.google.ar.sceneform.utilities.** { *; }
+-dontwarn com.google.ar.sceneform.utilities.**
+
+# Keep desugar runtime
+-keep class com.google.devtools.build.android.desugar.runtime.** { *; }
+-dontwarn com.google.devtools.build.android.desugar.runtime.**
+
+# Keep ARCore classes
+-keep class com.google.ar.core.** { *; }
+-dontwarn com.google.ar.core.**

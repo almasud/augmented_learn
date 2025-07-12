@@ -271,5 +271,7 @@
     <string name="internet_not_available">Opps! You have no internet connection. Please connect to the internet and try again.</string>
     <string name="permission_required">Permission required</string>
     <string name="notification_permission_required_to_show_action_progress">To show the progress of this action need the notification permission</string>
+    <string name="failed_to_fetch_app_info">Failed to fetch app info!</string>
+    <string name="error_getting_app_info">Error to get app info!</string>
 
 </resources>

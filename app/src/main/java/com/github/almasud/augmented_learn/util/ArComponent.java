@@ -15,7 +15,7 @@ import androidx.annotation.RequiresApi;
 
 import com.github.almasud.augmented_learn.BaseApplication;
 import com.github.almasud.augmented_learn.R;
-import com.github.almasud.augmented_learn.model.entity.ArModel;
+import com.github.almasud.augmented_learn.domain.model.entity.ArModel;
 import com.google.ar.sceneform.AnchorNode;
 import com.google.ar.sceneform.math.Quaternion;
 import com.google.ar.sceneform.math.Vector3;
@@ -41,9 +41,9 @@ public class ArComponent {
     private static final float MODEL_MIN_SCALE = 0.20f;
     private static final float MODEL_MAX_SCALE = 20.0f;
 
-    private Context mContext;
-    private ArFragment mArFragment;
-    private AnchorNode mAnchorNode;
+    private final Context mContext;
+    private final ArFragment mArFragment;
+    private final AnchorNode mAnchorNode;
 
     private ArComponent(ArComponentBuilder arComponentBuilder) {
         mContext = arComponentBuilder.context;
@@ -67,7 +67,7 @@ public class ArComponent {
      * Builder class of {@link ArComponent}.
      */
     public static class ArComponentBuilder {
-        private Context context;
+        private final Context context;
         private ArFragment arFragment;
         private AnchorNode anchorNode;
 

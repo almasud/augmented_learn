@@ -7,13 +7,13 @@
     android:orientation="horizontal"
     android:layout_gravity="center"
     android:gravity="center"
-    tools:context="com.github.almasud.augmented_learn.view.fragment.LearnFragment">
+    tools:context="com.github.almasud.augmented_learn.presentation.view.fragment.LearnFragment">
 
     <ImageView
         android:id="@+id/ivLearnItem"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        tools:src="@drawable/capital_a"
+        tools:src="@drawable/ic_help"
         android:layout_marginEnd="@dimen/activity_horizontal_margin"
         tools:ignore="ContentDescription" />
 
@@ -52,7 +52,7 @@
             android:id="@+id/ivLearnExtra"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            tools:src="@drawable/alphabet_apple"
+            tools:src="@drawable/ic_help"
             tools:ignore="ContentDescription"
             android:visibility="gone"/>
 

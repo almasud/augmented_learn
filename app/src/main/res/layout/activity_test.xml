@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.github.almasud.augmented_learn.view.activity.TestActivity">
+    tools:context="com.github.almasud.augmented_learn.presentation.view.activity.TestActivity">
 
     <include
         android:id="@+id/toolbarTest"
@@ -214,8 +214,8 @@
                 android:layout_height="30dp"
                 app:srcCompat="@drawable/ic_hearing_black"
                 android:background="@color/colorPrimary"
-                android:tint="@android:color/white"
                 android:layout_gravity="center_horizontal"
+                app:tint="@android:color/white"
                 tools:ignore="ContentDescription" />
 
             <TextView
