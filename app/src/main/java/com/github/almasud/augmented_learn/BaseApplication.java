@@ -9,6 +9,8 @@ import android.app.NotificationManager;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -37,17 +39,18 @@ import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.lifecycle.ProcessLifecycleOwner;
 
-import com.github.almasud.augmented_learn.model.entity.App;
-import com.github.almasud.augmented_learn.model.entity.ArModel;
-import com.github.almasud.augmented_learn.model.entity.Language;
-import com.github.almasud.augmented_learn.model.entity.Subject;
-import com.github.almasud.augmented_learn.model.entity.Voice;
-import com.github.almasud.augmented_learn.model.util.EventMessage;
-import com.github.almasud.augmented_learn.service.DownloadService;
-import com.github.almasud.augmented_learn.service.UnzipService;
+import com.github.almasud.augmented_learn.domain.model.entity.App;
+import com.github.almasud.augmented_learn.domain.model.entity.ArModel;
+import com.github.almasud.augmented_learn.domain.model.entity.Language;
+import com.github.almasud.augmented_learn.domain.model.entity.Subject;
+import com.github.almasud.augmented_learn.domain.model.entity.Voice;
+import com.github.almasud.augmented_learn.domain.model.util.EventMessage;
+import com.github.almasud.augmented_learn.presentation.service.DownloadService;
+import com.github.almasud.augmented_learn.presentation.service.UnzipService;
 import com.github.almasud.augmented_learn.util.OnSingleAction;
 import com.github.almasud.augmented_learn.util.AppPreference;
 import com.github.almasud.augmented_learn.util.AppResource;
+import com.github.almasud.augmented_learn.presentation.util.SnackbarHelper;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.ar.core.ArCoreApk;
 import com.karumi.dexter.Dexter;
@@ -552,7 +555,7 @@ public class BaseApplication extends Application implements LifecycleObserver {
         Set<Integer> randSet = new HashSet<>(totalNumber);
         // Add resultSize of random numbers to set
         while (randSet.size() < totalNumber)
-            while (!randSet.add(new Random().nextInt(boundNumber))) ;
+            while (!randSet.add(new Random().nextInt(boundNumber)));
         // Convert the randSet into an integer array to return
         int[] randArray = new int[totalNumber];
         int i = 0;
@@ -698,13 +701,8 @@ public class BaseApplication extends Application implements LifecycleObserver {
      */
     public static void speak(@NonNull String text) {
         if (isTTSEngineLoaded()) {
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-                if (sTTS.speak(text, TextToSpeech.QUEUE_FLUSH, null, null) == TextToSpeech.ERROR)
-                    Log.e(TAG, "Error in converting text to speech.");
-            } else {
-                if (sTTS.speak(text, TextToSpeech.QUEUE_FLUSH, null) == TextToSpeech.ERROR)
-                    Log.e(TAG, "Error in converting text to speech.");
-            }
+            if (sTTS.speak(text, TextToSpeech.QUEUE_FLUSH, null, null) == TextToSpeech.ERROR)
+                Log.e(TAG, "Error in converting text to speech.");
         } else {
             Log.e(TAG, "speak: The TTS engine is not loaded yet!");
         }
@@ -928,17 +926,22 @@ public class BaseApplication extends Application implements LifecycleObserver {
      * @param app      An instance of {@link App}.
      */
     public static void showUpdateAvailableWithDownloadOption(Activity activity, App app, File appDirectory) {
-        BaseApplication.setAlertDialog(
-                activity, null, activity.getResources().getString(R.string.update_available),
-                R.drawable.ic_update, String.format(
-                        activity.getResources().getString(R.string.update_available_message) + "\n"
-                                + " %s\n"
-                                + activity.getResources().getString(R.string.current_version) + " %s\n"
-                                + activity.getResources().getString(R.string.available_version) + " %s",
-                        app.getVersionDescription(), BuildConfig.VERSION_NAME,
-                        app.getVersionName()
-                ),
-                () -> {
+        try {
+            PackageInfo packageInfo = activity.getPackageManager().getPackageInfo(activity.getPackageName(), 0);
+            final String appVersionName = packageInfo.versionName;
+            final String appPackageName = packageInfo.packageName;
+
+            BaseApplication.setAlertDialog(
+                    activity, null, activity.getResources().getString(R.string.update_available),
+                    R.drawable.ic_update, String.format(
+                            activity.getResources().getString(R.string.update_available_message) + "\n"
+                                    + " %s\n"
+                                    + activity.getResources().getString(R.string.current_version) + " %s\n"
+                                    + activity.getResources().getString(R.string.available_version) + " %s",
+                            app.getVersionDescription(), appVersionName,
+                            app.getVersionName()
+                    ),
+                    () -> {
 //                    if (appDirectory.isDirectory()) {
 //                        // Start download & install the updated app.
 //                        BaseApplication.download(
@@ -946,32 +949,35 @@ public class BaseApplication extends Application implements LifecycleObserver {
 //                        );
 //                    }
 
-                    activity.startActivity(
-                            new Intent(Intent.ACTION_VIEW,
-                                    Uri.parse("https://almasud.github.io/augmented_learn")
-                            )
-                    );
-                },
+                        activity.startActivity(
+                                new Intent(Intent.ACTION_VIEW,
+                                        Uri.parse("https://almasud.github.io/augmented_learn")
+                                )
+                        );
+                    },
 //                activity.getResources().getString(R.string.action_update_now),
-                activity.getResources().getString(R.string.action_get_from_website),
-                () -> {
-                    final String appPackageName = BuildConfig.APPLICATION_ID;
-                    try {
-                        activity.startActivity(
-                                new Intent(Intent.ACTION_VIEW,
-                                        Uri.parse("market://details?id=" + appPackageName)
-                                )
-                        );
-                    } catch (ActivityNotFoundException ex) {
-                        activity.startActivity(
-                                new Intent(Intent.ACTION_VIEW,
-                                        Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)
-                                )
-                        );
-                    }
-                }, activity.getResources().getString(R.string.action_get_from_play_store),
-                () -> {
-                }, activity.getResources().getString(R.string.action_update_later)
-        );
+                    activity.getResources().getString(R.string.action_get_from_website),
+                    () -> {
+                        try {
+                            activity.startActivity(
+                                    new Intent(Intent.ACTION_VIEW,
+                                            Uri.parse("market://details?id=" + appPackageName)
+                                    )
+                            );
+                        } catch (ActivityNotFoundException ex) {
+                            activity.startActivity(
+                                    new Intent(Intent.ACTION_VIEW,
+                                            Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)
+                                    )
+                            );
+                        }
+                    }, activity.getResources().getString(R.string.action_get_from_play_store),
+                    () -> {
+                    }, activity.getResources().getString(R.string.action_update_later)
+            );
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.e(TAG, "showUpdateAvailableWithDownloadOption: Error getting app info", e);
+            SnackbarHelper.getInstance().showMessage(activity, activity.getResources().getString(R.string.error_getting_app_info));
+        }
     }
 }

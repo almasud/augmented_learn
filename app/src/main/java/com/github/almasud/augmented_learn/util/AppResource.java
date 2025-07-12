@@ -2,10 +2,10 @@ package com.github.almasud.augmented_learn.util;
 
 import android.net.Uri;
 
-import com.github.almasud.augmented_learn.model.entity.ArModel;
-import com.github.almasud.augmented_learn.model.entity.Language;
-import com.github.almasud.augmented_learn.model.entity.Subject;
-import com.github.almasud.augmented_learn.model.entity.Voice;
+import com.github.almasud.augmented_learn.domain.model.entity.ArModel;
+import com.github.almasud.augmented_learn.domain.model.entity.Language;
+import com.github.almasud.augmented_learn.domain.model.entity.Subject;
+import com.github.almasud.augmented_learn.domain.model.entity.Voice;
 import com.google.ar.core.AugmentedImageDatabase;
 
 import java.io.File;

@@ -3,7 +3,7 @@ package com.github.almasud.augmented_learn.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.github.almasud.augmented_learn.model.entity.App;
+import com.github.almasud.augmented_learn.domain.model.entity.App;
 import com.google.gson.Gson;
 
 /**
@@ -38,7 +38,7 @@ public final class AppPreference {
         String jsonString = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE)
                 .getString(APP_INFO, null);
 
-        if (jsonString == null || jsonString.length() == 0) {
+        if (jsonString == null || jsonString.isEmpty()) {
             return null;
         }
         return new Gson().fromJson(jsonString, App.class);
